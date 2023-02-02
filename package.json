@@ -13,6 +13,7 @@
         "@🔖🔖🔖🔖🔖 default smart contract commands 🔖🔖🔖🔖🔖 ": "echo 🔖🔖🔖🔖🔖 ",
         "compile": "yarn workspace @op-games/solidity-ts exec forge compile",
         "test": "yarn workspace @op-games/solidity-ts exec forge test",
+        "deploy": "yarn workspace @op-games/solidity-ts exec deploy_nft.bat",
         "chain": "yarn workspace @op-games/solidity-ts exec anvil",
         "install:foundry": "yarn workspace @op-games/solidity-ts exec foundryup && yarn forge install",
         "@🔖🔖🔖🔖🔖 nextjs 🔖🔖🔖🔖🔖 ": "echo 🔖🔖🔖🔖🔖",
