@@ -1,3 +1,7 @@
 [submodule "packages/solidity-ts/lib/forge-std"]
 	path = packages/solidity-ts/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "packages/nextjs-app-ts"]
+	path = packages/nextjs-app-ts
+	url = https://github.com/alto-io/arcadians.io
+	branch = contracts-integration
