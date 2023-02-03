@@ -17,7 +17,9 @@
         "chain": "yarn workspace @op-games/solidity-ts exec anvil",
         "install:foundry": "yarn workspace @op-games/solidity-ts exec foundryup && yarn forge install",
         "@🔖🔖🔖🔖🔖 nextjs 🔖🔖🔖🔖🔖 ": "echo 🔖🔖🔖🔖🔖",
-        "start": "yarn workspace @op-games/next-app-ts dev",
+        "dev": "yarn workspace @op-games/nextjs-app-ts dev",
+        "build": "yarn workspace @op-games/nextjs-app-ts build",
+        "start": "yarn workspace @op-games/nextjs-app-ts start",
         "@🔖🔖🔖🔖🔖 toolkit commands 🔖🔖🔖🔖🔖 ": "echo 📖 scripts & commands",
         "hardhat": "yarn workspace @op-games/solidity-ts hardhat",
         "forge": "yarn workspace @op-games/solidity-ts exec forge",
@@ -28,7 +30,7 @@
         "packages": [
             "packages/common",
             "packages/solidity-ts",
-            "packages/next-app-ts",
+            "packages/nextjs-app-ts",
             "packages/subgraph",
             "packages/services/*",
             "packages/*"
@@ -50,32 +52,32 @@
     },
     "lint-staged": {
         "packages/nextjs-app-ts/src/**/*.{ts,tsx}": [
-            "yarn workspace @op-games/next-app-ts lint --fix",
-            "yarn workspace @op-games/next-app-ts format"
+            "yarn workspace @op-games/nextjs-app-ts lint --fix",
+            "yarn workspace @op-games/nextjs-app-ts format"
         ],
         "packages/common/src/**/*.{ts,tsx}": [
-            "yarn workspace @scaffold-eth/common lint --fix",
-            "yarn workspace @scaffold-eth/common format"
+            "yarn workspace @op-games/common lint --fix",
+            "yarn workspace @op-games/common format"
         ],
         "packages/solidity-ts/tests/**/*.ts": [
-            "yarn workspace @scaffold-eth/solidity lint --fix",
-            "yarn workspace @scaffold-eth/solidity format"
+            "yarn workspace @op-games/solidity-ts lint --fix",
+            "yarn workspace @op-games/solidity-ts format"
         ],
         "packages/solidity-ts/helpers/**/*.ts": [
-            "yarn workspace @scaffold-eth/solidity lint --fix",
-            "yarn workspace @scaffold-eth/solidity format"
+            "yarn workspace @op-games/solidity-ts lint --fix",
+            "yarn workspace @op-games/solidity-ts format"
         ],
         "packages/solidity-ts/tasks/**/*.ts": [
-            "yarn workspace @scaffold-eth/solidity lint --fix",
-            "yarn workspace @scaffold-eth/solidity format"
+            "yarn workspace @op-games/solidity-ts lint --fix",
+            "yarn workspace @op-games/solidity-ts format"
         ],
         "packages/solidity-ts/deploy/**/*.ts": [
-            "yarn workspace @scaffold-eth/solidity lint --fix",
-            "yarn workspace @scaffold-eth/solidity format"
+            "yarn workspace @op-games/solidity-ts lint --fix",
+            "yarn workspace @op-games/solidity-ts format"
         ],
         "packages/solidity-ts/**/*.sol": [
-            "yarn workspace @scaffold-eth/solidity format",
-            "yarn workspace @scaffold-eth/solidity solhint --fix"
+            "yarn workspace @op-games/solidity-ts format",
+            "yarn workspace @op-games/solidity-ts solhint --fix"
         ]
     },
     "volta": {
