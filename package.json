@@ -20,6 +20,8 @@
         "dev": "yarn workspace @op-games/nextjs-app-ts dev",
         "build": "yarn workspace @op-games/nextjs-app-ts build",
         "start": "yarn workspace @op-games/nextjs-app-ts start",
+        "@🔖🔖🔖🔖🔖 blacksmith 🔖🔖🔖🔖🔖 ": "echo 🔖🔖🔖🔖🔖",
+        "blacksmith": "yarn workspace @op-games/blacksmith dev",
         "@🔖🔖🔖🔖🔖 toolkit commands 🔖🔖🔖🔖🔖 ": "echo 📖 scripts & commands",
         "hardhat": "yarn workspace @op-games/solidity-ts hardhat",
         "forge": "yarn workspace @op-games/solidity-ts exec forge",
@@ -31,6 +33,7 @@
             "packages/common",
             "packages/solidity-ts",
             "packages/nextjs-app-ts",
+            "packages/blacksmith",
             "packages/subgraph",
             "packages/services/*",
             "packages/*"

@@ -5,3 +5,6 @@
 	path = packages/nextjs-app-ts
 	url = https://github.com/alto-io/arcadians.io
 	branch = contracts-integration
+[submodule "packages/blacksmith"]
+	path = packages/blacksmith
+	url = http://github.com/alto-io/blacksmith.git
