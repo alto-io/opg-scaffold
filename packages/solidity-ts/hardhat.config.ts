@@ -40,7 +40,7 @@ export const config: HardhatUserConfig = {
     local: {
         url: 'http://localhost:8545',
       },
-      mumbai: mumbaiConfig
+      mumbai: mumbaiConfig,
   },
   solidity: {
     compilers: [

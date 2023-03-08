@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-library EquippableStorage {
+library ItemsStorage {
 
-    bytes32 constant EQUIPPABLE_STORAGE_POSITION =
-        keccak256("equippable.storage.position");
+    bytes32 constant ITEMS_STORAGE_POSITION =
+        keccak256("items.storage.position");
 
     struct Layout {
         // wallet => token id => bool 
@@ -16,7 +16,7 @@ library EquippableStorage {
         pure
         returns (Layout storage es)
     {
-        bytes32 position = EQUIPPABLE_STORAGE_POSITION;
+        bytes32 position = ITEMS_STORAGE_POSITION;
         assembly {
             es.slot := position
         }
