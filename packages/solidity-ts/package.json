@@ -6,6 +6,7 @@
     "verify": "hardhat etherscan-verify --solc-input --network",
     "tests": "hardhat test --network hardhat",
     "merkle-generate": "ts-node helpers/merkle-tree/generateTree.ts",
+    "deploy": "npx hardhat deploy --network",
     "chain:hardhat": "cross-env BUILDING=true hardhat node --network hardhat --no-deploy",
     "chain:foundry": "anvil",
     "fork:hardhat": "cross-env hardhat node --fork https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",

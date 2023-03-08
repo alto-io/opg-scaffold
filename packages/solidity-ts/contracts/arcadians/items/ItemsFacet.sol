@@ -2,25 +2,24 @@
 pragma solidity ^0.8.9;
 
 import { SolidStateERC1155 } from "@solidstate/contracts/token/ERC1155/SolidStateERC1155.sol";
-import { EquippableStorage } from "./EquippableStorage.sol";
-import { MerkleStorage } from "./MerkleStorage.sol";
+import { ItemsStorage } from "./ItemsStorage.sol";
+import { MerkleStorage } from "../merkle/MerkleStorage.sol";
 
-contract EquippableFacet is SolidStateERC1155 {
+contract ItemsFacet is SolidStateERC1155 {
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
 
-// TODO
-// rarity
-// item type (weapon = 1, armor = 2, background = 3)
+    // TODO
+    // item type (weapon = 1, armor = 2, background = 3)
 
     function claim(address to, uint tokenId, uint amount, bytes32[] memory proof)
         public
     {
-        EquippableStorage.Layout storage es = EquippableStorage.layout();
+        ItemsStorage.Layout storage itemsS = ItemsStorage.layout();
 
         // Revert if the token was already claimed before
-        require(!es.claimed[to][tokenId], "Already claimed");
-        es.claimed[to][tokenId] = true;
+        require(!itemsS.claimed[to][tokenId], "Already claimed");
+        itemsS.claimed[to][tokenId] = true;
 
         // Verify if is elegible
         bytes memory leaf = abi.encode(to, tokenId, amount);

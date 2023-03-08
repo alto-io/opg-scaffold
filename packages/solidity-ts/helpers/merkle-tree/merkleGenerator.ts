@@ -5,9 +5,9 @@ import path from "path";
 const TOKENS_PATH = path.join(__dirname, "./tokenList.json");
 export const MERKLE_TREE_PATH = path.join(__dirname, "./merkleTree.json");
 
-export interface TokensData {
-    ids: string[];
-    amounts: string[];
+export interface MerkleInput {
+    solidityTypes: string[];
+    data: any[];
 }
 
 export default class MerkleGenerator {
@@ -21,25 +21,41 @@ export default class MerkleGenerator {
     }
 
     private generateTree(tokensPath: string): StandardMerkleTree<any[]> {
-        const merkleData = JSON.parse(fs.readFileSync(tokensPath).toString());
-        const tree = StandardMerkleTree.of(merkleData, ["address", "uint256", "uint256"]);
+        const merkleData: MerkleInput = JSON.parse(fs.readFileSync(tokensPath).toString());
+        const tree = StandardMerkleTree.of(merkleData.data, merkleData.solidityTypes);
         fs.writeFileSync(MERKLE_TREE_PATH, JSON.stringify({root: tree.root, tree: tree.dump()}));
         return tree;
     }
 
-    getTokens(address: string): TokensData {
-        const tokens: TokensData = {ids: [], amounts: []};
-
+    getOwnedItems() {
+        const tokens: any = {};
         for (const [, entry] of this.merkleTree.entries()) {
-          if (entry[0] === address) {
-            tokens.ids.push(entry[1]);
-            tokens.amounts.push(entry[2]);
-          }
+            tokens[entry[0]] = tokens[entry[0]] || {ids: [], amounts:[]};
+            tokens[entry[0]].ids.push(entry[1]);
+            tokens[entry[0]].amounts.push(entry[2]);
         }
         return tokens;
     }
 
-    generateProof(address: string): string[][] {
+    getOwnedArcadians() {
+        const tokens: any = {};
+        for (const [, entry] of this.merkleTree.entries()) {
+            tokens[entry[0]] = tokens[entry[0]] || 0;
+            tokens[entry[0]] += entry[1];
+        }
+        return tokens;
+    }
+
+    generateProof(address: string): string[] {
+        for (const [i, entry] of this.merkleTree.entries()) {
+          if (entry[0] === address) {
+            return this.merkleTree.getProof(i);
+          }
+        }
+        return [];
+    }
+
+    generateProofs(address: string): string[][] {
         const proofs: string[][] = [];
 
         for (const [i, entry] of this.merkleTree.entries()) {
