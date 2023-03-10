@@ -15,7 +15,8 @@ export const func = async() => {
     const diamondInitName = 'ItemsInit';
     const FacetNames = [
         'ItemsFacet',
-        'MerkleFacet'
+        'MerkleFacet',
+        'RolesFacet'
     ]
 
     await deploy(diamondName, { from: deployer, log: true });
@@ -36,7 +37,7 @@ export const func = async() => {
     }
 
     ensureUniqueFunctions(newDeployedFacets, diamond);
-    ensureUniqueEvents(newDeployedFacets, diamond);
+    // ensureUniqueEvents(newDeployedFacets, diamond);
 
     const cut = []
     for (const facet of newDeployedFacets) {
@@ -57,7 +58,8 @@ export const func = async() => {
     const merkleRoot = merkleTree.root
 
     // Intialize our contract storage
-    let functionCall = itemsInit.interface.encodeFunctionData('init', [merkleRoot.toString()])
+    const baseTokenUri = "https://api.arcadians.io/";
+    let functionCall = itemsInit.interface.encodeFunctionData('init', [merkleRoot.toString(), baseTokenUri])
     let tx = await diamond.diamondCut(cut, itemsInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

@@ -2,15 +2,14 @@
 pragma solidity ^0.8.9;
 
 import { SolidStateERC1155 } from "@solidstate/contracts/token/ERC1155/SolidStateERC1155.sol";
+// import { ReentrancyGuard } from "@solidstate/contracts/utils/SolidStateERC1155.sol"; // nonReentrant()
 import { ItemsStorage } from "./ItemsStorage.sol";
-import { MerkleStorage } from "../merkle/MerkleStorage.sol";
+import { MerkleInternal } from "../merkle/MerkleInternal.sol";
+import { RolesInternal } from "../roles/RolesInternal.sol";
 
-contract ItemsFacet is SolidStateERC1155 {
+contract ItemsFacet is SolidStateERC1155, RolesInternal, MerkleInternal {
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
-
-    // TODO
-    // item type (weapon = 1, armor = 2, background = 3)
 
     function claim(address to, uint tokenId, uint amount, bytes32[] memory proof)
         public
@@ -23,8 +22,7 @@ contract ItemsFacet is SolidStateERC1155 {
 
         // Verify if is elegible
         bytes memory leaf = abi.encode(to, tokenId, amount);
-        bool isValid = MerkleStorage.isValidLeaf(proof, leaf);
-        require(isValid, "Not elegible to claim");
+        _validateLeaf(proof, leaf);
 
         // Mint token to address
         _mint(to, tokenId, amount, '');
@@ -49,5 +47,13 @@ contract ItemsFacet is SolidStateERC1155 {
         public
     {
         _mintBatch(to, ids, amounts, data);
+    }
+
+    function setBaseURI(string memory baseURI) external onlyManager {
+        _setBaseURI(baseURI);
+    }
+
+    function setTokenURI(uint tokenId, string memory tokenURI) external onlyManager {
+        _setTokenURI(tokenId, tokenURI);
     }
 }

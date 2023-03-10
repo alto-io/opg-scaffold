@@ -34,6 +34,9 @@ export const config: HardhatUserConfig = {
     },
     alice: {
         default: 1
+    },
+    bob: {
+        default: 2
     }
   },
   networks: {
