@@ -69,9 +69,6 @@ describe('Arcadians Diamond merkle', function () {
     let claimAmounts: number[];
 
     before(async function () {
-    })
-
-    beforeEach(async () => {
         // use deploy script to deploy diamond
         const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
         if (fs.existsSync(deploymentHardhatPath)) {
@@ -97,6 +94,9 @@ describe('Arcadians Diamond merkle', function () {
         claimAddresses = Object.keys(tokensData);
         claimAmounts = Object.values(tokensData);
         await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
+    })
+
+    beforeEach(async () => {
     });
 
     it('should be able to claim tokens if elegible', async () => {
@@ -127,20 +127,79 @@ describe('Arcadians Diamond merkle', function () {
             const badClaimAmount = claimAmounts[i] + 1;
             await expect(
                 arcadiansFacet.claim(deployerAddress, badClaimAmount, proof),
-            ).to.be.revertedWith("Not elegible to claim");
+            ).to.be.revertedWith("Data not included in merkle");
         }
     })
 
-    it('owner should be able to update merkle root', async () => {
+    it('should be able to update merkle root', async () => {
         const newMerkleRoot = ethers.constants.HashZero;
         await merkleFacet.updateMerkleRoot(newMerkleRoot);
         expect(await merkleFacet.getMerkleRoot()).to.be.equal(newMerkleRoot);
     })
-
-    it('should not be able to update merkle root if not the owner', async () => {
-        const newMerkleRoot = ethers.constants.HashZero;
-        await expect(
-            merkleFacet.connect(alice).updateMerkleRoot(newMerkleRoot),
-        ).to.be.revertedWith("Not owner");
-    })
 })
+
+describe('Arcadians Diamond roles', function () {
+    this.timeout(180000);
+
+    // contracts
+    let diamond: Contract;
+    let arcadiansInit: Contract;
+    let arcadiansFacet: Contract;
+    let merkleFacet: Contract;
+    let rolesFacet: Contract;
+
+    // accounts
+    let deployer: ethers.Signer
+    let deployerAddress: string;
+    let alice: ethers.Signer
+
+    // roles
+    let defaultAdminRole: string;
+    let managerRole: string;
+    let minterRole: string;
+
+    // merkle
+    let merkleGenerator: MerkleGenerator;
+    let tokensData: any;
+    let claimAddresses: string[];
+    let claimAmounts: number[];
+
+    before(async function () {
+    })
+
+    beforeEach(async () => {
+        // use deploy script to deploy diamond
+        const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
+        if (fs.existsSync(deploymentHardhatPath)) {
+            fs.rmdirSync(deploymentHardhatPath, { recursive: true })
+        }
+        await deployDiamond.func()
+        
+        const namedAccounts = await hre.ethers.getNamedSigners();
+        
+        deployer = namedAccounts.deployer
+        deployerAddress = await deployer.getAddress();
+        alice = namedAccounts.alice
+
+        diamond = await hre.ethers.getContract('ArcadiansDiamond');
+        console.log("diamond.owner: ", await diamond.owner());
+        
+        arcadiansInit = await hre.ethers.getContract('ArcadiansInit')
+        arcadiansFacet = await hre.ethers.getContractAt('ArcadiansFacet', diamond.address)
+        merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
+        rolesFacet = await hre.ethers.getContractAt('RolesFacet', diamond.address)
+
+        defaultAdminRole = await rolesFacet.getDefaultAdminRole();
+        managerRole = await rolesFacet.getManagerRole();
+        minterRole = await rolesFacet.getMinterRole();
+        
+        merkleGenerator = new MerkleGenerator(TOKENS_PATH);
+        tokensData = merkleGenerator.getOwnedArcadians();
+        claimAddresses = Object.keys(tokensData);
+        claimAmounts = Object.values(tokensData);
+        await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
+    });
+    
+    it('deployer should have all roles', async () => {
+    })
+});

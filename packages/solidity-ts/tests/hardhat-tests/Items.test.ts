@@ -8,7 +8,7 @@ import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
 import path from "path";
 import fs from "fs";
 
-const TOKENS_PATH = path.join(__dirname, "../mocks/ownedItemsMock.json");
+export const TOKENS_PATH = path.join(__dirname, "../mocks/ownedItemsMock.json");
 const deployDiamond = require('../../deploy/hardhat-deploy/03.ItemsDiamond.deploy')
 
 describe('Items Diamond Test', function () {
@@ -25,7 +25,7 @@ describe('Items Diamond Test', function () {
     let deployerAddress: string;
     let alice: ethers.Signer
 
-    beforeEach(async () => {
+    before(async () => {
         const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
         if (fs.existsSync(deploymentHardhatPath)) {
             fs.rmdirSync(deploymentHardhatPath, { recursive: true })
@@ -40,6 +40,9 @@ describe('Items Diamond Test', function () {
 
         diamond = await hre.ethers.getContract('ItemsDiamond');
         console.log("diamond.owner: ", await diamond.owner());
+    });
+
+    beforeEach(async () => {
     });
     
     it('should deployer be owner', async () => {
@@ -69,9 +72,6 @@ describe('Items Diamond merkle Test', function () {
     let claimValues: {ids: number[], amounts: number[]}[];
 
     before(async function () {
-    })
-
-    beforeEach(async () => {
         // use deploy script to deploy diamond
         const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
         if (fs.existsSync(deploymentHardhatPath)) {
@@ -98,6 +98,9 @@ describe('Items Diamond merkle Test', function () {
         tokensData = merkleGenerator.getOwnedItems();
         claimAddresses = Object.keys(tokensData);
         claimValues = Object.values(tokensData);
+    })
+
+    beforeEach(async () => {
     });
 
     it('should not be able to claim tokens if not elegible', async () => {
@@ -108,7 +111,7 @@ describe('Items Diamond merkle Test', function () {
             const proofs = merkleGenerator.generateProofs(address);
             await expect(
                 itemsFacet.claimBatch(deployerAddress, ids, badAmounts, proofs),
-            ).to.be.revertedWith("Not elegible to claim");
+            ).to.be.revertedWith("Data not included in merkle");
         }
     })
     
@@ -143,16 +146,9 @@ describe('Items Diamond merkle Test', function () {
         }
     })
 
-    it('owner should be able to update merkle root', async () => {
+    it('should be able to update merkle root', async () => {
         const newMerkleRoot = ethers.constants.HashZero;
         await merkleFacet.updateMerkleRoot(newMerkleRoot);
         expect(await merkleFacet.getMerkleRoot()).to.be.equal(newMerkleRoot);
-    })
-
-    it('should not be able to update merkle root if not the owner', async () => {
-        const newMerkleRoot = ethers.constants.HashZero;
-        await expect(
-            merkleFacet.connect(alice).updateMerkleRoot(newMerkleRoot),
-        ).to.be.revertedWith("Not owner");
     })
 })

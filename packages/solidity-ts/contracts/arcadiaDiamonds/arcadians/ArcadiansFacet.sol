@@ -2,10 +2,12 @@
 pragma solidity ^0.8.9;
 
 import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
-import { MerkleStorage } from "../merkle/MerkleStorage.sol";
+import { MerkleInternal } from "../merkle/MerkleInternal.sol";
+import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 
-contract ArcadiansFacet is SolidStateERC721 {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal {
 
     event Claimed(address indexed to, uint256 indexed amount);
 
@@ -19,8 +21,7 @@ contract ArcadiansFacet is SolidStateERC721 {
 
         // Verify if is elegible
         bytes memory leaf = abi.encode(to, totalAmount);
-        bool isValid = MerkleStorage.isValidLeaf(proof, leaf);
-        require(isValid, "Not elegible to claim");
+        _validateLeaf(proof, leaf);
 
         // Mint token to address
         uint amountLeftToClaim = totalAmount - es.amountClaimed[to];
@@ -39,5 +40,13 @@ contract ArcadiansFacet is SolidStateERC721 {
         ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
         _mint(account, es.counterId);
         es.counterId++;
+    }
+
+    function setBaseURI(string memory baseURI) external onlyManager {
+        _setBaseURI(baseURI);
+    }
+
+    function getBaseURI() external view returns (string memory) {
+        return _getBaseURI();
     }
 }
