@@ -11,42 +11,42 @@ contract ItemsFacet is SolidStateERC1155, RolesInternal, MerkleInternal {
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
 
-    function claim(address to, uint tokenId, uint amount, bytes32[] memory proof)
+    function claim(uint tokenId, uint amount, bytes32[] memory proof)
         public
     {
         ItemsStorage.Layout storage itemsS = ItemsStorage.layout();
 
         // Revert if the token was already claimed before
-        require(!itemsS.claimed[to][tokenId], "Already claimed");
-        itemsS.claimed[to][tokenId] = true;
+        require(!itemsS.claimed[msg.sender][tokenId], "Already claimed");
+        itemsS.claimed[msg.sender][tokenId] = true;
 
         // Verify if is elegible
-        bytes memory leaf = abi.encode(to, tokenId, amount);
+        bytes memory leaf = abi.encode(msg.sender, tokenId, amount);
         _validateLeaf(proof, leaf);
 
         // Mint token to address
-        _mint(to, tokenId, amount, '');
+        _mint(msg.sender, tokenId, amount, '');
 
-        emit Claimed(to, tokenId, amount);
+        emit Claimed(msg.sender, tokenId, amount);
     }
 
-    function claimBatch(address to, uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) external {
+    function claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) external {
         require(tokenIds.length == amounts.length, "Inputs length mismatch");
         for (uint256 i = 0; i < tokenIds.length; i++) {
-            claim(to, tokenIds[i], amounts[i], proofs[i]);
+            claim(tokenIds[i], amounts[i], proofs[i]);
         }
     }
 
     function mint(address account, uint256 id, uint256 amount, bytes memory data)
-        public
+        public onlyManager
     {
         _mint(account, id, amount, data);
     }
 
-    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
-        public
+    function mintBatch(uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+        public onlyManager
     {
-        _mintBatch(to, ids, amounts, data);
+        _mintBatch(msg.sender, ids, amounts, data);
     }
 
     function setBaseURI(string memory baseURI) external onlyManager {

@@ -11,37 +11,37 @@ contract ArcadiansFacet is ArcadiansInternal, MerkleInternal {
 
     event Claimed(address indexed to, uint256 indexed amount);
 
-    function claim(address to, uint totalAmount, bytes32[] memory proof)
+    function claim(uint totalAmount, bytes32[] memory proof)
         public
     {
         ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
 
         // Revert if the token was already claimed before
-        require(es.amountClaimed[to] < totalAmount, "All tokens claimed");
+        require(es.amountClaimed[msg.sender] < totalAmount, "All tokens claimed");
 
         // Verify if is elegible
-        bytes memory leaf = abi.encode(to, totalAmount);
+        bytes memory leaf = abi.encode(msg.sender, totalAmount);
         _validateLeaf(proof, leaf);
 
         // Mint token to address
-        uint amountLeftToClaim = totalAmount - es.amountClaimed[to];
+        uint amountLeftToClaim = totalAmount - es.amountClaimed[msg.sender];
         for (uint256 i = 0; i < amountLeftToClaim; i++) {
             uint tokenId = es.counterId;
-            _mint(to, tokenId);
+            _mint(msg.sender, tokenId);
             es.counterId++;
         }
-        es.amountClaimed[to] += amountLeftToClaim;
-        emit Claimed(to, amountLeftToClaim);
+        es.amountClaimed[msg.sender] += amountLeftToClaim;
+        emit Claimed(msg.sender, amountLeftToClaim);
     }
 
     function getClaimedAmount(address account) external view returns (uint) {
         return _getClaimedAmount(account);
     }
 
-    function mint(address to)
+    function mint()
         public payable
     {
-        _mint(to);
+        _mint(msg.sender);
     }
 
     function setMintPrice(uint newMintPrice) external onlyManager {
