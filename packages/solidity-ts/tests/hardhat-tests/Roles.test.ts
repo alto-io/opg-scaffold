@@ -7,9 +7,11 @@ import hre from 'hardhat';
 import path from "path";
 import fs from "fs";
 import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
-import { TOKENS_PATH } from './Items.test';
+import { TOKENS_PATH_ITEMS } from './Items.test';
+import { TOKENS_PATH_ARCADIANS } from './Arcadians.test';
 
-const deployDiamond = require('../../deploy/hardhat-deploy/02.ArcadiansDiamond.deploy')
+const deployArcadiansDiamond = require('../../deploy/hardhat-deploy/02.ArcadiansDiamond.deploy')
+const deployItemsDiamond = require('../../deploy/hardhat-deploy/03.ItemsDiamond.deploy')
 
 describe('Roles setup', function () {
     this.timeout(180000);
@@ -40,7 +42,7 @@ describe('Roles setup', function () {
         if (fs.existsSync(deploymentHardhatPath)) {
             fs.rmdirSync(deploymentHardhatPath, { recursive: true })
         }
-        await deployDiamond.func()
+        await deployArcadiansDiamond.func()
         
         const namedAccounts = await hre.ethers.getNamedSigners();
         
@@ -85,8 +87,8 @@ describe('Roles setup', function () {
     
     it('default admin should be able to add role to account', async () => {
         expect(await rolesFacet.hasRole(managerRole, aliceAddress)).to.be.false;
-        await rolesFacet.grantRole(managerRole, aliceAddress);
-        expect(await rolesFacet.hasRole(managerRole, aliceAddress)).to.be.true;
+        await rolesFacet.grantRole(managerRole, bobAddress);
+        expect(await rolesFacet.hasRole(managerRole, bobAddress)).to.be.true;
     })
 });
 
@@ -117,10 +119,10 @@ describe('Arcadians roles', function () {
         if (fs.existsSync(deploymentHardhatPath)) {
             fs.rmdirSync(deploymentHardhatPath, { recursive: true })
         }
-        await deployDiamond.func()
+        await deployArcadiansDiamond.func()
         
         const namedAccounts = await hre.ethers.getNamedSigners();
-        
+
         deployer = namedAccounts.deployer
         deployerAddress = await deployer.getAddress();
         alice = namedAccounts.alice
@@ -155,13 +157,29 @@ describe('Arcadians roles', function () {
         await expect(arcadiansFacet.connect(alice).setBaseURI(newBaseURI)).to.be.revertedWith(managerRoleMissingError);
     })
 
-    it('should not be able to update merkle root if not the owner', async () => {
+    it('should not be able to update merkle root without manager role', async () => {
         const newMerkleRoot = ethers.constants.HashZero;
         const aliceAddress = (await alice.getAddress()).toLocaleLowerCase();
         const managerRoleMissingError = `AccessControl: account ${aliceAddress.toLocaleLowerCase()} is missing role ${managerRole}`
         await expect(
             merkleFacet.connect(alice).updateMerkleRoot(newMerkleRoot),
         ).to.be.revertedWith(managerRoleMissingError);
+    })
+    
+    it('Should not be able to update max mint limit without manager role', async () => {
+        const currentMaxLimit = await arcadiansFacet.getMaxMintPerUser();
+        const newMaxLimit = currentMaxLimit + 1;
+        const managerRoleMissingError = `AccessControl: account ${aliceAddress.toLocaleLowerCase()} is missing role ${managerRole}`
+        await expect(arcadiansFacet.connect(alice).setMaxMintPerUser(newMaxLimit)).to.be.revertedWith(managerRoleMissingError)
+        
+    })
+    
+    it('Should not be able to update mint price without manager role', async () => {
+        const mintPrice = await arcadiansFacet.getMintPrice();
+        const newMintPrice = mintPrice + 1;
+        const managerRoleMissingError = `AccessControl: account ${aliceAddress.toLocaleLowerCase()} is missing role ${managerRole}`
+        await expect(arcadiansFacet.connect(alice).setMintPrice(newMintPrice)).to.be.revertedWith(managerRoleMissingError)
+        
     })
 });
 
@@ -199,7 +217,7 @@ describe('Items roles', function () {
         if (fs.existsSync(deploymentHardhatPath)) {
             fs.rmdirSync(deploymentHardhatPath, { recursive: true })
         }
-        await deployDiamond.func()
+        await deployItemsDiamond.func()
         
         const namedAccounts = await hre.ethers.getNamedSigners();
         
@@ -216,11 +234,12 @@ describe('Items roles', function () {
         merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
         rolesFacet = await hre.ethers.getContractAt('RolesFacet', diamond.address)
 
+        
         defaultAdminRole = await rolesFacet.getDefaultAdminRole();
         managerRole = await rolesFacet.getManagerRole();
         minterRole = await rolesFacet.getMinterRole();
         
-        merkleGenerator = new MerkleGenerator(TOKENS_PATH);
+        merkleGenerator = new MerkleGenerator(TOKENS_PATH_ITEMS);
         await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
 
         tokensData = merkleGenerator.getOwnedItems();

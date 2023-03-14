@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+// import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
 import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 
-contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal {
+contract ArcadiansFacet is ArcadiansInternal, MerkleInternal {
 
     event Claimed(address indexed to, uint256 indexed amount);
 
@@ -34,18 +34,33 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal {
         emit Claimed(to, amountLeftToClaim);
     }
 
-    function mint(address account)
-        public
+    function getClaimedAmount(address account) external view returns (uint) {
+        return _getClaimedAmount(account);
+    }
+
+    function mint(address to)
+        public payable
     {
-        ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
-        _mint(account, es.counterId);
-        es.counterId++;
+        _mint(to);
+    }
+
+    function setMintPrice(uint newMintPrice) external onlyManager {
+        _setMintPrice(newMintPrice);
+    }
+    function getMintPrice() external view returns (uint) {
+        return _getMintPrice();
+    }
+
+    function setMaxMintPerUser(uint newMaxMintPerUser) external onlyManager {
+        _setMaxMintPerUser(newMaxMintPerUser);
+    }
+    function getMaxMintPerUser() external view returns (uint) {
+        return _getMaxMintPerUser();
     }
 
     function setBaseURI(string memory baseURI) external onlyManager {
         _setBaseURI(baseURI);
     }
-
     function getBaseURI() external view returns (string memory) {
         return _getBaseURI();
     }

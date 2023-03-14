@@ -10,6 +10,8 @@ library ArcadiansStorage {
         // wallet => amount claimed 
         mapping(address => uint) amountClaimed;
         uint counterId;
+        uint maxMintPerUser;
+        uint mintPrice;
     }
 
     function layout()
