@@ -8,7 +8,7 @@ import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
 import path from "path";
 import fs from "fs";
 
-export const TOKENS_PATH = path.join(__dirname, "../mocks/ownedItemsMock.json");
+export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 const deployDiamond = require('../../deploy/hardhat-deploy/03.ItemsDiamond.deploy')
 
 describe('Items Diamond Test', function () {
@@ -64,6 +64,8 @@ describe('Items Diamond merkle Test', function () {
     let deployer: ethers.Signer
     let deployerAddress: string;
     let alice: ethers.Signer
+    let bob: ethers.Signer
+    let bobAddress: string;
 
     // merkle
     let merkleGenerator: MerkleGenerator;
@@ -84,6 +86,8 @@ describe('Items Diamond merkle Test', function () {
         deployer = namedAccounts.deployer
         deployerAddress = await deployer.getAddress();
         alice = namedAccounts.alice
+        bob = namedAccounts.bob
+        bobAddress = await bob.getAddress();
 
         diamond = await hre.ethers.getContract('ItemsDiamond');
         console.log("diamond.owner: ", await diamond.owner());
@@ -92,7 +96,7 @@ describe('Items Diamond merkle Test', function () {
         itemsFacet = await hre.ethers.getContractAt('ItemsFacet', diamond.address)
         merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
         
-        merkleGenerator = new MerkleGenerator(TOKENS_PATH);
+        merkleGenerator = new MerkleGenerator(TOKENS_PATH_ITEMS);
         await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
 
         tokensData = merkleGenerator.getOwnedItems();
@@ -121,7 +125,6 @@ describe('Items Diamond merkle Test', function () {
             const ids = claimValues[i].ids;
             const amounts = claimValues[i].amounts;
             const proofs = merkleGenerator.generateProofs(address);
-            console.log("address, ids, amounts, proofs: ", address, ids, amounts, proofs);
             
             const txRequest = await itemsFacet.claimBatch(address, ids, amounts, proofs);
             const tx = await txRequest.wait();

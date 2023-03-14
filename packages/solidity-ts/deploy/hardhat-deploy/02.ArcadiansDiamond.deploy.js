@@ -59,8 +59,10 @@ export const func = async() => {
 
     // Intialize our contract storage
     const baseTokenUri = "https://api.arcadians.io/";
-    let functionCall = arcadiansInit.interface.encodeFunctionData('init', [merkleRoot.toString(), baseTokenUri])
-    let tx = await diamond.diamondCut(cut, arcadiansInit.address, functionCall)
+    const maxMintPerUser = 1;
+    const priceMint = 10;
+    let functionCall = arcadiansInit.interface.encodeFunctionData('init', [merkleRoot.toString(), baseTokenUri, maxMintPerUser, priceMint]);
+    let tx = await diamond.diamondCut(cut, arcadiansInit.address, functionCall);
     let receipt = await tx.wait()
     if (!receipt.status) {
         throw Error(`Diamond upgrade failed: ${tx.hash}`)

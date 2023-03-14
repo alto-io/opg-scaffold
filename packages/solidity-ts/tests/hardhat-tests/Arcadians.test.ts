@@ -9,7 +9,7 @@ import path from "path";
 import fs from "fs";
 
 const deployDiamond = require('../../deploy/hardhat-deploy/02.ArcadiansDiamond.deploy')
-const TOKENS_PATH = path.join(__dirname, "../mocks/ownedArcadiansMock.json");
+export const TOKENS_PATH_ARCADIANS = path.join(__dirname, "../mocks/ownedArcadiansMock.json");
 
 describe('Arcadians Diamond Test', function () {
     this.timeout(180000);
@@ -89,7 +89,7 @@ describe('Arcadians Diamond merkle', function () {
         arcadiansFacet = await hre.ethers.getContractAt('ArcadiansFacet', diamond.address)
         merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
         
-        merkleGenerator = new MerkleGenerator(TOKENS_PATH);
+        merkleGenerator = new MerkleGenerator(TOKENS_PATH_ARCADIANS);
         tokensData = merkleGenerator.getOwnedArcadians();
         claimAddresses = Object.keys(tokensData);
         claimAmounts = Object.values(tokensData);
@@ -138,7 +138,7 @@ describe('Arcadians Diamond merkle', function () {
     })
 })
 
-describe('Arcadians Diamond roles', function () {
+describe('mint max limit per user', function () {
     this.timeout(180000);
 
     // contracts
@@ -152,6 +152,8 @@ describe('Arcadians Diamond roles', function () {
     let deployer: ethers.Signer
     let deployerAddress: string;
     let alice: ethers.Signer
+    let bob: ethers.Signer
+    let bobAddress: string;
 
     // roles
     let defaultAdminRole: string;
@@ -163,6 +165,9 @@ describe('Arcadians Diamond roles', function () {
     let tokensData: any;
     let claimAddresses: string[];
     let claimAmounts: number[];
+
+    // mint 
+    let mintPrice: number;
 
     before(async function () {
     })
@@ -180,6 +185,8 @@ describe('Arcadians Diamond roles', function () {
         deployer = namedAccounts.deployer
         deployerAddress = await deployer.getAddress();
         alice = namedAccounts.alice
+        bob = namedAccounts.bob
+        bobAddress = await bob.getAddress();
 
         diamond = await hre.ethers.getContract('ArcadiansDiamond');
         console.log("diamond.owner: ", await diamond.owner());
@@ -192,14 +199,138 @@ describe('Arcadians Diamond roles', function () {
         defaultAdminRole = await rolesFacet.getDefaultAdminRole();
         managerRole = await rolesFacet.getManagerRole();
         minterRole = await rolesFacet.getMinterRole();
+
+        mintPrice = await arcadiansFacet.getMintPrice();
         
-        merkleGenerator = new MerkleGenerator(TOKENS_PATH);
+        merkleGenerator = new MerkleGenerator(TOKENS_PATH_ARCADIANS);
         tokensData = merkleGenerator.getOwnedArcadians();
         claimAddresses = Object.keys(tokensData);
         claimAmounts = Object.values(tokensData);
         await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
     });
-    
-    it('deployer should have all roles', async () => {
+
+    it('Should be able to update mint price', async () => {
+        const mintPrice = await arcadiansFacet.getMintPrice();
+        console.log("mintPrice: ", mintPrice);
+        
+        const newMintPrice = mintPrice + 1;
+        await arcadiansFacet.setMintPrice(newMintPrice);
+        expect(await arcadiansFacet.getMintPrice()).to.be.equal(newMintPrice);
     })
+    
+    it('Should be able to mint by paying the right amount ', async () => {
+        const aliceAddress = await alice.getAddress()
+        const previousBalance: BigInt = await arcadiansFacet.balanceOf(aliceAddress);
+        await arcadiansFacet.connect(alice).mint(aliceAddress, {value: mintPrice})
+        const newBalance = await arcadiansFacet.balanceOf(aliceAddress);
+        expect(newBalance).to.be.equal(Number(previousBalance) + 1)
+    })
+
+    it('Should not be able to mint without sending ether ', async () => {
+        await expect(arcadiansFacet.connect(bob).mint(bobAddress)).to.be.revertedWith("Invalid pay amount")
+    })
+
+    it('Should not be able to mint paying a wrong amount ', async () => {
+        const wrongMintPrice = mintPrice - 1;
+        await expect(arcadiansFacet.connect(bob).mint(bobAddress, {value: wrongMintPrice})).to.be.revertedWith("Invalid pay amount")
+    })
+
+
+
+    describe('mint max limit per user', function () {
+        this.timeout(180000);
+    
+        // contracts
+        let diamond: Contract;
+        let arcadiansInit: Contract;
+        let arcadiansFacet: Contract;
+        let merkleFacet: Contract;
+        let rolesFacet: Contract;
+    
+        // accounts
+        let deployer: ethers.Signer
+        let deployerAddress: string;
+        let alice: ethers.Signer
+        let bob: ethers.Signer
+        let bobAddress: string;
+    
+        // roles
+        let defaultAdminRole: string;
+        let managerRole: string;
+        let minterRole: string;
+    
+        // merkle
+        let merkleGenerator: MerkleGenerator;
+        let tokensData: any;
+        let claimAddresses: string[];
+        let claimAmounts: number[];
+    
+        // mint 
+        let mintPrice: number;
+    
+        before(async function () {
+        })
+    
+        beforeEach(async () => {
+            // use deploy script to deploy diamond
+            const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
+            if (fs.existsSync(deploymentHardhatPath)) {
+                fs.rmdirSync(deploymentHardhatPath, { recursive: true })
+            }
+            await deployDiamond.func()
+            
+            const namedAccounts = await hre.ethers.getNamedSigners();
+            
+            deployer = namedAccounts.deployer
+            deployerAddress = await deployer.getAddress();
+            alice = namedAccounts.alice
+            bob = namedAccounts.bob
+            bobAddress = await bob.getAddress();
+    
+            diamond = await hre.ethers.getContract('ArcadiansDiamond');
+            console.log("diamond.owner: ", await diamond.owner());
+            
+            arcadiansInit = await hre.ethers.getContract('ArcadiansInit')
+            arcadiansFacet = await hre.ethers.getContractAt('ArcadiansFacet', diamond.address)
+            merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
+            rolesFacet = await hre.ethers.getContractAt('RolesFacet', diamond.address)
+    
+            defaultAdminRole = await rolesFacet.getDefaultAdminRole();
+            managerRole = await rolesFacet.getManagerRole();
+            minterRole = await rolesFacet.getMinterRole();
+    
+            mintPrice = await arcadiansFacet.getMintPrice();
+            
+            merkleGenerator = new MerkleGenerator(TOKENS_PATH_ARCADIANS);
+            tokensData = merkleGenerator.getOwnedArcadians();
+            claimAddresses = Object.keys(tokensData);
+            claimAmounts = Object.values(tokensData);
+            await merkleFacet.updateMerkleRoot(merkleGenerator.merkleRoot);
+        });
+        
+        it('Should be able to update max mint limit ', async () => {
+            const currentMaxLimit = await arcadiansFacet.getMaxMintPerUser();
+            const newMaxLimit = Number(currentMaxLimit) + 1;
+            await arcadiansFacet.setMaxMintPerUser(newMaxLimit)
+            expect(await arcadiansFacet.getMaxMintPerUser()).to.be.equal(newMaxLimit)
+        })
+        
+        it('Should be able to mint before reaching max limit ', async () => {
+            const maxLimit = await arcadiansFacet.getMaxMintPerUser();
+            const currentBalance = await arcadiansFacet.balanceOf(bobAddress);
+            const claimedAmount = await arcadiansFacet.getClaimedAmount(bobAddress);
+            console.log("maxLimit: ", maxLimit);
+            console.log("claimedAmount: ", claimedAmount);
+            console.log("currentBalance: ", currentBalance);
+            console.log("should mint: ", currentBalance - claimedAmount);
+            
+            let canMint = maxLimit - (currentBalance - claimedAmount);
+            
+            for (let i = 0; i < canMint; i++) {
+                await arcadiansFacet.connect(bob).mint(bobAddress, {value: mintPrice});
+            }
+            expect(await arcadiansFacet.balanceOf(bobAddress)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
+            await expect(arcadiansFacet.connect(bob).mint(bobAddress, {value: mintPrice})).to.be.revertedWith("Max mint reached");
+        })
+    });
 });
