@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "verify": "hardhat etherscan-verify --solc-input --network",
-    "tests": "hardhat test --network hardhat",
+    "tests": "hardhat test --network",
     "merkle-generate": "ts-node helpers/merkle-tree/generateTree.ts",
     "deploy": "npx hardhat deploy --network",
     "chain:hardhat": "cross-env BUILDING=true hardhat node --network hardhat --no-deploy",

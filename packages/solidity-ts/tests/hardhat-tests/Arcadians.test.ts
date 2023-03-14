@@ -100,35 +100,30 @@ describe('Arcadians Diamond merkle', function () {
     });
 
     it('should be able to claim tokens if elegible', async () => {
-        for (let i = 0; i < claimAddresses.length; i++) {
-            let proof = merkleGenerator.generateProof(claimAddresses[i]);
-            const txRequest = await arcadiansFacet.claim(claimAddresses[i], claimAmounts[i], proof);
-            const tx = await txRequest.wait();
-            expect(tx.status).to.be.equal(1);
-    
-            const balance = await arcadiansFacet.balanceOf(claimAddresses[i])
-            expect(balance).to.be.equal(claimAmounts[i])
-        }
+        const amountToClaim = 1;
+        let proof = merkleGenerator.generateProof(deployerAddress);
+        const txRequest = await arcadiansFacet.claim(amountToClaim, proof);
+        const tx = await txRequest.wait();
+        expect(tx.status).to.be.equal(1);
+
+        const balance = await arcadiansFacet.balanceOf(deployerAddress)
+        expect(balance).to.be.equal(amountToClaim)
     })
 
     it('should not able to claim the same tokens twice', async () => {
-        const claimAmount = tokensData[deployerAddress];
-        for (let i = 0; i < claimAddresses.length; i++) {
-            let proof = merkleGenerator.generateProof(claimAddresses[i]);
-            await expect(
-                arcadiansFacet.claim(deployerAddress, claimAmount, proof),
-            ).to.be.revertedWith("All tokens claimed");
-        }
+        const claimAmount = 1;
+        let proof = merkleGenerator.generateProof(deployerAddress);
+        await expect(
+            arcadiansFacet.claim(claimAmount, proof),
+        ).to.be.revertedWith("All tokens claimed");
     })
     
     it('should not be able to claim a different amount of tokens', async () => {
-        for (let i = 0; i < claimAddresses.length; i++) {
-            let proof = merkleGenerator.generateProof(claimAddresses[i]);
-            const badClaimAmount = claimAmounts[i] + 1;
-            await expect(
-                arcadiansFacet.claim(deployerAddress, badClaimAmount, proof),
-            ).to.be.revertedWith("Data not included in merkle");
-        }
+        const badClaimAmount = 2;
+        let proof = merkleGenerator.generateProof(deployerAddress);
+        await expect(
+            arcadiansFacet.claim(badClaimAmount, proof),
+        ).to.be.revertedWith("Data not included in merkle");
     })
 
     it('should be able to update merkle root', async () => {
@@ -221,18 +216,18 @@ describe('mint max limit per user', function () {
     it('Should be able to mint by paying the right amount ', async () => {
         const aliceAddress = await alice.getAddress()
         const previousBalance: BigInt = await arcadiansFacet.balanceOf(aliceAddress);
-        await arcadiansFacet.connect(alice).mint(aliceAddress, {value: mintPrice})
+        await arcadiansFacet.connect(alice).mint({value: mintPrice})
         const newBalance = await arcadiansFacet.balanceOf(aliceAddress);
         expect(newBalance).to.be.equal(Number(previousBalance) + 1)
     })
 
     it('Should not be able to mint without sending ether ', async () => {
-        await expect(arcadiansFacet.connect(bob).mint(bobAddress)).to.be.revertedWith("Invalid pay amount")
+        await expect(arcadiansFacet.connect(bob).mint()).to.be.revertedWith("Invalid pay amount")
     })
 
     it('Should not be able to mint paying a wrong amount ', async () => {
         const wrongMintPrice = mintPrice - 1;
-        await expect(arcadiansFacet.connect(bob).mint(bobAddress, {value: wrongMintPrice})).to.be.revertedWith("Invalid pay amount")
+        await expect(arcadiansFacet.connect(bob).mint({value: wrongMintPrice})).to.be.revertedWith("Invalid pay amount")
     })
 
 
@@ -327,10 +322,10 @@ describe('mint max limit per user', function () {
             let canMint = maxLimit - (currentBalance - claimedAmount);
             
             for (let i = 0; i < canMint; i++) {
-                await arcadiansFacet.connect(bob).mint(bobAddress, {value: mintPrice});
+                await arcadiansFacet.connect(bob).mint({value: mintPrice});
             }
             expect(await arcadiansFacet.balanceOf(bobAddress)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
-            await expect(arcadiansFacet.connect(bob).mint(bobAddress, {value: mintPrice})).to.be.revertedWith("Max mint reached");
+            await expect(arcadiansFacet.connect(bob).mint({value: mintPrice})).to.be.revertedWith("Max mint reached");
         })
     });
 });

@@ -108,45 +108,45 @@ describe('Items Diamond merkle Test', function () {
     });
 
     it('should not be able to claim tokens if not elegible', async () => {
-        for (let i = 0; i < claimAddresses.length; i++) {
-            const address = claimAddresses[i];
-            const ids = claimValues[i].ids;
-            const badAmounts = claimValues[i].amounts.map((amount) => ++amount);
-            const proofs = merkleGenerator.generateProofs(address);
-            await expect(
-                itemsFacet.claimBatch(deployerAddress, ids, badAmounts, proofs),
-            ).to.be.revertedWith("Data not included in merkle");
-        }
+        const ids = [1, 2];
+        const amounts = [1, 2];
+        const proofs = merkleGenerator.generateProofs(deployerAddress);
+        await expect(
+            itemsFacet.connect(alice).claimBatch(ids, amounts, proofs),
+        ).to.be.revertedWith("Data not included in merkle");
+    })
+
+    it('should not be able to claim tokens if token data is wrong', async () => {
+        const ids = [1, 2];
+        const badAmounts = [3, 2];
+        const proofs = merkleGenerator.generateProofs(deployerAddress);
+        await expect(
+            itemsFacet.claimBatch(ids, badAmounts, proofs),
+        ).to.be.revertedWith("Data not included in merkle");
     })
     
     it('should be able to claim tokens if elegible', async () => {
-        for (let i = 0; i < claimAddresses.length; i++) {
-            const address = claimAddresses[i];
-            const ids = claimValues[i].ids;
-            const amounts = claimValues[i].amounts;
-            const proofs = merkleGenerator.generateProofs(address);
-            
-            const txRequest = await itemsFacet.claimBatch(address, ids, amounts, proofs);
-            const tx = await txRequest.wait();
-            expect(tx.status).to.be.equal(1);
-    
-            for (let i = 0; i < ids.length; i++) {
-                const balance = await itemsFacet.balanceOf(address, ids[i])
-                expect(balance).to.be.equal(amounts[i])
-            }
+        const ids = [1, 2];
+        const amounts = [1, 2];
+        const proofs = merkleGenerator.generateProofs(deployerAddress);
+        
+        const txRequest = await itemsFacet.claimBatch(ids, amounts, proofs);
+        const tx = await txRequest.wait();
+        expect(tx.status).to.be.equal(1);
+
+        for (let i = 0; i < ids.length; i++) {
+            const balance = await itemsFacet.balanceOf(deployerAddress, ids[i])
+            expect(balance).to.be.equal(amounts[i])
         }
     })
 
     it('should not able to claim the same tokens twice', async () => {
-        for (let i = 0; i < claimAddresses.length; i++) {
-            const address = claimAddresses[i];
-            const ids = claimValues[i].ids;
-            const amounts = claimValues[i].amounts;
-            const proofs = merkleGenerator.generateProofs(address);
-            await expect(
-                itemsFacet.claimBatch(deployerAddress, ids, amounts, proofs),
-            ).to.be.revertedWith("Already claimed");
-        }
+        const ids = [1, 2];
+        const amounts = [1, 2];
+        const proofs = merkleGenerator.generateProofs(deployerAddress);
+        await expect(
+            itemsFacet.claimBatch(ids, amounts, proofs),
+        ).to.be.revertedWith("Already claimed");
     })
 
     it('should be able to update merkle root', async () => {
