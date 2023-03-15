@@ -16,8 +16,8 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         _setItemsAddress(newItemsAddress);
     }
 
-    function itemsAddress() external view returns (address) {
-        return _itemsAddress();
+    function getItemsAddress() external view returns (address) {
+        return _getItemsAddress();
     }
 
     function claim(uint totalAmount, bytes32[] memory proof)

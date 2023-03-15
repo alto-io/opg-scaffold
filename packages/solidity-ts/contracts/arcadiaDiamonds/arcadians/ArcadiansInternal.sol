@@ -28,7 +28,7 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal {
         }
     }
 
-    function _itemsAddress() internal view returns (address) {
+    function _getItemsAddress() internal view returns (address) {
         return ArcadiansStorage.layout().itemsAddress;
     }
 

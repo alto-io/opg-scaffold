@@ -51,8 +51,8 @@ contract InventoryFacet is
         _setArcadiansAddress(newArcadiansAddress);
     }
 
-    function arcadiansAddress() external view returns (address) {
-        return _arcadiansAddress();
+    function getArcadiansAddress() external view returns (address) {
+        return _getArcadiansAddress();
     }
 
     function createSlot(
