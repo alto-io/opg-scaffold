@@ -1,18 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-// import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
 import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
+import { IArcadiansFacet } from "./IArcadiansFacet.sol";
+import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 
-contract ArcadiansFacet is ArcadiansInternal, MerkleInternal {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, IArcadiansFacet, ReentrancyGuard {
 
-    event Claimed(address indexed to, uint256 indexed amount);
+    function setItemsAddress(address newItemsAddress) external onlyManager {
+        _setItemsAddress(newItemsAddress);
+    }
+
+    function itemsAddress() external view returns (address) {
+        return _itemsAddress();
+    }
 
     function claim(uint totalAmount, bytes32[] memory proof)
-        public
+        public nonReentrant
     {
         ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
 
@@ -39,7 +48,7 @@ contract ArcadiansFacet is ArcadiansInternal, MerkleInternal {
     }
 
     function mint()
-        public payable
+        public payable nonReentrant
     {
         _mint(msg.sender);
     }
@@ -63,5 +72,34 @@ contract ArcadiansFacet is ArcadiansInternal, MerkleInternal {
     }
     function getBaseURI() external view returns (string memory) {
         return _getBaseURI();
+    }
+
+    // required overrides
+    function _handleApproveMessageValue(
+        address operator,
+        uint256 tokenId,
+        uint256 value
+    ) internal virtual override (ERC721BaseInternal, SolidStateERC721) {
+        if (value > 0) revert SolidStateERC721__PayableApproveNotSupported();
+        SolidStateERC721._handleApproveMessageValue(operator, tokenId, value);
+    }
+
+
+    function _handleTransferMessageValue(
+        address from,
+        address to,
+        uint256 tokenId,
+        uint256 value
+    ) internal virtual override (ERC721BaseInternal, SolidStateERC721) {
+        if (value > 0) revert SolidStateERC721__PayableTransferNotSupported();
+        SolidStateERC721._handleTransferMessageValue(from, to, tokenId, value);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override(SolidStateERC721, ERC721BaseInternal) {
+        SolidStateERC721._beforeTokenTransfer(from, to, tokenId);
     }
 }

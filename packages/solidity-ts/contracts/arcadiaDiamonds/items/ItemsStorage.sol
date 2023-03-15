@@ -6,14 +6,16 @@ library ItemsStorage {
     bytes32 constant ITEMS_STORAGE_POSITION =
         keccak256("items.storage.position");
 
-    enum ItemType { Weapon, Top, Bottom, Head, Mouth, Eyes, Skin, Shadow, Background }
+    enum EquipmentItemType { Weapon, Top, Bottom }
+    enum CosmeticItemType { Head, Mouth, Eyes, Skin, Shadow, Background }
 
     struct Layout {
         // wallet => token id => bool 
         mapping(address => mapping(uint => bool)) claimed;
 
-        mapping(uint => ItemType) itemType;
-        mapping(ItemType => bool) typeExists;
+        mapping(uint => EquipmentItemType) equipmentItemType;
+        mapping(uint => CosmeticItemType) cosmeticItemType;
+        mapping(uint => bool) isEquipment;
     }
 
     function layout()
@@ -26,4 +28,8 @@ library ItemsStorage {
             es.slot := position
         }
     }
+
+    // function _isValidItemType(uint itemId) internal view returns (bool){
+    //     return ItemsStorage.layout().itemType[itemId] != ItemType.None;
+    // }
 }
