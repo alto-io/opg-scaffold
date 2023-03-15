@@ -37,16 +37,16 @@ contract ItemsFacet is SolidStateERC1155, RolesInternal, MerkleInternal {
         }
     }
 
-    function mint(address account, uint256 id, uint256 amount, bytes memory data)
+    function mint(address to, uint256 id, uint256 amount, bytes memory data)
         public onlyManager
     {
-        _mint(account, id, amount, data);
+        _mint(to, id, amount, data);
     }
 
-    function mintBatch(uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
         public onlyManager
     {
-        _mintBatch(msg.sender, ids, amounts, data);
+        _mintBatch(to, ids, amounts, data);
     }
 
     function setBaseURI(string memory baseURI) external onlyManager {
