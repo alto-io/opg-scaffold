@@ -91,7 +91,7 @@ contract InventoryFacetInternal is
         }
     }
 
-    function _arcadiansAddress() internal view returns (address) {
+    function _getArcadiansAddress() internal view returns (address) {
         return InventoryStorage.layout().arcadiansAddress;
     }
 

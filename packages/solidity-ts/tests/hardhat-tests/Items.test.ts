@@ -55,6 +55,15 @@ describe('Items Diamond Test', function () {
     })
 })
 
+describe('Items Diamond Inventory Test', function () {
+    it('should be able to update arcadians address', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const newArcadiansAddress = inventoryFacet.address;
+        await inventoryFacet.setArcadiansAddress(newArcadiansAddress);
+        expect(await inventoryFacet.getArcadiansAddress()).to.be.equal(newArcadiansAddress);
+    })
+})
+
 describe('Items Diamond merkle Test', function () {
 
     it('should not be able to claim tokens if not elegible', async () => {

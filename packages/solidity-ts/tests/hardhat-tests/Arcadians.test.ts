@@ -56,6 +56,15 @@ describe('Arcadians Diamond Test', function () {
     })
 })
 
+describe('Arcadians Diamond Inventory Test', function () {
+    it('should be able to update arcadians address', async () => {
+        const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const newItemsAddress = arcadiansFacet.address;
+        await arcadiansFacet.setItemsAddress(newItemsAddress);
+        expect(await arcadiansFacet.getItemsAddress()).to.be.equal(newItemsAddress);
+    })
+})
+
 describe('Arcadians Diamond merkle', function () {
 
     it('should be able to claim tokens if elegible', async () => {
