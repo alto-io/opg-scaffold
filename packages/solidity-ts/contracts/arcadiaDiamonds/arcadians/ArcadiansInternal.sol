@@ -6,14 +6,31 @@ import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 // import { MerkleInternal } from "../../merkle/MerkleInternal.sol";
 import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
-import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
+import { ERC721EnumerableInternal } from "@solidstate/contracts/token/ERC721/enumerable/ERC721EnumerableInternal.sol";
+import { ERC721EnumerableInternal } from "@solidstate/contracts/token/ERC721/enumerable/ERC721EnumerableInternal.sol";
+import { ERC721MetadataInternal } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataInternal.sol";
+
 // import "hardhat/console.sol";
 
-contract ArcadiansInternal is SolidStateERC721, RolesInternal {
+contract ArcadiansInternal is ERC721BaseInternal, RolesInternal {
 
     event MaxMintPerUserChanged(uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(string oldBaseURI, string newBaseURI);
+    event ItemsAddressChanged(address indexed oldItemsAddress, address indexed newItemsAddress);
+
+    function _setItemsAddress(address newItemsAddress) internal onlyManager {
+        ArcadiansStorage.Layout storage asl = ArcadiansStorage.layout();
+        if (newItemsAddress != asl.itemsAddress) {
+            emit ItemsAddressChanged(asl.itemsAddress, newItemsAddress);
+            asl.itemsAddress = newItemsAddress;
+        }
+    }
+
+    function _itemsAddress() internal view returns (address) {
+        return ArcadiansStorage.layout().itemsAddress;
+    }
 
     function _setBaseURI(string memory newBaseURI) internal {
         emit BaseURIChanged(ERC721MetadataStorage.layout().baseURI, newBaseURI);

@@ -1,76 +1,30 @@
 /* global ethers */
 /* eslint prefer-const: "off" */
-import hre, { ethers } from 'hardhat';
-import fs from "fs";
-import { MERKLE_TREE_PATH } from '~helpers/merkle-tree/merkleGenerator';
+import { ethers } from 'ethers';
+import hre from 'hardhat';
+import { DeployResult } from 'hardhat-deploy/types';
 
-const FacetCutAction = { Add: 0, Replace: 1, Remove: 2 }
+export const FacetCutAction = { Add: 0, Replace: 1, Remove: 2 }
 
-export const func = async() => {
+export const deployDiamond = async(diamondName: string, diamondInitName: string, facetNames: string[]): Promise<DeployResult> => {
     const { getNamedAccounts, deployments } = hre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
 
-    const diamondName = 'ItemsDiamond';
-    const diamondInitName = 'ItemsInit';
-    const FacetNames = [
-        'ItemsFacet',
-        'MerkleFacet',
-        'RolesFacet'
-    ]
+    const diamondDeployment = await deploy(diamondName, { from: deployer, log: true });
+    console.log(`${diamondName} address: `, diamondDeployment.address);
+    const diamondInitDeployment = await deploy(diamondInitName, { from: deployer, log: true });
+    console.log(`${diamondInitName} address: `, diamondInitDeployment.address);
 
-    await deploy(diamondName, { from: deployer, log: true });
-    await deploy(diamondInitName, { from: deployer, log: true });
-
-    // deploy facets
-    console.log('Deploying facets: ', FacetNames)
-
-    const diamond = await hre.ethers.getContract("ItemsDiamond");
-
-    const newDeployedFacets = [];
-    for (const FacetName of FacetNames) {
-        await deploy(FacetName, { from: deployer, log: true });
-
-        const facet = await hre.ethers.getContract(FacetName);
-        newDeployedFacets.push(facet);
-        console.log(`${FacetName} deployed: ${facet.address}`)
+    for (const FacetName of facetNames) {
+        const deployment = await deploy(FacetName, { from: deployer, log: true });
+        console.log(`${FacetName} deployed: ${deployment.address}`)
     }
+    return diamondDeployment;
+}
 
-    ensureUniqueFunctions(newDeployedFacets, diamond);
-    // ensureUniqueEvents(newDeployedFacets, diamond);
-
-    const cut = []
-    for (const facet of newDeployedFacets) {
-        const facetCut = await getFacetCut(facet, diamond);
-        cut.push(...facetCut);
-    }
-
-    const removeCut = await getRemoveCut(newDeployedFacets, diamond);
-    cut.push(...removeCut);
-
-    // upgrade diamond with facets
-    console.log('Diamond Cut:', cut)
-
-    const itemsInit = await hre.ethers.getContract("ItemsInit");
-
-    // Get merkle root previously generated
-    const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
-    const merkleRoot = merkleTree.root
-
-    // Intialize our contract storage
-    const baseTokenUri = "https://api.arcadians.io/";
-    let functionCall = itemsInit.interface.encodeFunctionData('init', [merkleRoot.toString(), baseTokenUri])
-    let tx = await diamond.diamondCut(cut, itemsInit.address, functionCall)
-    let receipt = await tx.wait()
-    if (!receipt.status) {
-        throw Error(`Diamond upgrade failed: ${tx.hash}`)
-    }
-    console.log("Diamond cut address: ", diamond.address);
-};
-
-export function ensureUniqueEvents(newDeployedFacets, diamond) {
-    const eventsToIgnore = []; // ie: ['ApprovalForAll(address,address,bool)', ...]
-    const allEvents = [];
+export function ensureUniqueEvents(newDeployedFacets: ethers.Contract[], diamond: ethers.Contract, eventsToIgnore: string[]) {
+    const allEvents: string[] = [];
     for (const newDeployedFacet of newDeployedFacets) {
         allEvents.push(...Object.keys(newDeployedFacet.interface.events))
     }
@@ -82,8 +36,8 @@ export function ensureUniqueEvents(newDeployedFacets, diamond) {
     }
 }
 
-export function ensureUniqueFunctions(newDeployedFacets, diamond) {
-    const allFunctions = [];
+export function ensureUniqueFunctions(newDeployedFacets: ethers.Contract[], diamond: ethers.Contract) {
+    const allFunctions: string[] = [];
     for (const newDeployedFacet of newDeployedFacets) {
         allFunctions.push(...Object.keys(newDeployedFacet.interface.functions))
     }
@@ -97,10 +51,10 @@ export function ensureUniqueFunctions(newDeployedFacets, diamond) {
 }
 
 // get facet cut from a facet
-export async function getFacetCut(facet, diamond) {
-    const deployedFacets = await diamond.facets();
-    const selectorsToAdd = [];
-    const selectorsToReplace = [];
+export async function getFacetCut(facet: ethers.Contract, diamond: ethers.Contract) {
+    const deployedFacets: any[] = await diamond.facets();
+    const selectorsToAdd: string[] = [];
+    const selectorsToReplace: string[] = [];
     const signatures = Object.keys(facet.interface.functions)
     const functionsToIgnore = ['init(bytes)', 'supportsInterface(bytes4)'];
     
@@ -140,8 +94,8 @@ export async function getFacetCut(facet, diamond) {
     return facetCut
 }
 
-export async function getRemoveCut(newDeployedFacets, diamond) {
-    const cutsToDeploy = [];
+export async function getRemoveCut(newDeployedFacets: ethers.Contract[], diamond: ethers.Contract) {
+    const cutsToDeploy: any[] = [];
     for (const newDeployedFacet of newDeployedFacets) {
         cutsToDeploy.push({
             target: newDeployedFacet.address,
@@ -176,6 +130,3 @@ export async function getRemoveCut(newDeployedFacets, diamond) {
     }
     return cut;
 }
-
-func.tags = ['DiamondCutFacet'];
-export default func;
