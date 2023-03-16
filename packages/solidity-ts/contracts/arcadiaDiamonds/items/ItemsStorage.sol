@@ -6,16 +6,16 @@ library ItemsStorage {
     bytes32 constant ITEMS_STORAGE_POSITION =
         keccak256("items.storage.position");
 
-    enum EquipmentItemType { Weapon, Top, Bottom }
-    enum CosmeticItemType { Head, Mouth, Eyes, Skin, Shadow, Background }
+    // Add items only in the end of the enum to keep data consistency
+    enum ItemSlot { Weapon, Top, Bottom, Head, Mouth, Eyes, Skin, Shadow, Background }
 
     struct Layout {
         // wallet => token id => bool 
         mapping(address => mapping(uint => bool)) claimed;
 
-        mapping(uint => EquipmentItemType) equipmentItemType;
-        mapping(uint => CosmeticItemType) cosmeticItemType;
-        mapping(uint => bool) isEquipment;
+        // token id => ItemSlots
+        mapping(uint => ItemSlot) itemSlots;
+        mapping(uint => bool) hasSlot;
     }
 
     function layout()

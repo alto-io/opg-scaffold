@@ -2,14 +2,14 @@ import {deployDiamond} from "../libraries/deployDiamond.ts"
 
 export const arcadiansDiamondName = 'ArcadiansDiamond';
 export const arcadiansDiamondInitName = 'ArcadiansInit';
-export const arcadiansFacetNames = [
-    'ArcadiansFacet',
-    'MerkleFacet',
-    'RolesFacet'
-]
+export const arcadiansFacetNames = {
+    arcadiansFacet: 'ArcadiansFacet',
+    merkleFacet: 'MerkleFacet',
+    rolesFacet: 'RolesFacet'
+}
 
 export const func = async() => {
-    await deployDiamond(arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames);
+    await deployDiamond(arcadiansDiamondName, arcadiansDiamondInitName, Object.values(arcadiansFacetNames));
 };
 
 func.tags = ['ArcadiansDiamond'];

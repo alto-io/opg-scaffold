@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 
 /**
+ * Crated based in the following work:
  * Authors: Moonstream DAO (engineering@moonstream.to)
  * GitHub: https://github.com/G7DAO/contracts
  */
@@ -14,7 +15,7 @@ import { ERC721Holder } from "@openzeppelin/contracts/token/ERC721/utils/ERC721H
 import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import { IERC1155 } from "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
-import { InventoryFacetInternal } from "./InventoryFacetInternal.sol";
+import { InventoryInternal } from "./InventoryInternal.sol";
 
 /**
 InventoryFacet is a smart contract that can either be used standalone or as part of an EIP-2535 Diamond
@@ -44,7 +45,7 @@ contract InventoryFacet is
     ERC721Holder,
     ERC1155Holder,
     ReentrancyGuard,
-    InventoryFacetInternal
+    InventoryInternal
 {
 
     function setArcadiansAddress(address newArcadiansAddress) public onlyManager {
@@ -69,35 +70,13 @@ contract InventoryFacet is
         return _slotIsUnequippable(slot);
     }
 
-    function markItemAsEquippableInSlot(
-        uint256 slot,
-        uint256 itemType,
-        address itemAddress,
-        uint256 itemPoolId,
-        uint256 maxAmount
-    ) external onlyManager requireValidItemType(itemType) {
-        _markItemAsEquippableInSlot(slot, itemType, itemAddress, itemPoolId, maxAmount);
-    }
-
-    function maxAmountOfItemInSlot(
-        uint256 slot,
-        uint256 itemType,
-        address itemAddress,
-        uint256 itemPoolId
-    ) external view returns (uint256) {
-        return
-            _maxAmountOfItemInSlot(slot, itemType, itemAddress, itemPoolId);
-    }
-
     function equip(
         uint256 arcadianTokenId,
         uint256 slot,
-        uint256 itemType,
-        address itemAddress,
         uint256 itemTokenId,
         uint256 amount
-    ) external requireValidItemType(itemType) nonReentrant {
-        _equip(arcadianTokenId, slot, itemType, itemAddress, itemTokenId, amount);
+    ) external nonReentrant {
+        _equip(arcadianTokenId, slot, itemTokenId, amount);
     }
 
     function unequip(

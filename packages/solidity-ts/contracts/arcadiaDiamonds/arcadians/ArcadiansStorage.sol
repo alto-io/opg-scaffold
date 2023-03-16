@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 library ArcadiansStorage {
 
-    bytes32 constant EQUIPPABLE_STORAGE_POSITION =
+    bytes32 constant ARCADIANS_STORAGE_POSITION =
         keccak256("equippable.storage.position");
 
     struct Layout {
@@ -20,7 +20,7 @@ library ArcadiansStorage {
         pure
         returns (Layout storage es)
     {
-        bytes32 position = EQUIPPABLE_STORAGE_POSITION;
+        bytes32 position = ARCADIANS_STORAGE_POSITION;
         assembly {
             es.slot := position
         }

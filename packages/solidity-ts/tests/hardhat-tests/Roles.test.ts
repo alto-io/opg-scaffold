@@ -1,19 +1,10 @@
 import '~helpers/hardhat-imports';
-import { Contract, ethers } from "ethers";
+import { ethers } from "ethers";
 import '~helpers/hardhat-imports';
 import '~tests/utils/chai-imports';
 import { expect } from 'chai';
-import hre from 'hardhat';
-import path from "path";
-import fs from "fs";
-import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
-import { TOKENS_PATH_ITEMS, deployItemsFixture } from './Items.test';
-import { TOKENS_PATH_ARCADIANS, deployArcadiansFixture } from './Arcadians.test';
-
-import deployArcadiansDiamond from '../../deploy/hardhat-deploy/01.ArcadiansDiamond.deploy';
-import deployItemsDiamond from '../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
-import initArcadiansDiamond from '../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
-import initItemsDiamond from '../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
+import { deployItemsFixture } from './Items.test';
+import { deployArcadiansFixture } from './Arcadians.test';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
 export async function deployArcadiansPlusRolesFixture() {
@@ -36,7 +27,7 @@ export async function deployItemsPlusRolesFixture() {
     return {...itemsFixture, defaultAdminRole, managerRole, minterRole};
 }
 
-describe('Roles setup', function () {
+describe('Roles setup arcadians', function () {
     
     it('deployer should have all roles', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployArcadiansPlusRolesFixture)
@@ -54,6 +45,30 @@ describe('Roles setup', function () {
     
     it('default admin should be able to add role to account', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployArcadiansPlusRolesFixture)
+        expect(await rolesFacet.hasRole(managerRole, namedAddresses.alice)).to.be.false;
+        await rolesFacet.grantRole(managerRole, namedAddresses.bob);
+        expect(await rolesFacet.hasRole(managerRole, namedAddresses.bob)).to.be.true;
+    })
+});
+
+describe('Roles setup Items', function () {
+    
+    it('deployer should have all roles', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployItemsPlusRolesFixture)
+        expect(await rolesFacet.hasRole(defaultAdminRole, namedAddresses.deployer)).to.be.true;
+        expect(await rolesFacet.hasRole(managerRole, namedAddresses.deployer)).to.be.true;
+        expect(await rolesFacet.hasRole(minterRole, namedAddresses.deployer)).to.be.true;
+    })
+    
+    it('non deployer should not have roles by default', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployItemsPlusRolesFixture)
+        expect(await rolesFacet.hasRole(defaultAdminRole, namedAddresses.alice)).to.be.false;
+        expect(await rolesFacet.hasRole(managerRole, namedAddresses.alice)).to.be.false;
+        expect(await rolesFacet.hasRole(minterRole, namedAddresses.alice)).to.be.false;
+    })
+    
+    it('default admin should be able to add role to account', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployItemsPlusRolesFixture)
         expect(await rolesFacet.hasRole(managerRole, namedAddresses.alice)).to.be.false;
         await rolesFacet.grantRole(managerRole, namedAddresses.bob);
         expect(await rolesFacet.hasRole(managerRole, namedAddresses.bob)).to.be.true;

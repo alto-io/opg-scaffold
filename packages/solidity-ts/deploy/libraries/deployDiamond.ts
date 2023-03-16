@@ -10,11 +10,12 @@ export const deployDiamond = async(diamondName: string, diamondInitName: string,
     const { getNamedAccounts, deployments } = hre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
-
+    
     const diamondDeployment = await deploy(diamondName, { from: deployer, log: true });
-    console.log(`${diamondName} address: `, diamondDeployment.address);
+    console.log(`${diamondName} deployed: `, diamondDeployment.address);
+
     const diamondInitDeployment = await deploy(diamondInitName, { from: deployer, log: true });
-    console.log(`${diamondInitName} address: `, diamondInitDeployment.address);
+    console.log(`${diamondInitName} deployed: `, diamondInitDeployment.address);
 
     for (const FacetName of facetNames) {
         const deployment = await deploy(FacetName, { from: deployer, log: true });

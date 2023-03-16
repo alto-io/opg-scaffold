@@ -10,19 +10,19 @@ import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.It
 
 
 // Get merkle root previously generated
-const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
+export const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
 
 // Diamond init params
-const merkleRootDefault = merkleTree.root.toString();
-const baseTokenURIDefault = "https://api.arcadians.io/";
+export const merkleRoot = merkleTree.root.toString();
+export const baseTokenURI = "https://api.arcadians.io/";
 
-export const func = async(baseTokenUri = baseTokenURIDefault, merkleRoot = merkleRootDefault) => {
+export const func = async() => {
 
     const diamond = await hre.ethers.getContract(itemsDiamondName);
     const diamondInit = await hre.ethers.getContract(itemsDiamondInitName);
 
     const newDeployedFacets = [];
-    for (const facetName of itemsFacetNames) {
+    for (const facetName of Object.values(itemsFacetNames)) {
         const facet = await hre.ethers.getContract(facetName);
         newDeployedFacets.push(facet);
     }
@@ -45,7 +45,7 @@ export const func = async(baseTokenUri = baseTokenURIDefault, merkleRoot = merkl
     const arcadiansDiamond = await hre.ethers.getContract(arcadiansDiamondName);
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [arcadiansDiamond.address, merkleRoot, baseTokenUri])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [arcadiansDiamond.address, merkleRoot, baseTokenURI])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

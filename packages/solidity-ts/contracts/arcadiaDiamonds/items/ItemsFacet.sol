@@ -7,25 +7,26 @@ import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ER
 import { ERC1155Enumerable } from "@solidstate/contracts/token/ERC1155/enumerable/ERC1155Enumerable.sol";
 import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol";
 import { ERC1155Metadata } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155Metadata.sol";
+import { ERC1155Metadata } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155Metadata.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { ItemsStorage } from "./ItemsStorage.sol";
 import { ItemsInternal } from "./ItemsInternal.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 
-contract ItemsFacet is RolesInternal, MerkleInternal, ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
+contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
 
-    function setItemType(uint256 id, uint256 itemType, bool isEquipment)
-        public onlyManager
-    {
-        _setItemType(id, itemType, isEquipment);
-    }
+    // function setItemType(uint256 id, uint256 itemType, bool isEquipment)
+    //     public onlyManager
+    // {
+    //     _setItemType(id, itemType, isEquipment);
+    // }
 
-    function setItemTypeBatch(uint256[] calldata ids, uint256[] calldata itemTypes, bool[] calldata isEquipment)
-        public onlyManager
-    {
-        _setItemTypeBatch(ids, itemTypes, isEquipment);
-    }
+    // function setItemTypeBatch(uint256[] calldata ids, uint256[] calldata itemTypes, bool[] calldata isEquipment)
+    //     public onlyManager
+    // {
+    //     _setItemTypeBatch(ids, itemTypes, isEquipment);
+    // }
 
     function claim(uint tokenId, uint amount, bytes32[] memory proof)
         public nonReentrant
@@ -37,11 +38,17 @@ contract ItemsFacet is RolesInternal, MerkleInternal, ERC1155Base, ERC1155Enumer
         _claimBatch(tokenIds, amounts, proofs);
     }
 
-    function mint(address to, uint256 id, uint256 amount)
+    function mint(address to, uint256 id, uint256 amount, ItemsStorage.ItemSlot itemSlot)
         public onlyManager
     {
-        _mint(to, id, amount);
+        _mint(to, id, amount, itemSlot);
     }
+
+    // function mint(address to, uint256 id, uint256 amount)
+    //     public onlyManager
+    // {
+    //     _mint(to, id, amount);
+    // }
 
     function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts)
         public onlyManager
