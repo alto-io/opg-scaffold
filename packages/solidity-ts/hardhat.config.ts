@@ -30,7 +30,7 @@ export const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: {
       default: 0,
-      mumbai: process.env.DEPLOYER_ADDRESS as string,
+    //   mumbai: process.env.DEPLOYER_ADDRESS as string,
     },
     alice: {
         default: 1

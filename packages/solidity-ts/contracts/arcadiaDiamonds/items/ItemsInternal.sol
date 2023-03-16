@@ -13,35 +13,6 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
 
-    function _checkValidItemType(uint itemId) internal view {
-        if (ItemsStorage.layout().isEquipment[itemId]) {
-            ItemsStorage.EquipmentItemType(itemId);
-        } else {
-            ItemsStorage.CosmeticItemType(itemId);
-        }
-    }
-
-    function _setItemType(uint256 id, uint256 itemType, bool isEquipment)
-        internal onlyManager
-    {
-        ItemsStorage.Layout storage itl = ItemsStorage.layout();
-        if (isEquipment) {
-            itl.equipmentItemType[id] = ItemsStorage.EquipmentItemType(itemType);
-        } else {
-            itl.cosmeticItemType[id] = ItemsStorage.CosmeticItemType(itemType);
-        }
-        itl.isEquipment[id] = isEquipment;
-    }
-
-    function _setItemTypeBatch(uint256[] calldata ids, uint256[] calldata itemTypes, bool[] calldata isEquipment)
-        internal onlyManager
-    {
-        require(ids.length == itemTypes.length && ids.length == isEquipment.length, "ItemsFacet: Data length mismatch");
-        for (uint256 i = 0; i < ids.length; i++) {
-            _setItemType(ids[i], itemTypes[i], isEquipment[i]);
-        }
-    }
-
     function _claim(uint tokenId, uint amount, bytes32[] memory proof)
         internal
     {
@@ -68,20 +39,50 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
         }
     }
 
+    function _setItemSlot(uint256 id, ItemsStorage.ItemSlot itemSlot) internal {
+        ItemsStorage.Layout storage itl = ItemsStorage.layout();
+        require(!itl.hasSlot[id] || itl.itemSlots[id] == itemSlot, "Item slot mismatch");
+        if (!itl.hasSlot[id]) {
+            itl.itemSlots[id] = itemSlot;
+        }
+    }
+
+    function _mint(address to, uint256 id, uint256 amount, ItemsStorage.ItemSlot itemSlot)
+        internal onlyManager
+    {
+        _setItemSlot(id, itemSlot);
+        ERC1155BaseInternal._mint(to, id, amount, "");
+    }
+
     function _mint(address to, uint256 id, uint256 amount)
         internal onlyManager
     {
-        _checkValidItemType(id);
-        super._mint(to, id, amount, "");
+        ItemsStorage.Layout storage itl = ItemsStorage.layout();
+        require(itl.hasSlot[id], "Minting an item without a slot assigned");
+        ERC1155BaseInternal._mint(to, id, amount, "");
+    }
+
+    function _mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, ItemsStorage.ItemSlot[] calldata itemSlots)
+        internal onlyManager
+    {
+        for (uint256 i = 0; i < ids.length; i++) {
+            _setItemSlot(ids[i], itemSlots[i]);
+        }
+        ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }
 
     function _mintBatch(address to, uint256[] memory ids, uint256[] memory amounts)
         internal onlyManager
     {
+        ItemsStorage.Layout storage itl = ItemsStorage.layout();
         for (uint256 i = 0; i < ids.length; i++) {
-            _checkValidItemType(ids[i]);
+            require(itl.hasSlot[ids[i]], "Minting an item without a slot assigned");
         }
-        super._mintBatch(to, ids, amounts, "");
+        ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
+    }
+
+    function _getItemsMax() internal pure returns (uint) {
+        return uint(type(ItemsStorage.ItemSlot).max);
     }
 
     // required overrides

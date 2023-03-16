@@ -7,9 +7,10 @@ import hre from 'hardhat';
 import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
 import path from "path";
 import fs from "fs";
-import deployArcadiansDiamond from '../../deploy/hardhat-deploy/01.ArcadiansDiamond.deploy';
-import deployItemsDiamond from '../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
+import deployArcadiansDiamond, { arcadiansDiamondInitName, arcadiansDiamondName, arcadiansFacetNames } from '../../deploy/hardhat-deploy/01.ArcadiansDiamond.deploy';
+import deployItemsDiamond, { itemsDiamondName } from '../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
 import initArcadiansDiamond from '../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
+import initItemsDiamond from '../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
 export const TOKENS_PATH_ARCADIANS = path.join(__dirname, "../mocks/ownedArcadiansMock.json");
@@ -31,7 +32,9 @@ export async function deployArcadiansFixture() {
 
     await deployArcadiansDiamond();
     await deployItemsDiamond();
-    await initArcadiansDiamond(baseTokenUri, maxMintPerUser, mintPrice, merkleGenerator.merkleRoot);
+    await initArcadiansDiamond();
+    // await initArcadiansDiamond(null, baseTokenUri, maxMintPerUser, mintPrice, merkleGenerator.merkleRoot);
+    await initItemsDiamond();
 
     const namedAccounts = await hre.ethers.getNamedSigners();
     const namedAddresses = {
@@ -39,11 +42,16 @@ export async function deployArcadiansFixture() {
         alice: (await namedAccounts.alice.getAddress()),
         bob: (await namedAccounts.bob.getAddress()),
     }
-    const diamond = await hre.ethers.getContract('ArcadiansDiamond');
-    const arcadiansInit = await hre.ethers.getContract('ArcadiansInit')
-    const arcadiansFacet = await hre.ethers.getContractAt('ArcadiansFacet', diamond.address)
-    const merkleFacet = await hre.ethers.getContractAt('MerkleFacet', diamond.address)
-    const rolesFacet = await hre.ethers.getContractAt('RolesFacet', diamond.address)
+    const diamond = await hre.ethers.getContract(arcadiansDiamondName);
+    const itemsDiamond = await hre.ethers.getContract(itemsDiamondName);
+    const arcadiansInit = await hre.ethers.getContract(arcadiansDiamondInitName)
+    const arcadiansFacet = await hre.ethers.getContractAt(arcadiansFacetNames.arcadiansFacet, diamond.address)
+    const merkleFacet = await hre.ethers.getContractAt(arcadiansFacetNames.merkleFacet, diamond.address)
+    const rolesFacet = await hre.ethers.getContractAt(arcadiansFacetNames.rolesFacet, diamond.address)
+
+    let functionCall = arcadiansInit.interface.encodeFunctionData('init', [itemsDiamond.address, merkleGenerator.merkleRoot, baseTokenUri, maxMintPerUser, mintPrice])
+    let tx = await diamond.diamondCut([], arcadiansInit.address, functionCall)
+    await tx.wait()
 
     return { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice };
 }
