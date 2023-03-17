@@ -16,19 +16,34 @@ import { RolesInternal } from "../roles/RolesInternal.sol";
 
 contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
 
-    // function setItemType(uint256 id, uint256 itemType, bool isEquipment)
-    //     public onlyManager
-    // {
-    //     _setItemType(id, itemType, isEquipment);
-    // }
+    function addNonEquippableItemType(string calldata name) external {
+        _addNonEquippableItemType(name);
+    }
 
-    // function setItemTypeBatch(uint256[] calldata ids, uint256[] calldata itemTypes, bool[] calldata isEquipment)
-    //     public onlyManager
-    // {
-    //     _setItemTypeBatch(ids, itemTypes, isEquipment);
-    // }
+    function addEquippableItemType(string calldata name, bool canBeUnequipped) external {
+        _addEquippableItemType(name, canBeUnequipped);
+    }
 
-    function claim(uint tokenId, uint amount, bytes32[] memory proof)
+    function getItemTypeCount() external view returns (uint) {
+        return ItemsStorage.layout().itemTypesCount;
+    }
+
+    function getItemType(uint itemTypeId) external view returns (ItemsStorage.ItemType memory) {
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        return isl.itemTypes[itemTypeId];
+    }
+
+    function getTokenItemTypeId(uint tokenId) external view returns (ItemsStorage.ItemTypeId memory) {
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        return isl.tokenIdToTypeId[tokenId];
+    }
+
+    function getTokenItemType(uint tokenId) external view OnlyTokenWithType(tokenId) returns (ItemsStorage.ItemType memory) {
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        return isl.itemTypes[isl.tokenIdToTypeId[tokenId].id];
+    }
+    
+    function claim(uint tokenId, uint amount, bytes32[] calldata proof)
         public nonReentrant
     {
         _claim(tokenId, amount, proof);
@@ -38,32 +53,25 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
         _claimBatch(tokenIds, amounts, proofs);
     }
 
-    function mint(address to, uint256 id, uint256 amount, ItemsStorage.ItemSlot itemSlot)
+    function mint(address to, uint256 id, uint256 amount)
         public onlyManager
     {
-        _mint(to, id, amount, itemSlot);
+        _mint(to, id, amount);
     }
 
-    // function mint(address to, uint256 id, uint256 amount)
-    //     public onlyManager
-    // {
-    //     _mint(to, id, amount);
-    // }
-
-    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts)
+    function mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
         public onlyManager
     {
         _mintBatch(to, ids, amounts);
     }
 
-    function setBaseURI(string memory baseURI) external onlyManager {
+    function setBaseURI(string calldata baseURI) external onlyManager {
         _setBaseURI(baseURI);
     }
 
-    function setTokenURI(uint tokenId, string memory tokenURI) external onlyManager {
+    function setTokenURI(uint tokenId, string calldata tokenURI) external onlyManager {
         _setTokenURI(tokenId, tokenURI);
     }
-
 
     // required overrides
     function supportsInterface(bytes4) external pure returns (bool) {
