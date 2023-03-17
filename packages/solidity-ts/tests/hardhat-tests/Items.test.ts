@@ -74,9 +74,20 @@ describe('Items Diamond Inventory Test', function () {
 
     it('should be able to mint', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        await itemsFacet.connect(namedAccounts.deployer).mint(namedAddresses.deployer, 1, 10, 1);
-        const balanceToken1 = await itemsFacet.balanceOf(namedAddresses.deployer, 1);
-        console.log("balanceToken1: ", balanceToken1);
+        const tokenId = 1;
+        const amount = 10;
+        const slotId = 1;
+        await itemsFacet.mintNewToken(namedAddresses.deployer, tokenId, amount, slotId);
+        const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+        expect(balanceToken).to.be.equal(amount);
+    })
+
+    it('should not be able to mint with inexistent slot id', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const tokenId = 1;
+        const amount = 10;
+        const slotId = 99;
+        await expect(itemsFacet.mintNewToken(namedAddresses.deployer, tokenId, amount, slotId)).to.be.reverted;
     })
 })
 

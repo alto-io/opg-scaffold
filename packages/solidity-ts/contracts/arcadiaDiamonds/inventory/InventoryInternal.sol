@@ -6,6 +6,7 @@ import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import { IERC1155 } from "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
+import { ItemsStorage } from "../items/ItemsStorage.sol";
 
 contract InventoryInternal is
     ReentrancyGuard,
@@ -14,8 +15,6 @@ contract InventoryInternal is
 {
 
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
-
-    event SlotCreated(address indexed creator, uint256 slot, bool unequippable);
 
     event ItemMarkedAsEquippableInSlot(
         uint256 indexed slot,
@@ -51,19 +50,6 @@ contract InventoryInternal is
 
     function _getArcadiansAddress() internal view returns (address) {
         return InventoryStorage.layout().arcadiansAddress;
-    }
-
-    function _createSlot(
-        bool unequippable
-    ) internal onlyManager returns (uint256) {
-        InventoryStorage.Layout storage istore = InventoryStorage.layout();
-
-        uint256 newSlot = istore.numSlots;
-        istore.slotIsUnequippable[newSlot] = unequippable;
-        istore.numSlots += 1;
-
-        emit SlotCreated(msg.sender, newSlot, unequippable);
-        return newSlot;
     }
 
     function _numSlots() internal view returns (uint256) {
@@ -135,6 +121,14 @@ contract InventoryInternal is
         uint256 itemTokenId,
         uint256 amount
     ) internal nonReentrant {
+
+        // Verify if this item can be equipped in this slot
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        ItemsStorage.ItemTypeId storage itemTypeId = isl.tokenIdToTypeId[itemTokenId];
+        require(itemTypeId.exists, "Item has no item type");
+        ItemsStorage.ItemType storage itemType = isl.itemTypes[itemTypeId.id];
+        require(itemType.exists, "No item type");
+        require(slot == itemType.slot, "Item inadequate for slot");
 
         InventoryStorage.Layout storage istore = InventoryStorage
             .layout();

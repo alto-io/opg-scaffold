@@ -9,7 +9,7 @@ import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 
-contract ItemsInit is RolesInternal, ERC1155MetadataInternal, ItemsInternal, InventoryInternal {    
+contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal {    
     function init(address arcadiansAddress, bytes32 merkleRoot, string calldata baseUri) external {
         MerkleStorage.Layout storage es = MerkleStorage.layout();
         es.merkleRoot = merkleRoot;
@@ -18,18 +18,6 @@ contract ItemsInit is RolesInternal, ERC1155MetadataInternal, ItemsInternal, Inv
 
         _setBaseURI(baseUri);
         _setArcadiansAddress(arcadiansAddress);
-
-        uint numSlots = _numSlots();
-        uint itemsMax = _getItemsMax();
-        for (uint256 i = numSlots; i < itemsMax; i++) {
-            if (i < 3) {
-                _createSlot(false);
-            } else {
-                _createSlot(true);
-            }
-        }
-        // _mint(msg.sender, 1, 10, ItemsStorage.ItemSlot.Weapon);
-        // _mint(msg.sender, 2, 20, ItemsStorage.ItemSlot.Head);
     }
 
 
