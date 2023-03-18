@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import { RolesStorage } from './RolesStorage.sol';
 import { AccessControlInternal } from "@solidstate/contracts/access/access_control/AccessControlInternal.sol";

@@ -56,6 +56,22 @@ export async function deployItemsFixture() {
     return { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, rolesFacet, merkleGenerator, baseTokenUri };
 }
 
+export async function deployItemsFixtureWithItemsTypes() {
+    const _deployItemsFixture = await loadFixture(deployItemsFixture);
+
+    // add item types
+    await _deployItemsFixture.itemsFacet.addNonEquippableItemType("nonEquippableItemType1");
+    await _deployItemsFixture.itemsFacet.addEquippableItemType("equippableItemType1", false);
+    await _deployItemsFixture.itemsFacet.addEquippableItemType("equippableItemType2Unequippable", true);
+
+    // assign item type to token id
+    await _deployItemsFixture.itemsFacet.setTokenIdType(0, 0);
+    await _deployItemsFixture.itemsFacet.setTokenIdType(1, 1);
+    await _deployItemsFixture.itemsFacet.setTokenIdType(2, 2);
+
+    return {..._deployItemsFixture }
+}
+
 describe('Items Diamond Test', function () {
     it('should deployer be owner', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
@@ -72,39 +88,111 @@ describe('Items Diamond Inventory Test', function () {
         expect(await inventoryFacet.getArcadiansAddress()).to.be.equal(newArcadiansAddress);
     })
 
-    it('should be able to mint', async () => {
+    it('should be able to add non equippable item type', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const tokenId = 1;
-        const amount = 10;
-        const slotId = 1;
-        await itemsFacet.mintNewToken(namedAddresses.deployer, tokenId, amount, slotId);
-        const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
-        expect(balanceToken).to.be.equal(amount);
+        const itemName = "nonEquippableItemType1";
+        expect((await inventoryFacet.numSlots())).to.be.equal(0);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
+        await itemsFacet.addNonEquippableItemType(itemName);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
+
+        expect((await inventoryFacet.numSlots())).to.be.equal(0);
+        const itemTypeId = 0;
+        const itemType = await itemsFacet.getItemType(itemTypeId);
+        expect(itemType.name).to.be.equal(itemName);
+        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.false;
     })
 
-    it('should not be able to mint with inexistent slot id', async () => {
+    it('should be able to add equippable item type with slot that can be unequipped', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const itemName = "equippableItemType1";
+        expect((await inventoryFacet.numSlots())).to.be.equal(0);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
+        await itemsFacet.addEquippableItemType(itemName, false);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
+
+        const numSlots = await inventoryFacet.numSlots();
+        const itemTypeId = 0;
+        const itemType = await itemsFacet.getItemType(itemTypeId);
+        expect(itemType.name).to.be.equal(itemName);
+        expect(itemType.slot).to.be.equal(numSlots);
+        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.true;
+        expect((await inventoryFacet.slotIsUnequippable(itemType.slot))).to.be.false;
+        expect(numSlots).to.be.equal(1);
+    })
+
+    it('should be able to add equippable item type with slot that cannot be unequipped', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const itemName = "equippableItemType1Unequippable";
+        expect((await inventoryFacet.numSlots())).to.be.equal(0);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
+        await itemsFacet.addEquippableItemType(itemName, true);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
+        const numSlots = await inventoryFacet.numSlots();
+        
+        const itemTypeId = 0;
+        const itemType = await itemsFacet.getItemType(itemTypeId);
+        expect(itemType.name).to.be.equal(itemName);
+        expect(itemType.slot).to.be.equal(numSlots);
+        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.true;
+        expect((await inventoryFacet.slotIsUnequippable(itemType.slot))).to.be.true;
+        expect(numSlots).to.be.equal(1);
+    })
+
+    it('should not be able set token type for inexistent item type', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        
+        await expect(itemsFacet.setTokenIdType(0, 0)).to.be.revertedWith("Item type does not exist");
+    })
+
+    it('should be able set token type for existent item type', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const itemName = "itemType1";
+        await itemsFacet.addNonEquippableItemType(itemName);
+        await itemsFacet.setTokenIdType(0, 0);
+        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
+    })
+
+    it('should not be able to mint token without item type created', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const tokenId = 1;
         const amount = 10;
-        const slotId = 99;
-        await expect(itemsFacet.mintNewToken(namedAddresses.deployer, tokenId, amount, slotId)).to.be.reverted;
+        await expect(itemsFacet.mint(namedAddresses.deployer, tokenId, amount)).to.be.revertedWith("Token does not have type assigned");
+    })
+
+    it('should not be able to mint token without type assigned', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const tokenId = 1;
+        const amount = 10;
+        await itemsFacet.addNonEquippableItemType("itemName");
+        await expect(itemsFacet.mint(namedAddresses.deployer, tokenId, amount)).to.be.revertedWith("Token does not have type assigned");
+    })
+
+    it('should be able to mint', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const amount = 10;
+        const tokenId = 1;
+        await itemsFacet.mint(namedAddresses.deployer, tokenId, amount);
+        const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+        expect(balanceToken).to.be.equal(amount);
     })
 })
 
 describe('Items Diamond merkle Test', function () {
 
     it('should not be able to claim tokens if not elegible', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
+        
         await expect(
             itemsFacet.connect(namedAccounts.alice).claimBatch(ids, amounts, proofs),
         ).to.be.revertedWith("Data not included in merkle");
     })
 
     it('should not be able to claim tokens if token data is wrong', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
         const ids = [1, 2];
         const badAmounts = [3, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
@@ -114,7 +202,7 @@ describe('Items Diamond merkle Test', function () {
     })
     
     it('should be able to claim tokens if elegible', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
@@ -128,7 +216,7 @@ describe('Items Diamond merkle Test', function () {
     })
 
     it('should not able to claim the same tokens twice', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
