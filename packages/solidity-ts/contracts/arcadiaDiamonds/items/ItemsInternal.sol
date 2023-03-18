@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import { ItemsStorage } from "./ItemsStorage.sol";
 import { InventorySlotsInternal } from "../inventory/InventorySlotsInternal.sol";
@@ -13,21 +13,26 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
 
-    modifier OnlyTokenWithType(uint tokenId) {
+    modifier onlyValidItemType(uint itemTypeId) {
+        require(ItemsStorage.layout().itemTypes[itemTypeId].exists, "Item type does not exist");
+        _;
+    }
+
+    modifier onlyTokenWithType(uint tokenId) {
         ItemsStorage.Layout storage isl = ItemsStorage.layout();
         require(
             isl.tokenIdToTypeId[tokenId].exists && isl.itemTypes[isl.tokenIdToTypeId[tokenId].id].exists, 
-            "Item does not have a registered item type"
+            "Token does not have type assigned"
         );
         _;
     }
 
-    modifier OnlyTokensWithType(uint[] calldata tokenIds) {
+    modifier onlyTokensWithType(uint[] calldata tokenIds) {
         ItemsStorage.Layout storage isl = ItemsStorage.layout();
         for (uint256 i = 0; i < tokenIds.length; i++) {
             require(
                 isl.tokenIdToTypeId[tokenIds[i]].exists && isl.itemTypes[isl.tokenIdToTypeId[tokenIds[i]].id].exists, 
-                "Item does not have a registered item type"
+                "Token does not have type assigned"
             );
         }
         _;
@@ -52,15 +57,24 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
         isl.itemTypesCount++;
     }
 
-    function _setTokenIdType(uint tokenId, uint itemType) internal {
+    function _setTokenIdType(uint tokenId, uint itemTypeId) internal onlyValidItemType(itemTypeId) {
         ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        require(isl.itemTypes[itemType].exists, "Item type does not exist");
-        isl.tokenIdToTypeId[tokenId].id = itemType;
+        isl.tokenIdToTypeId[tokenId].id = itemTypeId;
         isl.tokenIdToTypeId[tokenId].exists = true;
     }
 
+    function _isItemTypeEquippable(uint itemTypeId) internal view onlyValidItemType(itemTypeId) returns (bool) {
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        return isl.itemTypes[itemTypeId].slot > 0;
+    }
+
+    function _getTokenItemType(uint tokenId) internal view onlyTokenWithType(tokenId) returns (ItemsStorage.ItemType memory) {
+        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        return isl.itemTypes[isl.tokenIdToTypeId[tokenId].id];
+    }
+
     function _claim(uint tokenId, uint amount, bytes32[] memory proof)
-        internal OnlyTokenWithType(tokenId)
+        internal onlyTokenWithType(tokenId)
     {
         ItemsStorage.Layout storage isl = ItemsStorage.layout();
 
@@ -79,7 +93,7 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
     }
 
     function _claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
-        internal OnlyTokensWithType(tokenIds)
+        internal onlyTokensWithType(tokenIds)
     {
         require(tokenIds.length == amounts.length, "Inputs length mismatch");
         for (uint256 i = 0; i < tokenIds.length; i++) {
@@ -88,21 +102,14 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
     }
 
     function _mint(address to, uint256 id, uint256 amount)
-        internal onlyManager OnlyTokenWithType(id)
+        internal onlyManager onlyTokenWithType(id)
     {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        require(isl.itemTypes[id].exists, "Minting an item without a slot assigned");
-        
         ERC1155BaseInternal._mint(to, id, amount, "");
     }
 
     function _mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
-        internal onlyManager OnlyTokensWithType(ids)
+        internal onlyManager onlyTokensWithType(ids)
     {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        for (uint256 i = 0; i < ids.length; i++) {
-            require(isl.itemTypes[ids[i]].exists, "Minting an item without type");
-        }
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }
 

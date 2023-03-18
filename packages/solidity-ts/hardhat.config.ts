@@ -1,8 +1,4 @@
 import './helpers/hardhat-imports';
-import path from 'path';
-
-import chalk from 'chalk';
-import glob from 'glob';
 import { removeConsoleLog } from 'hardhat-preprocessor';
 import type { HardhatUserConfig } from 'hardhat/config';
 require('dotenv').config();
@@ -30,7 +26,7 @@ export const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: {
       default: 0,
-    //   mumbai: process.env.DEPLOYER_ADDRESS as string,
+      mumbai: process.env.DEPLOYER_ADDRESS as string,
     },
     alice: {
         default: 1
@@ -48,7 +44,7 @@ export const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.10',
+        version: '0.8.19',
         settings: {
           optimizer: {
             enabled: true,

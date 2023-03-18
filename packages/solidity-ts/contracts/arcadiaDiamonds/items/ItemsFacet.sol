@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import { SolidStateERC1155 } from "@solidstate/contracts/token/ERC1155/SolidStateERC1155.sol";
 import { ERC1155Base } from "@solidstate/contracts/token/ERC1155/base/ERC1155Base.sol";
@@ -24,6 +24,14 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
         _addEquippableItemType(name, canBeUnequipped);
     }
 
+    function setTokenIdType(uint tokenId, uint itemType) external {
+        _setTokenIdType(tokenId, itemType);
+    }
+
+    function isItemTypeEquippable(uint itemTypeId) external view returns (bool) {
+        return _isItemTypeEquippable(itemTypeId);
+    }
+
     function getItemTypeCount() external view returns (uint) {
         return ItemsStorage.layout().itemTypesCount;
     }
@@ -38,9 +46,8 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
         return isl.tokenIdToTypeId[tokenId];
     }
 
-    function getTokenItemType(uint tokenId) external view OnlyTokenWithType(tokenId) returns (ItemsStorage.ItemType memory) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        return isl.itemTypes[isl.tokenIdToTypeId[tokenId].id];
+    function getTokenItemType(uint tokenId) external view returns (ItemsStorage.ItemType memory) {
+        return _getTokenItemType(tokenId);
     }
     
     function claim(uint tokenId, uint amount, bytes32[] calldata proof)

@@ -1,16 +1,26 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.19;
 
 import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
 import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
+import { ERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/ERC721Metadata.sol";
+import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IERC721Metadata.sol";
 import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
+import { ERC721MetadataInternal } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataInternal.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
-import { IArcadiansFacet } from "./IArcadiansFacet.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 
-contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, IArcadiansFacet, ReentrancyGuard {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, ReentrancyGuard {
+
+    event Claimed(address indexed to, uint256 indexed amount);
+
+    function tokenURI(
+        uint256 tokenId
+    ) external view override (ERC721Metadata, IERC721Metadata) returns (string memory) {
+        return _getTokenURI(tokenId);
+    }
 
     function setItemsAddress(address newItemsAddress) external onlyManager {
         _setItemsAddress(newItemsAddress);
@@ -99,7 +109,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         address from,
         address to,
         uint256 tokenId
-    ) internal virtual override(SolidStateERC721, ERC721BaseInternal) {
+    ) internal virtual override (ArcadiansInternal, SolidStateERC721) {
         SolidStateERC721._beforeTokenTransfer(from, to, tokenId);
     }
 }

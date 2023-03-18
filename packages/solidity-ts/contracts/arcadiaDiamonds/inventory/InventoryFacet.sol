@@ -6,7 +6,7 @@
  * GitHub: https://github.com/G7DAO/contracts
  */
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.19;
 
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
@@ -18,30 +18,6 @@ import { InventoryStorage } from "./InventoryStorage.sol";
 import { InventoryInternal } from "./InventoryInternal.sol";
 import { InventorySlotsInternal } from "./InventorySlotsInternal.sol";
 
-/**
-InventoryFacet is a smart contract that can either be used standalone or as part of an EIP-2535 Diamond
-proxy contract.
-
-It implements an inventory system which can be layered onto any ERC721 contract.
-
-For more details, please refer to the design document:
-https://docs.google.com/document/d/1Oa9I9b7t46_ngYp-Pady5XKEDW8M2NE9rI0GBRACZBI/edit?usp=sharing
-
-Admin flow:
-- [x] Create inventory slots
-- [x] Specify whether inventory slots are equippable or not on slot creation
-- [x] Define tokens as equippable in inventory slots
-
-Player flow:
-- [ ] Equip ERC721 tokens in eligible inventory slots
-- [ ] Equip ERC1155 tokens in eligible inventory slots
-- [ ] Unequip items from unequippable slots
-
-Batch endpoints:
-- [ ] Marking items as equippable
-- [ ] Equipping items
-- [ ] Unequipping items
- */
 contract InventoryFacet is
     ERC721Holder,
     ERC1155Holder,
