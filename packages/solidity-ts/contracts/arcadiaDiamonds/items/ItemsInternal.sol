@@ -4,12 +4,11 @@ pragma solidity ^0.8.19;
 import { ItemsStorage } from "./ItemsStorage.sol";
 import { InventorySlotsInternal } from "../inventory/InventorySlotsInternal.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
-import { RolesInternal } from "../roles/RolesInternal.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol";
 import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol";
 
-contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal, InventorySlotsInternal {
+contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal, InventorySlotsInternal {
 
     event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
 
@@ -102,13 +101,13 @@ contract ItemsInternal is RolesInternal, MerkleInternal, ERC1155BaseInternal, ER
     }
 
     function _mint(address to, uint256 id, uint256 amount)
-        internal onlyManager onlyTokenWithType(id)
+        internal onlyTokenWithType(id)
     {
         ERC1155BaseInternal._mint(to, id, amount, "");
     }
 
     function _mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
-        internal onlyManager onlyTokensWithType(ids)
+        internal onlyTokensWithType(ids)
     {
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }

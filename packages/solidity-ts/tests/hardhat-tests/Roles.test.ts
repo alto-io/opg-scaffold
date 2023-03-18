@@ -117,7 +117,6 @@ describe('Arcadians roles', function () {
     })
 });
 
-
 describe('Items roles', function () {
 
     it('account with manager role should be able to update merkle root', async () => {
@@ -132,5 +131,11 @@ describe('Items roles', function () {
         const newMerkleRoot = ethers.constants.HashZero;
         const managerRoleMissingError = `AccessControl: account ${namedAddresses.alice.toLocaleLowerCase()} is missing role ${managerRole}`
         await expect(merkleFacet.connect(namedAccounts.alice).updateMerkleRoot(newMerkleRoot)).to.be.revertedWith(managerRoleMissingError);
+    })
+
+    it('account without minter role shouldnt be able to mint', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, defaultAdminRole, managerRole, minterRole } = await loadFixture(deployItemsPlusRolesFixture)
+        const managerRoleMissingError = `AccessControl: account ${namedAddresses.alice.toLocaleLowerCase()} is missing role ${minterRole}`
+        await expect(itemsFacet.connect(namedAccounts.alice).mint(namedAddresses.alice, 1, 10)).to.be.revertedWith(managerRoleMissingError);
     })
 })
