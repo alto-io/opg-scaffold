@@ -121,7 +121,7 @@ contract InventoryInternal is
         uint256 slot,
         uint256 itemTokenId,
         uint256 amount
-    ) internal nonReentrant {
+    ) internal {
 
         // Verify if this item can be equipped in this slot
         ItemsStorage.Layout storage isl = ItemsStorage.layout();

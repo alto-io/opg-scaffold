@@ -35,8 +35,6 @@ export async function deployArcadiansFixture() {
     await deployArcadiansDiamond();
     await deployItemsDiamond();
     await initArcadiansDiamond();
-    // await initArcadiansDiamond(null, baseTokenUri, maxMintPerUser, mintPrice, merkleGenerator.merkleRoot);
-    await initItemsDiamond();
 
     const namedAccounts = await hre.ethers.getNamedSigners();
     const namedAddresses = {

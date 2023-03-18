@@ -12,6 +12,7 @@ import deployItemsDiamond, { itemsDiamondInitName, itemsDiamondName, itemsFacetN
 import initArcadiansDiamond from '../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
 import initItemsDiamond from '../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
+import { deployArcadiansFixture } from './Arcadians.test';
 
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
@@ -30,8 +31,6 @@ export async function deployItemsFixture() {
 
     await deployArcadiansDiamond();
     await deployItemsDiamond();
-    await initArcadiansDiamond();
-    // await initItemsDiamond(null, baseTokenUri, merkleGenerator.merkleRoot);
     await initItemsDiamond();
 
     const namedAccounts = await hre.ethers.getNamedSigners();
@@ -81,6 +80,24 @@ describe('Items Diamond Test', function () {
 })
 
 describe('Items Diamond Inventory Test', function () {
+    it('should be able to equip an item in the arcadian', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const arcadianTokenId = 0;
+        const slot = 1;
+        const itemTokenId = 1;
+        const amount = 1;
+        
+        await arcadiansFacet.mint({value: mintPrice})
+        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount)
+        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
+        const equippedItem = await inventoryFacet.equipped(arcadianTokenId, slot);
+        expect(equippedItem.itemTokenId).to.be.equal(itemTokenId);
+        expect(equippedItem.amount).to.be.equal(amount);
+    })
+})
+
+describe('Items Diamond Mint Test', function () {
     it('should be able to update arcadians address', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const newArcadiansAddress = inventoryFacet.address;
