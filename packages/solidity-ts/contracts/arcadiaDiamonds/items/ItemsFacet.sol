@@ -61,13 +61,13 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     function mint(address to, uint256 id, uint256 amount)
-        public onlyManager
+        public onlyMinter
     {
         _mint(to, id, amount);
     }
 
     function mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
-        public onlyManager
+        public onlyMinter
     {
         _mintBatch(to, ids, amounts);
     }
