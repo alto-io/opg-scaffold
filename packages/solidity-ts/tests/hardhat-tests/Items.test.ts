@@ -190,8 +190,65 @@ describe('Items Diamond Mint Test', function () {
         const amount = 10;
         const tokenId = 1;
         await itemsFacet.mint(namedAddresses.deployer, tokenId, amount);
+
         const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
         expect(balanceToken).to.be.equal(amount);
+    })
+
+    it('should not be able to unequip an unequippable item', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const arcadianTokenId = 0;
+        const itemTokenId = 0;
+        const slot = 1;
+        const unequipAll = true;
+        const amount = 1;
+
+        await arcadiansFacet.mint({value: mintPrice});
+        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount);
+        await expect(inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, amount)).to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
+    })
+
+    it('should be able to unequip all item in slot', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const arcadianTokenId = 0;
+        const itemTokenId = 0;
+        const slot = 2;
+        const unequipAll = true;
+        const amount = 1;
+
+        await arcadiansFacet.mint({value: mintPrice});
+        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount);
+        await itemsFacet.setTokenIdType(itemTokenId, slot);
+        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
+        
+        const equippedItem1 = await inventoryFacet.equipped(itemTokenId, slot);
+        console.log("equippedItem1: ", equippedItem1);
+
+        await inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, amount);
+        const equippedItem = await inventoryFacet.equipped(itemTokenId, slot);
+        expect(equippedItem.amount).to.be.equal(0);
+    })
+
+    it('should be able to partial unequip item in slot', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const arcadianTokenId = 0;
+        const itemTokenId = 0;
+        const slot = 2;
+        const unequipAll = false;
+        const amount = 10;
+        const unequipAmount = 1;
+        
+        await arcadiansFacet.mint({value: mintPrice})
+        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount)
+        await itemsFacet.setTokenIdType(itemTokenId, slot);
+        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
+        
+        await inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, unequipAmount);
+        const equippedItem = await inventoryFacet.equipped(itemTokenId, slot);
+        expect(equippedItem.amount).to.be.equal(amount - unequipAmount);
     })
 })
 
