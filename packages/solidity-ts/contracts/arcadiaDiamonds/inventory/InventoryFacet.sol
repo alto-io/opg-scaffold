@@ -41,17 +41,24 @@ contract InventoryFacet is
     }
 
     function createSlot(
-        string calldata name,
         uint capacity,
-        bool unequippable
+        bool unequippable,
+        uint[] calldata allowedItemIds
     ) external onlyManager {
-        _createSlot(name, capacity, unequippable);
+        _createSlot(capacity, unequippable, allowedItemIds);
     }
 
-    function allowSlotUnequip(
+    function allowItemInSlot(
+        uint slot,
+        uint itemId
+    ) external {
+        _allowItemInSlot(slot, itemId);
+    }
+
+    function allowSlotToUnequip(
         uint slot
     ) external onlyManager {
-        _allowSlotUnequip(slot);
+        _allowSlotToUnequip(slot);
     }
 
     function equip(

@@ -2,19 +2,19 @@
 pragma solidity ^0.8.19;
 
 import { ItemsStorage } from "./ItemsStorage.sol";
-import { InventorySlotsInternal } from "../inventory/InventorySlotsInternal.sol";
+import { InventoryStorage } from "../inventory/InventoryStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol";
 import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol";
 
-contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal, InventorySlotsInternal {
+contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
     event Claimed(address indexed to, uint256 indexed itemId, uint amount);
 
     modifier onlyEquippableItem(uint itemId) {
         require(
-            _isItemEquippable(itemId),
+            InventoryStorage.layout().itemAllowedSlots[itemId].length > 0,
             "Item does not have any slot where it can be equipped"
         );
         _;
@@ -23,29 +23,6 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
     modifier onlyNonZeroItemId(uint itemId) {
         require(itemId != 0, "Item id can't be zero");
         _;
-    }
-
-    function _allowItemInSlot(uint itemId, uint slot) internal override onlyNonZeroItemId(itemId) {
-        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        itemsSL.items[itemId].slots.push(slot);
-        super._allowItemInSlot(slot, itemId);
-    }
-
-    function _allowItemsInSlotBatch(uint[] calldata itemIds, uint slot) internal {
-        for (uint256 i = 0; i < itemIds.length; i++) {
-            _allowItemInSlot(itemIds[i], slot);  
-        }
-    }
-
-    function _allowItemInSlotsBatch(uint itemId, uint[] calldata slots) internal {
-        for (uint256 i = 0; i < slots.length; i++) {
-            _allowItemInSlot(itemId, slots[i]);  
-        }
-    }
-
-    function _isItemEquippable(uint itemId) internal view returns (bool) {
-        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        return itemsSL.items[itemId].slots.length > 0;
     }
 
     function _claim(uint itemId, uint amount, bytes32[] memory proof)

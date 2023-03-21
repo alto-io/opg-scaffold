@@ -16,7 +16,6 @@ import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 export const TOKENS_PATH_ARCADIANS = path.join(__dirname, "../mocks/ownedArcadiansMock.json");
 
 export async function deployArcadiansFixture() {
-    console.log("mekie");
     const deploymentHardhatPath = path.join(__dirname, '../../generated/hardhat/deployments/hardhat');
     if (fs.existsSync(deploymentHardhatPath)) {
         fs.rmdirSync(deploymentHardhatPath, { recursive: true })
@@ -59,7 +58,6 @@ export async function deployArcadiansFixture() {
 describe('Arcadians Diamond Test', function () {
     this.timeout(10000)
     it('should deployer be owner', async () => {
-        console.log("mekie tests");
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
         const owner = await diamond.owner();
         expect(owner).to.be.equal(namedAddresses.deployer);
