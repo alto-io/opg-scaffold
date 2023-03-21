@@ -55,22 +55,6 @@ export async function deployItemsFixture() {
     return { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, rolesFacet, merkleGenerator, baseTokenUri };
 }
 
-export async function deployItemsFixtureWithItemsTypes() {
-    const _deployItemsFixture = await loadFixture(deployItemsFixture);
-
-    // add item types
-    await _deployItemsFixture.itemsFacet.addNonEquippableItemType("nonEquippableItemType1");
-    await _deployItemsFixture.itemsFacet.addEquippableItemType("equippableItemType1", false);
-    await _deployItemsFixture.itemsFacet.addEquippableItemType("equippableItemType2Unequippable", true);
-
-    // assign item type to token id
-    await _deployItemsFixture.itemsFacet.setTokenIdType(0, 0);
-    await _deployItemsFixture.itemsFacet.setTokenIdType(1, 1);
-    await _deployItemsFixture.itemsFacet.setTokenIdType(2, 2);
-
-    return {..._deployItemsFixture }
-}
-
 describe('Items Diamond Test', function () {
     it('should deployer be owner', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
@@ -79,25 +63,7 @@ describe('Items Diamond Test', function () {
     })
 })
 
-describe('Items Diamond Inventory Test', function () {
-    it('should be able to equip an item in the arcadian', async () => {
-        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
-        const arcadianTokenId = 0;
-        const slot = 1;
-        const itemTokenId = 1;
-        const amount = 1;
-        
-        await arcadiansFacet.mint({value: mintPrice})
-        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount)
-        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
-        const equippedItem = await inventoryFacet.equipped(arcadianTokenId, slot);
-        expect(equippedItem.itemTokenId).to.be.equal(itemTokenId);
-        expect(equippedItem.amount).to.be.equal(amount);
-    })
-})
-
-describe('Items Diamond Mint Test', function () {
+describe('Items Diamond Mint, equip and unequip items flow', function () {
     it('should be able to update arcadians address', async () => {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const newArcadiansAddress = inventoryFacet.address;
@@ -105,157 +71,226 @@ describe('Items Diamond Mint Test', function () {
         expect(await inventoryFacet.getArcadiansAddress()).to.be.equal(newArcadiansAddress);
     })
 
-    it('should be able to add non equippable item type', async () => {
+    it('should be able to equip and unequip an item from an arcadian', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const itemName = "nonEquippableItemType1";
-        expect((await inventoryFacet.numSlots())).to.be.equal(0);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
-        await itemsFacet.addNonEquippableItemType(itemName);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
 
-        expect((await inventoryFacet.numSlots())).to.be.equal(0);
-        const itemTypeId = 0;
-        const itemType = await itemsFacet.getItemType(itemTypeId);
-        expect(itemType.name).to.be.equal(itemName);
-        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.false;
-    })
-
-    it('should be able to add equippable item type with slot that can be unequipped', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const itemName = "equippableItemType1";
-        expect((await inventoryFacet.numSlots())).to.be.equal(0);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
-        await itemsFacet.addEquippableItemType(itemName, false);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
-
+        // create slot
+        const slotInput = {
+            name: "slot1",
+            capacity: 10,
+            unequippable: true
+        }
+        await inventoryFacet.createSlot(slotInput.name, slotInput.capacity, slotInput.unequippable);
         const numSlots = await inventoryFacet.numSlots();
-        const itemTypeId = 0;
-        const itemType = await itemsFacet.getItemType(itemTypeId);
-        expect(itemType.name).to.be.equal(itemName);
-        expect(itemType.slot).to.be.equal(numSlots);
-        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.true;
-        expect((await inventoryFacet.slotIsUnequippable(itemType.slot))).to.be.false;
         expect(numSlots).to.be.equal(1);
-    })
+        const slotId = numSlots;
+        let slot = await inventoryFacet.getSlot(slotId);
+        expect(slot.name).to.be.equal(slotInput.name);
+        expect(slot.isUnequippable).to.be.equal(slotInput.unequippable);
 
-    it('should be able to add equippable item type with slot that cannot be unequipped', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const itemName = "equippableItemType1Unequippable";
-        expect((await inventoryFacet.numSlots())).to.be.equal(0);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(0);
-        await itemsFacet.addEquippableItemType(itemName, true);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
-        const numSlots = await inventoryFacet.numSlots();
-        
-        const itemTypeId = 0;
-        const itemType = await itemsFacet.getItemType(itemTypeId);
-        expect(itemType.name).to.be.equal(itemName);
-        expect(itemType.slot).to.be.equal(numSlots);
-        expect((await itemsFacet.isItemTypeEquippable(itemTypeId))).to.be.true;
-        expect((await inventoryFacet.slotIsUnequippable(itemType.slot))).to.be.true;
-        expect(numSlots).to.be.equal(1);
-    })
+        // Allow items in slot
+        const itemId = 1;
+        await itemsFacet.allowItemInSlot(itemId, slotId);
 
-    it('should not be able set token type for inexistent item type', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        
-        await expect(itemsFacet.setTokenIdType(0, 0)).to.be.revertedWith("Item type does not exist");
-    })
+        // mint item
+        const itemAmount = 10;
+        await itemsFacet.mint(namedAddresses.deployer, itemId, itemAmount);
+        const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, itemId);
+        expect(balanceToken).to.be.equal(itemAmount);
 
-    it('should be able set token type for existent item type', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const itemName = "itemType1";
-        await itemsFacet.addNonEquippableItemType(itemName);
-        await itemsFacet.setTokenIdType(0, 0);
-        expect(await itemsFacet.getItemTypeCount()).to.be.equal(1);
-    })
-
-    it('should not be able to mint token without item type created', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const tokenId = 1;
-        const amount = 10;
-        await expect(itemsFacet.mint(namedAddresses.deployer, tokenId, amount)).to.be.revertedWith("Token does not have type assigned");
-    })
-
-    it('should not be able to mint token without type assigned', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
-        const tokenId = 1;
-        const amount = 10;
-        await itemsFacet.addNonEquippableItemType("itemName");
-        await expect(itemsFacet.mint(namedAddresses.deployer, tokenId, amount)).to.be.revertedWith("Token does not have type assigned");
-    })
-
-    it('should be able to mint', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
-        const amount = 10;
-        const tokenId = 1;
-        await itemsFacet.mint(namedAddresses.deployer, tokenId, amount);
-
-        const balanceToken = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
-        expect(balanceToken).to.be.equal(amount);
-    })
-
-    it('should not be able to unequip an unequippable item', async () => {
-        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
-        const arcadianTokenId = 0;
-        const itemTokenId = 0;
-        const slot = 1;
-        const unequipAll = true;
-        const amount = 1;
-
-        await arcadiansFacet.mint({value: mintPrice});
-        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount);
-        await expect(inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, amount)).to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
-    })
-
-    it('should be able to unequip all item in slot', async () => {
-        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
-        const arcadianTokenId = 0;
-        const itemTokenId = 0;
-        const slot = 2;
-        const unequipAll = true;
-        const amount = 1;
-
-        await arcadiansFacet.mint({value: mintPrice});
-        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount);
-        await itemsFacet.setTokenIdType(itemTokenId, slot);
-        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
-        
-        const equippedItem1 = await inventoryFacet.equipped(itemTokenId, slot);
-        console.log("equippedItem1: ", equippedItem1);
-
-        await inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, amount);
-        const equippedItem = await inventoryFacet.equipped(itemTokenId, slot);
-        expect(equippedItem.amount).to.be.equal(0);
-    })
-
-    it('should be able to partial unequip item in slot', async () => {
-        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
-        const arcadianTokenId = 0;
-        const itemTokenId = 0;
-        const slot = 2;
-        const unequipAll = false;
-        const amount = 10;
-        const unequipAmount = 1;
-        
+        // mint arcadian
         await arcadiansFacet.mint({value: mintPrice})
-        await itemsFacet.mint(namedAddresses.deployer, itemTokenId, amount)
-        await itemsFacet.setTokenIdType(itemTokenId, slot);
-        await inventoryFacet.equip(arcadianTokenId, slot, itemTokenId, amount);
+        const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
+        const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
         
-        await inventoryFacet.unequip(arcadianTokenId, slot, unequipAll, unequipAmount);
-        const equippedItem = await inventoryFacet.equipped(itemTokenId, slot);
-        expect(equippedItem.amount).to.be.equal(amount - unequipAmount);
+        // equip item in slot
+        await inventoryFacet.equip(arcadianId, slotId, itemId, itemAmount);
+        let equippedItem = await inventoryFacet.equipped(arcadianId, slotId);
+        expect(equippedItem.id).to.be.equal(itemId);
+        expect(equippedItem.amount).to.be.equal(itemAmount);
+
+        let arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
+        console.log("arcadianUri: ", arcadianUri);
+        let expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemId
+        expect(arcadianUri).to.be.equal(expectedUri);
+
+        // allow to unequip slot
+        expect(slot.isUnequippable).to.be.true;
+        await inventoryFacet.allowSlotUnequip(slotId);
+        slot = await inventoryFacet.getSlot(slotId);
+        expect(slot.isUnequippable).to.be.false;
+        
+        // unequip item
+        const unequipAll = true;
+        await inventoryFacet.unequip(arcadianId, slotId, unequipAll, 0);
+        equippedItem = await inventoryFacet.equipped(itemId, slotId);
+        expect(equippedItem.amount).to.be.equal(0);
+        expect(equippedItem.id).to.be.equal(0);
+    })
+
+    // In order to avoid code duplication in tests setup, 
+    // all error cases for a flow are grouped in one test.
+    it('should not be able to equip and unequip an item from an arcadian', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+
+        // create slot
+        const slotInput = {
+            name: "slot1",
+            capacity: 1,
+            unequippable: true
+        }
+        await inventoryFacet.createSlot(slotInput.name, slotInput.capacity, slotInput.unequippable);
+        const slotInput2 = {
+            name: "slot2",
+            capacity: 10,
+            unequippable: false
+        }
+        await inventoryFacet.createSlot(slotInput2.name, slotInput2.capacity, slotInput2.unequippable);
+        
+        // Allow items in slot
+        const numSlots = await inventoryFacet.numSlots();
+        const slotId = 1;
+        const itemId = 1;
+        await expect(itemsFacet.allowItemInSlot(0, slotId)).to.be.revertedWith("Item id can't be zero");
+        await expect(itemsFacet.allowItemInSlot(itemId, 0)).to.be.revertedWith("Slot id can't be zero");
+        await expect(itemsFacet.allowItemInSlot(itemId, 1000)).to.be.revertedWith("Inexistent slot id");
+        await itemsFacet.allowItemInSlot(itemId, slotId);
+        const itemIdWithoutSlot = 2;
+
+        // mint item
+        const itemAmount = 10;
+        await expect(itemsFacet.mint(namedAddresses.deployer, 0, itemAmount)).
+            to.be.revertedWith("Item id can't be zero");
+        await expect(itemsFacet.mint(namedAddresses.deployer, 100, itemAmount)).
+            to.be.revertedWith("Item does not have any slot where it can be equipped");
+        await itemsFacet.mint(namedAddresses.deployer, itemId, itemAmount);
+
+        // mint arcadian
+        await expect(arcadiansFacet.mint({value: 0})).
+            to.be.revertedWith("Invalid pay amount");
+        await expect(arcadiansFacet.mint({value: mintPrice + 1})).
+            to.be.revertedWith("Invalid pay amount");
+        const maxMintPerUser = await arcadiansFacet.getMaxMintPerUser();
+        for (let i = 0; i < maxMintPerUser; i++) {
+            await arcadiansFacet.mint({value: mintPrice})
+        }
+        await expect(arcadiansFacet.mint({value: mintPrice})).
+            to.be.revertedWith("User maximum minted tokens reached");
+        const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
+        
+        const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
+        
+        // equip item in slot
+        await expect(inventoryFacet.equip(arcadianId, 0, itemId, slotInput.capacity)).
+            to.be.revertedWith("Slot id can't be zero");
+        await expect(inventoryFacet.equip(arcadianId, numSlots+1, itemId, slotInput.capacity)).
+            to.be.revertedWith("Inexistent slot id");
+            await expect(inventoryFacet.equip(arcadianId, slotId, itemIdWithoutSlot, slotInput.capacity)).
+                to.be.revertedWith("Item needs to be assigned to at least 1 slot");
+        await expect(inventoryFacet.equip(arcadianId, slotId, itemId, slotInput.capacity+1)).
+            to.be.revertedWith("Amount exceeds slot capacity");
+        await inventoryFacet.equip(arcadianId, slotId, itemId, slotInput.capacity);
+        
+        // unequip item
+        let unequipAll = true;
+        const unequipAmount = 1;
+        await expect(inventoryFacet.connect(namedAccounts.alice).unequip(arcadianId, slotId, unequipAll, unequipAmount)).
+            to.be.revertedWith("InventoryFacet.equip: Message sender is not owner of the arcadian");
+        const unmintedArcadianId = 999;
+        await expect(inventoryFacet.unequip(unmintedArcadianId, slotId, unequipAll, unequipAmount)).
+            to.be.reverted;
+        await expect(inventoryFacet.unequip(arcadianId, slotId, unequipAll, unequipAmount)).
+            to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
+        
+        await inventoryFacet.allowSlotUnequip(slotId);
+        await expect(inventoryFacet.allowSlotUnequip(slotId)).to.be.revertedWith("Slot already unquippable");
+
+        await expect(inventoryFacet.unequip(arcadianId, slotId, false, unequipAmount+1)).
+            to.be.revertedWith("InventoryFacet._unequip: Attempting to unequip too many items from the slot");
+    })
+    
+    it('should be able to equip and unequip items from an arcadian in batch', async () => {
+        const { arcadiansFacet, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+
+        // create slot
+        const slotsInput = [{
+            name: "slot1",
+            capacity: 1,
+            unequippable: false
+        }, {
+            name: "slot2",
+            capacity: 1,
+            unequippable: false
+        }, {
+            name: "slot3",
+            capacity: 10,
+            unequippable: false
+        }]
+        for (let i = 0; i < slotsInput.length; i++) {
+            await inventoryFacet.createSlot(slotsInput[i].name, slotsInput[i].capacity, slotsInput[i].unequippable);
+        }
+
+        // Allow items in slot
+        const items = [
+            {id: 1, amount: 1, slots: [1]}, 
+            {id: 2, amount: 1, slots: [1, 2]},
+            {id: 3, amount: 1, slots: [2]}, 
+            {id: 4, amount: 10, slots: [2]}, 
+            {id: 5, amount: 10, slots: [1, 2, 3]}, 
+            {id: 6, amount: 10, slots: [3]}
+        ];
+        for (let i = 0; i < items.length; i++) {
+            await itemsFacet.allowItemInSlotsBatch(items[i].id, items[i].slots);
+        }
+
+        // mint item
+        for (let i = 0; i < items.length; i++) {
+            await itemsFacet.mint(namedAddresses.deployer, items[i].id, items[i].amount);
+        }
+
+        // mint arcadian
+        await arcadiansFacet.mint({value: mintPrice})
+        const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
+        const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
+        
+        // equip items in slots
+        const slotsIds = [1, 2, 3];
+        const itemsIds = [1, 2, 6];
+        const amounts = [1, 1, 5];
+
+        await inventoryFacet.equipBatch(arcadianId, slotsIds, itemsIds, amounts);
+        let equippedItem = await inventoryFacet.equippedBatch(arcadianId);
+        for (let i = 0; i < equippedItem.length; i++) {
+            expect(equippedItem[i].id).to.be.equal(itemsIds[i]);
+            expect(equippedItem[i].amount).to.be.equal(amounts[i]);
+        }
+
+        let arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
+        let expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemsIds.toString()
+        expect(arcadianUri).to.be.equal(expectedUri);
+        
+        // unequip items
+        await inventoryFacet.unequipBatch(arcadianId);
+        const equippedItems = await inventoryFacet.equippedBatch(arcadianId);
+        
+        for (let i = 0; i < equippedItems.length; i++) {
+            expect(equippedItems[i].amount).to.be.equal(0);
+            expect(equippedItems[i].id).to.be.equal(0);
+        }
+
+        arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
+        expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemsIds.map(id=>"0").toString()
+        expect(arcadianUri).to.be.equal(expectedUri);
     })
 })
 
 describe('Items Diamond merkle Test', function () {
 
     it('should not be able to claim tokens if not elegible', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
@@ -266,7 +301,7 @@ describe('Items Diamond merkle Test', function () {
     })
 
     it('should not be able to claim tokens if token data is wrong', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const ids = [1, 2];
         const badAmounts = [3, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
@@ -276,7 +311,7 @@ describe('Items Diamond merkle Test', function () {
     })
     
     it('should be able to claim tokens if elegible', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
@@ -290,7 +325,7 @@ describe('Items Diamond merkle Test', function () {
     })
 
     it('should not able to claim the same tokens twice', async () => {
-        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixtureWithItemsTypes);
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);

@@ -25,17 +25,27 @@ interface IInventoryFacet is
 
     function getArcadiansAddress() external view returns (address);
 
-    function createSlot(bool unequippable) external;
-
     function numSlots() external view returns (uint256);
 
-    function slotIsUnequippable(uint256 slot) external view returns (bool);
+    function getSlot(uint256 slot) external view returns (InventoryStorage.Slot memory);
+
+    function createSlot(
+        string calldata name,
+        bool unequippable
+    ) external;
 
     function equip(
         uint256 arcadianTokenId,
         uint256 slot,
         uint256 itemTokenId,
         uint256 amount
+    ) external;
+
+    function equipBatch(
+        uint256 arcadianTokenId,
+        uint256[] calldata slots,
+        uint256[] calldata itemTokenIds,
+        uint256[] calldata amounts
     ) external;
 
     function unequip(
@@ -45,8 +55,16 @@ interface IInventoryFacet is
         uint256 amount
     ) external;
 
+    function unequipBatch(
+        uint256 arcadianTokenId
+    ) external;
+
     function equipped(
         uint256 arcadianTokenId,
         uint256 slot
-    ) external view returns (EquippedItem memory item);
+    ) external view;
+
+    function equippedBatch(
+        uint256 arcadianTokenId
+    ) external view returns (EquippedItem[] memory item);
 }

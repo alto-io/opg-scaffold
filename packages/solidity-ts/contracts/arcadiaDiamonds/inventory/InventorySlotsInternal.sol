@@ -2,21 +2,15 @@
 pragma solidity ^0.8.19;
 
 import { InventoryStorage } from "./InventoryStorage.sol";
+import { IInventorySlotsInternal } from "./IInventorySlotsInternal.sol";
 
-contract InventorySlotsInternal {
+contract InventorySlotsInternal is IInventorySlotsInternal {
 
-    event SlotCreated(address indexed creator, uint256 slot, bool unequippable);
-
-    function _createSlot(
-        bool unequippable
-    ) internal returns (uint256) {
+    function _allowItemInSlot(
+        uint slot,
+        uint itemId
+    ) internal virtual onlyValidSlot(slot) {
         InventoryStorage.Layout storage istore = InventoryStorage.layout();
-
-        istore.numSlots += 1;
-        uint256 newSlot = istore.numSlots;
-        istore.slotIsUnequippable[newSlot] = unequippable;
-
-        emit SlotCreated(msg.sender, newSlot, unequippable);
-        return newSlot;
+        istore.slots[slot].allowedItems.push(itemId);
     }
 }

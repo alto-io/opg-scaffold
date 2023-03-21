@@ -30,10 +30,18 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
     ) internal view returns (string memory) {
         IInventoryFacet inventory = IInventoryFacet(_getItemsAddress());
         string memory tokenUri = ERC721MetadataInternal._tokenURI(tokenId);
-        IInventoryFacet.EquippedItem memory equippedItem = inventory.equipped(tokenId, 0);
+        IInventoryFacet.EquippedItem[] memory equippedItem = inventory.equippedBatch(tokenId);
         // TODO: get equippedAll and put them in URI
-        string memory itemId = equippedItem.itemTokenId.toString();
-        return string.concat(tokenUri, itemId);
+        tokenUri = string.concat(tokenUri, "/?tokenIds=");
+        for (uint i = 0; i < equippedItem.length; i++) {
+            string memory itemId = equippedItem[i].itemTokenId.toString();
+            if (i == 0) {
+                tokenUri = string.concat(tokenUri, itemId);
+            } else {
+                tokenUri = string.concat(tokenUri, ",", itemId);
+            }
+        }
+        return tokenUri;
     }
     
     function _setItemsAddress(address newItemsAddress) internal onlyManager {
@@ -86,7 +94,7 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
         ArcadiansStorage.Layout storage asl = ArcadiansStorage.layout();
         require(msg.value == asl.mintPrice, "Invalid pay amount");
         uint mintedTokens = _balanceOf(to) - asl.amountClaimed[to];
-        require(mintedTokens < asl.maxMintPerUser, "Max mint reached");
+        require(mintedTokens < asl.maxMintPerUser, "User maximum minted tokens reached");
         _mint(to, asl.counterId);
         asl.counterId++;
     }
