@@ -16,38 +16,16 @@ import { RolesInternal } from "../roles/RolesInternal.sol";
 
 contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
 
-    function addNonEquippableItemType(string calldata name) external {
-        _addNonEquippableItemType(name);
+    function allowItemInSlot(uint itemId, uint slot) external {
+        _allowItemInSlot(itemId, slot);
     }
 
-    function addEquippableItemType(string calldata name, bool canBeUnequipped) external {
-        _addEquippableItemType(name, canBeUnequipped);
+    function allowItemsInSlotBatch(uint[] calldata itemIds, uint slot) external {
+        _allowItemsInSlotBatch(itemIds, slot);
     }
 
-    function setTokenIdType(uint tokenId, uint itemType) external {
-        _setTokenIdType(tokenId, itemType);
-    }
-
-    function isItemTypeEquippable(uint itemTypeId) external view returns (bool) {
-        return _isItemTypeEquippable(itemTypeId);
-    }
-
-    function getItemTypeCount() external view returns (uint) {
-        return ItemsStorage.layout().itemTypesCount;
-    }
-
-    function getItemType(uint itemTypeId) external view returns (ItemsStorage.ItemType memory) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        return isl.itemTypes[itemTypeId];
-    }
-
-    function getTokenItemTypeId(uint tokenId) external view returns (ItemsStorage.ItemTypeId memory) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        return isl.tokenIdToTypeId[tokenId];
-    }
-
-    function getTokenItemType(uint tokenId) external view returns (ItemsStorage.ItemType memory) {
-        return _getTokenItemType(tokenId);
+    function allowItemInSlotsBatch(uint itemId, uint[] calldata slots) external {
+        _allowItemInSlotsBatch(itemId, slots);
     }
     
     function claim(uint tokenId, uint amount, bytes32[] calldata proof)

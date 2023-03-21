@@ -172,6 +172,6 @@ describe('mint max limit per user', function () {
             await arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice});
         }
         expect(await arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
-        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).to.be.revertedWith("Max mint reached");
+        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).to.be.revertedWith("User maximum minted tokens reached");
     })
 });

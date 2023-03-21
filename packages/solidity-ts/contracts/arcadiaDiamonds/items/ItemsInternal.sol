@@ -10,89 +10,65 @@ import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/met
 
 contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal, InventorySlotsInternal {
 
-    event Claimed(address indexed to, uint256 indexed tokenId, uint amount);
+    event Claimed(address indexed to, uint256 indexed itemId, uint amount);
 
-    modifier onlyValidItemType(uint itemTypeId) {
-        require(ItemsStorage.layout().itemTypes[itemTypeId].exists, "Item type does not exist");
-        _;
-    }
-
-    modifier onlyTokenWithType(uint tokenId) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+    modifier onlyEquippableItem(uint itemId) {
         require(
-            isl.tokenIdToTypeId[tokenId].exists && isl.itemTypes[isl.tokenIdToTypeId[tokenId].id].exists, 
-            "Token does not have type assigned"
+            _isItemEquippable(itemId),
+            "Item does not have any slot where it can be equipped"
         );
         _;
     }
 
-    modifier onlyTokensWithType(uint[] calldata tokenIds) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        for (uint256 i = 0; i < tokenIds.length; i++) {
-            require(
-                isl.tokenIdToTypeId[tokenIds[i]].exists && isl.itemTypes[isl.tokenIdToTypeId[tokenIds[i]].id].exists, 
-                "Token does not have type assigned"
-            );
-        }
+    modifier onlyNonZeroItemId(uint itemId) {
+        require(itemId != 0, "Item id can't be zero");
         _;
     }
 
-    function _addNonEquippableItemType(string calldata name) internal {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-
-        uint itemTypeId = isl.itemTypesCount;
-        isl.itemTypes[itemTypeId].name = name;
-        isl.itemTypes[itemTypeId].exists = true;
-        isl.itemTypesCount++;
+    function _allowItemInSlot(uint itemId, uint slot) internal override onlyNonZeroItemId(itemId) {
+        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
+        itemsSL.items[itemId].slots.push(slot);
+        super._allowItemInSlot(slot, itemId);
     }
 
-    function _addEquippableItemType(string calldata name, bool canBeUnequipped) internal {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-
-        uint itemTypeId = isl.itemTypesCount;
-        isl.itemTypes[itemTypeId].name = name;
-        isl.itemTypes[itemTypeId].slot = _createSlot(canBeUnequipped);
-        isl.itemTypes[itemTypeId].exists = true;
-        isl.itemTypesCount++;
+    function _allowItemsInSlotBatch(uint[] calldata itemIds, uint slot) internal {
+        for (uint256 i = 0; i < itemIds.length; i++) {
+            _allowItemInSlot(itemIds[i], slot);  
+        }
     }
 
-    function _setTokenIdType(uint tokenId, uint itemTypeId) internal onlyValidItemType(itemTypeId) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        isl.tokenIdToTypeId[tokenId].id = itemTypeId;
-        isl.tokenIdToTypeId[tokenId].exists = true;
+    function _allowItemInSlotsBatch(uint itemId, uint[] calldata slots) internal {
+        for (uint256 i = 0; i < slots.length; i++) {
+            _allowItemInSlot(itemId, slots[i]);  
+        }
     }
 
-    function _isItemTypeEquippable(uint itemTypeId) internal view onlyValidItemType(itemTypeId) returns (bool) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        return isl.itemTypes[itemTypeId].slot > 0;
+    function _isItemEquippable(uint itemId) internal view returns (bool) {
+        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
+        return itemsSL.items[itemId].slots.length > 0;
     }
 
-    function _getTokenItemType(uint tokenId) internal view onlyTokenWithType(tokenId) returns (ItemsStorage.ItemType memory) {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
-        return isl.itemTypes[isl.tokenIdToTypeId[tokenId].id];
-    }
-
-    function _claim(uint tokenId, uint amount, bytes32[] memory proof)
-        internal onlyTokenWithType(tokenId)
+    function _claim(uint itemId, uint amount, bytes32[] memory proof)
+        internal onlyNonZeroItemId(itemId)
     {
-        ItemsStorage.Layout storage isl = ItemsStorage.layout();
+        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
         // Revert if the token was already claimed before
-        require(!isl.claimed[msg.sender][tokenId], "Already claimed");
-        isl.claimed[msg.sender][tokenId] = true;
+        require(!itemsSL.claimed[msg.sender][itemId], "Already claimed");
+        itemsSL.claimed[msg.sender][itemId] = true;
 
         // Verify if is elegible
-        bytes memory leaf = abi.encode(msg.sender, tokenId, amount);
+        bytes memory leaf = abi.encode(msg.sender, itemId, amount);
         _validateLeaf(proof, leaf);
 
         // Mint token to address
-        _mint(msg.sender, tokenId, amount, '');
+        _mint(msg.sender, itemId, amount, '');
 
-        emit Claimed(msg.sender, tokenId, amount);
+        emit Claimed(msg.sender, itemId, amount);
     }
 
     function _claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
-        internal onlyTokensWithType(tokenIds)
+        internal
     {
         require(tokenIds.length == amounts.length, "Inputs length mismatch");
         for (uint256 i = 0; i < tokenIds.length; i++) {
@@ -100,14 +76,15 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
         }
     }
 
-    function _mint(address to, uint256 id, uint256 amount)
-        internal onlyTokenWithType(id)
+    function _mint(address to, uint256 itemId, uint256 amount)
+        internal onlyNonZeroItemId(itemId) onlyEquippableItem(itemId)
     {
-        ERC1155BaseInternal._mint(to, id, amount, "");
+        
+        ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
 
     function _mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
-        internal onlyTokensWithType(ids)
+        internal
     {
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }

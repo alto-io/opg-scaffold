@@ -18,25 +18,29 @@ library InventoryStorage {
     bytes32 constant INVENTORY_STORAGE_POSITION =
         keccak256("inventory.storage.position");
 
-    uint256 constant ERC721_ITEM_TYPE = 721;
-    uint256 constant ERC1155_ITEM_TYPE = 1155;
+    uint constant ERC721_ITEM_TYPE = 721;
+    uint constant ERC1155_ITEM_TYPE = 1155;
 
     // EquippedItem represents an item equipped in a specific inventory slot for a specific ERC721 token.
     struct EquippedItem {
-        uint256 itemTokenId;
-        uint256 amount;
+        uint id;
+        uint amount;
+    }
+
+    struct Slot {
+        string name;
+        uint capacity;
+        bool isUnequippable;
+        uint[] allowedItems;
     }
 
     struct Layout {
         address arcadiansAddress;
-        uint256 numSlots;
-        // Slot => true if items can be unequipped from that slot and false otherwise
-        mapping(uint256 => bool) slotIsUnequippable;
-        // arcadian token ID => slot => EquippedItem
-        mapping(uint256 => mapping(uint256 => EquippedItem)) equippedItems;
-
-        // // Slot  => allow more than one item per slot
-        // mapping(uint256 => uint256) slotAllowMultiple;
+        uint numSlots;
+        // Slot id => Slot
+        mapping(uint => Slot) slots;
+        // arcadian token ID => slot id => EquippedItem
+        mapping(uint => mapping(uint => EquippedItem)) equippedItems;
     }
 
     function layout()
