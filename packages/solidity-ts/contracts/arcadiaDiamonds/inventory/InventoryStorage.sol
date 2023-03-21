@@ -28,7 +28,6 @@ library InventoryStorage {
     }
 
     struct Slot {
-        string name;
         uint capacity;
         bool isUnequippable;
         uint[] allowedItems;
@@ -41,6 +40,8 @@ library InventoryStorage {
         mapping(uint => Slot) slots;
         // arcadian token ID => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
+        // item id => allowed slots list
+        mapping(uint => uint[]) itemAllowedSlots;
     }
 
     function layout()

@@ -6,16 +6,9 @@ library ItemsStorage {
     bytes32 constant ITEMS_STORAGE_POSITION =
         keccak256("items.storage.position");
 
-    struct Item {
-        uint[] slots;
-    }
-
     struct Layout {
         // wallet => token id => bool 
         mapping(address => mapping(uint => bool)) claimed;
-
-        // token id => Item
-        mapping(uint => Item) items;
     }
 
     function layout()

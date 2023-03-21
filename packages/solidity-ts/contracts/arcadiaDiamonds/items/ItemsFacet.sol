@@ -15,18 +15,6 @@ import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 
 contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
-
-    function allowItemInSlot(uint itemId, uint slot) external {
-        _allowItemInSlot(itemId, slot);
-    }
-
-    function allowItemsInSlotBatch(uint[] calldata itemIds, uint slot) external {
-        _allowItemsInSlotBatch(itemIds, slot);
-    }
-
-    function allowItemInSlotsBatch(uint itemId, uint[] calldata slots) external {
-        _allowItemInSlotsBatch(itemId, slots);
-    }
     
     function claim(uint tokenId, uint amount, bytes32[] calldata proof)
         public nonReentrant

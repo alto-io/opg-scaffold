@@ -77,21 +77,16 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         const slotInput = {
-            name: "slot1",
             capacity: 10,
             unequippable: true
         }
-        await inventoryFacet.createSlot(slotInput.name, slotInput.capacity, slotInput.unequippable);
+        const itemId = 1;
+        await inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, [itemId]);
         const numSlots = await inventoryFacet.numSlots();
         expect(numSlots).to.be.equal(1);
         const slotId = numSlots;
         let slot = await inventoryFacet.getSlot(slotId);
-        expect(slot.name).to.be.equal(slotInput.name);
         expect(slot.isUnequippable).to.be.equal(slotInput.unequippable);
-
-        // Allow items in slot
-        const itemId = 1;
-        await itemsFacet.allowItemInSlot(itemId, slotId);
 
         // mint item
         const itemAmount = 10;
@@ -100,9 +95,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(balanceToken).to.be.equal(itemAmount);
 
         // mint arcadian
-        await arcadiansFacet.mint({value: mintPrice})
-        const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
-        const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
+        await arcadiansFacet.mint({value: mintPrice});
+        const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer);
+        const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1);
+        const balanceItem = await itemsFacet.balanceOf(namedAddresses.deployer, itemId);
         
         // equip item in slot
         await inventoryFacet.equip(arcadianId, slotId, itemId, itemAmount);
@@ -110,14 +106,17 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(equippedItem.id).to.be.equal(itemId);
         expect(equippedItem.amount).to.be.equal(itemAmount);
 
+        expect(await itemsFacet.balanceOf(namedAddresses.deployer, itemId)).to.be.equal(balanceItem-itemAmount);
+
         let arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
         console.log("arcadianUri: ", arcadianUri);
         let expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemId
+        
         expect(arcadianUri).to.be.equal(expectedUri);
 
-        // allow to unequip slot
+        // allow to unequip slot, since slot was created as unequipable
         expect(slot.isUnequippable).to.be.true;
-        await inventoryFacet.allowSlotUnequip(slotId);
+        await inventoryFacet.allowSlotToUnequip(slotId);
         slot = await inventoryFacet.getSlot(slotId);
         expect(slot.isUnequippable).to.be.false;
         
@@ -127,6 +126,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         equippedItem = await inventoryFacet.equipped(itemId, slotId);
         expect(equippedItem.amount).to.be.equal(0);
         expect(equippedItem.id).to.be.equal(0);
+        expect(await itemsFacet.balanceOf(namedAddresses.deployer, itemId)).to.be.equal(balanceItem);
     })
 
     // In order to avoid code duplication in tests setup, 
@@ -137,34 +137,31 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         const slotInput = {
-            name: "slot1",
             capacity: 1,
             unequippable: true
         }
-        await inventoryFacet.createSlot(slotInput.name, slotInput.capacity, slotInput.unequippable);
+        const itemId = 1;
+        await inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, [itemId]);
         const slotInput2 = {
-            name: "slot2",
             capacity: 10,
             unequippable: false
         }
-        await inventoryFacet.createSlot(slotInput2.name, slotInput2.capacity, slotInput2.unequippable);
+        await inventoryFacet.createSlot(slotInput2.capacity, slotInput2.unequippable, []);
         
         // Allow items in slot
-        const numSlots = await inventoryFacet.numSlots();
         const slotId = 1;
-        const itemId = 1;
-        await expect(itemsFacet.allowItemInSlot(0, slotId)).to.be.revertedWith("Item id can't be zero");
-        await expect(itemsFacet.allowItemInSlot(itemId, 0)).to.be.revertedWith("Slot id can't be zero");
-        await expect(itemsFacet.allowItemInSlot(itemId, 1000)).to.be.revertedWith("Inexistent slot id");
-        await itemsFacet.allowItemInSlot(itemId, slotId);
-        const itemIdWithoutSlot = 2;
+        await expect(inventoryFacet.allowItemInSlot(slotId, 0)).to.be.revertedWith("Item id can't be zero");
+        await expect(inventoryFacet.allowItemInSlot(0, itemId)).to.be.revertedWith("Slot id can't be zero");
+        await expect(inventoryFacet.allowItemInSlot(1000, itemId)).to.be.revertedWith("Inexistent slot id");
 
         // mint item
         const itemAmount = 10;
         await expect(itemsFacet.mint(namedAddresses.deployer, 0, itemAmount)).
             to.be.revertedWith("Item id can't be zero");
+
         await expect(itemsFacet.mint(namedAddresses.deployer, 100, itemAmount)).
             to.be.revertedWith("Item does not have any slot where it can be equipped");
+
         await itemsFacet.mint(namedAddresses.deployer, itemId, itemAmount);
 
         // mint arcadian
@@ -179,12 +176,18 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // equip item in slot
         await expect(inventoryFacet.equip(arcadianId, 0, itemId, slotInput.capacity)).
             to.be.revertedWith("Slot id can't be zero");
+
+        const numSlots = await inventoryFacet.numSlots();
         await expect(inventoryFacet.equip(arcadianId, numSlots+1, itemId, slotInput.capacity)).
             to.be.revertedWith("Inexistent slot id");
-            await expect(inventoryFacet.equip(arcadianId, slotId, itemIdWithoutSlot, slotInput.capacity)).
-                to.be.revertedWith("Item needs to be assigned to at least 1 slot");
+
+        const itemIdWithoutSlot = 2;
+        await expect(inventoryFacet.equip(arcadianId, slotId, itemIdWithoutSlot, slotInput.capacity)).
+            to.be.revertedWith("Item not elegible for slot");
+
         await expect(inventoryFacet.equip(arcadianId, slotId, itemId, slotInput.capacity+1)).
             to.be.revertedWith("Amount exceeds slot capacity");
+
         await inventoryFacet.equip(arcadianId, slotId, itemId, slotInput.capacity);
         
         // unequip item
@@ -198,8 +201,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await expect(inventoryFacet.unequip(arcadianId, slotId, unequipAll, unequipAmount)).
             to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
         
-        await inventoryFacet.allowSlotUnequip(slotId);
-        await expect(inventoryFacet.allowSlotUnequip(slotId)).to.be.revertedWith("Slot already unquippable");
+        await inventoryFacet.allowSlotToUnequip(slotId);
+        await expect(inventoryFacet.allowSlotToUnequip(slotId)).to.be.revertedWith("Slot already unquippable");
 
         await expect(inventoryFacet.unequip(arcadianId, slotId, false, unequipAmount+1)).
             to.be.revertedWith("InventoryFacet._unequip: Attempting to unequip too many items from the slot");
@@ -210,39 +213,19 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
 
         // create slot
-        const slotsInput = [{
-            name: "slot1",
-            capacity: 1,
-            unequippable: false
-        }, {
-            name: "slot2",
-            capacity: 1,
-            unequippable: false
-        }, {
-            name: "slot3",
-            capacity: 10,
-            unequippable: false
-        }]
-        for (let i = 0; i < slotsInput.length; i++) {
-            await inventoryFacet.createSlot(slotsInput[i].name, slotsInput[i].capacity, slotsInput[i].unequippable);
-        }
+        const itemIds = [1, 2, 3]
+        const itemAmounts = [1, 1, 10]
 
-        // Allow items in slot
-        const items = [
-            {id: 1, amount: 1, slots: [1]}, 
-            {id: 2, amount: 1, slots: [1, 2]},
-            {id: 3, amount: 1, slots: [2]}, 
-            {id: 4, amount: 10, slots: [2]}, 
-            {id: 5, amount: 10, slots: [1, 2, 3]}, 
-            {id: 6, amount: 10, slots: [3]}
-        ];
-        for (let i = 0; i < items.length; i++) {
-            await itemsFacet.allowItemInSlotsBatch(items[i].id, items[i].slots);
+        const slotsIds = [1, 2, 3]
+        const slotsCapacity = 10;
+        const slotsUnequippable = false;
+        for (let i = 0; i < itemIds.length; i++) {
+            await inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, itemIds);
         }
 
         // mint item
-        for (let i = 0; i < items.length; i++) {
-            await itemsFacet.mint(namedAddresses.deployer, items[i].id, items[i].amount);
+        for (let i = 0; i < itemIds.length; i++) {
+            await itemsFacet.mint(namedAddresses.deployer, itemIds[i], itemAmounts[i]);
         }
 
         // mint arcadian
@@ -250,20 +233,16 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
         const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
         
-        // equip items in slots
-        const slotsIds = [1, 2, 3];
-        const itemsIds = [1, 2, 6];
-        const amounts = [1, 1, 5];
 
-        await inventoryFacet.equipBatch(arcadianId, slotsIds, itemsIds, amounts);
+        await inventoryFacet.equipBatch(arcadianId, slotsIds, itemIds, itemAmounts);
         let equippedItem = await inventoryFacet.equippedBatch(arcadianId);
         for (let i = 0; i < equippedItem.length; i++) {
-            expect(equippedItem[i].id).to.be.equal(itemsIds[i]);
-            expect(equippedItem[i].amount).to.be.equal(amounts[i]);
+            expect(equippedItem[i].id).to.be.equal(itemIds[i]);
+            expect(equippedItem[i].amount).to.be.equal(itemAmounts[i]);
         }
 
         let arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
-        let expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemsIds.toString()
+        let expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemIds.toString()
         expect(arcadianUri).to.be.equal(expectedUri);
         
         // unequip items
@@ -276,7 +255,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
 
         arcadianUri = await arcadiansFacet.tokenURI(arcadianId)
-        expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemsIds.map(id=>"0").toString()
+        expectedUri = "https://api.arcadians.io/" + arcadianId + "/?tokenIds=" + itemIds.map(id=>"0").toString()
         expect(arcadianUri).to.be.equal(expectedUri);
     })
 })
