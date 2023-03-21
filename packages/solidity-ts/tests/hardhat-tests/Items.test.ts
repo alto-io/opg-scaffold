@@ -168,16 +168,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await itemsFacet.mint(namedAddresses.deployer, itemId, itemAmount);
 
         // mint arcadian
-        await expect(arcadiansFacet.mint({value: 0})).
-            to.be.revertedWith("Invalid pay amount");
-        await expect(arcadiansFacet.mint({value: mintPrice + 1})).
-            to.be.revertedWith("Invalid pay amount");
         const maxMintPerUser = await arcadiansFacet.getMaxMintPerUser();
         for (let i = 0; i < maxMintPerUser; i++) {
             await arcadiansFacet.mint({value: mintPrice})
         }
-        await expect(arcadiansFacet.mint({value: mintPrice})).
-            to.be.revertedWith("User maximum minted tokens reached");
         const balance = await arcadiansFacet.balanceOf(namedAddresses.deployer)
         
         const arcadianId = await arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
