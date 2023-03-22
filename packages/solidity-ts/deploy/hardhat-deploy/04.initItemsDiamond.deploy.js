@@ -5,7 +5,7 @@ import fs from "fs";
 import { MERKLE_TREE_PATH } from '~helpers/merkle-tree/merkleGenerator';
 
 import { arcadiansDiamondName } from '../hardhat-deploy/01.ArcadiansDiamond.deploy'
-import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
+import { ensureUniqueEvents, ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.ItemsDiamond.deploy';
 
 
@@ -28,7 +28,8 @@ export const func = async() => {
     }
 
     ensureUniqueFunctions(newDeployedFacets, diamond);
-    // ensureUniqueEvents(newDeployedFacets, diamond);
+    // TODO: role functions are duplicated
+    // ensureUniqueEvents(newDeployedFacets, diamond, []);
 
     const cut = []
     for (const facet of newDeployedFacets) {

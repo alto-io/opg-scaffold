@@ -5,7 +5,7 @@ import fs from "fs";
 import { MERKLE_TREE_PATH } from '~helpers/merkle-tree/merkleGenerator';
 
 import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } from '../hardhat-deploy/01.ArcadiansDiamond.deploy'
-import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
+import { ensureUniqueEvents, ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 import { itemsDiamondName } from './02.ItemsDiamond.deploy';
 
 // Get merkle root previously generated
@@ -28,7 +28,7 @@ export const func = async() => {
     }
 
     ensureUniqueFunctions(newDeployedFacets, diamond);
-    // ensureUniqueEvents(newDeployedFacets, diamond);
+    // ensureUniqueEvents(newDeployedFacets, diamond, []);
 
     const cut = []
     for (const facet of newDeployedFacets) {
