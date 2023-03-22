@@ -139,17 +139,19 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             unequippable: false
         }
         const itemId = 1;
+        const slotId = 1;
         await inventoryFacet.createSlot(itemsAddress, [itemId], slotInput.capacity, slotInput.unequippable);
         const slotInput2 = {
             capacity: 10,
-            unequippable: false
+            unequippable: true
         }
+        const slot2Id = 2;
         await inventoryFacet.createSlot(itemsAddress, [], slotInput2.capacity, slotInput2.unequippable);
         
         // Allow items in slot
-        const slotId = 1;
         await expect(inventoryFacet.allowItemInSlot(itemsAddress, itemId, 0)).to.be.revertedWith("Slot id can't be zero");
         await expect(inventoryFacet.allowItemInSlot(itemsAddress, itemId, 1000)).to.be.revertedWith("Inexistent slot id");
+        await inventoryFacet.allowItemInSlot(itemsAddress, itemId, slot2Id);
 
         // mint item
         const itemAmount = 10;
@@ -181,6 +183,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             to.be.revertedWith("Amount exceeds slot capacity");
 
         await inventoryFacet.equip(arcadianId, itemsAddress, itemId, amountToEquip, slotId);
+        await inventoryFacet.equip(arcadianId, itemsAddress, itemId, amountToEquip, slot2Id);
         
         // unequip item
         let unequipAll = true;
@@ -190,9 +193,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const unmintedArcadianId = 999;
         await expect(inventoryFacet.unequip(unmintedArcadianId, slotId, unequipAll, unequipAmount)).
             to.be.reverted;
-        // TODO: test unequip unequippable
-        // await expect(inventoryFacet.unequip(arcadianId, slotId, unequipAll, unequipAmount)).
-        //     to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
+        await expect(inventoryFacet.unequip(arcadianId, slot2Id, unequipAll, unequipAmount)).
+            to.be.revertedWith("InventoryFacet._unequip: That slot is not unequippable");
         
         await expect(inventoryFacet.unequip(arcadianId, slotId, false, unequipAmount+1)).
             to.be.revertedWith("InventoryFacet._unequip: Attempting to unequip too many items from the slot");
