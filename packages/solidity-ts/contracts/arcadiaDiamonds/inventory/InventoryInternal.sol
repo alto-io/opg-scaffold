@@ -136,7 +136,7 @@ contract InventoryInternal is
 
         _safeTransfer(
             msg.sender,
-            address(this),
+            existingItem.itemAddress,
             msg.sender,
             existingItem.id,
             amount,
@@ -218,7 +218,7 @@ contract InventoryInternal is
         _safeTransfer(
             msg.sender,
             msg.sender,
-            address(this),
+            itemAddress,
             itemId,
             amount,
             ""
