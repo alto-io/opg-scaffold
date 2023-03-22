@@ -57,12 +57,6 @@ contract InventoryFacet is
         _allowItemInSlot(itemAddress, itemId, slot);
     }
 
-    function allowSlotToUnequip(
-        uint slot
-    ) external onlyManager {
-        _allowSlotToUnequip(slot);
-    }
-
     function equip(
         uint arcadianId,
         address itemAddress,
