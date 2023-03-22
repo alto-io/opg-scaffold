@@ -10,23 +10,10 @@ import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/met
 
 contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
-    event Claimed(address indexed to, uint256 indexed itemId, uint amount);
-
-    modifier onlyEquippableItem(uint itemId) {
-        require(
-            InventoryStorage.layout().itemAllowedSlots[itemId].length > 0,
-            "Item does not have any slot where it can be equipped"
-        );
-        _;
-    }
-
-    modifier onlyNonZeroItemId(uint itemId) {
-        require(itemId != 0, "Item id can't be zero");
-        _;
-    }
+    event ItemClaimed(address indexed to, uint256 indexed itemId, uint amount);
 
     function _claim(uint itemId, uint amount, bytes32[] memory proof)
-        internal onlyNonZeroItemId(itemId)
+        internal
     {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
@@ -41,7 +28,7 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
         // Mint token to address
         _mint(msg.sender, itemId, amount, '');
 
-        emit Claimed(msg.sender, itemId, amount);
+        emit ItemClaimed(msg.sender, itemId, amount);
     }
 
     function _claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
@@ -54,9 +41,8 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
     }
 
     function _mint(address to, uint256 itemId, uint256 amount)
-        internal onlyNonZeroItemId(itemId) onlyEquippableItem(itemId)
+        internal
     {
-        
         ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
 

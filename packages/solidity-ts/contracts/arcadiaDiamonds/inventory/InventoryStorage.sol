@@ -23,6 +23,7 @@ library InventoryStorage {
 
     // EquippedItem represents an item equipped in a specific inventory slot for a specific ERC721 token.
     struct EquippedItem {
+        address itemAddress;
         uint id;
         uint amount;
     }
@@ -30,7 +31,7 @@ library InventoryStorage {
     struct Slot {
         uint capacity;
         bool isUnequippable;
-        uint[] allowedItems;
+        uint[] allowedItemsIds;
     }
 
     struct Layout {
@@ -41,7 +42,7 @@ library InventoryStorage {
         // arcadian token ID => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
         // item id => allowed slots list
-        mapping(uint => uint[]) itemAllowedSlots;
+        mapping(address => mapping(uint => uint[])) itemAllowedSlots;
     }
 
     function layout()

@@ -14,20 +14,18 @@ import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol
 
 contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, ReentrancyGuard {
 
-    event Claimed(address indexed to, uint256 indexed amount);
-
     function tokenURI(
         uint256 tokenId
     ) external view override (ERC721Metadata, IERC721Metadata) returns (string memory) {
         return _getTokenURI(tokenId);
     }
 
-    function setItemsAddress(address newItemsAddress) external onlyManager {
-        _setItemsAddress(newItemsAddress);
+    function setInventoryAddress(address newInventoryAddress) external onlyManager {
+        _setInventoryAddress(newInventoryAddress);
     }
 
-    function getItemsAddress() external view returns (address) {
-        return _getItemsAddress();
+    function getInventoryAddress() external view returns (address) {
+        return _getInventoryAddress();
     }
 
     function claim(uint totalAmount, bytes32[] memory proof)
@@ -50,7 +48,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
             es.counterId++;
         }
         es.amountClaimed[msg.sender] += amountLeftToClaim;
-        emit Claimed(msg.sender, amountLeftToClaim);
+        emit ArcadianClaimed(msg.sender, amountLeftToClaim);
     }
 
     function getClaimedAmount(address account) external view returns (uint) {
@@ -84,6 +82,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         return _getBaseURI();
     }
 
+
     // required overrides
     function _handleApproveMessageValue(
         address operator,
@@ -93,7 +92,6 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         if (value > 0) revert SolidStateERC721__PayableApproveNotSupported();
         SolidStateERC721._handleApproveMessageValue(operator, tokenId, value);
     }
-
 
     function _handleTransferMessageValue(
         address from,

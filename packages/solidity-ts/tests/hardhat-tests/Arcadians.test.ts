@@ -67,9 +67,16 @@ describe('Arcadians Diamond Test', function () {
 describe('Arcadians Diamond Inventory Test', function () {
     it('should be able to update arcadians address', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
-        const newItemsAddress = arcadiansFacet.address;
-        await arcadiansFacet.setItemsAddress(newItemsAddress);
-        expect(await arcadiansFacet.getItemsAddress()).to.be.equal(newItemsAddress);
+        const newInventoryAddress = diamond.address;
+        const add = await arcadiansFacet.getInventoryAddress();
+        await arcadiansFacet.setInventoryAddress(newInventoryAddress);
+        expect(await arcadiansFacet.getInventoryAddress()).to.be.equal(newInventoryAddress);
+    })
+
+    it('should not be able to update arcadians address to a zero address', async () => {
+        const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
+        const newInventoryAddress = ethers.constants.AddressZero;
+        await expect(arcadiansFacet.setInventoryAddress(newInventoryAddress)).to.be.revertedWith("Invalid address");
     })
 })
 

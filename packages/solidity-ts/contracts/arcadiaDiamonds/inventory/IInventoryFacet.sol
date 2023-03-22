@@ -17,7 +17,8 @@ interface IInventoryFacet is
     IERC1155Receiver
 {
     struct EquippedItem {
-        uint256 itemTokenId;
+        address itemAddress;
+        uint256 id;
         uint256 amount;
     }
 
@@ -25,46 +26,60 @@ interface IInventoryFacet is
 
     function getArcadiansAddress() external view returns (address);
 
-    function numSlots() external view returns (uint256);
+    function numSlots() external view returns (uint);
 
-    function getSlot(uint256 slot) external view returns (InventoryStorage.Slot memory);
+    function getSlot(uint slot) external view returns (InventoryStorage.Slot memory);
 
     function createSlot(
-        string calldata name,
+        address itemAddress,
+        uint[] calldata allowedItemIds,
+        uint capacity,
         bool unequippable
     ) external;
 
+    function allowItemInSlot(
+        address itemAddress,
+        uint itemId,
+        uint slot
+    ) external;
+
+    function allowSlotToUnequip(
+        uint slot
+    ) external;
+
     function equip(
-        uint256 arcadianTokenId,
-        uint256 slot,
-        uint256 itemTokenId,
-        uint256 amount
+        uint arcadianId,
+        address itemAddress,
+        uint itemId,
+        uint amount,
+        uint slot
     ) external;
 
     function equipBatch(
-        uint256 arcadianTokenId,
-        uint256[] calldata slots,
-        uint256[] calldata itemTokenIds,
-        uint256[] calldata amounts
+        uint arcadianId,
+        address itemAddress,
+        uint[] calldata itemIds,
+        uint[] calldata amounts,
+        uint[] calldata slots
     ) external;
 
     function unequip(
-        uint256 arcadianTokenId,
-        uint256 slot,
+        uint arcadianId,
+        uint slot,
         bool unequipAll,
-        uint256 amount
+        uint amount
     ) external;
 
     function unequipBatch(
-        uint256 arcadianTokenId
+        uint arcadianId
     ) external;
 
     function equipped(
-        uint256 arcadianTokenId,
-        uint256 slot
-    ) external view;
+        uint arcadianId,
+        uint slot
+    ) external view returns (EquippedItem memory item);
 
     function equippedBatch(
-        uint256 arcadianTokenId
+        uint arcadianId
     ) external view returns (EquippedItem[] memory item);
 }
