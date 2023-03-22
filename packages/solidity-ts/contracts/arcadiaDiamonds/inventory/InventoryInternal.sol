@@ -17,11 +17,6 @@ contract InventoryInternal is
 
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
 
-    event SlotAllowedToUnequip(
-        address indexed by,
-        uint indexed slot
-    );
-
     event ItemAllowedInSlot(
         address indexed by, 
         address itemAddress, 
@@ -277,15 +272,6 @@ contract InventoryInternal is
         }
 
         emit SlotCreated(msg.sender, itemAddress, allowedItemIds, capacity, unequippable, newSlot);
-    }
-
-    function _allowSlotToUnequip(
-        uint slot
-    ) internal onlyValidSlot(slot) {
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        require(inventorySL.slots[slot].isUnequippable, "Slot already unquippable");
-        inventorySL.slots[slot].isUnequippable = false;
-        emit SlotAllowedToUnequip(msg.sender, slot);
     }
 
     function _allowItemInSlot(
