@@ -70,7 +70,7 @@ interface IInventoryFacet is
         uint amount
     ) external;
 
-    function unequipBatch(
+    function unequipAllItems(
         uint arcadianId
     ) external;
 
@@ -79,7 +79,7 @@ interface IInventoryFacet is
         uint slot
     ) external view returns (EquippedItem memory item);
 
-    function equippedBatch(
+    function equippedAll(
         uint arcadianId
     ) external view returns (EquippedItem[] memory item);
 }

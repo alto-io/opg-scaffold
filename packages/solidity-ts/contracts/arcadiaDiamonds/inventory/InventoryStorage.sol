@@ -39,9 +39,11 @@ library InventoryStorage {
         uint numSlots;
         // Slot id => Slot
         mapping(uint => Slot) slots;
+        // Slot id => item id => is allowed to be equipped
+        mapping(uint => mapping(address => mapping(uint => bool))) isItemAllowed;
         // arcadian token ID => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
-        // item id => allowed slots list
+        // item address => item id => allowed slots list
         mapping(address => mapping(uint => uint[])) itemAllowedSlots;
     }
 
