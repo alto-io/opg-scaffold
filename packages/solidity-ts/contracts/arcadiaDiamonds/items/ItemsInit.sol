@@ -4,9 +4,7 @@ pragma solidity 0.8.19;
 import { MerkleStorage } from "../merkle/MerkleStorage.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { ItemsInternal } from "./ItemsInternal.sol";
-import { ItemsStorage } from "./ItemsStorage.sol";
 import { InventoryInternal } from "../inventory/InventoryInternal.sol";
-import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 
 contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal {    

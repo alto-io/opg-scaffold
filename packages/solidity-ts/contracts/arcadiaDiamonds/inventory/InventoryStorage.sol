@@ -17,13 +17,13 @@ library InventoryStorage {
     uint constant ERC721_ITEM_TYPE = 721;
     uint constant ERC1155_ITEM_TYPE = 1155;
 
-    // EquippedItem represents an item equipped in a specific inventory slot for a specific ERC721 token.
+    // EquippedItem: holds the information of the currently equipped item for a specific slot in an arcadian
     struct EquippedItem {
         address itemAddress;
         uint id;
         uint amount;
     }
-
+    // Slot: Holds the general information for a slot
     struct Slot {
         uint capacity;
         bool isUnequippable;
@@ -35,10 +35,13 @@ library InventoryStorage {
         uint numSlots;
         // Slot id => Slot
         mapping(uint => Slot) slots;
-        // Slot id => item id => is allowed to be equipped
-        mapping(uint => mapping(address => mapping(uint => bool))) isItemAllowed;
+
         // arcadian token ID => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
+
+        // Slot id => item id => is allowed to be equipped
+        mapping(uint => mapping(address => mapping(uint => bool))) isItemAllowed;
+
         // item address => item id => allowed slots list
         mapping(address => mapping(uint => uint[])) itemAllowedSlots;
     }

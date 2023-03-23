@@ -35,9 +35,9 @@ contract RolesInternal is AccessControlInternal {
     }
 
     function _initRoles() internal {
-        RolesStorage.Layout storage rsl = RolesStorage.layout();
-        rsl.managerRole = keccak256("manager.role");
-        rsl.minterRole = keccak256("minter.role");
+        RolesStorage.Layout storage rolesSL = RolesStorage.layout();
+        rolesSL.managerRole = keccak256("manager.role");
+        rolesSL.minterRole = keccak256("minter.role");
 
         _grantRole(_getDefaultAdminRole(), msg.sender);
         _grantRole(_getManagerRole(), msg.sender);
