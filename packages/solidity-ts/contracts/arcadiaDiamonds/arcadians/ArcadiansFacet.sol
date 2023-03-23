@@ -5,8 +5,6 @@ import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateE
 import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
 import { ERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/ERC721Metadata.sol";
 import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IERC721Metadata.sol";
-import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
-import { ERC721MetadataInternal } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataInternal.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";

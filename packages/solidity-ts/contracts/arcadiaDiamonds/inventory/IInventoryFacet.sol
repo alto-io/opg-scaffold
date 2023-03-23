@@ -10,12 +10,18 @@ pragma solidity 0.8.19;
 
 import { IERC721Receiver } from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import { IERC1155Receiver } from "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
-import { InventoryStorage } from "./InventoryStorage.sol";
 
 interface IInventoryFacet is
     IERC721Receiver,
     IERC1155Receiver
 {
+
+    struct Slot {
+        uint capacity;
+        bool isUnequippable;
+        uint[] allowedItemsIds;
+    }
+
     struct EquippedItem {
         address itemAddress;
         uint256 id;
@@ -28,7 +34,7 @@ interface IInventoryFacet is
 
     function numSlots() external view returns (uint);
 
-    function getSlot(uint slot) external view returns (InventoryStorage.Slot memory);
+    function getSlot(uint slot) external view returns (Slot memory);
 
     function createSlot(
         address itemAddress,
