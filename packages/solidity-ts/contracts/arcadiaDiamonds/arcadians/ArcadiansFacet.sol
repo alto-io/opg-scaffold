@@ -108,6 +108,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         address to,
         uint256 tokenId
     ) internal virtual override (ArcadiansInternal, SolidStateERC721) {
+        ArcadiansInternal._beforeTokenTransfer(from, to, tokenId);
         SolidStateERC721._beforeTokenTransfer(from, to, tokenId);
     }
 }

@@ -57,6 +57,10 @@ contract InventoryFacet is
         _allowItemInSlot(itemAddress, itemId, slot);
     }
 
+    function getItemAllowedSlots(address itemAddress, uint itemId) external view returns (uint[] memory) {
+        return _getItemAllowedSlots(itemAddress, itemId);
+    }
+
     function equip(
         uint arcadianId,
         address itemAddress,
@@ -87,9 +91,18 @@ contract InventoryFacet is
     }
 
     function unequipBatch(
+        uint arcadianId,
+        uint[] calldata slots,
+        bool[] calldata unequipAll,
+        uint[] calldata amounts
+    ) external {
+        _unequipBatch(arcadianId, slots, unequipAll, amounts);
+    }
+
+    function unequipAllItems(
         uint arcadianId
     ) external {
-        _unequipBatch(arcadianId);
+        _unequipAllItems(arcadianId);
     }
 
     function equipped(
@@ -99,9 +112,9 @@ contract InventoryFacet is
         return _equipped(arcadianId, slot);
     }
 
-    function equippedBatch(
+    function equippedAll(
         uint arcadianId
     ) external view returns (InventoryStorage.EquippedItem[] memory item) {
-        return _equippedBatch(arcadianId);
+        return _equippedAll(arcadianId);
     }
 }

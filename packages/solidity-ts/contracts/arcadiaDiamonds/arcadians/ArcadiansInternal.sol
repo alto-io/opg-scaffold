@@ -24,7 +24,7 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
     ) internal view returns (string memory) {
         IInventoryFacet inventory = IInventoryFacet(_getInventoryAddress());
         string memory tokenUri = ERC721MetadataInternal._tokenURI(tokenId);
-        IInventoryFacet.EquippedItem[] memory equippedItem = inventory.equippedBatch(tokenId);
+        IInventoryFacet.EquippedItem[] memory equippedItem = inventory.equippedAll(tokenId);
         tokenUri = string.concat(tokenUri, "/?tokenIds=");
         for (uint i = 0; i < equippedItem.length; i++) {
             string memory itemId = equippedItem[i].id.toString();
@@ -100,7 +100,8 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
         uint256 tokenId
     ) internal virtual override (ERC721BaseInternal, ERC721MetadataInternal) {
         IInventoryFacet inventory = IInventoryFacet(_getInventoryAddress());
-        inventory.unequipBatch(tokenId);
+        try inventory.unequipAllItems(tokenId) {} catch {}
+
         super._beforeTokenTransfer(from, to, tokenId);
     }
 }
