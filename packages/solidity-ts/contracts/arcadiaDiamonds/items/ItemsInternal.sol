@@ -18,7 +18,7 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
         // Revert if the token was already claimed before
-        require(!itemsSL.claimed[msg.sender][itemId], "Already claimed");
+        require(!itemsSL.claimed[msg.sender][itemId], "ItemsInternal._claim: Already claimed");
         itemsSL.claimed[msg.sender][itemId] = true;
 
         // Verify if is elegible
@@ -34,7 +34,7 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
     function _claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
-        require(tokenIds.length == amounts.length, "Inputs length mismatch");
+        require(tokenIds.length == amounts.length, "ItemsInternal._claimBatch: Inputs length mismatch");
         for (uint256 i = 0; i < tokenIds.length; i++) {
             _claim(tokenIds[i], amounts[i], proofs[i]);
         }
