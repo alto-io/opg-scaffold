@@ -76,7 +76,7 @@ describe('Arcadians Diamond Inventory Test', function () {
     it('should not be able to update arcadians address to a zero address', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
         const newInventoryAddress = ethers.constants.AddressZero;
-        await expect(arcadiansFacet.setInventoryAddress(newInventoryAddress)).to.be.revertedWith("Invalid address");
+        await expect(arcadiansFacet.setInventoryAddress(newInventoryAddress)).to.be.revertedWith("ArcadiansInternal._setInventoryAddress: Invalid address");
     })
 })
 
@@ -145,13 +145,13 @@ describe('mint max limit per user', function () {
 
     it('Should not be able to mint without sending ether ', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
-        await expect(arcadiansFacet.connect(namedAccounts.bob).mint()).to.be.revertedWith("Invalid pay amount")
+        await expect(arcadiansFacet.connect(namedAccounts.bob).mint()).to.be.revertedWith("ArcadiansInternal._mint: Invalid pay amount")
     })
 
     it('Should not be able to mint paying a wrong amount ', async () => {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
         const wrongMintPrice = mintPrice - 1;
-        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: wrongMintPrice})).to.be.revertedWith("Invalid pay amount")
+        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: wrongMintPrice})).to.be.revertedWith("ArcadiansInternal._mint: Invalid pay amount")
     })
 })
 
@@ -177,6 +177,6 @@ describe('mint max limit per user', function () {
             await arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice});
         }
         expect(await arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
-        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).to.be.revertedWith("User maximum minted tokens reached");
+        await expect(arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).to.be.revertedWith("ArcadiansInternal._mint: User maximum minted tokens reached");
     })
 });

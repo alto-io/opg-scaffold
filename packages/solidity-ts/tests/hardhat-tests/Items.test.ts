@@ -396,7 +396,7 @@ describe('Items Diamond merkle Test', function () {
         await itemsFacet.claimBatch(ids, amounts, proofs)
         await expect(
             itemsFacet.claimBatch(ids, amounts, proofs)
-        ).to.be.revertedWith("Already claimed");
+        ).to.be.revertedWith("ItemsInternal._claim: Already claimed");
     })
 
     it('should be able to update merkle root', async () => {

@@ -255,7 +255,7 @@ contract InventoryInternal is
         uint[] storage allowedItemsIds = inventorySL.slots[slot].allowedItemsIds;
         for (uint i = 0; i < allowedItemsIds.length; i++) {
             if (allowedItemsIds[i] == itemId) {
-                require(amount <= inventorySL.slots[slot].capacity, "Amount exceeds slot capacity");
+                require(amount <= inventorySL.slots[slot].capacity, "InventoryFacet._validateItemForSlot: Amount exceeds slot capacity");
                 return;
             }
         }
@@ -316,7 +316,7 @@ contract InventoryInternal is
         uint[] calldata amounts,
         uint[] calldata slots
     ) internal onlyArcadianOwner(arcadianId) {
-        require(slots.length == itemIds.length && itemIds.length == amounts.length, "Input data length mismatch");
+        require(slots.length == itemIds.length && itemIds.length == amounts.length, "InventoryFacet._equipBatch: Input data length mismatch");
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 

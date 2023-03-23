@@ -38,7 +38,7 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
     }
     
     function _setInventoryAddress(address newInventoryAddress) internal onlyManager {
-        require(newInventoryAddress != address(0), "Invalid address");
+        require(newInventoryAddress != address(0), "ArcadiansInternal._setInventoryAddress: Invalid address");
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
         if (newInventoryAddress != arcadiansSL.inventoryAddress) {
             emit InventoryAddressChanged(msg.sender, arcadiansSL.inventoryAddress, newInventoryAddress);
@@ -87,9 +87,9 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
     function _mint(address to) internal
     {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        require(msg.value == arcadiansSL.mintPrice, "Invalid pay amount");
+        require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
         uint mintedTokens = _balanceOf(to) - arcadiansSL.amountClaimed[to];
-        require(mintedTokens < arcadiansSL.maxMintPerUser, "User maximum minted tokens reached");
+        require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
         _mint(to, arcadiansSL.counterId);
         arcadiansSL.counterId++;
     }
