@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
-import { ItemsStorage } from "./ItemsStorage.sol";
-import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol";
 import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol";
+import { ItemsStorage } from "./ItemsStorage.sol";
+import { MerkleInternal } from "../merkle/MerkleInternal.sol";
+import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
 
 contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 

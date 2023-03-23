@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
-import { RolesInternal } from "../roles/RolesInternal.sol";
 import {ReentrancyGuard} from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import {ERC1155Holder} from "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import {ERC721Holder} from "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
+import { RolesInternal } from "../roles/RolesInternal.sol";
 
 /**
 LibInventory defines the storage structure used by the Inventory contract as a facet for an EIP-2535 Diamond

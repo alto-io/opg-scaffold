@@ -2,14 +2,15 @@
 pragma solidity 0.8.19;
 
 import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
-import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { ERC721MetadataStorage } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataStorage.sol";
-import { RolesInternal } from "../roles/RolesInternal.sol";
 import { ERC721MetadataInternal } from "@solidstate/contracts/token/ERC721/metadata/ERC721MetadataInternal.sol";
 import { UintUtils } from '@solidstate/contracts/utils/UintUtils.sol';
+import { ArcadiansStorage } from "./ArcadiansStorage.sol";
+import { RolesInternal } from "../roles/RolesInternal.sol";
 import { IInventoryFacet } from "../inventory/IInventoryFacet.sol";
+import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
 
-contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataInternal {
+contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataInternal, WhitelistInternal {
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);

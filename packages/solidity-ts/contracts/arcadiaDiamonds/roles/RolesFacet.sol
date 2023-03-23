@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
-import { RolesInternal } from './RolesInternal.sol';
 import { AccessControl } from "@solidstate/contracts/access/access_control/AccessControl.sol";
+import { RolesInternal } from './RolesInternal.sol';
 
 contract RolesFacet is RolesInternal, AccessControl {
 

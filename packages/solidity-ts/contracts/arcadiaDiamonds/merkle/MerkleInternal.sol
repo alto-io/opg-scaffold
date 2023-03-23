@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
+import { MerkleProof } from "@solidstate/contracts/cryptography/MerkleProof.sol";
 import { MerkleStorage } from "./MerkleStorage.sol";
 import { RolesInternal } from "./../roles/RolesInternal.sol";
-import { MerkleProof } from "@solidstate/contracts/cryptography/MerkleProof.sol";
 
 contract MerkleInternal is RolesInternal {
 
