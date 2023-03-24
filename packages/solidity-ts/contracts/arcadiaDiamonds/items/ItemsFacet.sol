@@ -11,14 +11,18 @@ import { ItemsInternal } from "./ItemsInternal.sol";
 
 contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
     
-    function claim(uint tokenId, uint amount, bytes32[] calldata proof)
+    function claimMerkle(uint tokenId, uint amount, bytes32[] calldata proof)
         public nonReentrant
     {
-        _claim(tokenId, amount, proof);
+        _claimMerkle(tokenId, amount, proof);
     }
 
-    function claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
-        _claimBatch(tokenIds, amounts, proofs);
+    function claimMerkleBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
+        _claimMerkleBatch(tokenIds, amounts, proofs);
+    }
+
+    function claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) external {
+        _claimWhitelist(itemIds, amounts);
     }
 
     function mint(address to, uint256 id, uint256 amount)

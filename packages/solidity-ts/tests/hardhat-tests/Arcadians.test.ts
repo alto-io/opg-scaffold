@@ -47,12 +47,13 @@ export async function deployArcadiansFixture() {
     const arcadiansFacet = await hre.ethers.getContractAt(arcadiansFacetNames.arcadiansFacet, diamond.address)
     const merkleFacet = await hre.ethers.getContractAt(arcadiansFacetNames.merkleFacet, diamond.address)
     const rolesFacet = await hre.ethers.getContractAt(arcadiansFacetNames.rolesFacet, diamond.address)
+    const whitelistFacet = await hre.ethers.getContractAt(arcadiansFacetNames.whitelistFacet, diamond.address)
 
     let functionCall = arcadiansInit.interface.encodeFunctionData('init', [itemsDiamond.address, merkleGenerator.merkleRoot, baseTokenUri, maxMintPerUser, mintPrice])
     let tx = await diamond.diamondCut([], arcadiansInit.address, functionCall)
     await tx.wait()
 
-    return { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, rolesFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice };
+    return { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, rolesFacet, whitelistFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice };
 }
 
 describe('Arcadians Diamond Test', function () {
@@ -80,6 +81,32 @@ describe('Arcadians Diamond Inventory Test', function () {
     })
 })
 
+describe('Arcadians Diamond Whitelist', function () {
+
+    it('should be able to claim tokens if whitelisted', async () => {
+        const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, whitelistFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
+
+        let balance = await arcadiansFacet.balanceOf(namedAddresses.deployer);
+        expect(balance).to.be.equal(0);
+
+        const elegibleAmount = 10;
+
+        await expect(arcadiansFacet.claimWhitelist(elegibleAmount)).
+            to.be.revertedWith("WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
+
+        await whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
+        expect(await whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
+        expect(await whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+
+        await arcadiansFacet.claimWhitelist(elegibleAmount);
+        
+        expect(await whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(0);
+        balance = await arcadiansFacet.balanceOf(namedAddresses.deployer);
+        expect(balance).to.be.equal(elegibleAmount);
+    })
+})
+
 describe('Arcadians Diamond merkle', function () {
 
     it('should be able to claim tokens if elegible', async () => {
@@ -90,7 +117,7 @@ describe('Arcadians Diamond merkle', function () {
 
         const amountToClaim = 1;
         let proof = merkleGenerator.generateProof(namedAddresses.deployer);
-        const txRequest = await arcadiansFacet.claim(amountToClaim, proof);
+        const txRequest = await arcadiansFacet.claimMerkle(amountToClaim, proof);
         const tx = await txRequest.wait();
         expect(tx.status).to.be.equal(1);
 
@@ -102,9 +129,9 @@ describe('Arcadians Diamond merkle', function () {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
         const claimAmount = 1;
         let proof = merkleGenerator.generateProof(namedAddresses.deployer);
-        await arcadiansFacet.claim(claimAmount, proof);
+        await arcadiansFacet.claimMerkle(claimAmount, proof);
         await expect(
-            arcadiansFacet.claim(claimAmount, proof)
+            arcadiansFacet.claimMerkle(claimAmount, proof)
         ).to.be.revertedWith("All tokens claimed");
     })
     
@@ -113,7 +140,7 @@ describe('Arcadians Diamond merkle', function () {
         const badClaimAmount = 2;
         let proof = merkleGenerator.generateProof(namedAddresses.deployer);
         await expect(
-            arcadiansFacet.claim(badClaimAmount, proof),
+            arcadiansFacet.claimMerkle(badClaimAmount, proof),
         ).to.be.revertedWith("Data not included in merkle");
     })
 
@@ -169,7 +196,7 @@ describe('mint max limit per user', function () {
         const { namedAccounts, namedAddresses, diamond, arcadiansInit, arcadiansFacet, merkleFacet, merkleGenerator, baseTokenUri, maxMintPerUser, mintPrice } = await loadFixture(deployArcadiansFixture);
         const maxLimit = await arcadiansFacet.getMaxMintPerUser();
         const currentBalance = await arcadiansFacet.balanceOf(namedAddresses.bob);
-        const claimedAmount = await arcadiansFacet.getClaimedAmount(namedAddresses.bob);
+        const claimedAmount = await arcadiansFacet.getClaimedAmountMerkle(namedAddresses.bob);
         
         let canMint = maxLimit - (currentBalance - claimedAmount);
         

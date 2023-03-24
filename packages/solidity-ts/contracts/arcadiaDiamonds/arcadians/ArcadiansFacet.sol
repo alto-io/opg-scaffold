@@ -7,10 +7,9 @@ import { ERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/ERC7
 import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IERC721Metadata.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
-import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 
-contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, ReentrancyGuard {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, ReentrancyGuard {
 
     function tokenURI(
         uint256 tokenId
@@ -26,35 +25,22 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, MerkleInternal, 
         return _getInventoryAddress();
     }
 
-    function claim(uint totalAmount, bytes32[] memory proof)
-        public nonReentrant
+    function claimMerkle(uint totalAmount, bytes32[] memory proof)
+        external nonReentrant
     {
-        ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
-
-        // Revert if the token was already claimed before
-        require(es.amountClaimed[msg.sender] < totalAmount, "All tokens claimed");
-
-        // Verify if is elegible
-        bytes memory leaf = abi.encode(msg.sender, totalAmount);
-        _validateLeaf(proof, leaf);
-
-        // Mint token to address
-        uint amountLeftToClaim = totalAmount - es.amountClaimed[msg.sender];
-        for (uint256 i = 0; i < amountLeftToClaim; i++) {
-            uint tokenId = es.counterId;
-            _mint(msg.sender, tokenId);
-            es.counterId++;
-        }
-        es.amountClaimed[msg.sender] += amountLeftToClaim;
-        emit ArcadianClaimed(msg.sender, amountLeftToClaim);
+        _claimMerkle(totalAmount, proof);
     }
 
-    function getClaimedAmount(address account) external view returns (uint) {
-        return _getClaimedAmount(account);
+    function getClaimedAmountMerkle(address account) external view returns (uint) {
+        return _getClaimedAmountMerkle(account);
+    }
+
+    function claimWhitelist(uint amount) external {
+        _claimWhitelist(amount);
     }
 
     function mint()
-        public payable nonReentrant
+        external payable nonReentrant
     {
         _mint(msg.sender);
     }

@@ -8,7 +8,7 @@ library ItemsStorage {
 
     struct Layout {
         // wallet => token id => bool 
-        mapping(address => mapping(uint => bool)) claimed;
+        mapping(address => mapping(uint => bool)) claimedMerkle;
     }
 
     function layout()

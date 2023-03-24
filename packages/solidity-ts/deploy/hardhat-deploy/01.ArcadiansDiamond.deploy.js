@@ -5,7 +5,8 @@ export const arcadiansDiamondInitName = 'ArcadiansInit';
 export const arcadiansFacetNames = {
     arcadiansFacet: 'ArcadiansFacet',
     merkleFacet: 'MerkleFacet',
-    rolesFacet: 'RolesFacet'
+    rolesFacet: 'RolesFacet',
+    whitelistFacet: 'WhitelistFacet'
 }
 
 export const func = async() => {
