@@ -6,7 +6,7 @@ import { RolesInternal } from "../roles/RolesInternal.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 
 contract ArcadiansInit is RolesInternal, ArcadiansInternal {
-    function init(address inventoryAddress, bytes32 merkleRoot, string calldata baseUri, uint maxMintPerUser, uint mintPrice) external {
+    function init(bytes32 merkleRoot, string calldata baseUri, uint maxMintPerUser, uint mintPrice) external {
         MerkleStorage.Layout storage es = MerkleStorage.layout();
         es.merkleRoot = merkleRoot;
 
@@ -17,6 +17,5 @@ contract ArcadiansInit is RolesInternal, ArcadiansInternal {
         _setBaseURI(baseUri);
         _setMaxMintPerUser(maxMintPerUser);
         _setMintPrice(mintPrice);
-        _setInventoryAddress(inventoryAddress);
     }
 }

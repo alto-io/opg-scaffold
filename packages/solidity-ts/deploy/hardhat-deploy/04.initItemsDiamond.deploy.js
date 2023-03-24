@@ -46,7 +46,7 @@ export const func = async() => {
     const arcadiansDiamond = await hre.ethers.getContract(arcadiansDiamondName);
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [arcadiansDiamond.address, merkleRoot, baseTokenURI])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

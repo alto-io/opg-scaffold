@@ -3,15 +3,14 @@ pragma solidity 0.8.19;
 
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import { ERC1155BaseInternal } from "@solidstate/contracts/token/ERC1155/base/ERC1155BaseInternal.sol";
 import { AddressUtils } from "@solidstate/contracts/utils/AddressUtils.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
+import { IERC1155 } from "@solidstate/contracts/interfaces/IERC1155.sol";
 
 contract InventoryInternal is
     ReentrancyGuard,
-    RolesInternal,
-    ERC1155BaseInternal
+    RolesInternal
 {
 
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
@@ -55,7 +54,7 @@ contract InventoryInternal is
     }
 
     modifier onlyArcadianOwner(uint arcadianId) {
-        IERC721 arcadiansContract = IERC721(InventoryStorage.layout().arcadiansAddress);
+        IERC721 arcadiansContract = IERC721(address(this));
         require(
             msg.sender == arcadiansContract.ownerOf(arcadianId),
             "InventoryFacet: Message sender is not owner of the arcadian"
@@ -71,18 +70,6 @@ contract InventoryInternal is
     modifier onlyContract(address _address) {
         require(_address.isContract(), "InventoryFacet: Address given is not a contract");
         _;
-    }
-
-    function _setArcadiansAddress(address newArcadiansAddress) internal onlyManager onlyValidAddress(newArcadiansAddress) {
-        InventoryStorage.Layout storage itemsSL = InventoryStorage.layout();
-        if (newArcadiansAddress != itemsSL.arcadiansAddress) {
-            emit ArcadiansAddressChanged(itemsSL.arcadiansAddress, newArcadiansAddress);
-            itemsSL.arcadiansAddress = newArcadiansAddress;
-        }
-    }
-
-    function _getArcadiansAddress() internal view returns (address) {
-        return InventoryStorage.layout().arcadiansAddress;
     }
 
     function _numSlots() internal view returns (uint) {
@@ -113,13 +100,13 @@ contract InventoryInternal is
             );
         }
 
-        _safeTransfer(
-            msg.sender,
-            existingItem.itemAddress,
+        IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
+        erc1155Contract.safeTransferFrom(
+            address(this),
             msg.sender,
             existingItem.id,
             amount,
-            ""
+            ''
         );
 
         emit ItemUnequipped(
@@ -146,14 +133,13 @@ contract InventoryInternal is
         for (uint i = 0; i < slots.length; i++) {
 
             uint amountToUnequip = amounts[i];
-            uint slot = slots[i];
 
             require(
-                !inventorySL.slots[slot].isUnequippable,
+                !inventorySL.slots[slots[i]].isUnequippable,
                 "InventoryFacet._unequipBatch: Slot is not unequippable"
             );
 
-            InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slot];
+            InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slots[i]];
 
             if (unequipAll[i]) {
                 amountToUnequip = existingItem.amount;
@@ -164,25 +150,25 @@ contract InventoryInternal is
                 );
             }
 
-            if (existingItem.amount == amountToUnequip) {
-                delete inventorySL.equippedItems[arcadianId][slot];
-            } else {
-                existingItem.amount -= amountToUnequip;
-            }
 
-            _safeTransfer(
-                msg.sender,
+            IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
+            erc1155Contract.safeTransferFrom(
                 address(this),
                 msg.sender,
-                slot,
+                existingItem.id,
                 amountToUnequip,
-                ""
+                ''
             );
+
+            existingItem.amount -= amountToUnequip;
+            if (existingItem.amount == 0) {
+                delete inventorySL.equippedItems[arcadianId][slots[i]];
+            }
 
             emit ItemUnequipped(
                 msg.sender,
                 arcadianId,
-                slot,
+                slots[i],
                 amountToUnequip
             );
         }
@@ -192,41 +178,44 @@ contract InventoryInternal is
         uint arcadianId
     ) internal {
 
-        IERC721 arcadiansContract = IERC721(InventoryStorage.layout().arcadiansAddress);
-        address arcadianOwner = arcadiansContract.ownerOf(arcadianId);
-        require(
-            msg.sender == arcadianOwner ||
-            msg.sender == InventoryStorage.layout().arcadiansAddress,
-            "InventoryFacet._unequipAllItems: Caller not Arcadians contract neither or the arcadian owner"
-        );
+        IERC721 arcadiansContract = IERC721(address(this));
+        try arcadiansContract.ownerOf(arcadianId) returns (address arcadianOwner) {
+            require(
+                msg.sender == arcadianOwner,
+                "InventoryFacet._unequipAllItems: Caller not Arcadians contract neither or the arcadian owner"
+            );
 
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+            InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        for (uint i = 0; i < inventorySL.numSlots; i++) {
-            uint slot = i + 1;
+            for (uint i = 0; i < inventorySL.numSlots; i++) {
+                uint slot = i + 1;
 
-            InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slot];
+                InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slot];
 
-            // TODO: evaluate if unequippable items should also be unequiped in case of arcadian transfer
-            if (!inventorySL.slots[slot].isUnequippable && existingItem.amount > 0) {
-                _safeTransfer(
-                    msg.sender,
-                    address(this),
-                    arcadianOwner,
-                    existingItem.id,
-                    existingItem.amount,
-                    ""
-                );
+                // TODO: evaluate if unequippable items should also be unequiped in case of arcadian transfer
+                if (!inventorySL.slots[slot].isUnequippable && existingItem.amount > 0) {
 
-                emit ItemUnequipped(
-                    arcadianOwner,
-                    arcadianId,
-                    slot,
-                    existingItem.amount
-                );
-                
-                delete inventorySL.equippedItems[arcadianId][slot];
+                    IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
+                    erc1155Contract.safeTransferFrom(
+                        address(this),
+                        msg.sender,
+                        existingItem.id,
+                        existingItem.amount,
+                        ''
+                    );
+
+                    emit ItemUnequipped(
+                        arcadianOwner,
+                        arcadianId,
+                        slot,
+                        existingItem.amount
+                    );
+                    
+                    delete inventorySL.equippedItems[arcadianId][slot];
+                }
             }
+        } catch {
+
         }
     }
 
@@ -259,18 +248,18 @@ contract InventoryInternal is
             _unequip(arcadianId, slot, true, 0);
         }
         
+        IERC1155 erc1155Contract = IERC1155(itemAddress);
         require(
-            _balanceOf(msg.sender, itemId) >= amount,
+            erc1155Contract.balanceOf(msg.sender, itemId) >= amount,
             "InventoryFacet.equip: Message sender does not own enough of that item to equip"
         );
-    
-        _safeTransfer(
+
+        erc1155Contract.safeTransferFrom(
             msg.sender,
-            msg.sender,
-            itemAddress,
+            address(this),
             itemId,
             amount,
-            ""
+            ''
         );
 
         emit ItemEquipped(
@@ -300,17 +289,21 @@ contract InventoryInternal is
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
+        IERC1155 erc1155Contract = IERC1155(itemAddress);
+
         for (uint i = 0; i < itemsIds.length; i++) {
 
             require(inventorySL.isItemAllowed[slots[i]][itemAddress][itemsIds[i]], "InventoryFacet._equipBatch: Item not elegible for slot");
             require(inventorySL.slots[slots[i]].capacity >= amounts[i], "InventoryFacet._equipBatch: Item amount exceeds slot capacity");
 
             require(
-                _balanceOf(msg.sender, itemsIds[i]) >= amounts[i],
+                erc1155Contract.balanceOf(msg.sender, itemsIds[i]) >= amounts[i],
                 "InventoryFacet.equip: Sender has insufficient item balance"
             );
 
-            _unequip(arcadianId, slots[i], true, amounts[i]);
+            if (inventorySL.equippedItems[arcadianId][slots[i]].amount > 0) {
+                _unequip(arcadianId, slots[i], true, 0);
+            }
 
             emit ItemEquipped(
                 msg.sender,
@@ -328,13 +321,12 @@ contract InventoryInternal is
             });
         }
 
-        _safeTransferBatch(
-            msg.sender,
+        erc1155Contract.safeBatchTransferFrom(
             msg.sender,
             address(this),
             itemsIds,
             amounts,
-            ""
+            ''
         );
     }
 

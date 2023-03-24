@@ -44,7 +44,7 @@ export const func = async() => {
 
     // Intialize contract storage
     const itemsDiamond = await hre.ethers.getContract(itemsDiamondName);
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [itemsDiamond.address, merkleRoot, baseTokenURI, maxMintPerUser, mintPrice])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI, maxMintPerUser, mintPrice])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

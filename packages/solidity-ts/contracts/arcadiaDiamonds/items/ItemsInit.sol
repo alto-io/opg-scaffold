@@ -8,29 +8,12 @@ import { ItemsInternal } from "./ItemsInternal.sol";
 import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 
 contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal {    
-    function init(address arcadiansAddress, bytes32 merkleRoot, string calldata baseUri) external {
+    function init(bytes32 merkleRoot, string calldata baseUri) external {
         MerkleStorage.Layout storage es = MerkleStorage.layout();
         es.merkleRoot = merkleRoot;
 
         _initRoles();
 
         _setBaseURI(baseUri);
-        _setArcadiansAddress(arcadiansAddress);
     }
-
-
-
-
-    // required overrides
-    function _beforeTokenTransfer(
-        address operator,
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    )
-        internal
-        override (ERC1155BaseInternal, ItemsInternal)
-    {}
 }

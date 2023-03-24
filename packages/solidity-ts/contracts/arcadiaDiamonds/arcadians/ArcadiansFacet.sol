@@ -1,34 +1,47 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
-import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
 import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
+import { ERC721BaseStorage } from "@solidstate/contracts/token/ERC721/base/ERC721BaseStorage.sol";
 import { ERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/ERC721Metadata.sol";
+import { ISolidStateERC721 } from "@solidstate/contracts/token/ERC721/ISolidStateERC721.sol";
+import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
+import { ERC721Enumerable } from "@solidstate/contracts/token/ERC721/enumerable/ERC721Enumerable.sol";
+import { ERC721Base } from "@solidstate/contracts/token/ERC721/base/ERC721Base.sol";
+import { IERC721 } from '@solidstate/contracts/interfaces/IERC721.sol';
 import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IERC721Metadata.sol";
-import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
-import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
+import { ArcadiansStorage } from "./ArcadiansStorage.sol";
+import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
 
-contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, ReentrancyGuard {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal {
+    using EnumerableMap for EnumerableMap.UintToAddressMap;
 
     function tokenURI(
         uint256 tokenId
     ) external view override (ERC721Metadata, IERC721Metadata) returns (string memory) {
-        return _getTokenURI(tokenId);
-    }
-
-    function setInventoryAddress(address newInventoryAddress) external onlyManager {
-        _setInventoryAddress(newInventoryAddress);
-    }
-
-    function getInventoryAddress() external view returns (address) {
-        return _getInventoryAddress();
+        return _tokenURI(tokenId);
     }
 
     function claimMerkle(uint totalAmount, bytes32[] memory proof)
         external nonReentrant
     {
-        _claimMerkle(totalAmount, proof);
+        ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
+
+        // Revert if the token was already claimed before
+        require(es.amountClaimed[msg.sender] < totalAmount, "All tokens claimed");
+
+        // Verify if is elegible
+        bytes memory leaf = abi.encode(msg.sender, totalAmount);
+        _validateLeaf(proof, leaf);
+
+        // Mint token to address
+        uint amountLeftToClaim = totalAmount - es.amountClaimed[msg.sender];
+        for (uint256 i = 0; i < amountLeftToClaim; i++) {
+            _safeMint(msg.sender, _totalSupply());
+        }
+        es.amountClaimed[msg.sender] += amountLeftToClaim;
+        emit ArcadianClaimedMerkle(msg.sender, amountLeftToClaim);
     }
 
     function getClaimedAmountMerkle(address account) external view returns (uint) {
@@ -36,13 +49,20 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, ReentrancyGuard 
     }
 
     function claimWhitelist(uint amount) external {
-        _claimWhitelist(amount);
+        _consumeWhitelist(msg.sender, amount);
+        for (uint i = 0; i < amount; i++) {
+            _safeMint(msg.sender, _totalSupply());
+        }
     }
 
     function mint()
         external payable nonReentrant
     {
-        _mint(msg.sender);
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
+        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimed[msg.sender];
+        require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
+        _safeMint(msg.sender, _totalSupply());
     }
 
     function setMintPrice(uint newMintPrice) external onlyManager {
@@ -67,14 +87,16 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, ReentrancyGuard 
     }
 
 
+
+
     // required overrides
     function _handleApproveMessageValue(
         address operator,
         uint256 tokenId,
         uint256 value
-    ) internal virtual override (ERC721BaseInternal, SolidStateERC721) {
+    ) internal virtual override {
         if (value > 0) revert SolidStateERC721__PayableApproveNotSupported();
-        SolidStateERC721._handleApproveMessageValue(operator, tokenId, value);
+        super._handleApproveMessageValue(operator, tokenId, value);
     }
 
     function _handleTransferMessageValue(
@@ -82,17 +104,17 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, ReentrancyGuard 
         address to,
         uint256 tokenId,
         uint256 value
-    ) internal virtual override (ERC721BaseInternal, SolidStateERC721) {
+    ) internal virtual override {
         if (value > 0) revert SolidStateERC721__PayableTransferNotSupported();
-        SolidStateERC721._handleTransferMessageValue(from, to, tokenId, value);
+        super._handleTransferMessageValue(from, to, tokenId, value);
     }
 
     function _beforeTokenTransfer(
         address from,
         address to,
         uint256 tokenId
-    ) internal virtual override (ArcadiansInternal, SolidStateERC721) {
-        ArcadiansInternal._beforeTokenTransfer(from, to, tokenId);
-        SolidStateERC721._beforeTokenTransfer(from, to, tokenId);
+    ) internal virtual override {
+        _unequipAllItems(tokenId);
+        super._beforeTokenTransfer(from, to, tokenId);
     }
 }
