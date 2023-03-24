@@ -9,14 +9,15 @@ import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { IInventoryFacet } from "../inventory/IInventoryFacet.sol";
 import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
+import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 
-contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataInternal, WhitelistInternal {
+contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataInternal, WhitelistInternal, MerkleInternal {
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);
     event InventoryAddressChanged(address indexed by, address indexed oldInventoryAddress, address indexed newInventoryAddress);
-    event ArcadianClaimed(address indexed to, uint256 indexed amount);
+    event ArcadianClaimedMerkle(address indexed to, uint256 indexed amount);
 
     using UintUtils for uint256;
 
@@ -61,7 +62,7 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
         return ERC721MetadataStorage.layout().baseURI;
     }
 
-    function _getClaimedAmount(address account) internal view returns (uint) {
+    function _getClaimedAmountMerkle(address account) internal view returns (uint) {
         return ArcadiansStorage.layout().amountClaimed[account];
     }
 
@@ -93,6 +94,37 @@ contract ArcadiansInternal is ERC721BaseInternal, RolesInternal, ERC721MetadataI
         require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
         _mint(to, arcadiansSL.counterId);
         arcadiansSL.counterId++;
+    }
+
+    function _claimMerkle(uint totalAmount, bytes32[] memory proof) public
+    {
+        ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
+
+        // Revert if the token was already claimed before
+        require(es.amountClaimed[msg.sender] < totalAmount, "All tokens claimed");
+
+        // Verify if is elegible
+        bytes memory leaf = abi.encode(msg.sender, totalAmount);
+        _validateLeaf(proof, leaf);
+
+        // Mint token to address
+        uint amountLeftToClaim = totalAmount - es.amountClaimed[msg.sender];
+        for (uint256 i = 0; i < amountLeftToClaim; i++) {
+            uint tokenId = es.counterId;
+            _mint(msg.sender, tokenId);
+            es.counterId++;
+        }
+        es.amountClaimed[msg.sender] += amountLeftToClaim;
+        emit ArcadianClaimedMerkle(msg.sender, amountLeftToClaim);
+    }
+
+    function _claimWhitelist(uint amount) internal {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        _consumeWhitelist(msg.sender, amount);
+        for (uint i = 0; i < amount; i++) {
+            _mint(msg.sender, arcadiansSL.counterId);
+            arcadiansSL.counterId++;
+        }
     }
 
     function _beforeTokenTransfer(

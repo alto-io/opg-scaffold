@@ -8,18 +8,18 @@ import { ItemsStorage } from "./ItemsStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
 
-contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
+contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
-    event ItemClaimed(address indexed to, uint256 indexed itemId, uint amount);
+    event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
 
-    function _claim(uint itemId, uint amount, bytes32[] memory proof)
+    function _claimMerkle(uint itemId, uint amount, bytes32[] memory proof)
         internal
     {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
-        // Revert if the token was already claimed before
-        require(!itemsSL.claimed[msg.sender][itemId], "ItemsInternal._claim: Already claimed");
-        itemsSL.claimed[msg.sender][itemId] = true;
+        // Revert if the token was Already claimed before
+        require(!itemsSL.claimedMerkle[msg.sender][itemId], "ItemsInternal._claimMerkle: Already claimed");
+        itemsSL.claimedMerkle[msg.sender][itemId] = true;
 
         // Verify if is elegible
         bytes memory leaf = abi.encode(msg.sender, itemId, amount);
@@ -28,16 +28,26 @@ contract ItemsInternal is MerkleInternal, ERC1155BaseInternal, ERC1155Enumerable
         // Mint token to address
         _mint(msg.sender, itemId, amount, '');
 
-        emit ItemClaimed(msg.sender, itemId, amount);
+        emit ItemClaimedMerkle(msg.sender, itemId, amount);
     }
 
-    function _claimBatch(uint256[] calldata tokenIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
+    function _claimMerkleBatch(uint256[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
-        require(tokenIds.length == amounts.length, "ItemsInternal._claimBatch: Inputs length mismatch");
-        for (uint256 i = 0; i < tokenIds.length; i++) {
-            _claim(tokenIds[i], amounts[i], proofs[i]);
+        require(itemIds.length == amounts.length, "ItemsInternal._claimMerkleBatch: Inputs length mismatch");
+        for (uint256 i = 0; i < itemIds.length; i++) {
+            _claimMerkle(itemIds[i], amounts[i], proofs[i]);
         }
+    }
+    
+    function _claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) internal {
+        require(itemIds.length == amounts.length, "ItemsInternal._claimWhitelist: Inputs length mismatch");
+        uint totalAmount = 0;
+        for (uint i = 0; i < itemIds.length; i++) {
+            _mint(msg.sender, itemIds[i], amounts[i], '');
+            totalAmount += amounts[i];
+        }
+        _consumeWhitelist(msg.sender, totalAmount);
     }
 
     function _mint(address to, uint256 itemId, uint256 amount)

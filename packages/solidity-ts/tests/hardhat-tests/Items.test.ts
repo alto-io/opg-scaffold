@@ -47,12 +47,13 @@ export async function deployItemsFixture() {
     const merkleFacet = await hre.ethers.getContractAt(itemsFacetNames.merkleFacet, diamond.address)
     const inventoryFacet = await hre.ethers.getContractAt(itemsFacetNames.inventoryFacet, diamond.address)
     const rolesFacet = await hre.ethers.getContractAt(itemsFacetNames.rolesFacet, diamond.address)
+    const whitelistFacet = await hre.ethers.getContractAt(itemsFacetNames.whitelistFacet, diamond.address)
 
     let functionCall = itemsInit.interface.encodeFunctionData('init', [arcadiansDiamond.address, merkleGenerator.merkleRoot, baseTokenUri])
     let tx = await diamond.diamondCut([], itemsInit.address, functionCall)
     await tx.wait()
 
-    return { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, rolesFacet, merkleGenerator, baseTokenUri };
+    return { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, rolesFacet, whitelistFacet, merkleGenerator, baseTokenUri };
 }
 
 describe('Items Diamond Test', function () {
@@ -60,6 +61,31 @@ describe('Items Diamond Test', function () {
         const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
         const owner = await diamond.owner();
         expect(owner).to.be.equal(namedAddresses.deployer);
+    })
+
+    it('should be able to claim tokens if whitelisted', async () => {
+        const { namedAccounts, namedAddresses, diamond, itemsInit, itemsFacet, merkleFacet, inventoryFacet, whitelistFacet, merkleGenerator, baseTokenUri } = await loadFixture(deployItemsFixture);
+
+        const elegibleAmount = 10;
+        const tokenId = 1;
+
+        let balance = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+        expect(balance).to.be.equal(0);
+
+
+        await expect(itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
+            to.be.revertedWith("WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
+
+        await whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
+        expect(await whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
+        expect(await whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+
+        await itemsFacet.claimWhitelist([tokenId], [elegibleAmount]);
+        
+        expect(await whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(0);
+        balance = await itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+        expect(balance).to.be.equal(elegibleAmount);
     })
 })
 
@@ -360,7 +386,7 @@ describe('Items Diamond merkle Test', function () {
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
         
         await expect(
-            itemsFacet.connect(namedAccounts.alice).claimBatch(ids, amounts, proofs),
+            itemsFacet.connect(namedAccounts.alice).claimMerkleBatch(ids, amounts, proofs),
         ).to.be.revertedWith("Data not included in merkle");
     })
 
@@ -370,7 +396,7 @@ describe('Items Diamond merkle Test', function () {
         const badAmounts = [3, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
         await expect(
-            itemsFacet.connect(namedAccounts.deployer).claimBatch(ids, badAmounts, proofs),
+            itemsFacet.connect(namedAccounts.deployer).claimMerkleBatch(ids, badAmounts, proofs),
         ).to.be.revertedWith("Data not included in merkle");
     })
     
@@ -380,7 +406,7 @@ describe('Items Diamond merkle Test', function () {
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
 
-        await itemsFacet.connect(namedAccounts.deployer).claimBatch(ids, amounts, proofs);
+        await itemsFacet.connect(namedAccounts.deployer).claimMerkleBatch(ids, amounts, proofs);
 
         for (let i = 0; i < ids.length; i++) {
             const balance = await itemsFacet.balanceOf(namedAddresses.deployer, ids[i])
@@ -393,10 +419,10 @@ describe('Items Diamond merkle Test', function () {
         const ids = [1, 2];
         const amounts = [1, 2];
         const proofs = merkleGenerator.generateProofs(namedAddresses.deployer);
-        await itemsFacet.claimBatch(ids, amounts, proofs)
+        await itemsFacet.claimMerkleBatch(ids, amounts, proofs)
         await expect(
-            itemsFacet.claimBatch(ids, amounts, proofs)
-        ).to.be.revertedWith("ItemsInternal._claim: Already claimed");
+            itemsFacet.claimMerkleBatch(ids, amounts, proofs)
+        ).to.be.revertedWith("ItemsInternal._claimMerkle: Already claimed");
     })
 
     it('should be able to update merkle root', async () => {

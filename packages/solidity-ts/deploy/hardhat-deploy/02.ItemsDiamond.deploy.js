@@ -6,7 +6,8 @@ export const itemsFacetNames = {
     itemsFacet: 'ItemsFacet',
     merkleFacet: 'MerkleFacet',
     rolesFacet: 'RolesFacet',
-    inventoryFacet: 'InventoryFacet'
+    inventoryFacet: 'InventoryFacet',
+    whitelistFacet: 'WhitelistFacet'
 }
 
 export const func = async() => {
