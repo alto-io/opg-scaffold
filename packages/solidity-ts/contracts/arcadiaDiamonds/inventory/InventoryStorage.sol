@@ -2,8 +2,6 @@
 pragma solidity 0.8.19;
 
 import {ReentrancyGuard} from "@solidstate/contracts/utils/ReentrancyGuard.sol";
-import {ERC1155Holder} from "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
-import {ERC721Holder} from "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 
 /**
@@ -31,7 +29,6 @@ library InventoryStorage {
     }
 
     struct Layout {
-        address arcadiansAddress;
         uint numSlots;
         // Slot id => Slot
         mapping(uint => Slot) slots;

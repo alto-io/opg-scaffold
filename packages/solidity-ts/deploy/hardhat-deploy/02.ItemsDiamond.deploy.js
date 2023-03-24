@@ -6,7 +6,6 @@ export const itemsFacetNames = {
     itemsFacet: 'ItemsFacet',
     merkleFacet: 'MerkleFacet',
     rolesFacet: 'RolesFacet',
-    inventoryFacet: 'InventoryFacet',
     whitelistFacet: 'WhitelistFacet'
 }
 

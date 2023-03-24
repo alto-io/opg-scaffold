@@ -6,7 +6,8 @@ export const arcadiansFacetNames = {
     arcadiansFacet: 'ArcadiansFacet',
     merkleFacet: 'MerkleFacet',
     rolesFacet: 'RolesFacet',
-    whitelistFacet: 'WhitelistFacet'
+    whitelistFacet: 'WhitelistFacet',
+    inventoryFacet: 'InventoryFacet'
 }
 
 export const func = async() => {

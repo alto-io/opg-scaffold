@@ -21,14 +21,6 @@ contract InventoryFacet is
     InventoryInternal
 {
 
-    function setArcadiansAddress(address newArcadiansAddress) public onlyManager {
-        _setArcadiansAddress(newArcadiansAddress);
-    }
-
-    function getArcadiansAddress() external view returns (address) {
-        return _getArcadiansAddress();
-    }
-
     function numSlots() external view returns (uint) {
         return _numSlots();
     }
