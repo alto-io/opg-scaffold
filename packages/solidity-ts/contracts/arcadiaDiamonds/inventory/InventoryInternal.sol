@@ -76,6 +76,97 @@ contract InventoryInternal is
         return InventoryStorage.layout().numSlots;
     }
 
+    function _equip(
+        uint arcadianId,
+        uint slot,
+        InventoryStorage.EquippedItem calldata itemToEquip
+    ) internal onlyArcadianOwner(arcadianId) {
+
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+
+        require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slot), "InventoryFacet.equip: Item not elegible for slot");
+        require(inventorySL.slots[slot].capacity >= itemToEquip.amount, "InventoryFacet.equip: Item amount exceeds slot capacity");
+
+        if (inventorySL.equippedItems[arcadianId][slot].amount != 0) {
+            _unequipUnchecked(arcadianId, slot);
+        }
+
+        IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
+        require(
+            erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
+            "InventoryFacet.equip: Message sender does not own enough of that item to equip"
+        );
+
+        erc1155Contract.safeTransferFrom(
+            msg.sender,
+            address(this),
+            itemToEquip.id,
+            itemToEquip.amount,
+            ''
+        );
+
+        uint[] memory slots = new uint[](1);
+        slots[0] = slot;
+        InventoryStorage.EquippedItem[] memory itemsToEquip = new InventoryStorage.EquippedItem[](1);
+        itemsToEquip[0] = itemToEquip;
+        emit ItemsEquipped(
+            msg.sender,
+            arcadianId,
+            slots,
+            itemsToEquip
+        );
+
+        inventorySL.equippedItems[arcadianId][slot] = itemToEquip;
+    }
+
+    function _equipBatch(
+        uint arcadianId,
+        uint[] calldata slots,
+        InventoryStorage.EquippedItem[] calldata itemsToEquip
+    ) internal onlyArcadianOwner(arcadianId) {
+        require(slots.length == itemsToEquip.length, "InventoryFacet._equipBatch: Input data length mismatch");
+
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+
+        for (uint i = 0; i < slots.length; i++) {
+            InventoryStorage.EquippedItem calldata itemToEquip = itemsToEquip[i];
+            IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
+
+            require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slots[i]), "InventoryFacet._equipBatch: Item not elegible for slot");
+            require(inventorySL.slots[slots[i]].capacity >= itemToEquip.amount, "InventoryFacet._equipBatch: Item amount exceeds slot capacity");
+
+            require(
+                erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
+                "InventoryFacet.equip: Sender has insufficient item balance"
+            );
+
+            if (inventorySL.equippedItems[arcadianId][slots[i]].amount > 0) {
+                _unequipUnchecked(arcadianId, slots[i]);
+            }
+
+            inventorySL.equippedItems[arcadianId][slots[i]] = InventoryStorage.EquippedItem({
+                itemAddress: itemToEquip.itemAddress,
+                id: itemToEquip.id,
+                amount: itemToEquip.amount
+            });
+
+            erc1155Contract.safeTransferFrom(
+                msg.sender,
+                address(this),
+                itemToEquip.id,
+                itemToEquip.amount,
+                ''
+            );
+        }
+
+        emit ItemsEquipped(
+            msg.sender,
+            arcadianId,
+            slots,
+            itemsToEquip
+        );
+    }
+
     function _unequipUnchecked(
         uint arcadianId,
         uint slot
@@ -154,98 +245,6 @@ contract InventoryInternal is
                 arcadianId,
                 new uint[](0)
             );
-    }
-
-    function _equip(
-        uint arcadianId,
-        uint slot,
-        InventoryStorage.EquippedItem calldata itemToEquip
-    ) internal onlyArcadianOwner(arcadianId) {
-
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
-        require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slot), "InventoryFacet.equip: Item not elegible for slot");
-        require(inventorySL.slots[slot].capacity >= itemToEquip.amount, "InventoryFacet.equip: Item amount exceeds slot capacity");
-
-        if (inventorySL.equippedItems[arcadianId][slot].amount != 0) {
-            _unequipUnchecked(arcadianId, slot);
-        }
-
-        IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
-        require(
-            erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
-            "InventoryFacet.equip: Message sender does not own enough of that item to equip"
-        );
-
-        erc1155Contract.safeTransferFrom(
-            msg.sender,
-            address(this),
-            itemToEquip.id,
-            itemToEquip.amount,
-            ''
-        );
-
-        uint[] memory slots = new uint[](1);
-        slots[0] = slot;
-        InventoryStorage.EquippedItem[] memory itemsToEquip = new InventoryStorage.EquippedItem[](1);
-        itemsToEquip[0] = itemToEquip;
-        emit ItemsEquipped(
-            msg.sender,
-            arcadianId,
-            slots,
-            itemsToEquip
-        );
-
-        inventorySL.equippedItems[arcadianId][slot] = itemToEquip;
-    }
-
-    function _equipBatch(
-        uint arcadianId,
-        uint[] calldata slots,
-        InventoryStorage.EquippedItem[] calldata itemsToEquip
-    ) internal onlyArcadianOwner(arcadianId) {
-        require(slots.length == itemsToEquip.length, "InventoryFacet._equipBatch: Input data length mismatch");
-
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
-
-        for (uint i = 0; i < slots.length; i++) {
-            InventoryStorage.EquippedItem calldata itemToEquip = itemsToEquip[i];
-            IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
-
-            require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slots[i]), "InventoryFacet._equipBatch: Item not elegible for slot");
-            require(inventorySL.slots[slots[i]].capacity >= itemToEquip.amount, "InventoryFacet._equipBatch: Item amount exceeds slot capacity");
-
-            require(
-                erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
-                "InventoryFacet.equip: Sender has insufficient item balance"
-            );
-
-            if (inventorySL.equippedItems[arcadianId][slots[i]].amount > 0) {
-                _unequipUnchecked(arcadianId, slots[i]);
-            }
-
-            inventorySL.equippedItems[arcadianId][slots[i]] = InventoryStorage.EquippedItem({
-                itemAddress: itemToEquip.itemAddress,
-                id: itemToEquip.id,
-                amount: itemToEquip.amount
-            });
-
-            erc1155Contract.safeTransferFrom(
-                msg.sender,
-                address(this),
-                itemToEquip.id,
-                itemToEquip.amount,
-                ''
-            );
-        }
-
-        emit ItemsEquipped(
-            msg.sender,
-            arcadianId,
-            slots,
-            itemsToEquip
-        );
     }
 
     function _equipped(
