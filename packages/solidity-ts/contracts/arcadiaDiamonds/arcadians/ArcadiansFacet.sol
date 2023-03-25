@@ -114,7 +114,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal {
         address to,
         uint256 tokenId
     ) internal virtual override {
-        _unequipAllItems(tokenId);
+        _unequipAll(tokenId);
         super._beforeTokenTransfer(from, to, tokenId);
     }
 }

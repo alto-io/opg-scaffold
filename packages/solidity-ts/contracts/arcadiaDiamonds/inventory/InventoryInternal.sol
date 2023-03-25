@@ -4,6 +4,7 @@ pragma solidity 0.8.19;
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import { AddressUtils } from "@solidstate/contracts/utils/AddressUtils.sol";
+import { EnumerableSet } from "@solidstate/contracts/data/EnumerableSet.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
 import { IERC1155 } from "@solidstate/contracts/interfaces/IERC1155.sol";
@@ -13,29 +14,27 @@ contract InventoryInternal is
     RolesInternal
 {
 
+    using EnumerableSet for EnumerableSet.UintSet;
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
 
-    event ItemAllowedInSlot(
-        address indexed by, 
-        address itemAddress, 
-        uint itemId,
-        uint slot
-    );
-
-    event ItemEquipped(
+    event ItemsAllowedInSlotUpdated(
         address indexed by,
-        uint indexed arcadianId,
-        address indexed itemAddress,
-        uint itemId,
-        uint amount,
-        uint slot
-    );
-
-    event ItemUnequipped(
-        address indexed by,
-        uint indexed arcadianId,
         uint slot,
-        uint amount
+        address itemAddress, 
+        uint[] allowedItems
+    );
+
+    event ItemsEquipped(
+        address indexed by,
+        uint indexed arcadianId,
+        uint[] slots,
+        InventoryStorage.EquippedItem[] equippedItems
+    );
+
+    event ItemsUnequipped(
+        address indexed by,
+        uint indexed arcadianId,
+        uint[] slots
     );
 
     event SlotCreated(
@@ -46,10 +45,11 @@ contract InventoryInternal is
     );
 
     using AddressUtils for address;
+    using EnumerableSet for EnumerableSet.UintSet;
 
     modifier onlyValidSlot(uint slot) {
         require(slot != 0, "InventoryFacet: Slot id can't be zero");
-        require(slot <= InventoryStorage.layout().numSlots, "InventoryFacet: Inexistent slot id");
+        require(slot <= InventoryStorage.layout().numSlots, "InventoryFacet: Invalid slot");
         _;
     }
 
@@ -76,270 +76,188 @@ contract InventoryInternal is
         return InventoryStorage.layout().numSlots;
     }
 
-    function _unequip(
+    function _unequipUnchecked(
         uint arcadianId,
-        uint slot,
-        bool unequipAll,
-        uint amount
-    ) internal onlyArcadianOwner(arcadianId) {
-        
+        uint slot
+    ) internal {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        require(
-            !inventorySL.slots[slot].isUnequippable,
-            "InventoryFacet._unequip: Slot is not unequippable"
-        );
-
         InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slot];
-
-        if (unequipAll) {
-            amount = existingItem.amount;
-        } else {
-            require(
-                amount <= existingItem.amount,
-                "InventoryFacet._unequip: Attempting to unequip too many items from the slot"
-            );
-        }
-
         IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
         erc1155Contract.safeTransferFrom(
             address(this),
             msg.sender,
             existingItem.id,
-            amount,
+            existingItem.amount,
             ''
         );
 
-        emit ItemUnequipped(
+        delete inventorySL.equippedItems[arcadianId][slot];
+    }
+
+    function _unequip(
+        uint arcadianId,
+        uint slot
+    ) internal onlyArcadianOwner(arcadianId) onlyValidSlot(slot) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+
+        require(!inventorySL.slots[slot].isUnequippable, "InventoryFacet._unequip: Slot is unequippable");
+        require(inventorySL.equippedItems[arcadianId][slot].amount > 0, "InventoryFacet._unequip: Slot not equipped");
+        
+        _unequipUnchecked(arcadianId, slot);
+
+        uint[] memory slots = new uint[](1);
+        slots[0] = slot;
+
+        emit ItemsUnequipped(
             msg.sender,
             arcadianId,
-            slot,
-            amount
+            slots
         );
-
-        existingItem.amount -= amount;
-        if (existingItem.amount == 0) {
-            delete inventorySL.equippedItems[arcadianId][slot];
-        }
     }
 
     function _unequipBatch(
         uint arcadianId,
-        uint[] calldata slots,
-        bool[] calldata unequipAll,
-        uint[] calldata amounts
+        uint[] calldata slots
     ) internal onlyArcadianOwner(arcadianId) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        require(slots.length > 0, "InventoryFacet._unequip: Should specify at least one slot");
 
         for (uint i = 0; i < slots.length; i++) {
-
-            uint amountToUnequip = amounts[i];
-
-            require(
-                !inventorySL.slots[slots[i]].isUnequippable,
-                "InventoryFacet._unequipBatch: Slot is not unequippable"
-            );
-
-            InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slots[i]];
-
-            if (unequipAll[i]) {
-                amountToUnequip = existingItem.amount;
-            } else {
-                require(
-                    amountToUnequip <= existingItem.amount,
-                    "InventoryFacet._unequipBatch: Attempting to unequip too many items from the slot"
-                );
-            }
-
-
-            IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
-            erc1155Contract.safeTransferFrom(
-                address(this),
-                msg.sender,
-                existingItem.id,
-                amountToUnequip,
-                ''
-            );
-
-            existingItem.amount -= amountToUnequip;
-            if (existingItem.amount == 0) {
-                delete inventorySL.equippedItems[arcadianId][slots[i]];
-            }
-
-            emit ItemUnequipped(
-                msg.sender,
-                arcadianId,
-                slots[i],
-                amountToUnequip
-            );
+            uint slot = slots[i];
+            require(slot > 0 && slot <= inventorySL.numSlots, "InventoryFacet._unequip: Invalid slot");
+            require(!inventorySL.slots[slot].isUnequippable, "InventoryFacet._unequip: Slot is unequippable");
+            require(inventorySL.equippedItems[arcadianId][slot].amount > 0, "InventoryFacet._unequip: Slot not equipped");
+            
+            _unequipUnchecked(arcadianId, slot);
         }
+
+        emit ItemsUnequipped(
+            msg.sender,
+            arcadianId,
+            slots
+        );
     }
 
-    function _unequipAllItems(
+    function _unequipAll(
         uint arcadianId
     ) internal {
 
-        IERC721 arcadiansContract = IERC721(address(this));
-        try arcadiansContract.ownerOf(arcadianId) returns (address arcadianOwner) {
-            require(
-                msg.sender == arcadianOwner,
-                "InventoryFacet._unequipAllItems: Caller not Arcadians contract neither or the arcadian owner"
-            );
-
             InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-            for (uint i = 0; i < inventorySL.numSlots; i++) {
-                uint slot = i + 1;
-
-                InventoryStorage.EquippedItem storage existingItem = inventorySL.equippedItems[arcadianId][slot];
-
-                // TODO: evaluate if unequippable items should also be unequiped in case of arcadian transfer
-                if (!inventorySL.slots[slot].isUnequippable && existingItem.amount > 0) {
-
-                    IERC1155 erc1155Contract = IERC1155(existingItem.itemAddress);
-                    erc1155Contract.safeTransferFrom(
-                        address(this),
-                        msg.sender,
-                        existingItem.id,
-                        existingItem.amount,
-                        ''
-                    );
-
-                    emit ItemUnequipped(
-                        arcadianOwner,
-                        arcadianId,
-                        slot,
-                        existingItem.amount
-                    );
-                    
-                    delete inventorySL.equippedItems[arcadianId][slot];
+            for (uint slot = 1; slot <= inventorySL.numSlots; slot++) {
+                if (!inventorySL.slots[slot].isUnequippable && inventorySL.equippedItems[arcadianId][slot].amount > 0) {
+                    _unequipUnchecked(arcadianId, slot);
                 }
             }
-        } catch {
-
-        }
-    }
-
-    function _validateItemForSlot(uint slot, uint itemId, uint amount) internal view {
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint[] storage allowedItemsIds = inventorySL.slots[slot].allowedItemsIds;
-        for (uint i = 0; i < allowedItemsIds.length; i++) {
-            if (allowedItemsIds[i] == itemId) {
-                require(amount <= inventorySL.slots[slot].capacity, "InventoryFacet._validateItemForSlot: Amount exceeds slot capacity");
-                return;
-            }
-        }
-        revert("Item not elegible for slot");
+            emit ItemsUnequipped(
+                msg.sender,
+                arcadianId,
+                new uint[](0)
+            );
     }
 
     function _equip(
         uint arcadianId,
-        address itemAddress,
-        uint itemId,
-        uint amount,
-        uint slot
+        uint slot,
+        InventoryStorage.EquippedItem calldata itemToEquip
     ) internal onlyArcadianOwner(arcadianId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        require(inventorySL.isItemAllowed[slot][itemAddress][itemId], "InventoryFacet.equip: Item not elegible for slot");
-        require(inventorySL.slots[slot].capacity >= amount, "InventoryFacet.equip: Item amount exceeds slot capacity");
+        require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slot), "InventoryFacet.equip: Item not elegible for slot");
+        require(inventorySL.slots[slot].capacity >= itemToEquip.amount, "InventoryFacet.equip: Item amount exceeds slot capacity");
 
         if (inventorySL.equippedItems[arcadianId][slot].amount != 0) {
-            _unequip(arcadianId, slot, true, 0);
+            _unequipUnchecked(arcadianId, slot);
         }
-        
-        IERC1155 erc1155Contract = IERC1155(itemAddress);
+
+        IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
         require(
-            erc1155Contract.balanceOf(msg.sender, itemId) >= amount,
+            erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
             "InventoryFacet.equip: Message sender does not own enough of that item to equip"
         );
 
         erc1155Contract.safeTransferFrom(
             msg.sender,
             address(this),
-            itemId,
-            amount,
+            itemToEquip.id,
+            itemToEquip.amount,
             ''
         );
 
-        emit ItemEquipped(
+        uint[] memory slots = new uint[](1);
+        slots[0] = slot;
+        InventoryStorage.EquippedItem[] memory itemsToEquip = new InventoryStorage.EquippedItem[](1);
+        itemsToEquip[0] = itemToEquip;
+        emit ItemsEquipped(
             msg.sender,
             arcadianId,
-            itemAddress,
-            itemId,
-            amount,
-            slot
+            slots,
+            itemsToEquip
         );
 
-        inventorySL.equippedItems[arcadianId][slot] = InventoryStorage.EquippedItem({
-            itemAddress: itemAddress,
-            id: itemId,
-            amount: amount
-        });
+        inventorySL.equippedItems[arcadianId][slot] = itemToEquip;
     }
 
     function _equipBatch(
         uint arcadianId,
-        address itemAddress,
-        uint[] calldata itemsIds,
-        uint[] calldata amounts,
-        uint[] calldata slots
+        uint[] calldata slots,
+        InventoryStorage.EquippedItem[] calldata itemsToEquip
     ) internal onlyArcadianOwner(arcadianId) {
-        require(slots.length == itemsIds.length && itemsIds.length == amounts.length, "InventoryFacet._equipBatch: Input data length mismatch");
+        require(slots.length == itemsToEquip.length, "InventoryFacet._equipBatch: Input data length mismatch");
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        IERC1155 erc1155Contract = IERC1155(itemAddress);
 
-        for (uint i = 0; i < itemsIds.length; i++) {
+        for (uint i = 0; i < slots.length; i++) {
+            InventoryStorage.EquippedItem calldata itemToEquip = itemsToEquip[i];
+            IERC1155 erc1155Contract = IERC1155(itemToEquip.itemAddress);
 
-            require(inventorySL.isItemAllowed[slots[i]][itemAddress][itemsIds[i]], "InventoryFacet._equipBatch: Item not elegible for slot");
-            require(inventorySL.slots[slots[i]].capacity >= amounts[i], "InventoryFacet._equipBatch: Item amount exceeds slot capacity");
+            require(inventorySL.allowedSlots[itemToEquip.itemAddress][itemToEquip.id].contains(slots[i]), "InventoryFacet._equipBatch: Item not elegible for slot");
+            require(inventorySL.slots[slots[i]].capacity >= itemToEquip.amount, "InventoryFacet._equipBatch: Item amount exceeds slot capacity");
 
             require(
-                erc1155Contract.balanceOf(msg.sender, itemsIds[i]) >= amounts[i],
+                erc1155Contract.balanceOf(msg.sender, itemToEquip.id) >= itemToEquip.amount,
                 "InventoryFacet.equip: Sender has insufficient item balance"
             );
 
             if (inventorySL.equippedItems[arcadianId][slots[i]].amount > 0) {
-                _unequip(arcadianId, slots[i], true, 0);
+                _unequipUnchecked(arcadianId, slots[i]);
             }
 
-            emit ItemEquipped(
-                msg.sender,
-                arcadianId,
-                itemAddress,
-                itemsIds[i],
-                amounts[i],
-                slots[i]
-            );
-
             inventorySL.equippedItems[arcadianId][slots[i]] = InventoryStorage.EquippedItem({
-                itemAddress: itemAddress,
-                id: itemsIds[i],
-                amount: amounts[i]
+                itemAddress: itemToEquip.itemAddress,
+                id: itemToEquip.id,
+                amount: itemToEquip.amount
             });
+
+            erc1155Contract.safeTransferFrom(
+                msg.sender,
+                address(this),
+                itemToEquip.id,
+                itemToEquip.amount,
+                ''
+            );
         }
 
-        erc1155Contract.safeBatchTransferFrom(
+        emit ItemsEquipped(
             msg.sender,
-            address(this),
-            itemsIds,
-            amounts,
-            ''
+            arcadianId,
+            slots,
+            itemsToEquip
         );
     }
 
     function _equipped(
         uint arcadianId,
         uint slot
-    ) internal view returns (InventoryStorage.EquippedItem memory item) {
+    ) internal view returns (InventoryStorage.EquippedItem memory) {
         return InventoryStorage.layout().equippedItems[arcadianId][slot];
     }
 
     function _equippedAll(
         uint arcadianId
-    ) internal view returns (InventoryStorage.EquippedItem[] memory item) {
+    ) internal view returns (InventoryStorage.EquippedItem[] memory) {
         uint numSlots = InventoryStorage.layout().numSlots;
         InventoryStorage.EquippedItem[] memory items = new InventoryStorage.EquippedItem[](numSlots);
         for (uint i = 0; i < numSlots; i++) {
@@ -349,10 +267,10 @@ contract InventoryInternal is
     }
 
     function _createSlot(
-        address itemAddress,
-        uint[] calldata allowedItemsIds,
         uint capacity,
-        bool unequippable
+        bool unequippable,
+        address itemAddress,
+        uint[] calldata allowedItemsIds
     ) internal onlyContract(itemAddress) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
@@ -363,44 +281,46 @@ contract InventoryInternal is
         inventorySL.slots[newSlot].capacity = capacity;
 
         if (allowedItemsIds.length > 0) {
-            _allowItemsInSlot(itemAddress, allowedItemsIds, newSlot);
+            _allowItemsInSlot(newSlot, itemAddress, allowedItemsIds);
         }
 
         emit SlotCreated(msg.sender, capacity, unequippable, newSlot);
     }
 
-    function _allowItemInSlot(
-        address itemAddress,
-        uint itemId,
-        uint slot
-    ) internal onlyValidSlot(slot) onlyValidAddress(itemAddress) {
-        _allowItemInSlotUnchecked(itemAddress, itemId, slot);
-    }
-
     function _allowItemsInSlot(
+        uint slot,
         address itemAddress,
-        uint[] calldata itemsIds,
-        uint slot
+        uint[] calldata itemsIds
     ) internal virtual onlyValidSlot(slot) onlyValidAddress(itemAddress) {
-        for (uint i = 0; i < itemsIds.length; i++) {
-            _allowItemInSlotUnchecked(itemAddress, itemsIds[i], slot);
-        }
-    }
-
-    function _allowItemInSlotUnchecked(
-        address itemAddress,
-        uint itemId,
-        uint slot
-    ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        inventorySL.slots[slot].allowedItemsIds.push(itemId);
-        inventorySL.itemAllowedSlots[itemAddress][itemId].push(slot);
-        inventorySL.isItemAllowed[slot][itemAddress][itemId] = true;
-        emit ItemAllowedInSlot(msg.sender, itemAddress, itemId, slot);
+        for (uint i = 0; i < itemsIds.length; i++) {
+            require(!inventorySL.allowedItems[slot][itemAddress].contains(itemsIds[i]), "InventoryFacet._disallowItemsInSlot: Item already allowed in the slot");
+            inventorySL.allowedItems[slot][itemAddress].add(itemsIds[i]);
+            inventorySL.allowedSlots[itemAddress][itemsIds[i]].add(slot);
+        }
+        emit ItemsAllowedInSlotUpdated(msg.sender, slot, itemAddress, InventoryStorage.layout().allowedItems[slot][itemAddress].toArray());
     }
 
-    function _getItemAllowedSlots(address itemAddress, uint itemId) internal view returns (uint[] storage) {
-        return InventoryStorage.layout().itemAllowedSlots[itemAddress][itemId];
+    function _disallowItemsInSlot(
+        uint slot,
+        address itemAddress,
+        uint[] calldata itemsIds
+    ) internal virtual onlyValidSlot(slot) onlyValidAddress(itemAddress) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        for (uint i = 0; i < itemsIds.length; i++) {
+            require(inventorySL.allowedItems[slot][itemAddress].contains(itemsIds[i]), "InventoryFacet._disallowItemsInSlot: Item is not allowed in the slot");
+            inventorySL.allowedItems[slot][itemAddress].remove(itemsIds[i]);
+            inventorySL.allowedSlots[itemAddress][itemsIds[i]].remove(slot);
+        }
+        emit ItemsAllowedInSlotUpdated(msg.sender, slot, itemAddress, InventoryStorage.layout().allowedItems[slot][itemAddress].toArray());
+    }
+
+    function _getAllowedSlots(address itemAddress, uint itemId) internal view returns (uint[] memory) {
+        return InventoryStorage.layout().allowedSlots[itemAddress][itemId].toArray();
+    }
+
+    function _getAllowedItems(uint slot, address itemAddress) internal view returns (uint[] memory) {
+        return InventoryStorage.layout().allowedItems[slot][itemAddress].toArray();
     }
 
     function _getSlot(uint slot) internal view returns (InventoryStorage.Slot storage) {
