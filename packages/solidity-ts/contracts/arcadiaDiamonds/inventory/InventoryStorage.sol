@@ -32,12 +32,12 @@ library InventoryStorage {
 
     struct Layout {
         uint numSlots;
+
         // Slot id => Slot
         mapping(uint => Slot) slots;
 
         // arcadian id => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
-
 
         // Slot id => item address => items allowed
         mapping(uint => mapping(address => EnumerableSet.UintSet)) allowedItems;
