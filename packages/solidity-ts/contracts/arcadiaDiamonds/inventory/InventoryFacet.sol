@@ -30,68 +30,72 @@ contract InventoryFacet is
     }
 
     function createSlot(
-        address itemAddress,
-        uint[] calldata allowedItemIds,
         uint capacity,
-        bool unequippable
-    ) external onlyManager {
-        _createSlot(itemAddress, allowedItemIds, capacity, unequippable);
-    }
-
-    function allowItemInSlot(
+        bool unequippable,
         address itemAddress,
-        uint itemId,
-        uint slot
-    ) external {
-        _allowItemInSlot(itemAddress, itemId, slot);
+        uint[] calldata allowedItemIds
+    ) external onlyManager {
+        _createSlot(capacity, unequippable, itemAddress, allowedItemIds);
     }
 
-    function getItemAllowedSlots(address itemAddress, uint itemId) external view returns (uint[] memory) {
-        return _getItemAllowedSlots(itemAddress, itemId);
+    function allowItemsInSlot(
+        uint slot,
+        address itemAddress,
+        uint[] calldata itemIds
+    ) external {
+        _allowItemsInSlot(slot, itemAddress, itemIds);
+    }
+
+    function disallowItemsInSlot(
+        uint slot,
+        address itemAddress,
+        uint[] calldata itemIds
+    ) external {
+        _disallowItemsInSlot(slot, itemAddress, itemIds);
+    }
+
+    function getAllowedSlots(address itemAddress, uint itemId) external view returns (uint[] memory) {
+        return _getAllowedSlots(itemAddress, itemId);
+    }
+
+    function getAllowedItems(uint slot, address itemAddress) external view returns (uint[] memory) {
+        return _getAllowedItems(slot, itemAddress);
     }
 
     function equip(
         uint arcadianId,
-        address itemAddress,
-        uint itemId,
-        uint amount,
-        uint slot
+        uint slot,
+        InventoryStorage.EquippedItem calldata itemsToEquip
     ) external nonReentrant {
-        _equip(arcadianId, itemAddress, itemId, amount, slot);
+        _equip(arcadianId, slot, itemsToEquip);
     }
 
     function equipBatch(
         uint arcadianId,
-        address itemAddress,
-        uint[] calldata itemIds,
-        uint[] calldata amounts,
-        uint[] calldata slots
+        uint[] calldata slots,
+        InventoryStorage.EquippedItem[] calldata itemsToEquip
     ) external nonReentrant {
-        _equipBatch(arcadianId, itemAddress, itemIds, amounts, slots);
+        _equipBatch(arcadianId, slots, itemsToEquip);
     }
 
     function unequip(
         uint arcadianId,
-        uint slot,
-        bool unequipAll,
-        uint amount
+        uint slot
     ) external nonReentrant {
-        _unequip(arcadianId, slot, unequipAll, amount);
+        _unequip(arcadianId, slot);
     }
 
     function unequipBatch(
         uint arcadianId,
-        uint[] calldata slots,
-        bool[] calldata unequipAll,
-        uint[] calldata amounts
-    ) external {
-        _unequipBatch(arcadianId, slots, unequipAll, amounts);
+        uint[] calldata slots
+    ) external nonReentrant {
+        _unequipBatch(arcadianId, slots);
     }
 
-    function unequipAllItems(
+    function unequipAll(
         uint arcadianId
-    ) external {
-        _unequipAllItems(arcadianId);
+    ) external nonReentrant {
+        _unequipAll(arcadianId);
     }
 
     function equipped(

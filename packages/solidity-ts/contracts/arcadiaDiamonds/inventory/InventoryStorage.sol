@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import {ReentrancyGuard} from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
+import { EnumerableSet } from "@solidstate/contracts/data/EnumerableSet.sol";
 
 /**
 LibInventory defines the storage structure used by the Inventory contract as a facet for an EIP-2535 Diamond
@@ -15,6 +16,8 @@ library InventoryStorage {
     uint constant ERC721_ITEM_TYPE = 721;
     uint constant ERC1155_ITEM_TYPE = 1155;
 
+    using EnumerableSet for EnumerableSet.UintSet;
+
     // EquippedItem: holds the information of the currently equipped item for a specific slot in an arcadian
     struct EquippedItem {
         address itemAddress;
@@ -25,7 +28,6 @@ library InventoryStorage {
     struct Slot {
         uint capacity;
         bool isUnequippable;
-        uint[] allowedItemsIds;
     }
 
     struct Layout {
@@ -33,14 +35,14 @@ library InventoryStorage {
         // Slot id => Slot
         mapping(uint => Slot) slots;
 
-        // arcadian token ID => slot id => EquippedItem
+        // arcadian id => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
 
-        // Slot id => item id => is allowed to be equipped
-        mapping(uint => mapping(address => mapping(uint => bool))) isItemAllowed;
 
-        // item address => item id => allowed slots list
-        mapping(address => mapping(uint => uint[])) itemAllowedSlots;
+        // Slot id => item address => items allowed
+        mapping(uint => mapping(address => EnumerableSet.UintSet)) allowedItems;
+        // item address => item id => slots allowed
+        mapping(address => mapping(uint => EnumerableSet.UintSet)) allowedSlots;
     }
 
     function layout()
