@@ -270,7 +270,7 @@ contract InventoryInternal is
         bool unequippable,
         address itemAddress,
         uint[] calldata allowedItemsIds
-    ) internal onlyContract(itemAddress) {
+    ) internal {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         // slots are 1-index
@@ -280,6 +280,7 @@ contract InventoryInternal is
         inventorySL.slots[newSlot].capacity = capacity;
 
         if (allowedItemsIds.length > 0) {
+            require(itemAddress.isContract(), "InventoryFacet._createSlot: Invalid item address");
             _allowItemsInSlot(newSlot, itemAddress, allowedItemsIds);
         }
 
