@@ -8,8 +8,9 @@ import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/e
 import { ERC1155Metadata } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155Metadata.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { ItemsInternal } from "./ItemsInternal.sol";
+import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 
-contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal {
+contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal, Multicall {
     
     function claimMerkle(uint tokenId, uint amount, bytes32[] calldata proof)
         public nonReentrant

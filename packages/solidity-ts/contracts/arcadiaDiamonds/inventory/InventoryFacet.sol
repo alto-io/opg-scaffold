@@ -32,10 +32,11 @@ contract InventoryFacet is
     function createSlot(
         uint capacity,
         bool unequippable,
+        InventoryStorage.SlotCategory category,
         address itemAddress,
         uint[] calldata allowedItemIds
     ) external onlyManager {
-        _createSlot(capacity, unequippable, itemAddress, allowedItemIds);
+        _createSlot(capacity, unequippable, category, itemAddress, allowedItemIds);
     }
 
     function allowItemsInSlot(
@@ -109,5 +110,21 @@ contract InventoryFacet is
         uint arcadianId
     ) external view returns (InventoryStorage.EquippedItem[] memory item) {
         return _equippedAll(arcadianId);
+    }
+
+    function baseSlotsUnique(
+        uint[] calldata slots,
+        address[] calldata itemsAddress,
+        uint[] calldata itemsIds
+    ) external view returns (bool) {
+        return _baseSlotsUnique(slots, itemsAddress, itemsIds);
+    }
+
+    function sortSlots(
+        uint[] memory slots,
+        address[] memory itemsAddresses,
+        uint[] memory itemsIds
+    ) external pure returns (uint[] memory, address[] memory, uint[] memory) {
+        return _sortSlots(slots, itemsAddresses, itemsIds);
     }
 }

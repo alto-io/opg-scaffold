@@ -17,6 +17,9 @@ library InventoryStorage {
     uint constant ERC1155_ITEM_TYPE = 1155;
 
     using EnumerableSet for EnumerableSet.UintSet;
+    using EnumerableSet for EnumerableSet.Bytes32Set;
+
+    enum SlotCategory { Base, Equippment, Cosmetic }
 
     // EquippedItem: holds the information of the currently equipped item for a specific slot in an arcadian
     struct EquippedItem {
@@ -28,6 +31,7 @@ library InventoryStorage {
     struct Slot {
         uint capacity;
         bool isUnequippable;
+        SlotCategory category;
     }
 
     struct Layout {
@@ -36,6 +40,8 @@ library InventoryStorage {
         // Slot id => Slot
         mapping(uint => Slot) slots;
 
+        mapping(SlotCategory => EnumerableSet.UintSet) categorySlots;
+
         // arcadian id => slot id => EquippedItem
         mapping(uint => mapping(uint => EquippedItem)) equippedItems;
 
@@ -43,6 +49,10 @@ library InventoryStorage {
         mapping(uint => mapping(address => EnumerableSet.UintSet)) allowedItems;
         // item address => item id => slots allowed
         mapping(address => mapping(uint => EnumerableSet.UintSet)) allowedSlots;
+
+        // base items hash => arcadian id
+        EnumerableSet.Bytes32Set baseItemsHashes;
+        mapping(uint => bytes32) arcadiansBaseItemsHashes;
     }
 
     function layout()
