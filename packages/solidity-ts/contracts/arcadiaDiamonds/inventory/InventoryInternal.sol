@@ -28,8 +28,7 @@ contract InventoryInternal is
     event ItemsEquipped(
         address indexed by,
         uint indexed arcadianId,
-        uint[] slots,
-        InventoryStorage.EquippedItem[] equippedItems
+        uint[] slots
     );
 
     event ItemsUnequipped(
@@ -108,13 +107,10 @@ contract InventoryInternal is
 
         uint[] memory slots = new uint[](1);
         slots[0] = slot;
-        InventoryStorage.EquippedItem[] memory itemsToEquip = new InventoryStorage.EquippedItem[](1);
-        itemsToEquip[0] = itemToEquip;
         emit ItemsEquipped(
             msg.sender,
             arcadianId,
-            slots,
-            itemsToEquip
+            slots
         );
 
         inventorySL.equippedItems[arcadianId][slot] = itemToEquip;
@@ -164,8 +160,7 @@ contract InventoryInternal is
         emit ItemsEquipped(
             msg.sender,
             arcadianId,
-            slots,
-            itemsToEquip
+            slots
         );
 
         bool isUnique = _hashBaseItemsUnchecked(arcadianId);
