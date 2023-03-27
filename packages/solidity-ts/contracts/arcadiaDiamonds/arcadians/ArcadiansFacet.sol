@@ -13,8 +13,9 @@ import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IER
 import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
+import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 
-contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal {
+contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     using EnumerableMap for EnumerableMap.UintToAddressMap;
 
     function tokenURI(

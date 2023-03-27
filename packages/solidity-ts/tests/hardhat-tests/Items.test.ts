@@ -1,5 +1,5 @@
 import '~helpers/hardhat-imports';
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import '~helpers/hardhat-imports';
 import '~tests/utils/chai-imports';
 import { expect } from 'chai';
@@ -8,6 +8,7 @@ import path from "path";
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
 import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
+import { formatUnits } from '@ethersproject/units';
 
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
@@ -55,10 +56,11 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const slotInput = {
             capacity: 10,
-            unequippable: false
+            unequippable: false,
+            category: 0
         }
         const itemId = 1;
-        await arcadiansContracts.inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, itemsAddress, [itemId]);
+        await arcadiansContracts.inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, slotInput.category, itemsAddress, [itemId]);
         const numSlots = await arcadiansContracts.inventoryFacet.numSlots();
         expect(numSlots).to.be.equal(1);
         const slotId = numSlots;
@@ -112,17 +114,19 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const slotInput = {
             capacity: 1,
-            unequippable: false
+            unequippable: false,
+            category: 0
         }
         const itemId = 1;
         const slotId = 1;
-        await arcadiansContracts.inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, itemsAddress, [itemId]);
+        await arcadiansContracts.inventoryFacet.createSlot(slotInput.capacity, slotInput.unequippable, slotInput.category, itemsAddress, [itemId]);
         const slotInput2 = {
             capacity: 10,
-            unequippable: true
+            unequippable: true,
+            category: 0
         }
         const slot2Id = 2;
-        await arcadiansContracts.inventoryFacet.createSlot(slotInput2.capacity, slotInput2.unequippable, itemsAddress, []);
+        await arcadiansContracts.inventoryFacet.createSlot(slotInput2.capacity, slotInput2.unequippable, slotInput.category, itemsAddress, []);
         
         // Allow items in slot
         await expect(arcadiansContracts.inventoryFacet.allowItemsInSlot(0, itemsAddress, [itemId])).to.be.revertedWith("InventoryFacet: Slot id can't be zero");
@@ -168,9 +172,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         await arcadiansContracts.inventoryFacet.equip(arcadianId, slotId, itemToEquip1);
         await arcadiansContracts.inventoryFacet.equip(arcadianId, slot2Id, itemToEquip1);
+        await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot2Id, itemToEquip1)).
+            to.be.revertedWith("InventoryFacet._equip: Base items are not unique");
         
         // unequip item
-        let unequipAll = true;
         await expect(arcadiansContracts.inventoryFacet.connect(namedAccounts.alice).unequip(arcadianId, slotId)).
             to.be.revertedWith("InventoryFacet: Message sender is not owner of the arcadian");
         const unmintedArcadianId = 999;
@@ -188,12 +193,14 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const itemIds = [1, 2, 3]
         const itemAmounts = [1, 1, 10]
+        const itemsAddresses = [itemsAddress, itemsAddress, itemsAddress];
 
         const slotsIds = [1, 2, 3]
         const slotsCapacity = 10;
         const slotsUnequippable = false;
+        const slotsCategory = [0, 0, 0];
         for (let i = 0; i < itemIds.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, itemsAddress, itemIds);
+            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, slotsCategory[i], itemsAddresses[i], itemIds);
         }
 
         // mint item
@@ -208,14 +215,19 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         await itemsContracts.itemsFacet.setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         
-        const itemsToEquip = itemIds.map((itemId, i)=>[itemsAddress, itemId, itemAmounts[i]]);
+        const itemsToEquip = itemIds.map((itemId, i)=>[itemsAddresses[i], itemId, itemAmounts[i]]);
+        
+        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIds, itemsAddresses, itemIds)).to.be.true;
+
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIds, itemsToEquip);
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].id).to.be.equal(itemIds[i]);
             expect(equippedItems[i].amount).to.be.equal(itemAmounts[i]);
-            expect(equippedItems[i].itemAddress).to.be.equal(itemsAddress);
+            expect(equippedItems[i].itemAddress).to.be.equal(itemsAddresses[i]);
         }
+        
+        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIds, itemsAddresses, itemIds)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         let expectedUri = "https://api.arcadians.io/" + arcadianId; // + "/?tokenIds=" + itemIds.toString()
@@ -244,12 +256,14 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const itemIds = [1, 2, 3]
         const itemAmounts = [1, 1, 10]
+        const itemsAddresses = [itemsAddress, itemsAddress, itemsAddress];
 
         const slotsIds = [1, 2, 3]
         const slotsCapacity = 10;
         const slotsUnequippable = false;
+        const slotsCategory = [0, 0, 0];
         for (let i = 0; i < itemIds.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, itemsAddress, itemIds);
+            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, slotsCategory[i], itemsAddress, itemIds);
         }
 
         // mint item
@@ -263,6 +277,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
 
         await itemsContracts.itemsFacet.setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
+        
+        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIds, itemsAddresses, itemIds)).to.be.true;
+        
 
         const itemsToEquip = itemIds.map((itemId, i)=>[itemsAddress, itemId, itemAmounts[i]]);
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIds, itemsToEquip);
@@ -272,6 +289,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(equippedItems[i].amount).to.be.equal(itemAmounts[i]);
             expect(equippedItems[i].itemAddress).to.be.equal(itemsAddress);
         }
+
+        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIds, itemsAddresses, itemIds)).to.be.false;
 
         await arcadiansContracts.arcadiansFacet.transferFrom(namedAddresses.deployer, namedAddresses.alice, arcadianId);
 
@@ -298,8 +317,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIds = [1, 2, 3]
         const slotsCapacity = 10;
         const slotsUnequippable = false;
+        const slotsCategory = [0, 0, 1];
         for (let i = 0; i < itemIds.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, itemsAddress, itemIds);
+            await arcadiansContracts.inventoryFacet.createSlot(slotsCapacity, slotsUnequippable, slotsCategory[i], itemsAddress, itemIds);
         }
 
         // mint item

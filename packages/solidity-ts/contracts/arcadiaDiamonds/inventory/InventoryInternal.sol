@@ -15,6 +15,7 @@ contract InventoryInternal is
 {
 
     using EnumerableSet for EnumerableSet.UintSet;
+    using EnumerableSet for EnumerableSet.Bytes32Set;
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
 
     event ItemsAllowedInSlotUpdated(
@@ -117,6 +118,7 @@ contract InventoryInternal is
         );
 
         inventorySL.equippedItems[arcadianId][slot] = itemToEquip;
+        require(_hashBaseItemsUnchecked(arcadianId), "InventoryFacet._equip: Base items are not unique");
     }
 
     function _equipBatch(
@@ -165,6 +167,9 @@ contract InventoryInternal is
             slots,
             itemsToEquip
         );
+
+        bool isUnique = _hashBaseItemsUnchecked(arcadianId);
+        require(isUnique, "InventoryFacet._equipBatch: Base items are not unique");
     }
 
     function _unequipUnchecked(
@@ -204,6 +209,8 @@ contract InventoryInternal is
             arcadianId,
             slots
         );
+
+        _hashBaseItemsUnchecked(arcadianId);
     }
 
     function _unequipBatch(
@@ -227,24 +234,41 @@ contract InventoryInternal is
             arcadianId,
             slots
         );
+
+        _hashBaseItemsUnchecked(arcadianId);
     }
 
     function _unequipAll(
         uint arcadianId
     ) internal {
 
-            InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
-            for (uint slot = 1; slot <= inventorySL.numSlots; slot++) {
-                if (!inventorySL.slots[slot].isUnequippable && inventorySL.equippedItems[arcadianId][slot].amount > 0) {
-                    _unequipUnchecked(arcadianId, slot);
-                }
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        uint numSlots = inventorySL.numSlots;
+        uint numUnequippableSlots;
+        for (uint i = 0; i < numSlots; i++) {
+            uint slot = i + 1;
+            if (!inventorySL.slots[slot].isUnequippable && inventorySL.equippedItems[arcadianId][slot].amount > 0) {
+                numUnequippableSlots++;
             }
-            emit ItemsUnequipped(
-                msg.sender,
-                arcadianId,
-                new uint[](0)
-            );
+        }
+
+        uint[] memory unequippedSlots = new uint[](numUnequippableSlots);
+        uint counter;
+        for (uint i = 0; i < numSlots; i++) {
+            uint slot = i + 1;
+            if (!inventorySL.slots[slot].isUnequippable && inventorySL.equippedItems[arcadianId][slot].amount > 0) {
+                _unequipUnchecked(arcadianId, slot);
+                unequippedSlots[counter] = slot;
+                counter++;
+            }
+        }
+        emit ItemsUnequipped(
+            msg.sender,
+            arcadianId,
+            unequippedSlots
+        );
+
+        _hashBaseItemsUnchecked(arcadianId);
     }
 
     function _equipped(
@@ -257,17 +281,85 @@ contract InventoryInternal is
     function _equippedAll(
         uint arcadianId
     ) internal view returns (InventoryStorage.EquippedItem[] memory) {
-        uint numSlots = InventoryStorage.layout().numSlots;
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        uint numSlots = inventorySL.numSlots;
         InventoryStorage.EquippedItem[] memory items = new InventoryStorage.EquippedItem[](numSlots);
         for (uint i = 0; i < numSlots; i++) {
-            items[i] = _equipped(arcadianId, i+1);
+            items[i] = inventorySL.equippedItems[arcadianId][i+1];
         }
         return items;
+    }
+
+    function _baseSlotsUnique(
+        uint[] memory slots,
+        address[] memory itemsAddresses,
+        uint[] memory itemsIds
+    ) internal view returns (bool) {
+        require(slots.length == itemsAddresses.length && slots.length == itemsIds.length, "InventoryFacet._baseSlotsUnique: Input data length mismatch");
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        (slots, itemsAddresses, itemsIds) = _sortSlots(slots, itemsAddresses, itemsIds);
+        EnumerableSet.UintSet storage baseSlots = inventorySL.categorySlots[InventoryStorage.SlotCategory.Base];
+        bytes memory encodedItems;
+        for (uint i = 0; i < slots.length; i++) {
+            uint slot = slots[i];
+            if (!baseSlots.contains(slot)) continue;
+            encodedItems = abi.encodePacked(encodedItems, slot, itemsAddresses[i], itemsIds[i]);
+        }
+        return !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
+    }
+
+    function _sortSlots(
+        uint[] memory slots,
+        address[] memory itemsAddresses,
+        uint[] memory itemsIds
+    ) internal pure returns (uint[] memory, address[] memory, uint[] memory) {
+        uint n = slots.length;
+        for (uint i = 0; i < n - 1; i++) {
+            uint minIdx = i;
+            for (uint j = i + 1; j < n; j++) {
+                if (slots[j] < slots[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            if (minIdx != i) {
+                uint tempSlot = slots[i];
+                slots[i] = slots[minIdx];
+                slots[minIdx] = tempSlot;
+
+                address tempItemAddress = itemsAddresses[i];
+                itemsAddresses[i] = itemsAddresses[minIdx];
+                itemsAddresses[minIdx] = tempItemAddress;
+
+                uint tempItemsIds = itemsIds[i];
+                itemsIds[i] = itemsIds[minIdx];
+                itemsIds[minIdx] = tempItemsIds;
+            }
+        }
+        return (slots, itemsAddresses, itemsIds);
+    }
+
+    function _hashBaseItemsUnchecked(
+        uint arcadianId
+    ) internal returns (bool isUnique) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        bytes memory encodedItems;
+        EnumerableSet.UintSet storage baseSlots = inventorySL.categorySlots[InventoryStorage.SlotCategory.Base];
+        for (uint i = 0; i < baseSlots.length(); i++) {
+            uint slot = baseSlots.at(i);
+            InventoryStorage.EquippedItem storage equippedItem = inventorySL.equippedItems[arcadianId][slot];
+            encodedItems = abi.encodePacked(encodedItems, slot, equippedItem.itemAddress, equippedItem.id);
+        }
+        bytes32 baseItemsHash = keccak256(encodedItems);
+        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash);
+        inventorySL.baseItemsHashes.remove(inventorySL.arcadiansBaseItemsHashes[arcadianId]);
+        inventorySL.baseItemsHashes.add(baseItemsHash);
+        inventorySL.arcadiansBaseItemsHashes[arcadianId] = baseItemsHash;
     }
 
     function _createSlot(
         uint capacity,
         bool unequippable,
+        InventoryStorage.SlotCategory category,
         address itemAddress,
         uint[] calldata allowedItemsIds
     ) internal {
@@ -278,6 +370,7 @@ contract InventoryInternal is
         uint newSlot = inventorySL.numSlots;
         inventorySL.slots[newSlot].isUnequippable = unequippable;
         inventorySL.slots[newSlot].capacity = capacity;
+        inventorySL.slots[newSlot].category = category;
 
         if (allowedItemsIds.length > 0) {
             require(itemAddress.isContract(), "InventoryFacet._createSlot: Invalid item address");
@@ -298,6 +391,7 @@ contract InventoryInternal is
             inventorySL.allowedItems[slot][itemAddress].add(itemsIds[i]);
             inventorySL.allowedSlots[itemAddress][itemsIds[i]].add(slot);
         }
+        inventorySL.categorySlots[inventorySL.slots[slot].category].add(slot);
         emit ItemsAllowedInSlotUpdated(msg.sender, slot, itemAddress, InventoryStorage.layout().allowedItems[slot][itemAddress].toArray());
     }
 
