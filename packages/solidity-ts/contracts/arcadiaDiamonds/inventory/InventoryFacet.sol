@@ -108,18 +108,18 @@ contract InventoryFacet is
         return _equippedAll(arcadianId);
     }
 
-    function baseSlotsUnique(
-        uint[] calldata slots,
-        InventoryStorage.Item[] calldata items
-    ) external view returns (bool) {
-        return _baseSlotsUnique(slots, items);
-    }
-
-    function baseSlotsUniqueInArcadian(
+    function isArcadianUnique(
         uint arcadianId,
         uint[] calldata slots,
         InventoryStorage.Item[] calldata items
     ) external view returns (bool) {
-        return _baseSlotsUniqueInArcadian(arcadianId, slots, items);
+        return _isArcadianUnique(arcadianId, slots, items);
+    }
+
+    function isCombinationUnique(
+        uint[] calldata slots,
+        InventoryStorage.Item[] calldata items
+    ) external view returns (bool) {
+        return _isCombinationUnique(slots, items);
     }
 }

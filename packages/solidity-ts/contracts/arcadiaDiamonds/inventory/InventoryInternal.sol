@@ -304,12 +304,12 @@ contract InventoryInternal is
         return items;
     }
 
-    function _baseSlotsUniqueInArcadian(
+    function _isArcadianUnique(
         uint arcadianId,
         uint[] calldata slotsIds,
-        InventoryStorage.Item[] calldata items
+        InventoryStorage.Item[] calldata itemsToEquip
     ) internal view returns (bool) {
-        require(slotsIds.length == items.length, "InventoryFacet._baseSlotsUnique: Input data length mismatch");
+        require(slotsIds.length == itemsToEquip.length, "InventoryFacet._baseSlotsUnique: Input data length mismatch");
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
 
@@ -327,8 +327,8 @@ contract InventoryInternal is
         for (uint i = 0; i < slotsIds.length; i++) {
             if (!baseSlots.contains(slotsIds[i])) continue;
             baseSlotsIds[i] = slotsIds[i];
-            baseItems[i].contractAddress = items[i].contractAddress;
-            baseItems[i].id = items[i].id;
+            baseItems[i].contractAddress = itemsToEquip[i].contractAddress;
+            baseItems[i].id = itemsToEquip[i].id;
         }
 
         bytes memory encodedItems;
@@ -339,7 +339,7 @@ contract InventoryInternal is
         return !inventorySL.baseItemsHashesSet.contains(keccak256(encodedItems));
     }
 
-    function _baseSlotsUnique(
+    function _isCombinationUnique(
         uint[] memory slotsIds,
         InventoryStorage.Item[] memory items
     ) internal view returns (bool) {

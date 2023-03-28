@@ -259,8 +259,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIdsToEquip = slots.map(slot=>slot.id);
         const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
 
@@ -270,8 +270,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
         }
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         let expectedUri = "https://api.arcadians.io/" + arcadianId;
@@ -279,8 +279,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         await arcadiansContracts.inventoryFacet.unequipBatch(arcadianId, slotsIdsToEquip);
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
@@ -353,8 +353,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIdsToEquip = slots.map(slot=>slot.id);
         const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
@@ -364,13 +364,13 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
         }
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         await arcadiansContracts.arcadiansFacet.transferFrom(namedAddresses.deployer, namedAddresses.alice, arcadianId);
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
 
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
@@ -440,8 +440,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIdsToEquip = slots.map(slot=>slot.id);
         const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
@@ -451,13 +451,13 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
         }
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         await arcadiansContracts.inventoryFacet.unequipAll(arcadianId);
         
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.baseSlotsUniqueInArcadian(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
 
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
