@@ -19,35 +19,17 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
 
     using UintUtils for uint256;
 
-    // function _getTokenURI(
-    //     uint256 tokenId
-    // ) internal view returns (string memory) {
-    //     string memory tokenUri = ERC721MetadataInternal._tokenURI(tokenId);
-    //     // IInventoryFacet inventory = IInventoryFacet(_getInventoryAddress());
-    //     // IInventoryFacet.EquippedItem[] memory equippedItem = inventory.equippedAll(tokenId);
-    //     // tokenUri = string.concat(tokenUri, "/?tokenIds=");
-    //     // for (uint i = 0; i < equippedItem.length; i++) {
-    //     //     string memory itemId = equippedItem[i].id.toString();
-    //     //     if (i == 0) {
-    //     //         tokenUri = string.concat(tokenUri, itemId);
-    //     //     } else {
-    //     //         tokenUri = string.concat(tokenUri, ",", itemId);
-    //     //     }
-    //     // }
-    //     return tokenUri;
-    // }
-
     function _setBaseURI(string memory newBaseURI) internal {
         ERC721MetadataStorage.Layout storage ERC721SL = ERC721MetadataStorage.layout();
         emit BaseURIChanged(msg.sender, ERC721SL.baseURI, newBaseURI);
         ERC721SL.baseURI = newBaseURI;
     }
 
-    function _getBaseURI() internal view returns (string memory) {
+    function _baseURI() internal view returns (string memory) {
         return ERC721MetadataStorage.layout().baseURI;
     }
 
-    function _getClaimedAmountMerkle(address account) internal view returns (uint) {
+    function _claimedAmountMerkle(address account) internal view returns (uint) {
         return ArcadiansStorage.layout().amountClaimed[account];
     }
 
@@ -57,7 +39,7 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
         arcadiansSL.maxMintPerUser = newMaxMintPerUser;
     }
 
-    function _getMintPrice() internal view returns (uint) {
+    function _mintPrice() internal view returns (uint) {
         return ArcadiansStorage.layout().mintPrice;
     }
 
@@ -67,7 +49,7 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
         arcadiansSL.mintPrice = newMintPrice;
     }
 
-    function _getMaxMintPerUser() internal view returns (uint) {
+    function _maxMintPerUser() internal view returns (uint) {
         return ArcadiansStorage.layout().maxMintPerUser;
     }
 }

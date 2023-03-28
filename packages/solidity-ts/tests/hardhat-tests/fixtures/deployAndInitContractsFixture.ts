@@ -66,7 +66,6 @@ export default async function deployAndInitContractsFixture() {
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
     await tx.wait()
 
-
     const itemsParams = { 
         baseTokenUri: "https://api.arcadians.io/",
         merkleGenerator: new MerkleGenerator(TOKENS_PATH_ITEMS)

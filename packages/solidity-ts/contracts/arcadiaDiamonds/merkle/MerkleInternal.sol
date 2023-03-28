@@ -7,12 +7,12 @@ import { RolesInternal } from "./../roles/RolesInternal.sol";
 
 contract MerkleInternal is RolesInternal {
 
-    function _getMerkleRoot() internal view returns (bytes32) {
+    function _merkleRoot() internal view returns (bytes32) {
         return MerkleStorage.layout().merkleRoot;
     }
 
-    function _updateMerkleRoot(bytes32 merkleRoot) onlyManager internal {
-        MerkleStorage.layout().merkleRoot = merkleRoot;
+    function _updateMerkleRoot(bytes32 newMerkleRoot) onlyManager internal {
+        MerkleStorage.layout().merkleRoot = newMerkleRoot;
     }
 
     // To create 'leaf' use abi.encode(leafProp1, leafProp2, ...)

@@ -22,15 +22,14 @@ library InventoryStorage {
     enum SlotCategory { Base, Equippment, Cosmetic }
 
     // EquippedItem: holds the information of the currently equipped item for a specific slot in an arcadian
-    struct EquippedItem {
-        address itemAddress;
+    struct Item {
+        address contractAddress;
         uint id;
-        uint amount;
     }
+
     // Slot: Holds the general information for a slot
     struct Slot {
-        uint capacity;
-        bool isUnequippable;
+        bool unequippable;
         SlotCategory category;
     }
 
@@ -40,18 +39,18 @@ library InventoryStorage {
         // Slot id => Slot
         mapping(uint => Slot) slots;
 
-        mapping(SlotCategory => EnumerableSet.UintSet) categorySlots;
+        mapping(SlotCategory => EnumerableSet.UintSet) categoryToSlots;
 
         // arcadian id => slot id => EquippedItem
-        mapping(uint => mapping(uint => EquippedItem)) equippedItems;
+        mapping(uint => mapping(uint => Item)) equippedItems;
 
         // Slot id => item address => items allowed
-        mapping(uint => mapping(address => EnumerableSet.UintSet)) allowedItems;
-        // item address => item id => slots allowed
-        mapping(address => mapping(uint => EnumerableSet.UintSet)) allowedSlots;
+        mapping(uint => InventoryStorage.Item[]) allowedItems;
+        // item address => item id => allowed slot
+        mapping(address => mapping(uint => uint)) itemSlot;
 
         // base items hash => arcadian id
-        EnumerableSet.Bytes32Set baseItemsHashes;
+        EnumerableSet.Bytes32Set baseItemsHashesSet;
         mapping(uint => bytes32) arcadiansBaseItemsHashes;
     }
 

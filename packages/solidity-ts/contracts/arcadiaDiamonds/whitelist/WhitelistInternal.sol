@@ -9,11 +9,11 @@ contract WhitelistInternal is RolesInternal {
 
     event WhitelistBalanceChanged(address account, int amount, uint totalElegibleAmount, uint totalClaimedAmount);
 
-    function _getWhitelistClaimed(address account) internal view returns (uint) {
+    function _whitelistClaimed(address account) internal view returns (uint) {
         return WhitelistStorage.layout().claimed[account];
     }
 
-    function _getWhitelistBalance(address account) internal view returns (uint) {
+    function _whitelistBalance(address account) internal view returns (uint) {
         return WhitelistStorage.layout().elegible[account];
     }
 

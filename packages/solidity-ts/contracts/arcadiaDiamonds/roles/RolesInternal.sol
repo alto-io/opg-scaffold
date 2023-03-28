@@ -8,29 +8,29 @@ import { RolesStorage } from './RolesStorage.sol';
 contract RolesInternal is AccessControlInternal {
 
     modifier onlyDefaultAdmin() {
-        _checkRole(_getDefaultAdminRole());
+        _checkRole(_defaultAdminRole());
         _;
     }
 
     modifier onlyManager() {
-        _checkRole(_getManagerRole());
+        _checkRole(_managerRole());
         _;
     }
 
     modifier onlyMinter() {
-        _checkRole(_getMinterRole());
+        _checkRole(_minterRole());
         _;
     }
 
-    function _getDefaultAdminRole() internal pure returns (bytes32) {
+    function _defaultAdminRole() internal pure returns (bytes32) {
         return AccessControlStorage.DEFAULT_ADMIN_ROLE;
     }
 
-    function _getManagerRole() internal view returns (bytes32) {
+    function _managerRole() internal view returns (bytes32) {
         return RolesStorage.layout().managerRole;
     }
 
-    function _getMinterRole() internal view returns (bytes32) {
+    function _minterRole() internal view returns (bytes32) {
         return RolesStorage.layout().minterRole;
     }
 
@@ -39,8 +39,8 @@ contract RolesInternal is AccessControlInternal {
         rolesSL.managerRole = keccak256("manager.role");
         rolesSL.minterRole = keccak256("minter.role");
 
-        _grantRole(_getDefaultAdminRole(), msg.sender);
-        _grantRole(_getManagerRole(), msg.sender);
-        _grantRole(_getMinterRole(), msg.sender);
+        _grantRole(_defaultAdminRole(), msg.sender);
+        _grantRole(_managerRole(), msg.sender);
+        _grantRole(_minterRole(), msg.sender);
     }
 }

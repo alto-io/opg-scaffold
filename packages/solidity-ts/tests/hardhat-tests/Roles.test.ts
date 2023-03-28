@@ -10,15 +10,15 @@ export async function deployAndInitPlusRolesFixture() {
     const deployFixture = await loadFixture(deployAndInitContractsFixture);
     
     const arcadianRoles = {
-        defaultAdmin: await deployFixture.arcadiansContracts.rolesFacet.getDefaultAdminRole(),
-        manager: await deployFixture.arcadiansContracts.rolesFacet.getManagerRole(),
-        minter: await deployFixture.arcadiansContracts.rolesFacet.getMinterRole()
+        defaultAdmin: await deployFixture.arcadiansContracts.rolesFacet.defaultAdminRole(),
+        manager: await deployFixture.arcadiansContracts.rolesFacet.managerRole(),
+        minter: await deployFixture.arcadiansContracts.rolesFacet.minterRole()
     }
     
     const itemsRoles = {
-        defaultAdmin: await deployFixture.itemsContracts.rolesFacet.getDefaultAdminRole(),
-        manager: await deployFixture.itemsContracts.rolesFacet.getManagerRole(),
-        minter: await deployFixture.itemsContracts.rolesFacet.getMinterRole()
+        defaultAdmin: await deployFixture.itemsContracts.rolesFacet.defaultAdminRole(),
+        manager: await deployFixture.itemsContracts.rolesFacet.managerRole(),
+        minter: await deployFixture.itemsContracts.rolesFacet.minterRole()
     }
     
     return {...deployFixture, arcadianRoles, itemsRoles};
@@ -77,7 +77,7 @@ describe('Arcadians roles', function () {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
         const newBaseURI = "newBaseURI";
         await arcadiansContracts.arcadiansFacet.setBaseURI(newBaseURI);
-        expect(await arcadiansContracts.arcadiansFacet.getBaseURI()).to.be.equal(newBaseURI);
+        expect(await arcadiansContracts.arcadiansFacet.baseURI()).to.be.equal(newBaseURI);
     })
 
     it('non-manager should not able to update baseURI', async () => {
@@ -98,7 +98,7 @@ describe('Arcadians roles', function () {
     
     it('Should not be able to update max mint limit without manager role', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
-        const currentMaxLimit = await arcadiansContracts.arcadiansFacet.getMaxMintPerUser();
+        const currentMaxLimit = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         const newMaxLimit = currentMaxLimit + 1;
         const managerRoleMissingError = `AccessControl: account ${namedAddresses.alice.toLocaleLowerCase()} is missing role ${arcadianRoles.manager}`
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).setMaxMintPerUser(newMaxLimit)).to.be.revertedWith(managerRoleMissingError)
@@ -119,7 +119,7 @@ describe('Items roles', function () {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
         const newMerkleRoot = ethers.constants.HashZero;
         await itemsContracts.merkleFacet.updateMerkleRoot(newMerkleRoot);
-        expect(await itemsContracts.merkleFacet.getMerkleRoot()).to.be.equal(newMerkleRoot);
+        expect(await itemsContracts.merkleFacet.merkleRoot()).to.be.equal(newMerkleRoot);
     })
 
     it('account without manager role shouldnt be able to update merkle root', async () => {

@@ -31,13 +31,13 @@ describe('Arcadians Diamond Whitelist', function () {
             to.be.revertedWith("WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
 
         await arcadiansContracts.whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
-        expect(await arcadiansContracts.whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
-        expect(await arcadiansContracts.whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
 
         await arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount);
         
-        expect(await arcadiansContracts.whitelistFacet.getWhitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-        expect(await arcadiansContracts.whitelistFacet.getWhitelistBalance(namedAddresses.deployer)).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(0);
         balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer);
         expect(balance).to.be.equal(elegibleAmount);
     })
@@ -85,7 +85,7 @@ describe('Arcadians Diamond merkle', function () {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const newMerkleRoot = ethers.constants.HashZero;
         await arcadiansContracts.merkleFacet.updateMerkleRoot(newMerkleRoot);
-        expect(await arcadiansContracts.merkleFacet.getMerkleRoot()).to.be.equal(newMerkleRoot);
+        expect(await arcadiansContracts.merkleFacet.merkleRoot()).to.be.equal(newMerkleRoot);
     })
 })
 
@@ -96,7 +96,7 @@ describe('mint max limit per user', function () {
         
         const newMintPrice = arcadiansParams.mintPrice + 1;
         await arcadiansContracts.arcadiansFacet.setMintPrice(newMintPrice);
-        expect(await arcadiansContracts.arcadiansFacet.getMintPrice()).to.be.equal(newMintPrice);
+        expect(await arcadiansContracts.arcadiansFacet.mintPrice()).to.be.equal(newMintPrice);
     })
     
     it('Should be able to mint by paying the right amount ', async () => {
@@ -123,17 +123,17 @@ describe('mint max limit per user', function () {
     
     it('Should be able to update max mint limit ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        const currentMaxLimit = await arcadiansContracts.arcadiansFacet.getMaxMintPerUser();
+        const currentMaxLimit = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         const newMaxLimit = Number(currentMaxLimit) + 1;
         await arcadiansContracts.arcadiansFacet.setMaxMintPerUser(newMaxLimit)
-        expect(await arcadiansContracts.arcadiansFacet.getMaxMintPerUser()).to.be.equal(newMaxLimit)
+        expect(await arcadiansContracts.arcadiansFacet.maxMintPerUser()).to.be.equal(newMaxLimit)
     })
     
     it('Should be able to mint before reaching max limit ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        const maxLimit = await arcadiansContracts.arcadiansFacet.getMaxMintPerUser();
+        const maxLimit = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         const currentBalance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob);
-        const claimedAmount = await arcadiansContracts.arcadiansFacet.getClaimedAmountMerkle(namedAddresses.bob);
+        const claimedAmount = await arcadiansContracts.arcadiansFacet.claimedAmountMerkle(namedAddresses.bob);
         
         let canMint = maxLimit - (currentBalance - claimedAmount);
         
