@@ -25,65 +25,61 @@ contract InventoryFacet is
         return _numSlots();
     }
 
-    function getSlot(uint slot) external view returns (InventoryStorage.Slot memory) {
-        return _getSlot(slot);
+    function slot(uint slotId) external view returns (InventoryStorage.Slot memory) {
+        return _slot(slotId);
     }
 
     function createSlot(
-        uint capacity,
         bool unequippable,
         InventoryStorage.SlotCategory category,
-        address itemAddress,
-        uint[] calldata allowedItemIds
+        InventoryStorage.Item[] calldata items
     ) external onlyManager {
-        _createSlot(capacity, unequippable, category, itemAddress, allowedItemIds);
+        _createSlot(unequippable, category, items);
     }
 
     function allowItemsInSlot(
-        uint slot,
-        address itemAddress,
-        uint[] calldata itemIds
+        uint slotId,
+        InventoryStorage.Item[] calldata items
     ) external {
-        _allowItemsInSlot(slot, itemAddress, itemIds);
+        _allowItemsInSlot(slotId, items);
     }
 
     function disallowItemsInSlot(
-        uint slot,
-        address itemAddress,
-        uint[] calldata itemIds
+        uint slotId,
+        InventoryStorage.Item[] calldata items
     ) external {
-        _disallowItemsInSlot(slot, itemAddress, itemIds);
+        _disallowItemsInSlot(slotId, items);
     }
 
-    function getAllowedSlots(address itemAddress, uint itemId) external view returns (uint[] memory) {
-        return _getAllowedSlots(itemAddress, itemId);
+    function allowedSlot(InventoryStorage.Item calldata item) external view returns (uint) {
+        return _allowedSlot(item);
     }
 
-    function getAllowedItems(uint slot, address itemAddress) external view returns (uint[] memory) {
-        return _getAllowedItems(slot, itemAddress);
+    function allowedItems(uint slotId) external view returns (InventoryStorage.Item[] memory) {
+        return _allowedItems(slotId);
     }
 
     function equip(
         uint arcadianId,
-        uint slot,
-        InventoryStorage.EquippedItem calldata itemsToEquip
+        uint slotId,
+        InventoryStorage.Item calldata itemsToEquip
     ) external nonReentrant {
-        _equip(arcadianId, slot, itemsToEquip);
+        _equip(arcadianId, slotId, itemsToEquip);
     }
 
     function equipBatch(
         uint arcadianId,
         uint[] calldata slots,
-        InventoryStorage.EquippedItem[] calldata itemsToEquip
+        InventoryStorage.Item[] calldata itemsToEquip
     ) external nonReentrant {
         _equipBatch(arcadianId, slots, itemsToEquip);
     }
 
     function unequip(
         uint arcadianId,
-        uint slot
+        uint slotId
     ) external nonReentrant {
-        _unequip(arcadianId, slot);
+        _unequip(arcadianId, slotId);
     }
 
     function unequipBatch(
@@ -101,30 +97,29 @@ contract InventoryFacet is
 
     function equipped(
         uint arcadianId,
-        uint slot
-    ) external view returns (InventoryStorage.EquippedItem memory item) {
-        return _equipped(arcadianId, slot);
+        uint slotId
+    ) external view returns (InventoryStorage.Item memory item) {
+        return _equipped(arcadianId, slotId);
     }
 
     function equippedAll(
         uint arcadianId
-    ) external view returns (InventoryStorage.EquippedItem[] memory item) {
+    ) external view returns (InventoryStorage.Item[] memory item) {
         return _equippedAll(arcadianId);
     }
 
     function baseSlotsUnique(
         uint[] calldata slots,
-        address[] calldata itemsAddress,
-        uint[] calldata itemsIds
+        InventoryStorage.Item[] calldata items
     ) external view returns (bool) {
-        return _baseSlotsUnique(slots, itemsAddress, itemsIds);
+        return _baseSlotsUnique(slots, items);
     }
 
-    function sortSlots(
-        uint[] memory slots,
-        address[] memory itemsAddresses,
-        uint[] memory itemsIds
-    ) external pure returns (uint[] memory, address[] memory, uint[] memory) {
-        return _sortSlots(slots, itemsAddresses, itemsIds);
+    function baseSlotsUniqueInArcadian(
+        uint arcadianId,
+        uint[] calldata slots,
+        InventoryStorage.Item[] calldata items
+    ) external view returns (bool) {
+        return _baseSlotsUniqueInArcadian(arcadianId, slots, items);
     }
 }

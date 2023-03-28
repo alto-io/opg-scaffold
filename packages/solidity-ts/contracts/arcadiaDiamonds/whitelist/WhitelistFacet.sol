@@ -5,12 +5,12 @@ import { WhitelistInternal } from './WhitelistInternal.sol';
 
 contract WhitelistFacet is WhitelistInternal {
 
-    function getWhitelistClaimed(address account) external view returns (uint) {
-        return _getWhitelistClaimed(account);
+    function whitelistClaimed(address account) external view returns (uint) {
+        return _whitelistClaimed(account);
     }
 
-    function getWhitelistBalance(address account) external view returns (uint) {
-        return _getWhitelistBalance(account);
+    function whitelistBalance(address account) external view returns (uint) {
+        return _whitelistBalance(account);
     }
 
     function addToWhitelist(address account, uint amount) external {

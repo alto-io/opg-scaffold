@@ -14,6 +14,7 @@ import { ArcadiansInternal } from "./ArcadiansInternal.sol";
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
+import { InventoryStorage } from "../inventory/InventoryStorage.sol";
 
 contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     using EnumerableMap for EnumerableMap.UintToAddressMap;
@@ -45,11 +46,11 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         emit ArcadianClaimedMerkle(msg.sender, amountLeftToClaim);
     }
 
-    function getClaimedAmountMerkle(address account) external view returns (uint) {
-        return _getClaimedAmountMerkle(account);
+    function claimedAmountMerkle(address account) external view returns (uint) {
+        return _claimedAmountMerkle(account);
     }
 
-    function claimWhitelist(uint amount) external {
+    function claimWhitelist(uint amount) external nonReentrant {
         _consumeWhitelist(msg.sender, amount);
         for (uint i = 0; i < amount; i++) {
             _safeMint(msg.sender, _totalSupply());
@@ -66,28 +67,41 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         _safeMint(msg.sender, _totalSupply());
     }
 
+    function mintAndEquipp(
+        uint[] calldata slotIds,
+        InventoryStorage.Item[] calldata itemsToEquip
+    )
+        external payable nonReentrant
+    {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
+        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimed[msg.sender];
+        require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
+        uint tokenId = _totalSupply();
+        _safeMint(msg.sender, tokenId);
+        _equipBatch(tokenId, slotIds, itemsToEquip);
+    }
+
     function setMintPrice(uint newMintPrice) external onlyManager {
         _setMintPrice(newMintPrice);
     }
-    function getMintPrice() external view returns (uint) {
-        return _getMintPrice();
+    function mintPrice() external view returns (uint) {
+        return _mintPrice();
     }
 
     function setMaxMintPerUser(uint newMaxMintPerUser) external onlyManager {
         _setMaxMintPerUser(newMaxMintPerUser);
     }
-    function getMaxMintPerUser() external view returns (uint) {
-        return _getMaxMintPerUser();
+    function maxMintPerUser() external view returns (uint) {
+        return _maxMintPerUser();
     }
 
-    function setBaseURI(string memory baseURI) external onlyManager {
-        _setBaseURI(baseURI);
+    function setBaseURI(string memory newBaseURI) external onlyManager {
+        _setBaseURI(newBaseURI);
     }
-    function getBaseURI() external view returns (string memory) {
-        return _getBaseURI();
+    function baseURI() external view returns (string memory) {
+        return _baseURI();
     }
-
-
 
 
     // required overrides

@@ -6,15 +6,15 @@ import { RolesInternal } from './RolesInternal.sol';
 
 contract RolesFacet is RolesInternal, AccessControl {
 
-    function getDefaultAdminRole() external pure returns (bytes32) {
-        return _getDefaultAdminRole();
+    function defaultAdminRole() external pure returns (bytes32) {
+        return _defaultAdminRole();
     }
 
-    function getManagerRole() external view returns (bytes32) {
-        return _getManagerRole();
+    function managerRole() external view returns (bytes32) {
+        return _managerRole();
     }
 
-    function getMinterRole() external view returns (bytes32) {
-        return _getMinterRole();
+    function minterRole() external view returns (bytes32) {
+        return _minterRole();
     }
 }
