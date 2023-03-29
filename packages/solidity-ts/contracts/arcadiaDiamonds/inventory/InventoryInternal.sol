@@ -76,25 +76,25 @@ contract InventoryInternal is
     function _equip(
         uint arcadianId,
         uint slotId,
-        InventoryStorage.Item calldata itemToEquip
+        InventoryStorage.Item calldata item
     ) internal onlyArcadianOwner(arcadianId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        require(inventorySL.itemSlot[itemToEquip.contractAddress][itemToEquip.id] == slotId, "InventoryFacet.equip: Item not elegible for slot");
+        require(inventorySL.itemSlot[item.contractAddress][item.id] == slotId, "InventoryFacet.equip: Item not elegible for slot");
         require(!inventorySL.slots[slotId].unequippable || inventorySL.equippedItems[arcadianId][slotId].contractAddress == address(0), "InventoryFacet.equip: Unequippable slots already has an item");
         _unequipUnchecked(arcadianId, slotId);
 
-        IERC1155 erc1155Contract = IERC1155(itemToEquip.contractAddress);
+        IERC1155 erc1155Contract = IERC1155(item.contractAddress);
         require(
-            erc1155Contract.balanceOf(msg.sender, itemToEquip.id) > 0,
+            erc1155Contract.balanceOf(msg.sender, item.id) > 0,
             "InventoryFacet.equip: Message sender does not own enough of that item to equip"
         );
 
         erc1155Contract.safeTransferFrom(
             msg.sender,
             address(this),
-            itemToEquip.id,
+            item.id,
             1,
             ''
         );
@@ -107,18 +107,18 @@ contract InventoryInternal is
             slotsIds
         );
 
-        inventorySL.equippedItems[arcadianId][slotId] = itemToEquip;
+        inventorySL.equippedItems[arcadianId][slotId] = item;
         require(_hashBaseItemsUnchecked(arcadianId), "InventoryFacet._equip: Base items are not unique");
     }
 
     function _equipBatch(
         uint arcadianId,
         uint[] calldata slotIds,
-        InventoryStorage.Item[] calldata itemsToEquip
-    ) internal onlyArcadianOwner(arcadianId) {
+        InventoryStorage.Item[] calldata items
+    ) internal {
         // current: 1954977
         require(slotIds.length > 0, "InventoryFacet._unequip: Should specify at least one slot");
-        require(slotIds.length == itemsToEquip.length, "InventoryFacet._equipBatch: Input data length mismatch");
+        require(slotIds.length == items.length, "InventoryFacet._equipBatch: Input data length mismatch");
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint numSlots = inventorySL.numSlots;
         for (uint i = 0; i < slotIds.length; i++) {
@@ -128,13 +128,13 @@ contract InventoryInternal is
                 "InventoryFacet._equipBatch: Invalid slot"
             );
             require(
-                inventorySL.itemSlot[itemsToEquip[i].contractAddress][itemsToEquip[i].id] == slotId, 
+                inventorySL.itemSlot[items[i].contractAddress][items[i].id] == slotId, 
                 "InventoryFacet._equipBatch: Item not elegible for slot"
             );
 
-            IERC1155 erc1155Contract = IERC1155(itemsToEquip[i].contractAddress);
+            IERC1155 erc1155Contract = IERC1155(items[i].contractAddress);
             require(
-                erc1155Contract.balanceOf(msg.sender, itemsToEquip[i].id) > 0,
+                erc1155Contract.balanceOf(msg.sender, items[i].id) > 0,
                 "InventoryFacet.equip: Sender has insufficient item balance"
             );
 
@@ -144,7 +144,7 @@ contract InventoryInternal is
                 "InventoryFacet.equip: Unequippable slots already has an item"
             );
 
-            if (existingItem.contractAddress == itemsToEquip[i].contractAddress && existingItem.id == itemsToEquip[i].id) {
+            if (existingItem.contractAddress == items[i].contractAddress && existingItem.id == items[i].id) {
                 continue;
             }
 
@@ -158,12 +158,12 @@ contract InventoryInternal is
                 );
             }
 
-            inventorySL.equippedItems[arcadianId][slotId] = itemsToEquip[i];
+            inventorySL.equippedItems[arcadianId][slotId] = items[i];
 
             erc1155Contract.safeTransferFrom(
                 msg.sender,
                 address(this),
-                itemsToEquip[i].id,
+                items[i].id,
                 1,
                 ''
             );
@@ -285,14 +285,13 @@ contract InventoryInternal is
 
     function _equippedAll(
         uint arcadianId
-    ) internal view returns (InventoryStorage.Item[] memory) {
+    ) internal view returns (InventoryStorage.Item[] memory items) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint numSlots = inventorySL.numSlots;
-        InventoryStorage.Item[] memory items = new InventoryStorage.Item[](numSlots);
+        items = new InventoryStorage.Item[](numSlots);
         for (uint i = 0; i < numSlots; i++) {
             items[i] = inventorySL.equippedItems[arcadianId][i+1];
         }
-        return items;
     }
 
     function _isArcadianUnique(

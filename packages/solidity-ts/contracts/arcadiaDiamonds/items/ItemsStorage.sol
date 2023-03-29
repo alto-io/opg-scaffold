@@ -7,7 +7,7 @@ library ItemsStorage {
         keccak256("items.storage.position");
 
     struct Layout {
-        // wallet => token id => bool 
+        // wallet address => token id => is claimed 
         mapping(address => mapping(uint => bool)) claimedMerkle;
     }
 

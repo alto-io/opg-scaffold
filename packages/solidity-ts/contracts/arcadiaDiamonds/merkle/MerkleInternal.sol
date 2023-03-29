@@ -11,7 +11,7 @@ contract MerkleInternal is RolesInternal {
         return MerkleStorage.layout().merkleRoot;
     }
 
-    function _updateMerkleRoot(bytes32 newMerkleRoot) onlyManager internal {
+    function _updateMerkleRoot(bytes32 newMerkleRoot) internal {
         MerkleStorage.layout().merkleRoot = newMerkleRoot;
     }
 
