@@ -89,12 +89,6 @@ contract InventoryFacet is
         _unequipBatch(arcadianId, slots);
     }
 
-    function unequipAll(
-        uint arcadianId
-    ) external nonReentrant {
-        _unequipAll(arcadianId);
-    }
-
     function equipped(
         uint arcadianId,
         uint slotId
@@ -114,12 +108,5 @@ contract InventoryFacet is
         InventoryStorage.Item[] calldata items
     ) external view returns (bool) {
         return _isArcadianUnique(arcadianId, slots, items);
-    }
-
-    function isCombinationUnique(
-        uint[] calldata slots,
-        InventoryStorage.Item[] calldata items
-    ) external view returns (bool) {
-        return _isCombinationUnique(slots, items);
     }
 }

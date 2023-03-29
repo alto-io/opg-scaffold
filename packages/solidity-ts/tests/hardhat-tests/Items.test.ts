@@ -58,7 +58,6 @@ describe('Items Diamond Test', function () {
 })
 
 describe('Items Diamond Mint, equip and unequip items flow', function () {
-
     it('should be able to equip and unequip an item from an arcadian', async () => {
         
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
@@ -74,13 +73,23 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             contractAddress: itemsContracts.itemsFacet.address,
             id: 0
         }
-
-        expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(0);
         
         await arcadiansContracts.inventoryFacet.createSlot(slot.unequippable, slot.category, [item]);
-        const numSlots = await arcadiansContracts.inventoryFacet.numSlots();
-        expect(numSlots).to.be.equal(1);
-        slot.id = numSlots;
+        slot.id = await arcadiansContracts.inventoryFacet.numSlots();
+        expect(slot.id).to.be.equal(1);
+
+        // Remove and set item slot
+        expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
+        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.contractAddress, BigNumber.from(item.id)]]);
+
+        await arcadiansContracts.inventoryFacet.disallowItemsInSlot(slot.id, [item]);
+        expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(0);
+        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([]);
+
+        await arcadiansContracts.inventoryFacet.allowItemsInSlot(slot.id, [item]);
+        expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
+        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.contractAddress, BigNumber.from(item.id)]]);
+        
         const slotSC = await arcadiansContracts.inventoryFacet.slot(slot.id);
         expect(slotSC.category).to.be.equal(slot.category);
         expect(slotSC.unequippable).to.be.equal(slot.unequippable);
@@ -259,7 +268,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIdsToEquip = slots.map(slot=>slot.id);
         const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
@@ -269,8 +277,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(equippedItems[i].id).to.be.equal((itemsToEquip[i] as ItemSC).id);
             expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
         }
+        console.log("input: ", slots.map((slot=>slot.id)), itemsToEquip);
         
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
@@ -279,7 +287,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         await arcadiansContracts.inventoryFacet.unequipBatch(arcadianId, slotsIdsToEquip);
         
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
@@ -353,7 +360,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const slotsIdsToEquip = slots.map(slot=>slot.id);
         const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
         
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
@@ -364,99 +370,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
         }
         
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         await arcadiansContracts.arcadiansFacet.transferFrom(namedAddresses.deployer, namedAddresses.alice, arcadianId);
         
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
-
-        equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
-        for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal(0);
-            expect(equippedItems[i].contractAddress).to.be.equal(ethers.constants.AddressZero);
-            expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount);
-        }
-    })
-
-    it('should be able to unequip all items at once', async () => {
-        
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-
-        // create slot
-        const slots: Slot[] = [
-            { unequippable: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
-            { unequippable: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
-            { unequippable: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
-            { unequippable: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
-            { unequippable: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
-            { unequippable: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
-            { unequippable: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
-            { unequippable: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
-            { unequippable: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
-            { unequippable: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
-        ]
-        const items: ItemSC[] = [
-            { contractAddress: itemsContracts.itemsFacet.address, id: 0 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 1 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 2 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 3 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 4 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 5 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 6 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 7 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 8 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 9 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 10 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 11 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 12 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 13 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 14 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 15 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 16 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 17 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 18 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 19 },
-        ]
-
-        for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].unequippable, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
-        }
-
-        const mintItemsAmount = 100;
-        // mint item
-        for (let i = 0; i < items.length; i++) {
-            await itemsContracts.itemsFacet.mint(namedAddresses.deployer, items[i].id, mintItemsAmount);
-        }
-
-        // mint arcadian
-        await arcadiansContracts.arcadiansFacet.mint({value: arcadiansParams.mintPrice})
-        const balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer)
-        const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(namedAddresses.deployer, balance-1)
-
-        await itemsContracts.itemsFacet.setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
-        
-        const slotsIdsToEquip = slots.map(slot=>slot.id);
-        const itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
-
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
-        
-        await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
-        let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
-        for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal((itemsToEquip[i] as ItemSC).id);
-            expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
-            expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
-        }
-        
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slots.map((slot=>slot.id)), itemsToEquip)).to.be.false;
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
-
-        await arcadiansContracts.inventoryFacet.unequipAll(arcadianId);
-        
-        expect(await arcadiansContracts.inventoryFacet.isCombinationUnique(slotsIdsToEquip, itemsToEquip)).to.be.true;
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.true;
 
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
