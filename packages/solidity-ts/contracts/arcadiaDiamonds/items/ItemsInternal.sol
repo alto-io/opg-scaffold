@@ -62,6 +62,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }
 
+
     // required overrides
     function _beforeTokenTransfer(
         address operator,
