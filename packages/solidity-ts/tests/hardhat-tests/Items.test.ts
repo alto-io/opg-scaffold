@@ -111,8 +111,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await itemsContracts.itemsFacet.setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         
         await arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, item);
-        let equippedItem: ItemSC = await arcadiansContracts.inventoryFacet.equipped(arcadianId, slot.id);
-        expect(equippedItem.id).to.be.equal(item.id);
+        let equippedItem = await arcadiansContracts.inventoryFacet.equipped(arcadianId, slot.id);
+        expect(equippedItem.itemId).to.be.equal(item.id);
+        expect(equippedItem.slotId).to.be.equal(slot.id);
         expect(equippedItem.contractAddress).to.be.equal(item.contractAddress);
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem-1);
 
@@ -124,7 +125,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await arcadiansContracts.inventoryFacet.unequip(arcadianId, slot.id);
         equippedItem = await arcadiansContracts.inventoryFacet.equipped(item.id, slot.id);
         
-        expect(equippedItem.id).to.be.equal(0);
+        expect(equippedItem.itemId).to.be.equal(0);
         expect(equippedItem.contractAddress).to.be.equal(ethers.constants.AddressZero);
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem);
     })
@@ -274,10 +275,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal((itemsToEquip[i] as ItemSC).id);
+            expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as ItemSC).id);
             expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
         }
-        console.log("input: ", slots.map((slot=>slot.id)), itemsToEquip);
         
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
@@ -291,7 +291,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal(0);
+            expect(equippedItems[i].itemId).to.be.equal(0);
             expect(equippedItems[i].contractAddress).to.be.equal(ethers.constants.AddressZero);
         }
 
@@ -365,7 +365,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await arcadiansContracts.inventoryFacet.equipBatch(arcadianId, slotsIdsToEquip, itemsToEquip);
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal((itemsToEquip[i] as ItemSC).id);
+            expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as ItemSC).id);
             expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
         }
@@ -378,7 +378,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            expect(equippedItems[i].id).to.be.equal(0);
+            expect(equippedItems[i].itemId).to.be.equal(0);
             expect(equippedItems[i].contractAddress).to.be.equal(ethers.constants.AddressZero);
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount);
         }

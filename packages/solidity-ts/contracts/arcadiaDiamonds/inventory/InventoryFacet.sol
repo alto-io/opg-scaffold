@@ -41,10 +41,19 @@ contract InventoryFacet is
      * @notice Returns the details of an inventory slot given its ID
      * @dev Slots are 1-indexed
      * @param slotId The ID of the inventory slot
-     * @return The details of the inventory slot
+     * @return existentSlot The details of the inventory slot
      */
-    function slot(uint slotId) external view returns (InventoryStorage.Slot memory) {
+    function slot(uint slotId) external view returns (InventoryStorage.Slot memory existentSlot) {
         return _slot(slotId);
+    }
+
+    /**
+     * @notice Returns the details of all the existent slots
+     * @dev Slots are 1-indexed
+     * @return existentSlots The details of all the inventory slots
+     */
+    function slotsAll() external view returns (InventoryStorage.Slot[] memory existentSlots) {
+        return _slotsAll();
     }
 
     /**
@@ -165,7 +174,7 @@ contract InventoryFacet is
     function equipped(
         uint arcadianId,
         uint slotId
-    ) external view returns (InventoryStorage.Item memory item) {
+    ) external view returns (ItemInSlot memory item) {
         return _equipped(arcadianId, slotId);
     }
 
@@ -175,7 +184,7 @@ contract InventoryFacet is
      */
     function equippedAll(
         uint arcadianId
-    ) external view returns (InventoryStorage.Item[] memory item) {
+    ) external view returns (ItemInSlot[] memory equippedSlot) {
         return _equippedAll(arcadianId);
     }
 
