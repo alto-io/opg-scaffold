@@ -99,7 +99,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @param slotIds IDs of the inventory slots to equip
      * @param itemsToEquip array of items to equip in the correspondent slot
      */
-    function mintAndEquipp(
+    function mintAndEquip(
         uint[] calldata slotIds,
         InventoryStorage.Item[] calldata itemsToEquip
     )

@@ -73,6 +73,12 @@ contract InventoryInternal is
         return InventoryStorage.layout().numSlots;
     }
 
+    struct ItemInSlot {
+        uint slotId;
+        address contractAddress;
+        uint itemId;
+    }
+
     function _equip(
         uint arcadianId,
         uint slotId,
@@ -117,7 +123,7 @@ contract InventoryInternal is
         InventoryStorage.Item[] calldata items
     ) internal {
         // current: 1954977
-        require(slotIds.length > 0, "InventoryFacet._unequip: Should specify at least one slot");
+        require(slotIds.length > 0, "InventoryFacet._equipBatch: Should specify at least one slot");
         require(slotIds.length == items.length, "InventoryFacet._equipBatch: Input data length mismatch");
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint numSlots = inventorySL.numSlots;
@@ -279,18 +285,22 @@ contract InventoryInternal is
     function _equipped(
         uint arcadianId,
         uint slotId
-    ) internal view returns (InventoryStorage.Item memory) {
-        return InventoryStorage.layout().equippedItems[arcadianId][slotId];
+    ) internal view returns (ItemInSlot memory) {
+        // return InventoryStorage.layout().equippedItems[arcadianId][slotId];
+        InventoryStorage.Item storage item = InventoryStorage.layout().equippedItems[arcadianId][slotId];
+        return ItemInSlot(slotId, item.contractAddress, item.id);
     }
 
     function _equippedAll(
         uint arcadianId
-    ) internal view returns (InventoryStorage.Item[] memory items) {
+    ) internal view returns (ItemInSlot[] memory equippedSlots) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint numSlots = inventorySL.numSlots;
-        items = new InventoryStorage.Item[](numSlots);
+        equippedSlots = new ItemInSlot[](numSlots);
         for (uint i = 0; i < numSlots; i++) {
-            items[i] = inventorySL.equippedItems[arcadianId][i+1];
+            uint slot = i + 1;
+            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slot];
+            equippedSlots[i] = ItemInSlot(slot, equippedItem.contractAddress, equippedItem.id);
         }
     }
 
@@ -326,7 +336,7 @@ contract InventoryInternal is
             encodedItems = abi.encodePacked(encodedItems, baseSlotsIds[i], baseItems[i].contractAddress, baseItems[i].id);
         }
 
-        return !inventorySL.baseItemsHashesSet.contains(keccak256(encodedItems));
+        return !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
     }
 
     function _hashBaseItemsUnchecked(
@@ -342,10 +352,10 @@ contract InventoryInternal is
             encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.contractAddress, equippedItem.id);
         }
         bytes32 baseItemsHash = keccak256(encodedItems);
-        isUnique = !inventorySL.baseItemsHashesSet.contains(baseItemsHash);
-        inventorySL.baseItemsHashesSet.remove(inventorySL.arcadiansBaseItemsHashes[arcadianId]);
-        inventorySL.baseItemsHashesSet.add(baseItemsHash);
-        inventorySL.arcadiansBaseItemsHashes[arcadianId] = baseItemsHash;
+        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash);
+        inventorySL.baseItemsHashes.remove(inventorySL.arcadianToBaseItemHash[arcadianId]);
+        inventorySL.baseItemsHashes.add(baseItemsHash);
+        inventorySL.arcadianToBaseItemHash[arcadianId] = baseItemsHash;
     }
 
     function _createSlot(
@@ -360,6 +370,7 @@ contract InventoryInternal is
         uint newSlot = inventorySL.numSlots;
         inventorySL.slots[newSlot].unequippable = unequippable;
         inventorySL.slots[newSlot].category = category;
+        inventorySL.slots[newSlot].id = newSlot;
 
         if (allowedItems.length > 0) {
             _allowItemsInSlot(newSlot, allowedItems);
@@ -380,7 +391,7 @@ contract InventoryInternal is
             if (inventorySL.itemSlot[items[i].contractAddress][items[i].id] > 0) {
                 _disallowItemInSlotUnchecked(slotId, items[i]);
             }
-            inventorySL.allowedItems[slotId].push(items[i]);
+            inventorySL.slots[slotId].allowedItems.push(items[i]);
             inventorySL.itemSlot[items[i].contractAddress][items[i].id] = slotId;
         }
         inventorySL.categoryToSlots[inventorySL.slots[slotId].category].add(slotId);
@@ -405,11 +416,11 @@ contract InventoryInternal is
     ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         
-        for (uint i = 0; i < inventorySL.allowedItems[slotId].length; i++) {
-            if (inventorySL.allowedItems[slotId][i].id == item.id) {
-                inventorySL.allowedItems[slotId][i] = inventorySL.allowedItems[slotId][inventorySL.allowedItems[slotId].length-1];
-                delete inventorySL.allowedItems[slotId][inventorySL.allowedItems[slotId].length-1];
-                inventorySL.allowedItems[slotId].pop();
+        for (uint i = 0; i < inventorySL.slots[slotId].allowedItems.length; i++) {
+            if (inventorySL.slots[slotId].allowedItems[i].id == item.id) {
+                inventorySL.slots[slotId].allowedItems[i] = inventorySL.slots[slotId].allowedItems[inventorySL.slots[slotId].allowedItems.length-1];
+                delete inventorySL.slots[slotId].allowedItems[inventorySL.slots[slotId].allowedItems.length-1];
+                inventorySL.slots[slotId].allowedItems.pop();
                 break;
             }
         }
@@ -422,10 +433,20 @@ contract InventoryInternal is
     }
 
     function _allowedItems(uint slotId) internal view onlyValidSlot(slotId) returns (InventoryStorage.Item[] memory) {
-        return InventoryStorage.layout().allowedItems[slotId];
+        return InventoryStorage.layout().slots[slotId].allowedItems;
     }
 
-    function _slot(uint slotId) internal view returns (InventoryStorage.Slot storage) {
+    function _slot(uint slotId) internal view returns (InventoryStorage.Slot storage slot) {
         return InventoryStorage.layout().slots[slotId];
+    }
+
+    function _slotsAll() internal view returns (InventoryStorage.Slot[] memory slotsAll) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        uint numSlots = inventorySL.numSlots;
+        slotsAll = new InventoryStorage.Slot[](numSlots);
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            slotsAll[i] = InventoryStorage.layout().slots[slotId];
+        }
     }
 }

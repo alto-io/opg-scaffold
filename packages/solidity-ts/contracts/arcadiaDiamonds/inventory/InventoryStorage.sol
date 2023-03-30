@@ -29,8 +29,10 @@ library InventoryStorage {
 
     // Holds the general information about a slot
     struct Slot {
+        uint id;
         bool unequippable;
         SlotCategory category;
+        InventoryStorage.Item[] allowedItems;
     }
 
     struct Layout {
@@ -44,15 +46,13 @@ library InventoryStorage {
         // arcadian id => slot id => Items equipped
         mapping(uint => mapping(uint => Item)) equippedItems;
 
-        // Slot id => item address => Items Ids allowed
-        mapping(uint => InventoryStorage.Item[]) allowedItems;
         // item address => item id => allowed slot id
         mapping(address => mapping(uint => uint)) itemSlot;
 
         // List of all the existent hashes
-        EnumerableSet.Bytes32Set baseItemsHashesSet;
+        EnumerableSet.Bytes32Set baseItemsHashes;
         // arcadian id => base items hash
-        mapping(uint => bytes32) arcadiansBaseItemsHashes;
+        mapping(uint => bytes32) arcadianToBaseItemHash;
     }
 
     function layout()
