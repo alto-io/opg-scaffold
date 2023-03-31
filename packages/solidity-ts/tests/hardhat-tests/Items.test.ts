@@ -185,10 +185,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // equip item in slot
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, 0, item)).
-            to.be.revertedWith("InventoryFacet.equip: Item not elegible for slot");
+            to.be.revertedWith("InventoryFacet: Slot id can't be zero");
 
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, 999, item)).
-            to.be.revertedWith("InventoryFacet.equip: Item not elegible for slot");
+            to.be.revertedWith("InventoryFacet: Invalid slot");
 
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, [item.contractAddress, 999])).
             to.be.revertedWith("InventoryFacet.equip: Item not elegible for slot");
