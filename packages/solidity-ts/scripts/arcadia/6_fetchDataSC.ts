@@ -15,7 +15,7 @@ interface SlotSC {
     category: BigNumber,
     allowedItems: ItemSC[]
 }
-interface ItemInSlotSC {
+export interface ItemInSlotSC {
     slotId: BigNumber,
     itemId: BigNumber,
     contractAddress: string
