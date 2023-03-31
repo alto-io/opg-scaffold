@@ -35,7 +35,7 @@ contract WhitelistInternal is RolesInternal {
         require(accounts.length == amounts.length, "WhitelistInternal._addToWhitelistBatch: Inputs length mismatch");
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
         for (uint i = 0; i < accounts.length; i++) {
-            WhitelistStorage.layout().elegible[accounts[i]] += amounts[i];
+            whitelistSL.elegible[accounts[i]] += amounts[i];
             emit WhitelistBalanceChanged(msg.sender, int(amounts[i]), whitelistSL.elegible[accounts[i]], whitelistSL.claimed[accounts[i]]);
         }
     }
