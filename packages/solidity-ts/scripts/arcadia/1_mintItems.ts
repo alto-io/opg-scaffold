@@ -6,12 +6,12 @@ interface MintItem {
     amount: number
 }
 const mintItemsList: MintItem[] = [
-    { id: 0, amount: 1 },
-    // { id: 1, amount: 10 },
-    // { id: 2, amount: 10 },
-    // { id: 3, amount: 20 },
-    // { id: 4, amount: 20 },
-    // { id: 5, amount: 30 },
+    { id: 0, amount: 10 },
+    { id: 1, amount: 10 },
+    { id: 2, amount: 10 },
+    { id: 3, amount: 20 },
+    { id: 4, amount: 20 },
+    { id: 5, amount: 30 },
 ];
 
 async function main() {
