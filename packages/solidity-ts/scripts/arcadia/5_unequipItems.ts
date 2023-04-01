@@ -9,7 +9,7 @@ import { ItemInSlotSC } from "./6_fetchDataSC";
 enum SlotCategory { Base, Equippment, Cosmetic}
 interface Slot {
     id?: number,
-    unequippable: boolean,
+    permanent: boolean,
     category: SlotCategory,
     allowedItems: number[]
 }

@@ -23,14 +23,14 @@ library InventoryStorage {
 
     // Holds the information needed to identify an ERC1155 item
     struct Item {
-        address contractAddress;
+        address erc721Contract;
         uint id;
     }
 
     // Holds the general information about a slot
     struct Slot {
         uint id;
-        bool unequippable;
+        bool permanent;
         SlotCategory category;
         InventoryStorage.Item[] allowedItems;
     }

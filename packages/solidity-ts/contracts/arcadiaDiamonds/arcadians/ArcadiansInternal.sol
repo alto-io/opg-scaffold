@@ -11,6 +11,9 @@ import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 
 contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, InventoryInternal {
 
+    error Arcadians_InvalidPayAmount();
+    error Arcadians_MaximumMintedArcadiansReached();
+
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);

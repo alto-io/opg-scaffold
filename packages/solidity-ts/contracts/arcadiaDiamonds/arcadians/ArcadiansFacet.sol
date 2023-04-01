@@ -46,7 +46,11 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
 
         // Revert if the arcadian was already claimed before
-        require(es.amountClaimed[msg.sender] < totalAmount, "All tokens claimed");
+        if (totalAmount == 0) 
+            revert Merkle_InvalidClaimAmount();
+
+        if (es.amountClaimed[msg.sender] > 0) 
+            revert Merkle_AlreadyClaimed();
 
         // Verify if is elegible
         bytes memory leaf = abi.encode(msg.sender, totalAmount);
@@ -88,9 +92,14 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         external payable nonReentrant
     {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
+
+        if (msg.value != arcadiansSL.mintPrice)
+            revert Arcadians_InvalidPayAmount();
+
         uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimed[msg.sender];
-        require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
+        if (mintedTokens >= arcadiansSL.maxMintPerUser) 
+            revert Arcadians_MaximumMintedArcadiansReached();
+
         _safeMint(msg.sender, _totalSupply());
     }
 

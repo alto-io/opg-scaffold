@@ -34,7 +34,7 @@ interface IInventoryFacet {
     enum SlotCategory { Base, Equippment, Cosmetic }
     struct Slot {
         uint id;
-        bool unequippable;
+        bool permanent;
         SlotCategory category;
         Item[] allowedItems;
     }
@@ -65,12 +65,12 @@ interface IInventoryFacet {
      * @notice Creates a new inventory slot
      * @dev This function is only accessible to the manager role
      * @dev Slots are 1-indexed
-     * @param unequippable Whether or not the slot can be unequipped once equipped
+     * @param permanent Whether or not the slot can be unequipped once equipped
      * @param category The category of the slot
      * @param items The list of items to allow in the slot
      */
     function createSlot(
-        bool unequippable,
+        bool permanent,
         SlotCategory category,
         Item[] calldata items
     ) external;

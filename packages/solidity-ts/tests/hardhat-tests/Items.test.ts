@@ -8,17 +8,16 @@ import path from "path";
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
 import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
-import { formatUnits } from '@ethersproject/units';
 
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
 export interface ItemSC {
-    contractAddress: string,
+    erc721Contract: string,
     id: number
 }
 
 export interface Slot {
-    unequippable: boolean,
+    permanent: boolean,
     category: number,
     id: number,
     itemsIdsAllowed: number[]
@@ -42,7 +41,7 @@ describe('Items Diamond Test', function () {
 
 
         await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
-            to.be.revertedWith("WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
+            to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
         await itemsContracts.whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
         expect(await itemsContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
@@ -65,22 +64,22 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const slot: Slot = {
             id: 0,
-            unequippable: false,
+            permanent: false,
             category: 0,
             itemsIdsAllowed: [0, 1] 
         }
         const item: ItemSC = {
-            contractAddress: itemsContracts.itemsFacet.address,
+            erc721Contract: itemsContracts.itemsFacet.address,
             id: 0
         }
         
-        await arcadiansContracts.inventoryFacet.createSlot(slot.unequippable, slot.category, [item]);
+        await arcadiansContracts.inventoryFacet.createSlot(slot.permanent, slot.category, [item]);
         slot.id = await arcadiansContracts.inventoryFacet.numSlots();
         expect(slot.id).to.be.equal(1);
 
         // Remove and set item slot
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
-        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.contractAddress, BigNumber.from(item.id)]]);
+        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.erc721Contract, BigNumber.from(item.id)]]);
 
         await arcadiansContracts.inventoryFacet.disallowItemsInSlot(slot.id, [item]);
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(0);
@@ -88,11 +87,11 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         await arcadiansContracts.inventoryFacet.allowItemsInSlot(slot.id, [item]);
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
-        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.contractAddress, BigNumber.from(item.id)]]);
+        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.erc721Contract, BigNumber.from(item.id)]]);
         
         const slotSC = await arcadiansContracts.inventoryFacet.slot(slot.id);
         expect(slotSC.category).to.be.equal(slot.category);
-        expect(slotSC.unequippable).to.be.equal(slot.unequippable);
+        expect(slotSC.permanent).to.be.equal(slot.permanent);
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
 
         // mint item
@@ -114,7 +113,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let equippedItem = await arcadiansContracts.inventoryFacet.equipped(arcadianId, slot.id);
         expect(equippedItem.itemId).to.be.equal(item.id);
         expect(equippedItem.slotId).to.be.equal(slot.id);
-        expect(equippedItem.contractAddress).to.be.equal(item.contractAddress);
+        expect(equippedItem.erc721Contract).to.be.equal(item.erc721Contract);
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem-1);
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
@@ -126,7 +125,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         equippedItem = await arcadiansContracts.inventoryFacet.equipped(item.id, slot.id);
         
         expect(equippedItem.itemId).to.be.equal(0);
-        expect(equippedItem.contractAddress).to.be.equal(ethers.constants.AddressZero);
+        expect(equippedItem.erc721Contract).to.be.equal(ethers.constants.AddressZero);
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem);
     })
 
@@ -139,31 +138,33 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         // create slot
         const slot: Slot = {
             id: 0,
-            unequippable: false,
+            permanent: false,
             category: 0,
             itemsIdsAllowed: [0, 1] 
         }
         const item: ItemSC = {
-            contractAddress: itemsContracts.itemsFacet.address,
+            erc721Contract: itemsContracts.itemsFacet.address,
             id: 0
         }
-        await arcadiansContracts.inventoryFacet.createSlot(slot.unequippable, slot.category, [item]);
+        await arcadiansContracts.inventoryFacet.createSlot(slot.permanent, slot.category, [item]);
 
         slot.id = await arcadiansContracts.inventoryFacet.numSlots();
 
         const slot2: Slot = {
             id: 0,
-            unequippable: true,
+            permanent: true,
             category: 1,
             itemsIdsAllowed: [0, 1] 
         }
         
-        await arcadiansContracts.inventoryFacet.createSlot(slot2.unequippable, slot2.category, []);
+        await arcadiansContracts.inventoryFacet.createSlot(slot2.permanent, slot2.category, []);
         slot2.id = await arcadiansContracts.inventoryFacet.numSlots();
         
         // Allow items in slot
-        await expect(arcadiansContracts.inventoryFacet.allowItemsInSlot(0, [item])).to.be.revertedWith("InventoryFacet: Slot id can't be zero");
-        await expect(arcadiansContracts.inventoryFacet.allowItemsInSlot(1000, [item])).to.be.revertedWith("InventoryFacet: Invalid slot");
+        await expect(arcadiansContracts.inventoryFacet.allowItemsInSlot(0, [item])).
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidSlotId");
+        await expect(arcadiansContracts.inventoryFacet.allowItemsInSlot(1000, [item])).
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidSlotId");
 
         // mint item
         const tokenAmount = 10;
@@ -179,35 +180,35 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         // approve tokens for the inventory contract
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, item)).
-            to.be.reverted;
+            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "ERC1155Base__NotOwnerOrApproved");
 
         await itemsContracts.itemsFacet.setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
 
         // equip item in slot
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, 0, item)).
-            to.be.revertedWith("InventoryFacet: Slot id can't be zero");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidSlotId");
 
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, 999, item)).
-            to.be.revertedWith("InventoryFacet: Invalid slot");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidSlotId");
 
-        await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, [item.contractAddress, 999])).
-            to.be.revertedWith("InventoryFacet.equip: Item not elegible for slot");
+        await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, [item.erc721Contract, 999])).
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotElegibleForSlot");
 
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot2.id, item)).
-            to.be.revertedWith("InventoryFacet.equip: Item not elegible for slot");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotElegibleForSlot");
         
         await arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, item);
         await expect(arcadiansContracts.inventoryFacet.equip(arcadianId, slot.id, item)).
-            to.be.revertedWith("InventoryFacet._equip: Base items are not unique");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ArcadianNotUnique");
         
         // unequip item
         await expect(arcadiansContracts.inventoryFacet.connect(namedAccounts.alice).unequip(arcadianId, slot.id)).
-            to.be.revertedWith("InventoryFacet: Message sender is not owner of the arcadian");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotArcadianOwner");
         const unmintedArcadianId = 999;
         await expect(arcadiansContracts.inventoryFacet.unequip(unmintedArcadianId, slot.id)).
-            to.be.reverted;
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "EnumerableMap__NonExistentKey")
         await expect(arcadiansContracts.inventoryFacet.unequip(arcadianId, slot2.id)).
-            to.be.revertedWith("InventoryFacet._unequip: Slot is unequippable");
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingPermanentSlot");
     })
     
     it('should be able to equip and unequip items from an arcadian in batch', async () => {
@@ -215,42 +216,42 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         const slots: Slot[] = [
-            { unequippable: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
-            { unequippable: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
-            { unequippable: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
-            { unequippable: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
-            { unequippable: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
-            { unequippable: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
-            { unequippable: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
-            { unequippable: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
-            { unequippable: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
-            { unequippable: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
+            { permanent: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
+            { permanent: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
+            { permanent: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
+            { permanent: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
+            { permanent: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
+            { permanent: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
+            { permanent: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
+            { permanent: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
+            { permanent: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
+            { permanent: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
         ]
         const items: ItemSC[] = [
-            { contractAddress: itemsContracts.itemsFacet.address, id: 0 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 1 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 2 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 3 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 4 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 5 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 6 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 7 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 8 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 9 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 10 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 11 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 12 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 13 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 14 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 15 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 16 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 17 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 18 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 19 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 0 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 1 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 2 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 3 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 4 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 5 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 6 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 7 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 8 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 9 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 10 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 11 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 12 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 13 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 14 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 15 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 16 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 17 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 18 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 19 },
         ]
 
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].unequippable, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         const mintItemsAmount = 100;
@@ -276,7 +277,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as ItemSC).id);
-            expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
+            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as ItemSC).erc721Contract);
         }
         
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
@@ -292,7 +293,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal(0);
-            expect(equippedItems[i].contractAddress).to.be.equal(ethers.constants.AddressZero);
+            expect(equippedItems[i].erc721Contract).to.be.equal(ethers.constants.AddressZero);
         }
 
         arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
@@ -306,42 +307,42 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         // create slot
         const slots: Slot[] = [
-            { unequippable: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
-            { unequippable: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
-            { unequippable: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
-            { unequippable: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
-            { unequippable: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
-            { unequippable: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
-            { unequippable: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
-            { unequippable: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
-            { unequippable: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
-            { unequippable: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
+            { permanent: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
+            { permanent: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
+            { permanent: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
+            { permanent: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
+            { permanent: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
+            { permanent: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
+            { permanent: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
+            { permanent: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
+            { permanent: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
+            { permanent: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
         ]
         const items: ItemSC[] = [
-            { contractAddress: itemsContracts.itemsFacet.address, id: 0 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 1 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 2 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 3 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 4 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 5 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 6 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 7 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 8 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 9 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 10 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 11 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 12 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 13 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 14 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 15 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 16 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 17 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 18 },
-            { contractAddress: itemsContracts.itemsFacet.address, id: 19 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 0 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 1 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 2 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 3 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 4 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 5 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 6 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 7 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 8 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 9 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 10 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 11 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 12 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 13 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 14 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 15 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 16 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 17 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 18 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 19 },
         ]
 
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].unequippable, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         const mintItemsAmount = 100;
@@ -366,7 +367,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as ItemSC).id);
-            expect(equippedItems[i].contractAddress).to.be.equal((itemsToEquip[i] as ItemSC).contractAddress);
+            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as ItemSC).erc721Contract);
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount-1);
         }
         
@@ -379,7 +380,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal(0);
-            expect(equippedItems[i].contractAddress).to.be.equal(ethers.constants.AddressZero);
+            expect(equippedItems[i].erc721Contract).to.be.equal(ethers.constants.AddressZero);
             expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemsToEquip[i]?.id)).to.be.equal(mintItemsAmount);
         }
     })
@@ -393,9 +394,8 @@ describe('Items Diamond merkle Test', function () {
         const amounts = [1, 2];
         const proofs = itemsParams.merkleGenerator.generateProofs(namedAddresses.deployer);
         
-        await expect(
-            itemsContracts.itemsFacet.connect(namedAccounts.alice).claimMerkleBatch(ids, amounts, proofs),
-        ).to.be.revertedWith("Data not included in merkle");
+        await expect(itemsContracts.itemsFacet.connect(namedAccounts.alice).claimMerkleBatch(ids, amounts, proofs)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_NotIncludedInMerkleTree");
     })
 
     it('should not be able to claim tokens if token data is wrong', async () => {
@@ -403,9 +403,8 @@ describe('Items Diamond merkle Test', function () {
         const ids = [1, 2];
         const badAmounts = [3, 2];
         const proofs = itemsParams.merkleGenerator.generateProofs(namedAddresses.deployer);
-        await expect(
-            itemsContracts.itemsFacet.connect(namedAccounts.deployer).claimMerkleBatch(ids, badAmounts, proofs),
-        ).to.be.revertedWith("Data not included in merkle");
+        await expect(itemsContracts.itemsFacet.connect(namedAccounts.deployer).claimMerkleBatch(ids, badAmounts, proofs)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_NotIncludedInMerkleTree");
     })
 
     it('should be able to claim tokens if elegible', async () => {
@@ -428,9 +427,8 @@ describe('Items Diamond merkle Test', function () {
         const amounts = [1, 2];
         const proofs = itemsParams.merkleGenerator.generateProofs(namedAddresses.deployer);
         await itemsContracts.itemsFacet.claimMerkleBatch(ids, amounts, proofs)
-        await expect(
-            itemsContracts.itemsFacet.claimMerkleBatch(ids, amounts, proofs)
-        ).to.be.revertedWith("ItemsInternal._claimMerkle: Already claimed");
+        await expect(itemsContracts.itemsFacet.claimMerkleBatch(ids, amounts, proofs)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_AlreadyClaimed");
     })
 
     it('should be able to update merkle root', async () => {
