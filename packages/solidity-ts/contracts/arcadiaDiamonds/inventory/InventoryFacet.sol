@@ -80,7 +80,7 @@ contract InventoryFacet is
     function allowItemsInSlot(
         uint slotId,
         InventoryStorage.Item[] calldata items
-    ) external {
+    ) external onlyManager {
         _allowItemsInSlot(slotId, items);
     }
     
@@ -92,7 +92,7 @@ contract InventoryFacet is
     function disallowItemsInSlot(
         uint slotId,
         InventoryStorage.Item[] calldata items
-    ) external {
+    ) external onlyManager {
         _disallowItemsInSlot(slotId, items);
     }
 
