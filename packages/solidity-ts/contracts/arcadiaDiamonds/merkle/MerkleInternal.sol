@@ -7,6 +7,10 @@ import { RolesInternal } from "./../roles/RolesInternal.sol";
 
 contract MerkleInternal is RolesInternal {
 
+    error Merkle_AlreadyClaimed();
+    error Merkle_InvalidClaimAmount();
+    error Merkle_NotIncludedInMerkleTree();
+
     function _merkleRoot() internal view returns (bytes32) {
         return MerkleStorage.layout().merkleRoot;
     }
@@ -18,7 +22,8 @@ contract MerkleInternal is RolesInternal {
     // To create 'leaf' use abi.encode(leafProp1, leafProp2, ...)
     function _validateLeaf(bytes32[] memory proof, bytes memory _leaf) internal view returns (bool isValid) {
         bytes32 leaf = keccak256(bytes.concat(keccak256(_leaf)));
+
         isValid = MerkleProof.verify(proof, MerkleStorage.layout().merkleRoot, leaf);
-        require(isValid, "Data not included in merkle");
+        if (!isValid) revert Merkle_NotIncludedInMerkleTree();
     }
 }

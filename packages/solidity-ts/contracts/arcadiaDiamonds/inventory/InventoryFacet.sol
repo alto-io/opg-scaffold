@@ -60,16 +60,16 @@ contract InventoryFacet is
      * @notice Creates a new inventory slot
      * @dev This function is only accessible to the manager role
      * @dev Slots are 1-indexed
-     * @param unequippable Whether or not the slot can be unequipped once equipped
+     * @param permanent Whether or not the slot can be unequipped once equipped
      * @param category The category of the slot
      * @param items The list of items to allow in the slot
      */
     function createSlot(
-        bool unequippable,
+        bool permanent,
         InventoryStorage.SlotCategory category,
         InventoryStorage.Item[] calldata items
     ) external onlyManager {
-        _createSlot(unequippable, category, items);
+        _createSlot(permanent, category, items);
     }
 
     /**

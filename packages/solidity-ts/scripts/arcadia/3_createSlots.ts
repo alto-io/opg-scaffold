@@ -7,7 +7,7 @@ import getDeployedContracts from "./utils/deployedContracts";
 
 enum SlotCategory { Base, Equippment, Cosmetic}
 interface Slot {
-    unequippable: boolean,
+    permanent: boolean,
     category: SlotCategory,
     allowedItems: number[]
 }
@@ -17,9 +17,9 @@ interface Item {
     id: number
 }
 let slotsList: Slot[] = [
-    { unequippable: false, category: SlotCategory.Base, allowedItems: [0, 1]},
-    { unequippable: false, category: SlotCategory.Cosmetic, allowedItems: [2, 3]},
-    { unequippable: false, category: SlotCategory.Equippment, allowedItems: [4, 5]}
+    { permanent: false, category: SlotCategory.Base, allowedItems: [0, 1]},
+    { permanent: false, category: SlotCategory.Cosmetic, allowedItems: [2, 3]},
+    { permanent: false, category: SlotCategory.Equippment, allowedItems: [4, 5]}
 ]
 
 async function main() {
@@ -38,7 +38,7 @@ async function main() {
     
     for (let i = 0; i < slotsList.length; i++) {
         const slotAllowedItems = itemsList.filter((_item)=>slotsList[i].allowedItems.includes(_item.id));
-        let tx = await inventorySC.createSlot(slotsList[i].unequippable, slotsList[i].category, slotAllowedItems);
+        let tx = await inventorySC.createSlot(slotsList[i].permanent, slotsList[i].category, slotAllowedItems);
         await tx.wait();
     }
     const slotsSC: Slot[] = [];

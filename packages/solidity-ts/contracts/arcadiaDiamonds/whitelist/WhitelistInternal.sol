@@ -7,6 +7,9 @@ import { RolesInternal } from "./../roles/RolesInternal.sol";
 
 contract WhitelistInternal is RolesInternal {
 
+    error Whitelist_ExceedsElegibleAmount();
+    error Whitelist_InputDataMismatch();
+
     event WhitelistBalanceChanged(address account, int amount, uint totalElegibleAmount, uint totalClaimedAmount);
 
     function _whitelistClaimed(address account) internal view returns (uint) {
@@ -19,9 +22,13 @@ contract WhitelistInternal is RolesInternal {
 
     function _consumeWhitelist(address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
-        require(whitelistSL.elegible[account] >= amount, "WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
+
+        if (whitelistSL.elegible[account] < amount) 
+            revert Whitelist_ExceedsElegibleAmount();
+
         whitelistSL.elegible[account] -= amount;
         whitelistSL.claimed[account] += amount;
+
         emit WhitelistBalanceChanged(msg.sender, int(amount), whitelistSL.elegible[account], whitelistSL.claimed[account]);
     }
 
@@ -32,8 +39,10 @@ contract WhitelistInternal is RolesInternal {
     }
 
     function _addToWhitelistBatch(address[] calldata accounts, uint[] calldata amounts) onlyManager internal {
-        require(accounts.length == amounts.length, "WhitelistInternal._addToWhitelistBatch: Inputs length mismatch");
+        if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();
+
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+
         for (uint i = 0; i < accounts.length; i++) {
             whitelistSL.elegible[accounts[i]] += amounts[i];
             emit WhitelistBalanceChanged(msg.sender, int(amounts[i]), whitelistSL.elegible[accounts[i]], whitelistSL.claimed[accounts[i]]);

@@ -28,7 +28,7 @@ describe('Arcadians Diamond Whitelist', function () {
         const elegibleAmount = 10;
 
         await expect(arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount)).
-            to.be.revertedWith("WhitelistInternal._consumeWhitelist: amount exceeds elegible amount");
+            to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
         await arcadiansContracts.whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
         expect(await arcadiansContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
@@ -67,18 +67,16 @@ describe('Arcadians Diamond merkle', function () {
         const claimAmount = 1;
         let proof = arcadiansParams.merkleGenerator.generateProof(namedAddresses.deployer);
         await arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof);
-        await expect(
-            arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof)
-        ).to.be.revertedWith("All tokens claimed");
+        await expect(arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_AlreadyClaimed");
     })
     
     it('should not be able to claim a different amount of tokens', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const badClaimAmount = 2;
         let proof = arcadiansParams.merkleGenerator.generateProof(namedAddresses.deployer);
-        await expect(
-            arcadiansContracts.arcadiansFacet.claimMerkle(badClaimAmount, proof),
-        ).to.be.revertedWith("Data not included in merkle");
+        await expect(arcadiansContracts.arcadiansFacet.claimMerkle(badClaimAmount, proof)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_NotIncludedInMerkleTree");
     })
 
     it('should be able to update merkle root', async () => {
@@ -109,13 +107,15 @@ describe('mint max limit per user', function () {
 
     it('Should not be able to mint without sending ether ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint()).to.be.revertedWith("ArcadiansInternal._mint: Invalid pay amount")
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint()).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount");
     })
 
     it('Should not be able to mint paying a wrong amount ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const wrongMintPrice = arcadiansParams.mintPrice - 1;
-        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: wrongMintPrice})).to.be.revertedWith("ArcadiansInternal._mint: Invalid pay amount")
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: wrongMintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount");
     })
 })
 
@@ -129,7 +129,7 @@ describe('mint max limit per user', function () {
         expect(await arcadiansContracts.arcadiansFacet.maxMintPerUser()).to.be.equal(newMaxLimit)
     })
     
-    it('Should be able to mint before reaching max limit ', async () => {
+    it('Should be able to mint before reaching max limit', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const maxLimit = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         const currentBalance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob);
@@ -141,6 +141,7 @@ describe('mint max limit per user', function () {
             await arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice});
         }
         expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
-        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice})).to.be.revertedWith("ArcadiansInternal._mint: User maximum minted tokens reached");
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansReached");
     })
 });

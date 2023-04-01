@@ -11,7 +11,7 @@ interface ItemSC {
 }
 interface SlotSC {
     id: BigNumber,
-    unequippable: boolean,
+    permanent: boolean,
     category: BigNumber,
     allowedItems: ItemSC[]
 }
@@ -51,7 +51,7 @@ async function main() {
     const slotsAll = slotsAllSC.map((slot: SlotSC)=>{
         return {
             id: slot.id.toNumber(),
-            unequippable: slot.unequippable,
+            permanent: slot.permanent,
             category: slot.category,
             allowedItems: slot.allowedItems.map((item)=>{return {contractAddress: item.contractAddress, id: item.id.toNumber()}})
         }

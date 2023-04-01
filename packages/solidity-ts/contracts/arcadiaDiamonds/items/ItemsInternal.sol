@@ -10,6 +10,8 @@ import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
 
 contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
+    error Items_InputsLengthMistatch();
+
     event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
 
     function _claimMerkle(uint itemId, uint amount, bytes32[] memory proof)
@@ -18,7 +20,9 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
         // Revert if the token was Already claimed before
-        require(!itemsSL.claimedMerkle[msg.sender][itemId], "ItemsInternal._claimMerkle: Already claimed");
+        if (itemsSL.claimedMerkle[msg.sender][itemId]) 
+            revert Merkle_AlreadyClaimed();
+
         itemsSL.claimedMerkle[msg.sender][itemId] = true;
 
         // Verify if is elegible
@@ -34,14 +38,18 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     function _claimMerkleBatch(uint256[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
-        require(itemIds.length == amounts.length, "ItemsInternal._claimMerkleBatch: Inputs length mismatch");
+        if (itemIds.length != amounts.length) 
+            revert Items_InputsLengthMistatch();
+        
         for (uint256 i = 0; i < itemIds.length; i++) {
             _claimMerkle(itemIds[i], amounts[i], proofs[i]);
         }
     }
     
     function _claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) internal {
-        require(itemIds.length == amounts.length, "ItemsInternal._claimWhitelist: Inputs length mismatch");
+        if (itemIds.length != amounts.length) 
+            revert Items_InputsLengthMistatch();
+
         uint totalAmount = 0;
         for (uint i = 0; i < itemIds.length; i++) {
             _mint(msg.sender, itemIds[i], amounts[i], '');
