@@ -1,7 +1,7 @@
 // import { ethers } from "ethers";
 import hre from "hardhat";
 import fs from "fs";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import path from "path";
 import getDeployedContracts from "./utils/deployedContracts";
 
@@ -9,12 +9,11 @@ enum SlotCategory { Base, Equippment, Cosmetic}
 interface Slot {
     id?: number,
     permanent: boolean,
-    category: SlotCategory,
-    allowedItems: number[]
+    category: SlotCategory
 }
 
 interface Item {
-    contractAddress: string,
+    erc721Contract: string,
     id: number
 }
 
@@ -24,21 +23,26 @@ async function main() {
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
     const itemsList: Item[] = [
-        { id: 0, contractAddress: itemsSC.address },
-        { id: 1, contractAddress: itemsSC.address },
-        { id: 2, contractAddress: itemsSC.address },
-        { id: 3, contractAddress: itemsSC.address },
-        { id: 4, contractAddress: itemsSC.address },
-        { id: 5, contractAddress: itemsSC.address }
+        { id: 0, erc721Contract: itemsSC.address },
+        { id: 1, erc721Contract: itemsSC.address },
+        { id: 2, erc721Contract: itemsSC.address },
+        { id: 3, erc721Contract: itemsSC.address },
+        { id: 4, erc721Contract: itemsSC.address },
+        { id: 5, erc721Contract: itemsSC.address }
     ]
 
     const arcadianId = 0;
-    const slotsAll = await inventorySC.slotsAll();
-
-    const itemsToEquip = slotsAll.map((_slot: any)=> itemsList.find((item)=> item.id == _slot.allowedItems[0].id));
+    const slotsAll: Slot[] = await inventorySC.slotsAll();
+    
+    const itemsToEquip: Item[] = [];
+    for (const slot of slotsAll) {
+        const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
+        const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
+        itemsToEquip.push(itemToEquip);
+    }
     const slotsIds = slotsAll.map((slot: Slot)=>slot.id);
-
     await itemsSC.setApprovalForAll(inventorySC.address, true);
+    
     let tx = await inventorySC.equipBatch(arcadianId, slotsIds, itemsToEquip);
     await tx.wait();
 

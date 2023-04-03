@@ -5,20 +5,19 @@ import { BigNumber, ethers } from "ethers";
 import path from "path";
 import getDeployedContracts from "./utils/deployedContracts";
 
-interface ItemSC {
-    id: BigNumber,
-    contractAddress: string
+interface Item {
+    id: any,
+    erc721Contract: string
 }
-interface SlotSC {
-    id: BigNumber,
+interface Slot {
+    id: any,
     permanent: boolean,
-    category: BigNumber,
-    allowedItems: ItemSC[]
+    category: any
 }
-export interface ItemInSlotSC {
-    slotId: BigNumber,
-    itemId: BigNumber,
-    contractAddress: string
+export interface ItemInSlot {
+    slotId: any,
+    itemId: any,
+    erc721Contract: string
 }
 
 const dataSCPath = path.join(__dirname, "output/dataSC.json");
@@ -47,19 +46,28 @@ async function main() {
         ownedItems.push({itemId: tokensByAccount[i].toNumber(), balance: balance.toNumber()});
     }
 
-    let slotsAllSC: SlotSC[] = await inventorySC.slotsAll();
-    const slotsAll = slotsAllSC.map((slot: SlotSC)=>{
-        return {
+    let slotsAll: Slot[] = await inventorySC.slotsAll();
+    const slots: any[] = [];
+    for (const slot of slotsAll) {
+        const allowedItems: Item[] = [];
+        const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
+        for (let i = 0; i < numAllowedItems.toNumber(); i++) {
+            let allowedItem: Item = await inventorySC.allowedItem(slot.id, i)
+            allowedItems.push({erc721Contract: allowedItem.erc721Contract, id: allowedItem.id.toNumber() });
+        }
+        
+        slots.push({
             id: slot.id.toNumber(),
             permanent: slot.permanent,
             category: slot.category,
-            allowedItems: slot.allowedItems.map((item)=>{return {contractAddress: item.contractAddress, id: item.id.toNumber()}})
-        }
-    })
-    const equippedAllSC: ItemInSlotSC[] = await inventorySC.equippedAll(arcadianId);
+            allowedItems: allowedItems
+        })
+    }
+
+    const equippedAllSC: ItemInSlot[] = await inventorySC.equippedAll(arcadianId);
     const equippedAll = equippedAllSC.map((itemInSlot) => {return {
         slotSc: itemInSlot.slotId.toNumber(),
-        contractAddress: itemInSlot.contractAddress,
+        erc721Contract: itemInSlot.erc721Contract,
         itemId: itemInSlot.itemId.toNumber(),
     }})
 
@@ -72,7 +80,7 @@ async function main() {
         ownedArcadians,
         itemsOwner: accounts.deployer,
         ownedItems,
-        inventorySlots: slotsAll,
+        inventorySlots: slots,
         equippedAll
     };
     fs.writeFileSync(dataSCPath, JSON.stringify(dataSC));

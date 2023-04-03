@@ -15,7 +15,7 @@ interface Slot {
 }
 
 interface Item {
-    contractAddress: string,
+    erc721Contract: string,
     id: number
 }
 

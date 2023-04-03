@@ -32,7 +32,6 @@ library InventoryStorage {
         uint id;
         bool permanent;
         SlotCategory category;
-        InventoryStorage.Item[] allowedItems;
     }
 
     struct Layout {
@@ -48,6 +47,8 @@ library InventoryStorage {
 
         // item address => item id => allowed slot id
         mapping(address => mapping(uint => uint)) itemSlot;
+        // slot id => items
+        mapping(uint => InventoryStorage.Item[]) allowedItems;
 
         // List of all the existent hashes
         EnumerableSet.Bytes32Set baseItemsHashes;

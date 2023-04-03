@@ -79,15 +79,17 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // Remove and set item slot
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
-        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.erc721Contract, BigNumber.from(item.id)]]);
-
+        expect(await arcadiansContracts.inventoryFacet.allowedItem(slot.id, 0)).to.be.eql([item.erc721Contract, BigNumber.from(item.id)]);
+        expect(await arcadiansContracts.inventoryFacet.numAllowedItems(slot.id)).to.be.equal(1);
+        
         await arcadiansContracts.inventoryFacet.disallowItemsInSlot(slot.id, [item]);
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(0);
-        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([]);
-
+        expect(await arcadiansContracts.inventoryFacet.numAllowedItems(slot.id)).to.be.equal(0);
+        
         await arcadiansContracts.inventoryFacet.allowItemsInSlot(slot.id, [item]);
         expect(await arcadiansContracts.inventoryFacet.allowedSlot(item)).to.be.equal(slot.id);
-        expect(await arcadiansContracts.inventoryFacet.allowedItems(slot.id)).to.be.eql([[item.erc721Contract, BigNumber.from(item.id)]]);
+        expect(await arcadiansContracts.inventoryFacet.allowedItem(slot.id, 0)).to.be.eql([item.erc721Contract, BigNumber.from(item.id)]);
+        expect(await arcadiansContracts.inventoryFacet.numAllowedItems(slot.id)).to.be.equal(1);
         
         const slotSC = await arcadiansContracts.inventoryFacet.slot(slot.id);
         expect(slotSC.category).to.be.equal(slot.category);
