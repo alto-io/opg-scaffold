@@ -43,16 +43,20 @@ describe('Items Diamond Test', function () {
         await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
             to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
-        await itemsContracts.whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
-        expect(await itemsContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        await itemsContracts.whitelistFacet.increaseWhitelistElegible(namedAddresses.deployer, elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.claimedWhitelist(namedAddresses.deployer)).to.be.equal(0);
+        expect(await itemsContracts.whitelistFacet.elegibleWhitelist(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.totalClaimedWhitelist()).to.be.equal(0);
+        expect(await itemsContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(elegibleAmount);
 
         await itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount]);
         
-        expect(await itemsContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(0);
+        expect(await itemsContracts.whitelistFacet.claimedWhitelist(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.elegibleWhitelist(namedAddresses.deployer)).to.be.equal(0);
         balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
         expect(balance).to.be.equal(elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.totalClaimedWhitelist()).to.be.equal(elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(0);
     })
 })
 
@@ -420,6 +424,7 @@ describe('Items Diamond merkle Test', function () {
         for (let i = 0; i < ids.length; i++) {
             const balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, ids[i]);
             expect(balance).to.be.equal(amounts[i]);
+            expect(await itemsContracts.itemsFacet.claimedAmount(namedAddresses.deployer, ids[i])).to.be.equal(amounts[i]);
         }
     })
 

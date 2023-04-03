@@ -18,7 +18,7 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);
     event InventoryAddressChanged(address indexed by, address indexed oldInventoryAddress, address indexed newInventoryAddress);
-    event ArcadianClaimedMerkle(address indexed to, uint256 indexed amount);
+    event ArcadianClaimedMerkle(address indexed to, uint256 indexed claimedAmount);
 
     using UintUtils for uint256;
 
@@ -33,7 +33,11 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
     }
 
     function _claimedAmountMerkle(address account) internal view returns (uint) {
-        return ArcadiansStorage.layout().amountClaimed[account];
+        return ArcadiansStorage.layout().amountClaimedMerkle[account];
+    }
+
+    function _totalClaimedMerkle() internal view returns (uint) {
+        return ArcadiansStorage.layout().totalClaimedMerkle;
     }
 
     function _setMaxMintPerUser(uint newMaxMintPerUser) internal {

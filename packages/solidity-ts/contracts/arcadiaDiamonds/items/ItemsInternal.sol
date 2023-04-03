@@ -19,19 +19,12 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
-        // Revert if the token was Already claimed before
-        if (itemsSL.claimedMerkle[msg.sender][itemId]) 
-            revert Merkle_AlreadyClaimed();
-
-        itemsSL.claimedMerkle[msg.sender][itemId] = true;
-
-        // Verify if is elegible
         bytes memory leaf = abi.encode(msg.sender, itemId, amount);
-        _validateLeaf(proof, leaf);
+        _consumeLeaf(proof, leaf);
 
-        // Mint token to address
         _mint(msg.sender, itemId, amount, '');
 
+        itemsSL.amountClaimed[msg.sender][itemId] += amount;
         emit ItemClaimedMerkle(msg.sender, itemId, amount);
     }
 
@@ -56,6 +49,10 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
             totalAmount += amounts[i];
         }
         _consumeWhitelist(msg.sender, totalAmount);
+    }
+
+    function _claimedAmount(address account, uint itemId) internal view returns (uint) {
+        return ItemsStorage.layout().amountClaimed[account][itemId];
     }
 
     function _mint(address to, uint256 itemId, uint256 amount)

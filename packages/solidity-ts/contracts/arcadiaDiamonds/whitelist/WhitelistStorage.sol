@@ -9,6 +9,9 @@ library WhitelistStorage {
     struct Layout {
         mapping(address => uint) claimed;
         mapping(address => uint) elegible;
+        uint totalClaimed;
+        uint totalElegible;
+        bool claimInactive;
     }
 
     function layout()

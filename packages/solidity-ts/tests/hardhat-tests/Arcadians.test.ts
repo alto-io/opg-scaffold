@@ -22,6 +22,21 @@ describe('Arcadians Diamond Whitelist', function () {
     it('should be able to claim tokens if whitelisted', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
 
+        // disable and disable claim to test it
+        expect(await arcadiansContracts.whitelistFacet.isWhitelistClaimActive()).to.be.true;
+        await arcadiansContracts.whitelistFacet.setWhitelistClaimInactive();
+        expect(await arcadiansContracts.whitelistFacet.isWhitelistClaimActive()).to.be.false;
+
+        await expect(arcadiansContracts.arcadiansFacet.claimWhitelist(1)).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Whitelist_ClaimInactive");
+
+        await arcadiansContracts.whitelistFacet.setWhitelistClaimActive();
+        expect(await arcadiansContracts.whitelistFacet.isWhitelistClaimActive()).to.be.true;
+    })
+
+    it('should be able to claim tokens if whitelisted', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+
         let balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer);
         expect(balance).to.be.equal(0);
 
@@ -30,16 +45,21 @@ describe('Arcadians Diamond Whitelist', function () {
         await expect(arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount)).
             to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
-        await arcadiansContracts.whitelistFacet.addToWhitelist(namedAddresses.deployer, elegibleAmount);
-        expect(await arcadiansContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(0);
-        expect(await arcadiansContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-
-        await arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount);
+        // Increase whitelist elegible
+        await arcadiansContracts.whitelistFacet.increaseWhitelistElegible(namedAddresses.deployer, elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.claimedWhitelist(namedAddresses.deployer)).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.elegibleWhitelist(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.totalClaimedWhitelist()).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(elegibleAmount);
         
-        expect(await arcadiansContracts.whitelistFacet.whitelistClaimed(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-        expect(await arcadiansContracts.whitelistFacet.whitelistBalance(namedAddresses.deployer)).to.be.equal(0);
+        // claim
+        await arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.claimedWhitelist(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.elegibleWhitelist(namedAddresses.deployer)).to.be.equal(0);
         balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer);
         expect(balance).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.totalClaimedWhitelist()).to.be.equal(elegibleAmount);
+        expect(await arcadiansContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(0);
     })
 })
 
@@ -60,6 +80,7 @@ describe('Arcadians Diamond merkle', function () {
 
         balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer)
         expect(balance).to.be.equal(amountToClaim)
+        expect(await arcadiansContracts.arcadiansFacet.totalClaimedMerkle()).to.be.equal(amountToClaim);
     })
 
     it('should not able to claim the same tokens twice', async () => {
@@ -69,6 +90,15 @@ describe('Arcadians Diamond merkle', function () {
         await arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof);
         await expect(arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof)).
             to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_AlreadyClaimed");
+    })
+
+    it('should not able to claim if merkle calim is not active', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        const claimAmount = 1;
+        let proof = arcadiansParams.merkleGenerator.generateProof(namedAddresses.deployer);
+        await arcadiansContracts.merkleFacet.setMerkleClaimInactive();
+        await expect(arcadiansContracts.arcadiansFacet.claimMerkle(claimAmount, proof)).
+            to.be.revertedWithCustomError(arcadiansContracts.merkleFacet, "Merkle_ClaimInactive");
     })
     
     it('should not be able to claim a different amount of tokens', async () => {

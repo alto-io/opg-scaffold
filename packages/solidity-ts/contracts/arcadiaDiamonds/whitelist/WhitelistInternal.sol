@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 
-import { MerkleProof } from "@solidstate/contracts/cryptography/MerkleProof.sol";
 import { WhitelistStorage } from "./WhitelistStorage.sol";
 import { RolesInternal } from "./../roles/RolesInternal.sol";
 
@@ -9,43 +8,100 @@ contract WhitelistInternal is RolesInternal {
 
     error Whitelist_ExceedsElegibleAmount();
     error Whitelist_InputDataMismatch();
+    error Whitelist_ClaimStateAlreadyUpdated();
+    error Whitelist_ClaimInactive();
 
-    event WhitelistBalanceChanged(address account, int amount, uint totalElegibleAmount, uint totalClaimedAmount);
+    event WhitelistBalanceChanged(address account, uint totalElegibleAmount, uint totalClaimedAmount);
 
-    function _whitelistClaimed(address account) internal view returns (uint) {
+    function _claimedWhitelist(address account) internal view returns (uint) {
         return WhitelistStorage.layout().claimed[account];
     }
 
-    function _whitelistBalance(address account) internal view returns (uint) {
+    function _totalClaimedWhitelist() internal view returns (uint) {
+        return WhitelistStorage.layout().totalClaimed;
+    }
+
+    function _totalElegibleWhitelist() internal view returns (uint) {
+        return WhitelistStorage.layout().totalElegible;
+    }
+
+    function _elegibleWhitelist(address account) internal view returns (uint) {
         return WhitelistStorage.layout().elegible[account];
     }
 
     function _consumeWhitelist(address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
 
+        if (whitelistSL.claimInactive) 
+            revert Whitelist_ClaimInactive();
+            
         if (whitelistSL.elegible[account] < amount) 
             revert Whitelist_ExceedsElegibleAmount();
 
         whitelistSL.elegible[account] -= amount;
         whitelistSL.claimed[account] += amount;
+        whitelistSL.totalClaimed += amount;
+        whitelistSL.totalElegible -= amount;
 
-        emit WhitelistBalanceChanged(msg.sender, int(amount), whitelistSL.elegible[account], whitelistSL.claimed[account]);
+        emit WhitelistBalanceChanged(msg.sender, whitelistSL.elegible[account], whitelistSL.claimed[account]);
     }
 
-    function _addToWhitelist(address account, uint amount) onlyManager internal {
+    function _increaseWhitelistElegible(address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
         whitelistSL.elegible[account] += amount;
-        emit WhitelistBalanceChanged(msg.sender, int(amount), whitelistSL.elegible[account], whitelistSL.claimed[account]);
+        whitelistSL.totalElegible += amount;
+        
+        emit WhitelistBalanceChanged(msg.sender, whitelistSL.elegible[account], whitelistSL.claimed[account]);
     }
 
-    function _addToWhitelistBatch(address[] calldata accounts, uint[] calldata amounts) onlyManager internal {
+    function _increaseWhitelistElegibleBatch(address[] calldata accounts, uint[] calldata amounts) internal {
         if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();
 
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
 
         for (uint i = 0; i < accounts.length; i++) {
             whitelistSL.elegible[accounts[i]] += amounts[i];
-            emit WhitelistBalanceChanged(msg.sender, int(amounts[i]), whitelistSL.elegible[accounts[i]], whitelistSL.claimed[accounts[i]]);
+            whitelistSL.totalElegible += amounts[i];
+            emit WhitelistBalanceChanged(msg.sender, whitelistSL.elegible[accounts[i]], whitelistSL.claimed[accounts[i]]);
         }
+    }
+
+    function _setWhitelistElegible(address account, uint amount) internal {
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        whitelistSL.totalElegible += amount - whitelistSL.elegible[account];
+        whitelistSL.elegible[account] += amount;
+        emit WhitelistBalanceChanged(msg.sender, whitelistSL.elegible[account], whitelistSL.claimed[account]);
+    }
+
+    function _setWhitelistElegibleBatch(address[] calldata accounts, uint[] calldata amounts) internal {
+        if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();
+
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+
+        for (uint i = 0; i < accounts.length; i++) {
+            whitelistSL.totalElegible += amounts[i] - whitelistSL.elegible[accounts[i]];
+            whitelistSL.elegible[accounts[i]] = amounts[i];
+            emit WhitelistBalanceChanged(msg.sender, whitelistSL.elegible[accounts[i]], whitelistSL.claimed[accounts[i]]);
+        }
+    }
+
+    function _isWhitelistClaimActive() view internal returns (bool) {
+        return !WhitelistStorage.layout().claimInactive;
+    }
+
+    function _setWhitelistClaimActive() internal {
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+
+        if (!whitelistSL.claimInactive) revert Whitelist_ClaimInactive();
+        
+        whitelistSL.claimInactive = false;
+    }
+
+    function _setWhitelistClaimInactive() internal {
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+
+        if (whitelistSL.claimInactive) revert Whitelist_ClaimStateAlreadyUpdated();
+        
+        whitelistSL.claimInactive = true;
     }
 }
