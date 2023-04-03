@@ -53,6 +53,16 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
+     * @notice Amount claimed by an address of a specific item
+     * @param account the account to query
+     * @param itemId the item id to query
+     * @return amount returns the claimed amount given an account and an item id
+     */
+    function claimedAmount(address account, uint itemId) external view returns (uint amount) {
+        return _claimedAmount(account, itemId);
+    }
+
+    /**
      * @notice Mints a new item
      * @param to The address to mint the item to
      * @param id The ID of the item to mint

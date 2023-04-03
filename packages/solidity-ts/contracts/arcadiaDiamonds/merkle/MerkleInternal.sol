@@ -10,6 +10,8 @@ contract MerkleInternal is RolesInternal {
     error Merkle_AlreadyClaimed();
     error Merkle_InvalidClaimAmount();
     error Merkle_NotIncludedInMerkleTree();
+    error Merkle_ClaimInactive();
+    error Merkle_ClaimStateAlreadyUpdated();
 
     function _merkleRoot() internal view returns (bytes32) {
         return MerkleStorage.layout().merkleRoot;
@@ -19,11 +21,40 @@ contract MerkleInternal is RolesInternal {
         MerkleStorage.layout().merkleRoot = newMerkleRoot;
     }
 
-    // To create 'leaf' use abi.encode(leafProp1, leafProp2, ...)
-    function _validateLeaf(bytes32[] memory proof, bytes memory _leaf) internal view returns (bool isValid) {
-        bytes32 leaf = keccak256(bytes.concat(keccak256(_leaf)));
+    function _isMerkleClaimActive() view internal returns (bool) {
+        return !MerkleStorage.layout().claimInactive;
+    }
 
-        isValid = MerkleProof.verify(proof, MerkleStorage.layout().merkleRoot, leaf);
+    function _setMerkleClaimActive() internal {
+        MerkleStorage.Layout storage merkleSL = MerkleStorage.layout();
+
+        if (!merkleSL.claimInactive) revert Merkle_ClaimStateAlreadyUpdated();
+        
+        merkleSL.claimInactive = false;
+    }
+
+    function _setMerkleClaimInactive() internal {
+        MerkleStorage.Layout storage merkleSL = MerkleStorage.layout();
+
+        if (merkleSL.claimInactive) revert Merkle_ClaimStateAlreadyUpdated();
+        
+        merkleSL.claimInactive = true;
+    }
+
+    // To create 'leaf' use abi.encode(leafProp1, leafProp2, ...)
+    function _consumeLeaf(bytes32[] memory proof, bytes memory _leaf) internal {
+        MerkleStorage.Layout storage merkleSL = MerkleStorage.layout();
+
+        if (merkleSL.claimInactive) revert Merkle_ClaimInactive();
+
+        bytes32 proofHash = keccak256(abi.encodePacked(proof));
+        if (merkleSL.claimedProof[proofHash]) revert Merkle_AlreadyClaimed();
+
+        bytes32 leaf = keccak256(bytes.concat(keccak256(_leaf)));
+        bool isValid = MerkleProof.verify(proof, merkleSL.merkleRoot, leaf);
+        
         if (!isValid) revert Merkle_NotIncludedInMerkleTree();
+        
+        merkleSL.claimedProof[proofHash] = true;
     }
 }

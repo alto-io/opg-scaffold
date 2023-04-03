@@ -8,6 +8,9 @@ library MerkleStorage {
 
     struct Layout {
         bytes32 merkleRoot;
+        bool claimInactive;
+        mapping(bytes32 => bool) claimedProof;
+        mapping(address => uint) amountClaimed;
     }
 
     function layout()

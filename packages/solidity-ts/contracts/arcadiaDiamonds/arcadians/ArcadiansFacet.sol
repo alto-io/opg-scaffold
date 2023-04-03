@@ -37,32 +37,30 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
 
     /**
      * @notice Allow the caller of the transaction to claim the amount of arcadians present in the Merkle tree
-     * @param totalAmount total amount of arcadians that the caller can claim
+     * @param amount amount of arcadians that the caller wants to claim
      * @param proof Merkle proof to validate if the caller is eligible to claim the amount given
      */
-    function claimMerkle(uint totalAmount, bytes32[] memory proof)
+    function claimMerkle(uint amount, bytes32[] memory proof)
         external nonReentrant
     {
-        ArcadiansStorage.Layout storage es = ArcadiansStorage.layout();
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
 
         // Revert if the arcadian was already claimed before
-        if (totalAmount == 0) 
+        if (amount == 0) 
             revert Merkle_InvalidClaimAmount();
 
-        if (es.amountClaimed[msg.sender] > 0) 
-            revert Merkle_AlreadyClaimed();
-
         // Verify if is elegible
-        bytes memory leaf = abi.encode(msg.sender, totalAmount);
-        _validateLeaf(proof, leaf);
+        bytes memory leaf = abi.encode(msg.sender, amount);
+        _consumeLeaf(proof, leaf);
 
         // Mint arcadians to address
-        uint amountLeftToClaim = totalAmount - es.amountClaimed[msg.sender];
-        for (uint256 i = 0; i < amountLeftToClaim; i++) {
+        for (uint256 i = 0; i < amount; i++) {
             _safeMint(msg.sender, _totalSupply());
         }
-        es.amountClaimed[msg.sender] += amountLeftToClaim;
-        emit ArcadianClaimedMerkle(msg.sender, amountLeftToClaim);
+        arcadiansSL.amountClaimedMerkle[msg.sender] += amount;
+        arcadiansSL.totalClaimedMerkle += amount;
+
+        emit ArcadianClaimedMerkle(msg.sender, amount);
     }
 
     /**
@@ -96,7 +94,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (msg.value != arcadiansSL.mintPrice)
             revert Arcadians_InvalidPayAmount();
 
-        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimed[msg.sender];
+        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
         if (mintedTokens >= arcadiansSL.maxMintPerUser) 
             revert Arcadians_MaximumMintedArcadiansReached();
 
@@ -116,7 +114,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
         require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
-        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimed[msg.sender];
+        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
         require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
         uint tokenId = _totalSupply();
         _safeMint(msg.sender, tokenId);
@@ -168,6 +166,13 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         return _baseURI();
     }
 
+    /**
+     * @notice Returns the total claimed amount from the merkle tree
+     * @return The total claimed amount
+     */
+    function totalClaimedMerkle() external view returns (uint) {
+        return _totalClaimedMerkle();
+    }
 
     // required overrides
     function _handleApproveMessageValue(
