@@ -13,7 +13,7 @@ interface Slot {
 }
 
 interface Item {
-    contractAddress: string,
+    erc721Contract: string,
     id: number
 }
 let slotsList: Slot[] = [
@@ -28,16 +28,18 @@ async function main() {
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
     const itemsList: Item[] = [
-        { id: 0, contractAddress: itemsSC.address },
-        { id: 1, contractAddress: itemsSC.address },
-        { id: 2, contractAddress: itemsSC.address },
-        { id: 3, contractAddress: itemsSC.address },
-        { id: 4, contractAddress: itemsSC.address },
-        { id: 5, contractAddress: itemsSC.address }
+        { id: 0, erc721Contract: itemsSC.address },
+        { id: 1, erc721Contract: itemsSC.address },
+        { id: 2, erc721Contract: itemsSC.address },
+        { id: 3, erc721Contract: itemsSC.address },
+        { id: 4, erc721Contract: itemsSC.address },
+        { id: 5, erc721Contract: itemsSC.address }
     ]
     
     for (let i = 0; i < slotsList.length; i++) {
         const slotAllowedItems = itemsList.filter((_item)=>slotsList[i].allowedItems.includes(_item.id));
+        console.log("inputs: ", slotsList[i].permanent, slotsList[i].category, slotAllowedItems);
+        
         let tx = await inventorySC.createSlot(slotsList[i].permanent, slotsList[i].category, slotAllowedItems);
         await tx.wait();
     }

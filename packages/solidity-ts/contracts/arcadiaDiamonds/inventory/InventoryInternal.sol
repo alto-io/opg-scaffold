@@ -423,7 +423,7 @@ contract InventoryInternal is
 
                 _disallowItemInSlotUnchecked(slotId, items[i]);
             }
-            inventorySL.slots[slotId].allowedItems.push(items[i]);
+            inventorySL.allowedItems[slotId].push(items[i]);
             inventorySL.itemSlot[items[i].erc721Contract][items[i].id] = slotId;
         }
 
@@ -455,10 +455,10 @@ contract InventoryInternal is
     ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         
-        for (uint i = 0; i < inventorySL.slots[slotId].allowedItems.length; i++) {
-            if (inventorySL.slots[slotId].allowedItems[i].id == item.id) {
-                inventorySL.slots[slotId].allowedItems[i] = inventorySL.slots[slotId].allowedItems[inventorySL.slots[slotId].allowedItems.length-1];
-                inventorySL.slots[slotId].allowedItems.pop();
+        for (uint i = 0; i < inventorySL.allowedItems[slotId].length; i++) {
+            if (inventorySL.allowedItems[slotId][i].id == item.id) {
+                inventorySL.allowedItems[slotId][i] = inventorySL.allowedItems[slotId][inventorySL.allowedItems[slotId].length-1];
+                inventorySL.allowedItems[slotId].pop();
                 break;
             }
         }
@@ -470,8 +470,12 @@ contract InventoryInternal is
         return InventoryStorage.layout().itemSlot[item.erc721Contract][item.id];
     }
 
-    function _allowedItems(uint slotId) internal view onlyValidSlot(slotId) returns (InventoryStorage.Item[] memory) {
-        return InventoryStorage.layout().slots[slotId].allowedItems;
+    function _allowedItem(uint slotId, uint index) internal view onlyValidSlot(slotId) returns (InventoryStorage.Item memory) {
+        return InventoryStorage.layout().allowedItems[slotId][index];
+    }
+
+    function _numAllowedItems(uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
+        return InventoryStorage.layout().allowedItems[slotId].length;
     }
 
     function _slot(uint slotId) internal view returns (InventoryStorage.Slot storage slot) {

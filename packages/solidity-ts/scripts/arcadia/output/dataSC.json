@@ -1,1 +1,101 @@
-{"network":"mumbai","itemsSC":"0xE8BdDFd782706b46e0a60ceF66c5d5bB8b917fdE","inventorySC":"0x354697334732722Ee1A6B0027A0daE5fE3d6A3Aa","arcadiansSC":"0x354697334732722Ee1A6B0027A0daE5fE3d6A3Aa","arcadiansOwner":"0xaD733B7055eCAebFb3B38626f0148c5d12158F03","ownedArcadians":[0],"itemsOwner":"0xaD733B7055eCAebFb3B38626f0148c5d12158F03","ownedItems":[],"inventorySlots":[],"equippedAll":[]}
+{
+    "network": "localhost",
+    "itemsSC": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    "inventorySC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansSC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "ownedArcadians": [
+        0
+    ],
+    "itemsOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "ownedItems": [
+        {
+            "itemId": 0,
+            "balance": 10
+        },
+        {
+            "itemId": 1,
+            "balance": 10
+        },
+        {
+            "itemId": 2,
+            "balance": 10
+        },
+        {
+            "itemId": 3,
+            "balance": 20
+        },
+        {
+            "itemId": 4,
+            "balance": 20
+        },
+        {
+            "itemId": 5,
+            "balance": 30
+        }
+    ],
+    "inventorySlots": [
+        {
+            "id": 1,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 0
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 2
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 4
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 5
+                }
+            ]
+        }
+    ],
+    "equippedAll": [
+        {
+            "slotSc": 1,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 2,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 3,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        }
+    ]
+}

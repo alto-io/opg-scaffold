@@ -106,12 +106,22 @@ contract InventoryFacet is
     }
 
     /**
-     * @notice Returns an array of all the items that are allowed for a given slot
+     * @notice Returns the allowed item for a given slot and the index
+     * @param slotId The slot id to query
+     * @param index The index of the item
+     * @return A list of all the items that are allowed in the slot
+     */
+    function allowedItem(uint slotId, uint index) external view returns (InventoryStorage.Item memory) {
+        return _allowedItem(slotId, index);
+    }
+
+    /**
+     * @notice Returns the number of allowed items for a given slot
      * @param slotId The slot id to check
      * @return A list of all the items that are allowed in the slot
      */
-    function allowedItems(uint slotId) external view returns (InventoryStorage.Item[] memory) {
-        return _allowedItems(slotId);
+    function numAllowedItems(uint slotId) external view returns (uint) {
+        return _numAllowedItems(slotId);
     }
 
     /**
