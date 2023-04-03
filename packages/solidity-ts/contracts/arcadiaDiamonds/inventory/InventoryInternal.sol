@@ -263,43 +263,6 @@ contract InventoryInternal is
         );
     }
 
-    // Function only to be called by the arcadians contract when these are tansfered, in order to unequip the equipped items
-    function _unequipAllUnchecked(
-        uint arcadianId
-    ) internal {
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
-        uint numSlots = inventorySL.numSlots;
-        uint numUnequippableSlots;
-
-        for (uint slotId = 1; slotId <= numSlots; slotId++) {
-            if (!inventorySL.slots[slotId].permanent && inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0)) {
-                numUnequippableSlots++;
-            }
-        }
-
-        uint[] memory unequippedSlots = new uint[](numUnequippableSlots);
-        uint counter;
-
-        for (uint slotId = 1; slotId <= numSlots; slotId++) {
-            if (!inventorySL.slots[slotId].permanent && inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0)) {
-                _unequipUnchecked(arcadianId, slotId);
-                unequippedSlots[counter] = slotId;
-                counter++;
-            }
-        }
-
-        if (unequippedSlots.length > 0) {
-            _hashBaseItemsUnchecked(arcadianId);
-
-            emit ItemsUnequipped(
-                msg.sender,
-                arcadianId,
-                unequippedSlots
-            );
-        }
-    }
-
     function _equipped(
         uint arcadianId,
         uint slotId
