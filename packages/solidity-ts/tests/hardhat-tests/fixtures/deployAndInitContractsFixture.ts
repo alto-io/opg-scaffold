@@ -57,7 +57,7 @@ export default async function deployAndInitContractsFixture() {
     
     // Initialise contracts
     const arcadiansParams = { 
-        baseTokenUri: "https://api.arcadians.io/", 
+        baseTokenUri: "https://arcadians.sandbox.outplay.games/v2/arcadians/", 
         maxMintPerUser: 3, 
         mintPrice: 10,
         merkleGenerator: new MerkleGenerator(TOKENS_PATH_ARCADIANS)

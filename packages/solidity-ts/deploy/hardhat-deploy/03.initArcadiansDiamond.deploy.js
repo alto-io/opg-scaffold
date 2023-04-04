@@ -13,7 +13,7 @@ const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
-export const baseTokenURI = "https://api.arcadians.io/";
+export const baseTokenURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
 export const maxMintPerUser = 3;
 export const mintPrice = 2;
 

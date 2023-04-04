@@ -123,7 +123,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem-1);
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        let expectedUri = "https://api.arcadians.io/" + arcadianId;
+        let expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
         
         // unequip item
@@ -289,7 +289,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        let expectedUri = "https://api.arcadians.io/" + arcadianId;
+        let expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
         
         await arcadiansContracts.inventoryFacet.unequipBatch(arcadianId, slotsIdsToEquip);
@@ -303,7 +303,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
 
         arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        expectedUri = "https://api.arcadians.io/" + arcadianId;
+        expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
     })
 })
