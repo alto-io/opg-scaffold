@@ -22,15 +22,6 @@ async function main() {
     const network = hre.network.name;
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
-    const itemsList: Item[] = [
-        { id: 0, erc721Contract: itemsSC.address },
-        { id: 1, erc721Contract: itemsSC.address },
-        { id: 2, erc721Contract: itemsSC.address },
-        { id: 3, erc721Contract: itemsSC.address },
-        { id: 4, erc721Contract: itemsSC.address },
-        { id: 5, erc721Contract: itemsSC.address }
-    ]
-
     const arcadianId = 0;
     const slotsAll: Slot[] = await inventorySC.slotsAll();
     
