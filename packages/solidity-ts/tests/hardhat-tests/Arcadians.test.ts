@@ -17,6 +17,15 @@ describe('Arcadians Diamond Test', function () {
     })
 })
 
+describe('Arcadians Diamond BaseUri Test', function () {
+    it('should be able to set base URI', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        const newBaseURI = "newbaseuri.io/";
+        await arcadiansContracts.arcadiansFacet.setBaseURI(newBaseURI);
+        expect(await arcadiansContracts.arcadiansFacet.baseURI()).to.be.equal(newBaseURI);
+    })
+})
+
 describe('Arcadians Diamond Whitelist', function () {
 
     it('should be able to claim tokens if whitelisted', async () => {

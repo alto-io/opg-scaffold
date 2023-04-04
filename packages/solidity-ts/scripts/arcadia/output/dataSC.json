@@ -1,13 +1,13 @@
 {
-    "network": "localhost",
-    "itemsSC": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
-    "inventorySC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-    "arcadiansSC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-    "arcadiansOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "network": "mumbai",
+    "itemsSC": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
+    "inventorySC": "0xD4dc190c8D5359891438B43cfDB0cb1bfDf4BE71",
+    "arcadiansSC": "0xD4dc190c8D5359891438B43cfDB0cb1bfDf4BE71",
+    "arcadiansOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
     "ownedArcadians": [
         0
     ],
-    "itemsOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "itemsOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
     "ownedItems": [
         {
             "itemId": 0,
@@ -41,11 +41,11 @@
             "category": 0,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 0
                 },
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 1
                 }
             ]
@@ -56,11 +56,11 @@
             "category": 2,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 2
                 },
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 3
                 }
             ]
@@ -71,11 +71,11 @@
             "category": 1,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 4
                 },
                 {
-                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
                     "id": 5
                 }
             ]
