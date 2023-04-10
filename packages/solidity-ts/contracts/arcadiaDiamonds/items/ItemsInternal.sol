@@ -14,28 +14,28 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
 
     event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
 
-    function _claimMerkle(uint itemId, uint amount, bytes32[] memory proof)
+    function _claimMerkle(address to, uint itemId, uint amount, bytes32[] memory proof)
         internal
     {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
-        bytes memory leaf = abi.encode(msg.sender, itemId, amount);
+        bytes memory leaf = abi.encode(to, itemId, amount);
         _consumeLeaf(proof, leaf);
 
-        _mint(msg.sender, itemId, amount, '');
+        _mint(to, itemId, amount, '');
 
-        itemsSL.amountClaimed[msg.sender][itemId] += amount;
-        emit ItemClaimedMerkle(msg.sender, itemId, amount);
+        itemsSL.amountClaimed[to][itemId] += amount;
+        emit ItemClaimedMerkle(to, itemId, amount);
     }
 
-    function _claimMerkleBatch(uint256[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
+    function _claimMerkleBatch(address to, uint256[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
         if (itemIds.length != amounts.length) 
             revert Items_InputsLengthMistatch();
         
         for (uint256 i = 0; i < itemIds.length; i++) {
-            _claimMerkle(itemIds[i], amounts[i], proofs[i]);
+            _claimMerkle(to, itemIds[i], amounts[i], proofs[i]);
         }
     }
     
