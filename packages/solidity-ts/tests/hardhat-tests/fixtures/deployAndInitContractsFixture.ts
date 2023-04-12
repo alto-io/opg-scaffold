@@ -67,7 +67,7 @@ export default async function deployAndInitContractsFixture() {
     await tx.wait()
 
     const itemsParams = { 
-        baseTokenUri: "https://api.arcadians.io/",
+        baseTokenUri: "https://arcadians.dev.outplay.games/v2/equipments-cosmetics/",
         merkleGenerator: new MerkleGenerator(TOKENS_PATH_ITEMS)
     }
     // init items diamond
