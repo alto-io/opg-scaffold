@@ -55,12 +55,16 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
 
         // Mint arcadians to address
         for (uint256 i = 0; i < amount; i++) {
-            _safeMint(msg.sender, _totalSupply());
+            _safeMint(msg.sender, nextArcadianId());
         }
         arcadiansSL.amountClaimedMerkle[msg.sender] += amount;
         arcadiansSL.totalClaimedMerkle += amount;
 
         emit ArcadianClaimedMerkle(msg.sender, amount);
+    }
+
+    function nextArcadianId() internal view returns (uint arcadianId) {
+        arcadianId = _totalSupply() + 1;
     }
 
     /**
@@ -85,7 +89,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
 
         // Mint arcadians to address
         for (uint256 i = 0; i < amount; i++) {
-            _safeMint(to, _totalSupply());
+            _safeMint(to, nextArcadianId());
         }
         arcadiansSL.amountClaimedMerkle[to] += amount;
         arcadiansSL.totalClaimedMerkle += amount;
@@ -109,7 +113,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function claimWhitelist(uint amount) external nonReentrant {
         _consumeWhitelist(msg.sender, amount);
         for (uint i = 0; i < amount; i++) {
-            _safeMint(msg.sender, _totalSupply());
+            _safeMint(msg.sender, nextArcadianId());
         }
     }
 
@@ -128,7 +132,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (mintedTokens >= arcadiansSL.maxMintPerUser) 
             revert Arcadians_MaximumMintedArcadiansReached();
 
-        _safeMint(msg.sender, _totalSupply());
+        _safeMint(msg.sender, nextArcadianId());
     }
 
    /**

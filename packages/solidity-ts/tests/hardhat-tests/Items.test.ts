@@ -74,7 +74,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
         const item: ItemSC = {
             erc721Contract: itemsContracts.itemsFacet.address,
-            id: 0
+            id: 1
         }
         
         await arcadiansContracts.inventoryFacet.createSlot(slot.permanent, slot.category, [item]);
@@ -150,7 +150,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
         const item: ItemSC = {
             erc721Contract: itemsContracts.itemsFacet.address,
-            id: 0
+            id: 1
         }
         await arcadiansContracts.inventoryFacet.createSlot(slot.permanent, slot.category, [item]);
 
@@ -222,7 +222,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         const slots: Slot[] = [
-            { permanent: false, category: 0, id: 1, itemsIdsAllowed: [0, 1] },
+            { permanent: false, category: 0, id: 1, itemsIdsAllowed: [1, 20] },
             { permanent: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
             { permanent: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
             { permanent: false, category: 1, id: 4, itemsIdsAllowed: [5, 7] },
@@ -234,7 +234,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             { permanent: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
         ]
         const items: ItemSC[] = [
-            { erc721Contract: itemsContracts.itemsFacet.address, id: 0 },
             { erc721Contract: itemsContracts.itemsFacet.address, id: 1 },
             { erc721Contract: itemsContracts.itemsFacet.address, id: 2 },
             { erc721Contract: itemsContracts.itemsFacet.address, id: 3 },
@@ -254,6 +253,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             { erc721Contract: itemsContracts.itemsFacet.address, id: 17 },
             { erc721Contract: itemsContracts.itemsFacet.address, id: 18 },
             { erc721Contract: itemsContracts.itemsFacet.address, id: 19 },
+            { erc721Contract: itemsContracts.itemsFacet.address, id: 20 }
         ]
 
         for (let i = 0; i < slots.length; i++) {
