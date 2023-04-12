@@ -14,7 +14,7 @@ export const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString(
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
-export const baseTokenURI = "https://api.arcadians.io/";
+export const baseTokenURI = "https://arcadians.dev.outplay.games/v2/equipments-cosmetics/";
 
 export const func = async() => {
 
