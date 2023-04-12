@@ -7,12 +7,15 @@ import { ERC1155MetadataInternal } from "@solidstate/contracts/token/ERC1155/met
 import { ItemsStorage } from "./ItemsStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
+import { ArrayUtils } from "@solidstate/contracts/utils/ArrayUtils.sol";
 
 contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
     error Items_InputsLengthMistatch();
-
+    error Items_InvalidItemId();
     event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
+
+    using ArrayUtils for uint[];
 
     function _claimMerkle(address to, uint itemId, uint amount, bytes32[] memory proof)
         internal
@@ -22,7 +25,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         bytes memory leaf = abi.encode(to, itemId, amount);
         _consumeLeaf(proof, leaf);
 
-        _mint(to, itemId, amount, '');
+        _mint(to, itemId, amount);
 
         itemsSL.amountClaimed[to][itemId] += amount;
         emit ItemClaimedMerkle(to, itemId, amount);
@@ -45,7 +48,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
 
         uint totalAmount = 0;
         for (uint i = 0; i < itemIds.length; i++) {
-            _mint(msg.sender, itemIds[i], amounts[i], '');
+            _mint(msg.sender, itemIds[i], amounts[i]);
             totalAmount += amounts[i];
         }
         _consumeWhitelist(msg.sender, totalAmount);
@@ -58,12 +61,16 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     function _mint(address to, uint256 itemId, uint256 amount)
         internal
     {
+        if (itemId == 0) revert Items_InvalidItemId();
+
         ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
 
     function _mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
         internal
     {
+        if (ids.min() < 1) revert Items_InvalidItemId();
+        
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }
 
