@@ -2,14 +2,13 @@
 /* eslint prefer-const: "off" */
 import hre from 'hardhat';
 import fs from "fs";
-import { MERKLE_TREE_PATH } from '~helpers/merkle-tree/merkleGenerator';
 
-import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } from '../hardhat-deploy/01.ArcadiansDiamond.deploy'
-import { ensureUniqueEvents, ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
-import { itemsDiamondName } from './02.ItemsDiamond.deploy';
+import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } from '../hardhat-deploy/01.ArcadiansDiamond.deploy';
+import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
+import { arcadiansMerklePaths } from '~helpers/merkle-tree/merkleGenerator';
 
 // Get merkle root previously generated
-const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
+const merkleTree = JSON.parse(fs.readFileSync(arcadiansMerklePaths.outputMerkleTree).toString());
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
@@ -43,7 +42,6 @@ export const func = async() => {
     console.log('Arcadians Diamond Cut: ', cut)
 
     // Intialize contract storage
-    const itemsDiamond = await hre.ethers.getContract(itemsDiamondName);
     let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI, maxMintPerUser, mintPrice])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
