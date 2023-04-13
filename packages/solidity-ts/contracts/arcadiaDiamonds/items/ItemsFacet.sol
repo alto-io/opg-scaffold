@@ -44,18 +44,6 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
-     * @notice Claims items if present in the Merkle tree
-     * @dev TODO: DELETE THIS FUNCTION
-     * @param to address to claim
-     * @param itemsIds The IDs of the items to claim
-     * @param amounts The amounts of the items to claim
-     * @param proofs The Merkle proofs for the items
-     */
-    function claimMerkleBatchTEST(address to, uint256[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
-        _claimMerkleBatch(to, itemsIds, amounts, proofs);
-    }
-
-    /**
      * @notice Claims items from a whitelist
      * @param itemIds The IDs of the items to claim
      * @param amounts The amounts of the items to claim
