@@ -59,6 +59,13 @@ contract InventoryInternal is
         InventoryStorage.SlotCategory category
     );
 
+    // Helper struct only used in view functions
+    struct ItemInSlot {
+        uint slotId;
+        address erc721Contract;
+        uint itemId;
+    }
+
     modifier onlyValidSlot(uint slotId) {
         if (slotId == 0 || slotId > InventoryStorage.layout().numSlots) revert Inventory_InvalidSlotId();
         _;
@@ -72,13 +79,6 @@ contract InventoryInternal is
 
     function _numSlots() internal view returns (uint) {
         return InventoryStorage.layout().numSlots;
-    }
-
-    // Helper struct only used in view functions
-    struct ItemInSlot {
-        uint slotId;
-        address erc721Contract;
-        uint itemId;
     }
 
     function _equip(
@@ -131,7 +131,7 @@ contract InventoryInternal is
         uint arcadianId,
         uint[] calldata slotIds,
         InventoryStorage.Item[] calldata items
-    ) internal {
+    ) internal onlyArcadianOwner(arcadianId) {
 
         if (slotIds.length == 0) revert Inventory_SlotNotSpecified();
 
