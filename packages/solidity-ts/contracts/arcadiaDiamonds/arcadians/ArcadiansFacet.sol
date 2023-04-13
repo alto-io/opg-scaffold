@@ -68,36 +68,6 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
     /**
-     * @notice Test function: Allow the caller of the transaction to claim the amount of arcadians present in the Merkle tree
-     * @dev TODO: DELETE THIS FUNCTION
-     * @param to address to claim
-     * @param amount amount of arcadians that the caller wants to claim
-     * @param proof Merkle proof to validate if the caller is eligible to claim the amount given
-     */
-    function claimMerkleTEST(address to, uint amount, bytes32[] memory proof)
-        external nonReentrant
-    {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-
-        // Revert if the arcadian was already claimed before
-        if (amount == 0) 
-            revert Merkle_InvalidClaimAmount();
-
-        // Verify if is elegible
-        bytes memory leaf = abi.encode(to, amount);
-        _consumeLeaf(proof, leaf);
-
-        // Mint arcadians to address
-        for (uint256 i = 0; i < amount; i++) {
-            _safeMint(to, nextArcadianId());
-        }
-        arcadiansSL.amountClaimedMerkle[to] += amount;
-        arcadiansSL.totalClaimedMerkle += amount;
-
-        emit ArcadianClaimedMerkle(to, amount);
-    }
-
-    /**
      * @notice Returns the amount of arcadians claimed by an address through the Merkle tree
      * @param account address to check
      * @return uint amount of tokens claimed by the address
