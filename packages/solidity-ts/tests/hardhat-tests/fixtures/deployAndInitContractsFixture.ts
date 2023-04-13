@@ -2,7 +2,7 @@ import '~helpers/hardhat-imports';
 import '~helpers/hardhat-imports';
 import '~tests/utils/chai-imports';
 import hre from 'hardhat';
-import MerkleGenerator from '~helpers/merkle-tree/merkleGenerator';
+import MerkleGenerator, { MerklePaths } from '~helpers/merkle-tree/merkleGenerator';
 import path from "path";
 import fs from "fs";
 import deployArcadiansDiamond, { arcadiansDiamondInitName, arcadiansDiamondName, arcadiansFacetNames } from '../../../deploy/hardhat-deploy/01.ArcadiansDiamond.deploy';
@@ -54,21 +54,31 @@ export default async function deployAndInitContractsFixture() {
         rolesFacet: await hre.ethers.getContractAt(itemsFacetNames.rolesFacet, itemsDiamond.address),
         whitelistFacet: await hre.ethers.getContractAt(itemsFacetNames.whitelistFacet, itemsDiamond.address),
     };
+
+    let arcadiansMerklePaths: MerklePaths = {
+        inputTokens: path.join(__dirname, "../../mocks/ownedArcadiansMock.json"),
+        outputMerkleTree: path.join(__dirname, "../../mocks/ownedArcadiansMerkleTree.json"),
+    }
     
     // Initialise contracts
     const arcadiansParams = { 
         baseTokenUri: "https://arcadians.sandbox.outplay.games/v2/arcadians/", 
         maxMintPerUser: 3, 
         mintPrice: 10,
-        merkleGenerator: new MerkleGenerator(TOKENS_PATH_ARCADIANS)
+        merkleGenerator: new MerkleGenerator(arcadiansMerklePaths)
     }
     let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', [arcadiansParams.merkleGenerator.merkleRoot, arcadiansParams.baseTokenUri, arcadiansParams.maxMintPerUser, arcadiansParams.mintPrice])
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
     await tx.wait()
 
+    let itemsMerklePaths: MerklePaths = {
+        inputTokens: path.join(__dirname, "../../mocks/ownedItemsMock.json"),
+        outputMerkleTree: path.join(__dirname, "../../mocks/ownedItemsMerkleTree.json"),
+    }
+
     const itemsParams = { 
         baseTokenUri: "https://arcadians.dev.outplay.games/v2/equipments-cosmetics/",
-        merkleGenerator: new MerkleGenerator(TOKENS_PATH_ITEMS)
+        merkleGenerator: new MerkleGenerator(itemsMerklePaths)
     }
     // init items diamond
     let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', [itemsParams.merkleGenerator.merkleRoot, itemsParams.baseTokenUri])

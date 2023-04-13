@@ -2,15 +2,14 @@
 /* eslint prefer-const: "off" */
 import hre from 'hardhat';
 import fs from "fs";
-import { MERKLE_TREE_PATH } from '~helpers/merkle-tree/merkleGenerator';
 
-import { arcadiansDiamondName } from '../hardhat-deploy/01.ArcadiansDiamond.deploy'
-import { ensureUniqueEvents, ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
+import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.ItemsDiamond.deploy';
+import { itemsMerklePaths } from '~helpers/merkle-tree/merkleGenerator';
 
 
 // Get merkle root previously generated
-export const merkleTree = JSON.parse(fs.readFileSync(MERKLE_TREE_PATH).toString());
+export const merkleTree = JSON.parse(fs.readFileSync(itemsMerklePaths.outputMerkleTree).toString());
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
@@ -42,8 +41,6 @@ export const func = async() => {
 
     // upgrade diamond with facets
     console.log('Items Diamond Cut: ', cut)
-
-    const arcadiansDiamond = await hre.ethers.getContract(arcadiansDiamondName);
 
     // Intialize contract storage
     let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI])

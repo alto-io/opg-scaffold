@@ -1,3 +1,4 @@
-import MerkleGenerator from "./merkleGenerator";
+import MerkleGenerator, { arcadiansMerklePaths, itemsMerklePaths } from "./merkleGenerator";
 
-new MerkleGenerator();
+new MerkleGenerator(itemsMerklePaths);
+new MerkleGenerator(arcadiansMerklePaths);

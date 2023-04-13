@@ -2,28 +2,43 @@ import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import fs from "fs";
 import path from "path";
 
-const TOKENS_PATH = path.join(__dirname, "./tokenList.json");
-export const MERKLE_TREE_PATH = path.join(__dirname, "./merkleTree.json");
-
 export interface MerkleInput {
     solidityTypes: string[];
     data: any[];
+}
+
+export interface MerklePaths {
+    inputTokens: string;
+    outputMerkleTree: string;
+}
+
+export const itemsMerklePaths: MerklePaths = {
+    // inputTokens: path.join(__dirname, "./dataV1/ownedItems.json"),
+    // outputMerkleTree: path.join(__dirname, "./dataV1/itemsMerkleTree.json")
+    inputTokens: path.join(__dirname, "./arcadiaMocks/ownedItems.json"),
+    outputMerkleTree: path.join(__dirname, "./arcadiaMocks/itemsMerkleTree.json")
+}
+export const arcadiansMerklePaths: MerklePaths = {
+    // inputTokens: path.join(__dirname, "./dataV1/ownedArcadians.json"),
+    // outputMerkleTree: path.join(__dirname, "./dataV1/arcadiansMerkleTree.json")
+    inputTokens: path.join(__dirname, "./arcadiaMocks/ownedArcadians.json"),
+    outputMerkleTree: path.join(__dirname, "./arcadiaMocks/arcadiansMerkleTree.json")
 }
 
 export default class MerkleGenerator {
     public readonly merkleRoot: string;
     public readonly merkleTree: StandardMerkleTree<any>;
 
-    constructor(tokensPath: string = TOKENS_PATH) {
-        this.merkleTree = this.generateTree(tokensPath);
+    constructor(merklePaths: MerklePaths) {
+        this.merkleTree = this.generateTree(merklePaths);
         this.merkleRoot = this.merkleTree.root;
-        console.info("Merkle tree generated and saved to: ", MERKLE_TREE_PATH);
+        console.info("Merkle tree generated and saved to: ", merklePaths.inputTokens);
     }
 
-    private generateTree(tokensPath: string): StandardMerkleTree<any[]> {
-        const merkleData: MerkleInput = JSON.parse(fs.readFileSync(tokensPath).toString());
+    private generateTree(merklePaths: MerklePaths): StandardMerkleTree<any[]> {
+        const merkleData: MerkleInput = JSON.parse(fs.readFileSync(merklePaths.inputTokens).toString());
         const tree = StandardMerkleTree.of(merkleData.data, merkleData.solidityTypes);
-        fs.writeFileSync(MERKLE_TREE_PATH, JSON.stringify({root: tree.root, tree: tree.dump()}));
+        fs.writeFileSync(merklePaths.outputMerkleTree, JSON.stringify({root: tree.root, tree: tree.dump()}));
         return tree;
     }
 
