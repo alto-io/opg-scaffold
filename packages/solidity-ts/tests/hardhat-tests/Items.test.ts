@@ -51,7 +51,7 @@ describe('Items Diamond Test', function () {
         expect(uri).to.be.equal(baseItemURI + tokenId);
     })
 
-    it('should be able to claim tokens if whitelisted', async () => {
+    it('should be able to claim items if whitelisted', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
 
         const elegibleAmount = 10;

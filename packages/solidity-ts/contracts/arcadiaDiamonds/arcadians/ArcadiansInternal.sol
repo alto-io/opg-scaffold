@@ -12,7 +12,8 @@ import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, InventoryInternal {
 
     error Arcadians_InvalidPayAmount();
-    error Arcadians_MaximumMintedArcadiansReached();
+    error Arcadians_MaximumMintedArcadiansPerUserReached();
+    error Arcadians_MaximumArcadiansSupplyReached();
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
@@ -21,6 +22,8 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
     event ArcadianClaimedMerkle(address indexed to, uint256 indexed claimedAmount);
 
     using UintUtils for uint256;
+
+    uint constant MAX_SUPPLY = 6666;
 
     function _setBaseURI(string memory newBaseURI) internal {
         ERC721MetadataStorage.Layout storage ERC721SL = ERC721MetadataStorage.layout();
@@ -40,12 +43,6 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
         return ArcadiansStorage.layout().totalClaimedMerkle;
     }
 
-    function _setMaxMintPerUser(uint newMaxMintPerUser) internal {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        emit MaxMintPerUserChanged(msg.sender, arcadiansSL.maxMintPerUser, newMaxMintPerUser);
-        arcadiansSL.maxMintPerUser = newMaxMintPerUser;
-    }
-
     function _mintPrice() internal view returns (uint) {
         return ArcadiansStorage.layout().mintPrice;
     }
@@ -54,6 +51,12 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
         emit MintPriceChanged(msg.sender, arcadiansSL.mintPrice, newMintPrice);
         arcadiansSL.mintPrice = newMintPrice;
+    }
+
+    function _setMaxMintPerUser(uint newMaxMintPerUser) internal {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        emit MaxMintPerUserChanged(msg.sender, arcadiansSL.maxMintPerUser, newMaxMintPerUser);
+        arcadiansSL.maxMintPerUser = newMaxMintPerUser;
     }
 
     function _maxMintPerUser() internal view returns (uint) {

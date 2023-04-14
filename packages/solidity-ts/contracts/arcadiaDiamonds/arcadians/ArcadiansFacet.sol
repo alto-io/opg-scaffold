@@ -43,6 +43,10 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function claimMerkle(uint amount, bytes32[] memory proof)
         external nonReentrant
     {
+
+        if (_totalSupply() + amount > MAX_SUPPLY)
+            revert Arcadians_MaximumArcadiansSupplyReached();
+            
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
 
         // Revert if the arcadian was already claimed before
@@ -61,6 +65,19 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         arcadiansSL.totalClaimedMerkle += amount;
 
         emit ArcadianClaimedMerkle(msg.sender, amount);
+    }
+
+    function _restrictedSafeMint() internal returns (uint tokenId) {
+        tokenId = nextArcadianId();
+        if (tokenId > MAX_SUPPLY)
+            revert Arcadians_MaximumArcadiansSupplyReached();
+
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
+        if (mintedTokens >= arcadiansSL.maxMintPerUser) 
+            revert Arcadians_MaximumMintedArcadiansPerUserReached();
+
+        _safeMint(msg.sender, nextArcadianId());
     }
 
     function nextArcadianId() internal view returns (uint arcadianId) {
@@ -83,7 +100,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function claimWhitelist(uint amount) external nonReentrant {
         _consumeWhitelist(msg.sender, amount);
         for (uint i = 0; i < amount; i++) {
-            _safeMint(msg.sender, nextArcadianId());
+            _restrictedSafeMint();
         }
     }
 
@@ -93,16 +110,10 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function mint()
         external payable nonReentrant
     {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-
-        if (msg.value != arcadiansSL.mintPrice)
+        if (msg.value != ArcadiansStorage.layout().mintPrice)
             revert Arcadians_InvalidPayAmount();
 
-        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
-        if (mintedTokens >= arcadiansSL.maxMintPerUser) 
-            revert Arcadians_MaximumMintedArcadiansReached();
-
-        _safeMint(msg.sender, nextArcadianId());
+        _restrictedSafeMint();
     }
 
    /**
@@ -117,11 +128,10 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         external payable nonReentrant
     {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        require(msg.value == arcadiansSL.mintPrice, "ArcadiansInternal._mint: Invalid pay amount");
-        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
-        require(mintedTokens < arcadiansSL.maxMintPerUser, "ArcadiansInternal._mint: User maximum minted tokens reached");
-        uint tokenId = _totalSupply();
-        _safeMint(msg.sender, tokenId);
+        if (msg.value != arcadiansSL.mintPrice) 
+            revert Arcadians_InvalidPayAmount();
+
+        uint tokenId = _restrictedSafeMint();
         _equipBatch(tokenId, slotIds, itemsToEquip);
     }
 
@@ -155,6 +165,14 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      */
     function maxMintPerUser() external view returns (uint) {
         return _maxMintPerUser();
+    }
+
+    /**
+     * @dev This function returns the maximum supply of arcadians
+     * @return The current maximum supply of arcadians
+     */
+    function maxSupply() external pure returns (uint) {
+        return MAX_SUPPLY;
     }
 
     /**
