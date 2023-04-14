@@ -61,7 +61,7 @@ export default async function deployAndInitContractsFixture() {
     // Initialise contracts
     const arcadiansParams = { 
         baseTokenUri: baseArcadianURI, 
-        maxMintPerUser: 3, 
+        maxMintPerUser: 3,
         mintPrice: 10,
         merkleGenerator: new MerkleGenerator(arcadiansMerklePaths)
     }

@@ -28,7 +28,7 @@ describe('Arcadians Diamond BaseUri Test', function () {
 
 describe('Arcadians Diamond Whitelist', function () {
 
-    it('should be able to claim tokens if whitelisted', async () => {
+    it('should be able to switch whitelist state', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
 
         // disable and disable claim to test it
@@ -43,13 +43,13 @@ describe('Arcadians Diamond Whitelist', function () {
         expect(await arcadiansContracts.whitelistFacet.isWhitelistClaimActive()).to.be.true;
     })
 
-    it('should be able to claim tokens if whitelisted', async () => {
+    it('should be able to claim arcadians if whitelisted', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
 
         let balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.deployer);
         expect(balance).to.be.equal(0);
 
-        const elegibleAmount = 10;
+        const elegibleAmount = 3;
 
         await expect(arcadiansContracts.arcadiansFacet.claimWhitelist(elegibleAmount)).
             to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
@@ -69,6 +69,11 @@ describe('Arcadians Diamond Whitelist', function () {
         expect(balance).to.be.equal(elegibleAmount);
         expect(await arcadiansContracts.whitelistFacet.totalClaimedWhitelist()).to.be.equal(elegibleAmount);
         expect(await arcadiansContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(0);
+
+        // Should not claim more arcadians than the limit per user
+        await arcadiansContracts.whitelistFacet.increaseWhitelistElegible(namedAddresses.deployer, 10);
+        await expect(arcadiansContracts.arcadiansFacet.claimWhitelist(10)).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
     })
 })
 
@@ -126,7 +131,7 @@ describe('Arcadians Diamond merkle', function () {
     })
 })
 
-describe('mint max limit per user', function () {
+describe('mint limits', function () {
 
     it('Should be able to update mint price', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
@@ -156,6 +161,16 @@ describe('mint max limit per user', function () {
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: wrongMintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount");
     })
+
+    // To run this test, the value MAX_SUPPLY should be updated in the 
+    // contract to a smaller value (ie. 1)
+    // it('Should be able to mint only until the max supply is reached ', async () => {
+    //     const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+    //     const maxSupply = await arcadiansContracts.arcadiansFacet.maxSupply();
+    //     console.log("maxSupply: ", maxSupply);
+    //     await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice});
+    //     await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice})).to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumArcadiansSupplyReached")
+    // })
 })
 
 describe('mint max limit per user', function () {
@@ -181,6 +196,6 @@ describe('mint max limit per user', function () {
         }
         expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansReached");
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
     })
 });
