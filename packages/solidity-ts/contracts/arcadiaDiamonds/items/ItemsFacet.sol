@@ -8,6 +8,7 @@ import { ERC1155EnumerableInternal } from "@solidstate/contracts/token/ERC1155/e
 import { ERC1155Metadata } from "@solidstate/contracts/token/ERC1155/metadata/ERC1155Metadata.sol";
 import { ReentrancyGuard } from "@solidstate/contracts/utils/ReentrancyGuard.sol";
 import { ItemsInternal } from "./ItemsInternal.sol";
+import { ItemsStorage } from "./ItemsStorage.sol";
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 import { IERC1155 } from '@solidstate/contracts/interfaces/IERC1155.sol';
 
@@ -94,6 +95,27 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
      */
     function setBaseURI(string calldata baseURI) external onlyManager {
         _setBaseURI(baseURI);
+    }
+
+    /**
+     * @notice Set the base URI for all items metadata
+     * @dev Only the manager role can call this function
+     * @param newBaseURI The new base URI
+     * @param migrate Should migrate to IPFS
+     */
+    function migrateToIPFS(string calldata newBaseURI, bool migrate) external onlyManager {
+        _migrateToIPFS(newBaseURI, migrate);
+    }
+
+    /**
+     * @notice Override ERC1155Metadata
+     */
+    function uri(uint256 tokenId) public view override returns (string memory) {
+        if (ItemsStorage.layout().isMigratedToIPFS) {
+            return string.concat(super.uri(tokenId), ".json");
+        } else {
+            return super.uri(tokenId);
+        }
     }
 
     /**

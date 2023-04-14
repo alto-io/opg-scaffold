@@ -13,7 +13,7 @@ export const merkleTree = JSON.parse(fs.readFileSync(itemsMerklePaths.outputMerk
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
-export const baseTokenURI = "https://arcadians.dev.outplay.games/v2/equipments-cosmetics/";
+export const baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
 
 export const func = async() => {
 
@@ -43,7 +43,7 @@ export const func = async() => {
     console.log('Items Diamond Cut: ', cut)
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseItemURI])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

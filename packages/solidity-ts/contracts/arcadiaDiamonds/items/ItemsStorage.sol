@@ -9,6 +9,7 @@ library ItemsStorage {
     struct Layout {
         // wallet address => token id => is claimed 
         mapping(address => mapping(uint => uint)) amountClaimed;
+        bool isMigratedToIPFS;
     }
 
     function layout()

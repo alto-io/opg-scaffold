@@ -7,10 +7,8 @@ import path from "path";
 import fs from "fs";
 import deployArcadiansDiamond, { arcadiansDiamondInitName, arcadiansDiamondName, arcadiansFacetNames } from '../../../deploy/hardhat-deploy/01.ArcadiansDiamond.deploy';
 import deployItemsDiamond, { itemsDiamondName, itemsDiamondInitName, itemsFacetNames } from '../../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
-import initArcadiansDiamond from '../../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
-import initItemsDiamond from '../../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
-import { TOKENS_PATH_ARCADIANS } from '../Arcadians.test';
-import { TOKENS_PATH_ITEMS } from '../Items.test';
+import initArcadiansDiamond, { baseArcadianURI } from '../../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
+import initItemsDiamond, { baseItemURI } from '../../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 
 export default async function deployAndInitContractsFixture() {
     const deploymentHardhatPath = path.join(__dirname, '../../../generated/hardhat/deployments/hardhat');
@@ -62,7 +60,7 @@ export default async function deployAndInitContractsFixture() {
     
     // Initialise contracts
     const arcadiansParams = { 
-        baseTokenUri: "https://arcadians.sandbox.outplay.games/v2/arcadians/", 
+        baseTokenUri: baseArcadianURI, 
         maxMintPerUser: 3, 
         mintPrice: 10,
         merkleGenerator: new MerkleGenerator(arcadiansMerklePaths)
@@ -77,7 +75,7 @@ export default async function deployAndInitContractsFixture() {
     }
 
     const itemsParams = { 
-        baseTokenUri: "https://arcadians.dev.outplay.games/v2/equipments-cosmetics/",
+        baseTokenUri: baseItemURI,
         merkleGenerator: new MerkleGenerator(itemsMerklePaths)
     }
     // init items diamond

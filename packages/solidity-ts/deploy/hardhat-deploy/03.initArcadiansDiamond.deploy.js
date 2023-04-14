@@ -12,7 +12,7 @@ const merkleTree = JSON.parse(fs.readFileSync(arcadiansMerklePaths.outputMerkleT
 
 // Diamond init params
 export const merkleRoot = merkleTree.root.toString();
-export const baseTokenURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
+export const baseArcadianURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
 export const maxMintPerUser = 3;
 export const mintPrice = 2;
 
@@ -42,7 +42,7 @@ export const func = async() => {
     console.log('Arcadians Diamond Cut: ', cut)
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseTokenURI, maxMintPerUser, mintPrice])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseArcadianURI, maxMintPerUser, mintPrice])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

@@ -8,6 +8,8 @@ import path from "path";
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
 import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
+import { baseItemURI } from 'deploy/hardhat-deploy/04.initItemsDiamond.deploy';
+import { baseArcadianURI } from 'deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
 
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
@@ -28,6 +30,25 @@ describe('Items Diamond Test', function () {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const owner = await itemsContracts.diamond.owner();
         expect(owner).to.be.equal(namedAddresses.deployer);
+    })
+
+    it('should be able to migrate to ipfs', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        const tokenId = 1;
+        await itemsContracts.itemsFacet.mint(namedAddresses.deployer, tokenId, 1);
+        let uri = await itemsContracts.itemsFacet.uri(tokenId);
+        expect(uri).to.be.equal(baseItemURI + tokenId);
+
+        // migrate to ipfs
+        const ipfsUri = "ipfsUri/";
+        await itemsContracts.itemsFacet.migrateToIPFS(ipfsUri, true);
+        uri = await itemsContracts.itemsFacet.uri(tokenId);
+        expect(uri).to.be.equal(ipfsUri + tokenId + ".json");
+
+        // migrate out of ipfs
+        await itemsContracts.itemsFacet.migrateToIPFS(baseItemURI, false);
+        uri = await itemsContracts.itemsFacet.uri(tokenId);
+        expect(uri).to.be.equal(baseItemURI + tokenId);
     })
 
     it('should be able to claim tokens if whitelisted', async () => {
@@ -123,7 +144,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, item.id)).to.be.equal(balanceItem-1);
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        let expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
+        let expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
         
         // unequip item
@@ -289,7 +310,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        let expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
+        let expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
         
         await arcadiansContracts.inventoryFacet.unequipBatch(arcadianId, slotsIdsToEquip);
@@ -303,7 +324,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
 
         arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
-        expectedUri = "https://arcadians.sandbox.outplay.games/v2/arcadians/" + arcadianId;
+        expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
     })
 })
