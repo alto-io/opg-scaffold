@@ -74,6 +74,10 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
     }
 
+    function _migrateToIPFS(string calldata newBaseURI, bool migrate) internal {
+        _setBaseURI(newBaseURI);
+        ItemsStorage.layout().isMigratedToIPFS = migrate;
+    }
 
     // required overrides
     function _beforeTokenTransfer(
