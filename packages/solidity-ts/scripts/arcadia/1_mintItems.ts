@@ -5,14 +5,20 @@ interface MintItem {
     id: number,
     amount: number
 }
-const mintItemsList: MintItem[] = [
-    { id: 0, amount: 10 },
-    { id: 1, amount: 10 },
-    { id: 2, amount: 10 },
-    { id: 3, amount: 20 },
-    { id: 4, amount: 20 },
-    { id: 5, amount: 30 },
-];
+
+const maxItemsPerTransaction = 100;
+const numberOfItems = 450;
+const mintItemsList: MintItem[][] = [];
+const numTransactionsNeeded = Math.round(numberOfItems / maxItemsPerTransaction)
+console.log("numTransactionsNeeded: ", numTransactionsNeeded);
+let itemsPerTransaction = [];
+for (let i = 1; i <= numberOfItems; i++) {
+    itemsPerTransaction.push({ id: i, amount: 50 })
+    if (itemsPerTransaction.length == maxItemsPerTransaction || i == numberOfItems) {
+        mintItemsList.push(itemsPerTransaction);
+        itemsPerTransaction = [];
+    }
+}
 
 async function main() {
     const network = hre.network.name;
@@ -22,11 +28,23 @@ async function main() {
     const recipientAddress = accounts.deployer;
     console.log("Items recipient address: ", recipientAddress);
     
-    let tx = await itemsSC.mintBatch(recipientAddress, mintItemsList.map((item)=>item.id), mintItemsList.map((item)=>item.amount));
-    await tx.wait();
+    console.log("recipientAddress: ", recipientAddress);
+
     for (let i = 0; i < mintItemsList.length; i++) {
-        const balance = await itemsSC.balanceOf(recipientAddress, mintItemsList[i].id);
-        console.log(`- item id ${mintItemsList[i].id} balance: `, balance.toString());
+        const mintItemsListTransaction = mintItemsList[i];
+        const itemsIds = mintItemsListTransaction.map((item)=>item.id);
+        const itemsAmounts = mintItemsListTransaction.map((item)=>item.amount);
+        
+        let tx = await itemsSC.mintBatch(recipientAddress, itemsIds, itemsAmounts);
+        await tx.wait();
+    }
+    
+
+    for (const mintItemsListTransaction of mintItemsList) {
+        for (let j = 0; j < mintItemsListTransaction.length; j++) {
+            const balance = await itemsSC.balanceOf(recipientAddress, mintItemsListTransaction[j].id);
+            console.log(`- item id ${mintItemsListTransaction[j].id} balance: `, balance.toString());
+        }
     }
 }
 
