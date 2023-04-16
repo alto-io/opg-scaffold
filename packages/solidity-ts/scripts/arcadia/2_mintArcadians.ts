@@ -1,8 +1,6 @@
 // import { ethers } from "ethers";
 import hre from "hardhat";
-import fs from "fs";
-import { BigNumber, ethers } from "ethers";
-import path from "path";
+import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
 
 async function main() {
@@ -11,8 +9,11 @@ async function main() {
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
     const payAmount = await arcadiansSC.mintPrice()
-    let tx = await arcadiansSC.mint({value: payAmount});
-    await tx.wait();
+    const mintAmount = 1;
+    for (let i = 0; i < mintAmount; i++) {
+        let tx = await arcadiansSC.mint({value: payAmount});
+        await tx.wait();
+    }
     const minterAddress = await arcadiansSC.signer.getAddress();
     
     console.log("minterAddress: ", minterAddress);
@@ -29,5 +30,5 @@ async function main() {
 main().catch((error) => {
     console.error("error: ", error);
     process.exitCode = 1;
-  });
+});
   

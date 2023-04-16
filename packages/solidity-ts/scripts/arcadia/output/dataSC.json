@@ -1,82 +1,3529 @@
 {
-    "network": "mumbai",
-    "itemsSC": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
-    "inventorySC": "0xD4dc190c8D5359891438B43cfDB0cb1bfDf4BE71",
-    "arcadiansSC": "0xD4dc190c8D5359891438B43cfDB0cb1bfDf4BE71",
-    "arcadiansOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+    "network": "localhost",
+    "itemsSC": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    "inventorySC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansSC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "ownedArcadians": [
-        0
+        1
     ],
-    "itemsOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
+    "itemsOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "ownedItems": [
         {
-            "itemId": 0,
-            "balance": 10
-        },
-        {
             "itemId": 1,
-            "balance": 10
+            "balance": 50
         },
         {
             "itemId": 2,
-            "balance": 10
+            "balance": 50
         },
         {
             "itemId": 3,
-            "balance": 20
+            "balance": 50
         },
         {
             "itemId": 4,
-            "balance": 20
+            "balance": 50
         },
         {
             "itemId": 5,
-            "balance": 30
+            "balance": 50
+        },
+        {
+            "itemId": 6,
+            "balance": 50
+        },
+        {
+            "itemId": 7,
+            "balance": 50
+        },
+        {
+            "itemId": 8,
+            "balance": 50
+        },
+        {
+            "itemId": 9,
+            "balance": 50
+        },
+        {
+            "itemId": 10,
+            "balance": 50
+        },
+        {
+            "itemId": 11,
+            "balance": 50
+        },
+        {
+            "itemId": 12,
+            "balance": 50
+        },
+        {
+            "itemId": 13,
+            "balance": 50
+        },
+        {
+            "itemId": 14,
+            "balance": 50
+        },
+        {
+            "itemId": 15,
+            "balance": 50
+        },
+        {
+            "itemId": 16,
+            "balance": 50
+        },
+        {
+            "itemId": 17,
+            "balance": 50
+        },
+        {
+            "itemId": 18,
+            "balance": 49
+        },
+        {
+            "itemId": 19,
+            "balance": 50
+        },
+        {
+            "itemId": 20,
+            "balance": 50
+        },
+        {
+            "itemId": 21,
+            "balance": 50
+        },
+        {
+            "itemId": 22,
+            "balance": 50
+        },
+        {
+            "itemId": 23,
+            "balance": 50
+        },
+        {
+            "itemId": 24,
+            "balance": 50
+        },
+        {
+            "itemId": 25,
+            "balance": 50
+        },
+        {
+            "itemId": 26,
+            "balance": 50
+        },
+        {
+            "itemId": 27,
+            "balance": 50
+        },
+        {
+            "itemId": 28,
+            "balance": 50
+        },
+        {
+            "itemId": 29,
+            "balance": 50
+        },
+        {
+            "itemId": 30,
+            "balance": 50
+        },
+        {
+            "itemId": 31,
+            "balance": 50
+        },
+        {
+            "itemId": 32,
+            "balance": 50
+        },
+        {
+            "itemId": 33,
+            "balance": 50
+        },
+        {
+            "itemId": 34,
+            "balance": 50
+        },
+        {
+            "itemId": 35,
+            "balance": 50
+        },
+        {
+            "itemId": 36,
+            "balance": 50
+        },
+        {
+            "itemId": 37,
+            "balance": 50
+        },
+        {
+            "itemId": 38,
+            "balance": 50
+        },
+        {
+            "itemId": 39,
+            "balance": 50
+        },
+        {
+            "itemId": 40,
+            "balance": 50
+        },
+        {
+            "itemId": 41,
+            "balance": 50
+        },
+        {
+            "itemId": 42,
+            "balance": 50
+        },
+        {
+            "itemId": 43,
+            "balance": 50
+        },
+        {
+            "itemId": 44,
+            "balance": 50
+        },
+        {
+            "itemId": 45,
+            "balance": 50
+        },
+        {
+            "itemId": 46,
+            "balance": 50
+        },
+        {
+            "itemId": 47,
+            "balance": 50
+        },
+        {
+            "itemId": 48,
+            "balance": 50
+        },
+        {
+            "itemId": 49,
+            "balance": 50
+        },
+        {
+            "itemId": 50,
+            "balance": 50
+        },
+        {
+            "itemId": 51,
+            "balance": 50
+        },
+        {
+            "itemId": 52,
+            "balance": 50
+        },
+        {
+            "itemId": 53,
+            "balance": 50
+        },
+        {
+            "itemId": 54,
+            "balance": 50
+        },
+        {
+            "itemId": 55,
+            "balance": 50
+        },
+        {
+            "itemId": 56,
+            "balance": 50
+        },
+        {
+            "itemId": 57,
+            "balance": 50
+        },
+        {
+            "itemId": 58,
+            "balance": 50
+        },
+        {
+            "itemId": 59,
+            "balance": 50
+        },
+        {
+            "itemId": 60,
+            "balance": 50
+        },
+        {
+            "itemId": 61,
+            "balance": 50
+        },
+        {
+            "itemId": 62,
+            "balance": 50
+        },
+        {
+            "itemId": 63,
+            "balance": 50
+        },
+        {
+            "itemId": 64,
+            "balance": 50
+        },
+        {
+            "itemId": 65,
+            "balance": 50
+        },
+        {
+            "itemId": 66,
+            "balance": 50
+        },
+        {
+            "itemId": 67,
+            "balance": 50
+        },
+        {
+            "itemId": 68,
+            "balance": 50
+        },
+        {
+            "itemId": 69,
+            "balance": 50
+        },
+        {
+            "itemId": 70,
+            "balance": 50
+        },
+        {
+            "itemId": 71,
+            "balance": 50
+        },
+        {
+            "itemId": 72,
+            "balance": 50
+        },
+        {
+            "itemId": 73,
+            "balance": 50
+        },
+        {
+            "itemId": 74,
+            "balance": 50
+        },
+        {
+            "itemId": 75,
+            "balance": 50
+        },
+        {
+            "itemId": 76,
+            "balance": 50
+        },
+        {
+            "itemId": 77,
+            "balance": 49
+        },
+        {
+            "itemId": 78,
+            "balance": 50
+        },
+        {
+            "itemId": 79,
+            "balance": 50
+        },
+        {
+            "itemId": 80,
+            "balance": 50
+        },
+        {
+            "itemId": 81,
+            "balance": 50
+        },
+        {
+            "itemId": 82,
+            "balance": 50
+        },
+        {
+            "itemId": 83,
+            "balance": 50
+        },
+        {
+            "itemId": 84,
+            "balance": 50
+        },
+        {
+            "itemId": 85,
+            "balance": 50
+        },
+        {
+            "itemId": 86,
+            "balance": 50
+        },
+        {
+            "itemId": 87,
+            "balance": 50
+        },
+        {
+            "itemId": 88,
+            "balance": 50
+        },
+        {
+            "itemId": 89,
+            "balance": 50
+        },
+        {
+            "itemId": 90,
+            "balance": 50
+        },
+        {
+            "itemId": 91,
+            "balance": 50
+        },
+        {
+            "itemId": 92,
+            "balance": 50
+        },
+        {
+            "itemId": 93,
+            "balance": 50
+        },
+        {
+            "itemId": 94,
+            "balance": 50
+        },
+        {
+            "itemId": 95,
+            "balance": 50
+        },
+        {
+            "itemId": 96,
+            "balance": 50
+        },
+        {
+            "itemId": 97,
+            "balance": 50
+        },
+        {
+            "itemId": 98,
+            "balance": 50
+        },
+        {
+            "itemId": 99,
+            "balance": 50
+        },
+        {
+            "itemId": 100,
+            "balance": 50
+        },
+        {
+            "itemId": 101,
+            "balance": 50
+        },
+        {
+            "itemId": 102,
+            "balance": 50
+        },
+        {
+            "itemId": 103,
+            "balance": 50
+        },
+        {
+            "itemId": 104,
+            "balance": 50
+        },
+        {
+            "itemId": 105,
+            "balance": 50
+        },
+        {
+            "itemId": 106,
+            "balance": 50
+        },
+        {
+            "itemId": 107,
+            "balance": 50
+        },
+        {
+            "itemId": 108,
+            "balance": 50
+        },
+        {
+            "itemId": 109,
+            "balance": 50
+        },
+        {
+            "itemId": 110,
+            "balance": 50
+        },
+        {
+            "itemId": 111,
+            "balance": 50
+        },
+        {
+            "itemId": 112,
+            "balance": 50
+        },
+        {
+            "itemId": 113,
+            "balance": 50
+        },
+        {
+            "itemId": 114,
+            "balance": 50
+        },
+        {
+            "itemId": 115,
+            "balance": 50
+        },
+        {
+            "itemId": 116,
+            "balance": 49
+        },
+        {
+            "itemId": 117,
+            "balance": 50
+        },
+        {
+            "itemId": 118,
+            "balance": 50
+        },
+        {
+            "itemId": 119,
+            "balance": 50
+        },
+        {
+            "itemId": 120,
+            "balance": 50
+        },
+        {
+            "itemId": 121,
+            "balance": 50
+        },
+        {
+            "itemId": 122,
+            "balance": 50
+        },
+        {
+            "itemId": 123,
+            "balance": 50
+        },
+        {
+            "itemId": 124,
+            "balance": 50
+        },
+        {
+            "itemId": 125,
+            "balance": 50
+        },
+        {
+            "itemId": 126,
+            "balance": 50
+        },
+        {
+            "itemId": 127,
+            "balance": 50
+        },
+        {
+            "itemId": 128,
+            "balance": 50
+        },
+        {
+            "itemId": 129,
+            "balance": 50
+        },
+        {
+            "itemId": 130,
+            "balance": 50
+        },
+        {
+            "itemId": 131,
+            "balance": 50
+        },
+        {
+            "itemId": 132,
+            "balance": 50
+        },
+        {
+            "itemId": 133,
+            "balance": 50
+        },
+        {
+            "itemId": 134,
+            "balance": 50
+        },
+        {
+            "itemId": 135,
+            "balance": 50
+        },
+        {
+            "itemId": 136,
+            "balance": 50
+        },
+        {
+            "itemId": 137,
+            "balance": 50
+        },
+        {
+            "itemId": 138,
+            "balance": 50
+        },
+        {
+            "itemId": 139,
+            "balance": 50
+        },
+        {
+            "itemId": 140,
+            "balance": 50
+        },
+        {
+            "itemId": 141,
+            "balance": 50
+        },
+        {
+            "itemId": 142,
+            "balance": 50
+        },
+        {
+            "itemId": 143,
+            "balance": 50
+        },
+        {
+            "itemId": 144,
+            "balance": 50
+        },
+        {
+            "itemId": 145,
+            "balance": 50
+        },
+        {
+            "itemId": 146,
+            "balance": 50
+        },
+        {
+            "itemId": 147,
+            "balance": 50
+        },
+        {
+            "itemId": 148,
+            "balance": 50
+        },
+        {
+            "itemId": 149,
+            "balance": 50
+        },
+        {
+            "itemId": 150,
+            "balance": 50
+        },
+        {
+            "itemId": 151,
+            "balance": 50
+        },
+        {
+            "itemId": 152,
+            "balance": 50
+        },
+        {
+            "itemId": 153,
+            "balance": 50
+        },
+        {
+            "itemId": 154,
+            "balance": 50
+        },
+        {
+            "itemId": 155,
+            "balance": 50
+        },
+        {
+            "itemId": 156,
+            "balance": 50
+        },
+        {
+            "itemId": 157,
+            "balance": 50
+        },
+        {
+            "itemId": 158,
+            "balance": 50
+        },
+        {
+            "itemId": 159,
+            "balance": 50
+        },
+        {
+            "itemId": 160,
+            "balance": 49
+        },
+        {
+            "itemId": 161,
+            "balance": 50
+        },
+        {
+            "itemId": 162,
+            "balance": 50
+        },
+        {
+            "itemId": 163,
+            "balance": 50
+        },
+        {
+            "itemId": 164,
+            "balance": 50
+        },
+        {
+            "itemId": 165,
+            "balance": 50
+        },
+        {
+            "itemId": 166,
+            "balance": 50
+        },
+        {
+            "itemId": 167,
+            "balance": 50
+        },
+        {
+            "itemId": 168,
+            "balance": 50
+        },
+        {
+            "itemId": 169,
+            "balance": 50
+        },
+        {
+            "itemId": 170,
+            "balance": 50
+        },
+        {
+            "itemId": 171,
+            "balance": 50
+        },
+        {
+            "itemId": 172,
+            "balance": 50
+        },
+        {
+            "itemId": 173,
+            "balance": 50
+        },
+        {
+            "itemId": 174,
+            "balance": 50
+        },
+        {
+            "itemId": 175,
+            "balance": 50
+        },
+        {
+            "itemId": 176,
+            "balance": 50
+        },
+        {
+            "itemId": 177,
+            "balance": 50
+        },
+        {
+            "itemId": 178,
+            "balance": 50
+        },
+        {
+            "itemId": 179,
+            "balance": 50
+        },
+        {
+            "itemId": 180,
+            "balance": 50
+        },
+        {
+            "itemId": 181,
+            "balance": 50
+        },
+        {
+            "itemId": 182,
+            "balance": 50
+        },
+        {
+            "itemId": 183,
+            "balance": 50
+        },
+        {
+            "itemId": 184,
+            "balance": 50
+        },
+        {
+            "itemId": 185,
+            "balance": 50
+        },
+        {
+            "itemId": 186,
+            "balance": 50
+        },
+        {
+            "itemId": 187,
+            "balance": 50
+        },
+        {
+            "itemId": 188,
+            "balance": 50
+        },
+        {
+            "itemId": 189,
+            "balance": 50
+        },
+        {
+            "itemId": 190,
+            "balance": 50
+        },
+        {
+            "itemId": 191,
+            "balance": 50
+        },
+        {
+            "itemId": 192,
+            "balance": 50
+        },
+        {
+            "itemId": 193,
+            "balance": 50
+        },
+        {
+            "itemId": 194,
+            "balance": 50
+        },
+        {
+            "itemId": 195,
+            "balance": 50
+        },
+        {
+            "itemId": 196,
+            "balance": 50
+        },
+        {
+            "itemId": 197,
+            "balance": 50
+        },
+        {
+            "itemId": 198,
+            "balance": 50
+        },
+        {
+            "itemId": 199,
+            "balance": 50
+        },
+        {
+            "itemId": 200,
+            "balance": 50
+        },
+        {
+            "itemId": 201,
+            "balance": 50
+        },
+        {
+            "itemId": 202,
+            "balance": 50
+        },
+        {
+            "itemId": 203,
+            "balance": 50
+        },
+        {
+            "itemId": 204,
+            "balance": 50
+        },
+        {
+            "itemId": 205,
+            "balance": 50
+        },
+        {
+            "itemId": 206,
+            "balance": 50
+        },
+        {
+            "itemId": 207,
+            "balance": 50
+        },
+        {
+            "itemId": 208,
+            "balance": 50
+        },
+        {
+            "itemId": 209,
+            "balance": 50
+        },
+        {
+            "itemId": 210,
+            "balance": 50
+        },
+        {
+            "itemId": 211,
+            "balance": 50
+        },
+        {
+            "itemId": 212,
+            "balance": 50
+        },
+        {
+            "itemId": 213,
+            "balance": 50
+        },
+        {
+            "itemId": 214,
+            "balance": 50
+        },
+        {
+            "itemId": 215,
+            "balance": 50
+        },
+        {
+            "itemId": 216,
+            "balance": 50
+        },
+        {
+            "itemId": 217,
+            "balance": 50
+        },
+        {
+            "itemId": 218,
+            "balance": 50
+        },
+        {
+            "itemId": 219,
+            "balance": 50
+        },
+        {
+            "itemId": 220,
+            "balance": 50
+        },
+        {
+            "itemId": 221,
+            "balance": 50
+        },
+        {
+            "itemId": 222,
+            "balance": 50
+        },
+        {
+            "itemId": 223,
+            "balance": 50
+        },
+        {
+            "itemId": 224,
+            "balance": 50
+        },
+        {
+            "itemId": 225,
+            "balance": 50
+        },
+        {
+            "itemId": 226,
+            "balance": 50
+        },
+        {
+            "itemId": 227,
+            "balance": 50
+        },
+        {
+            "itemId": 228,
+            "balance": 50
+        },
+        {
+            "itemId": 229,
+            "balance": 50
+        },
+        {
+            "itemId": 230,
+            "balance": 50
+        },
+        {
+            "itemId": 231,
+            "balance": 50
+        },
+        {
+            "itemId": 232,
+            "balance": 50
+        },
+        {
+            "itemId": 233,
+            "balance": 50
+        },
+        {
+            "itemId": 234,
+            "balance": 50
+        },
+        {
+            "itemId": 235,
+            "balance": 50
+        },
+        {
+            "itemId": 236,
+            "balance": 50
+        },
+        {
+            "itemId": 237,
+            "balance": 50
+        },
+        {
+            "itemId": 238,
+            "balance": 50
+        },
+        {
+            "itemId": 239,
+            "balance": 50
+        },
+        {
+            "itemId": 240,
+            "balance": 50
+        },
+        {
+            "itemId": 241,
+            "balance": 50
+        },
+        {
+            "itemId": 242,
+            "balance": 50
+        },
+        {
+            "itemId": 243,
+            "balance": 50
+        },
+        {
+            "itemId": 244,
+            "balance": 50
+        },
+        {
+            "itemId": 245,
+            "balance": 50
+        },
+        {
+            "itemId": 246,
+            "balance": 50
+        },
+        {
+            "itemId": 247,
+            "balance": 50
+        },
+        {
+            "itemId": 248,
+            "balance": 50
+        },
+        {
+            "itemId": 249,
+            "balance": 50
+        },
+        {
+            "itemId": 250,
+            "balance": 50
+        },
+        {
+            "itemId": 251,
+            "balance": 50
+        },
+        {
+            "itemId": 252,
+            "balance": 50
+        },
+        {
+            "itemId": 253,
+            "balance": 50
+        },
+        {
+            "itemId": 254,
+            "balance": 50
+        },
+        {
+            "itemId": 255,
+            "balance": 50
+        },
+        {
+            "itemId": 256,
+            "balance": 50
+        },
+        {
+            "itemId": 257,
+            "balance": 50
+        },
+        {
+            "itemId": 258,
+            "balance": 50
+        },
+        {
+            "itemId": 259,
+            "balance": 50
+        },
+        {
+            "itemId": 260,
+            "balance": 50
+        },
+        {
+            "itemId": 261,
+            "balance": 50
+        },
+        {
+            "itemId": 262,
+            "balance": 50
+        },
+        {
+            "itemId": 263,
+            "balance": 50
+        },
+        {
+            "itemId": 264,
+            "balance": 50
+        },
+        {
+            "itemId": 265,
+            "balance": 50
+        },
+        {
+            "itemId": 266,
+            "balance": 50
+        },
+        {
+            "itemId": 267,
+            "balance": 50
+        },
+        {
+            "itemId": 268,
+            "balance": 50
+        },
+        {
+            "itemId": 269,
+            "balance": 50
+        },
+        {
+            "itemId": 270,
+            "balance": 50
+        },
+        {
+            "itemId": 271,
+            "balance": 50
+        },
+        {
+            "itemId": 272,
+            "balance": 50
+        },
+        {
+            "itemId": 273,
+            "balance": 50
+        },
+        {
+            "itemId": 274,
+            "balance": 50
+        },
+        {
+            "itemId": 275,
+            "balance": 50
+        },
+        {
+            "itemId": 276,
+            "balance": 50
+        },
+        {
+            "itemId": 277,
+            "balance": 50
+        },
+        {
+            "itemId": 278,
+            "balance": 50
+        },
+        {
+            "itemId": 279,
+            "balance": 50
+        },
+        {
+            "itemId": 280,
+            "balance": 50
+        },
+        {
+            "itemId": 281,
+            "balance": 50
+        },
+        {
+            "itemId": 282,
+            "balance": 50
+        },
+        {
+            "itemId": 283,
+            "balance": 50
+        },
+        {
+            "itemId": 284,
+            "balance": 49
+        },
+        {
+            "itemId": 285,
+            "balance": 50
+        },
+        {
+            "itemId": 286,
+            "balance": 50
+        },
+        {
+            "itemId": 287,
+            "balance": 50
+        },
+        {
+            "itemId": 288,
+            "balance": 50
+        },
+        {
+            "itemId": 289,
+            "balance": 50
+        },
+        {
+            "itemId": 290,
+            "balance": 50
+        },
+        {
+            "itemId": 291,
+            "balance": 50
+        },
+        {
+            "itemId": 292,
+            "balance": 50
+        },
+        {
+            "itemId": 293,
+            "balance": 50
+        },
+        {
+            "itemId": 294,
+            "balance": 50
+        },
+        {
+            "itemId": 295,
+            "balance": 50
+        },
+        {
+            "itemId": 296,
+            "balance": 50
+        },
+        {
+            "itemId": 297,
+            "balance": 50
+        },
+        {
+            "itemId": 298,
+            "balance": 50
+        },
+        {
+            "itemId": 299,
+            "balance": 50
+        },
+        {
+            "itemId": 300,
+            "balance": 50
+        },
+        {
+            "itemId": 301,
+            "balance": 50
+        },
+        {
+            "itemId": 302,
+            "balance": 49
+        },
+        {
+            "itemId": 303,
+            "balance": 50
+        },
+        {
+            "itemId": 304,
+            "balance": 50
+        },
+        {
+            "itemId": 305,
+            "balance": 50
+        },
+        {
+            "itemId": 306,
+            "balance": 50
+        },
+        {
+            "itemId": 307,
+            "balance": 50
+        },
+        {
+            "itemId": 308,
+            "balance": 50
+        },
+        {
+            "itemId": 309,
+            "balance": 50
+        },
+        {
+            "itemId": 310,
+            "balance": 50
+        },
+        {
+            "itemId": 311,
+            "balance": 50
+        },
+        {
+            "itemId": 312,
+            "balance": 50
+        },
+        {
+            "itemId": 313,
+            "balance": 50
+        },
+        {
+            "itemId": 314,
+            "balance": 50
+        },
+        {
+            "itemId": 315,
+            "balance": 50
+        },
+        {
+            "itemId": 316,
+            "balance": 50
+        },
+        {
+            "itemId": 317,
+            "balance": 50
+        },
+        {
+            "itemId": 318,
+            "balance": 50
+        },
+        {
+            "itemId": 319,
+            "balance": 50
+        },
+        {
+            "itemId": 320,
+            "balance": 50
+        },
+        {
+            "itemId": 321,
+            "balance": 50
+        },
+        {
+            "itemId": 322,
+            "balance": 50
+        },
+        {
+            "itemId": 323,
+            "balance": 50
+        },
+        {
+            "itemId": 324,
+            "balance": 50
+        },
+        {
+            "itemId": 325,
+            "balance": 50
+        },
+        {
+            "itemId": 326,
+            "balance": 50
+        },
+        {
+            "itemId": 327,
+            "balance": 50
+        },
+        {
+            "itemId": 328,
+            "balance": 50
+        },
+        {
+            "itemId": 329,
+            "balance": 50
+        },
+        {
+            "itemId": 330,
+            "balance": 50
+        },
+        {
+            "itemId": 331,
+            "balance": 50
+        },
+        {
+            "itemId": 332,
+            "balance": 50
+        },
+        {
+            "itemId": 333,
+            "balance": 50
+        },
+        {
+            "itemId": 334,
+            "balance": 50
+        },
+        {
+            "itemId": 335,
+            "balance": 50
+        },
+        {
+            "itemId": 336,
+            "balance": 50
+        },
+        {
+            "itemId": 337,
+            "balance": 50
+        },
+        {
+            "itemId": 338,
+            "balance": 50
+        },
+        {
+            "itemId": 339,
+            "balance": 50
+        },
+        {
+            "itemId": 340,
+            "balance": 50
+        },
+        {
+            "itemId": 341,
+            "balance": 50
+        },
+        {
+            "itemId": 342,
+            "balance": 50
+        },
+        {
+            "itemId": 343,
+            "balance": 50
+        },
+        {
+            "itemId": 344,
+            "balance": 50
+        },
+        {
+            "itemId": 345,
+            "balance": 50
+        },
+        {
+            "itemId": 346,
+            "balance": 50
+        },
+        {
+            "itemId": 347,
+            "balance": 50
+        },
+        {
+            "itemId": 348,
+            "balance": 50
+        },
+        {
+            "itemId": 349,
+            "balance": 50
+        },
+        {
+            "itemId": 350,
+            "balance": 50
+        },
+        {
+            "itemId": 351,
+            "balance": 50
+        },
+        {
+            "itemId": 352,
+            "balance": 50
+        },
+        {
+            "itemId": 353,
+            "balance": 50
+        },
+        {
+            "itemId": 354,
+            "balance": 50
+        },
+        {
+            "itemId": 355,
+            "balance": 50
+        },
+        {
+            "itemId": 356,
+            "balance": 50
+        },
+        {
+            "itemId": 357,
+            "balance": 50
+        },
+        {
+            "itemId": 358,
+            "balance": 50
+        },
+        {
+            "itemId": 359,
+            "balance": 50
+        },
+        {
+            "itemId": 360,
+            "balance": 50
+        },
+        {
+            "itemId": 361,
+            "balance": 50
+        },
+        {
+            "itemId": 362,
+            "balance": 50
+        },
+        {
+            "itemId": 363,
+            "balance": 50
+        },
+        {
+            "itemId": 364,
+            "balance": 50
+        },
+        {
+            "itemId": 365,
+            "balance": 50
+        },
+        {
+            "itemId": 366,
+            "balance": 50
+        },
+        {
+            "itemId": 367,
+            "balance": 50
+        },
+        {
+            "itemId": 368,
+            "balance": 50
+        },
+        {
+            "itemId": 369,
+            "balance": 50
+        },
+        {
+            "itemId": 370,
+            "balance": 50
+        },
+        {
+            "itemId": 371,
+            "balance": 50
+        },
+        {
+            "itemId": 372,
+            "balance": 50
+        },
+        {
+            "itemId": 373,
+            "balance": 50
+        },
+        {
+            "itemId": 374,
+            "balance": 50
+        },
+        {
+            "itemId": 375,
+            "balance": 50
+        },
+        {
+            "itemId": 376,
+            "balance": 50
+        },
+        {
+            "itemId": 377,
+            "balance": 50
+        },
+        {
+            "itemId": 378,
+            "balance": 50
+        },
+        {
+            "itemId": 379,
+            "balance": 50
+        },
+        {
+            "itemId": 380,
+            "balance": 49
+        },
+        {
+            "itemId": 381,
+            "balance": 49
+        },
+        {
+            "itemId": 382,
+            "balance": 50
+        },
+        {
+            "itemId": 383,
+            "balance": 50
+        },
+        {
+            "itemId": 384,
+            "balance": 50
+        },
+        {
+            "itemId": 385,
+            "balance": 50
+        },
+        {
+            "itemId": 386,
+            "balance": 50
+        },
+        {
+            "itemId": 387,
+            "balance": 50
+        },
+        {
+            "itemId": 388,
+            "balance": 49
+        },
+        {
+            "itemId": 389,
+            "balance": 50
+        },
+        {
+            "itemId": 390,
+            "balance": 50
+        },
+        {
+            "itemId": 391,
+            "balance": 50
+        },
+        {
+            "itemId": 392,
+            "balance": 50
+        },
+        {
+            "itemId": 393,
+            "balance": 50
+        },
+        {
+            "itemId": 394,
+            "balance": 50
+        },
+        {
+            "itemId": 395,
+            "balance": 50
+        },
+        {
+            "itemId": 396,
+            "balance": 50
+        },
+        {
+            "itemId": 397,
+            "balance": 50
+        },
+        {
+            "itemId": 398,
+            "balance": 50
+        },
+        {
+            "itemId": 399,
+            "balance": 50
+        },
+        {
+            "itemId": 400,
+            "balance": 50
+        },
+        {
+            "itemId": 401,
+            "balance": 50
+        },
+        {
+            "itemId": 402,
+            "balance": 50
+        },
+        {
+            "itemId": 403,
+            "balance": 50
+        },
+        {
+            "itemId": 404,
+            "balance": 50
+        },
+        {
+            "itemId": 405,
+            "balance": 50
+        },
+        {
+            "itemId": 406,
+            "balance": 50
+        },
+        {
+            "itemId": 407,
+            "balance": 50
+        },
+        {
+            "itemId": 408,
+            "balance": 50
+        },
+        {
+            "itemId": 409,
+            "balance": 50
+        },
+        {
+            "itemId": 410,
+            "balance": 50
+        },
+        {
+            "itemId": 411,
+            "balance": 50
+        },
+        {
+            "itemId": 412,
+            "balance": 50
+        },
+        {
+            "itemId": 413,
+            "balance": 50
+        },
+        {
+            "itemId": 414,
+            "balance": 50
+        },
+        {
+            "itemId": 415,
+            "balance": 50
+        },
+        {
+            "itemId": 416,
+            "balance": 50
+        },
+        {
+            "itemId": 417,
+            "balance": 50
+        },
+        {
+            "itemId": 418,
+            "balance": 50
+        },
+        {
+            "itemId": 419,
+            "balance": 50
+        },
+        {
+            "itemId": 420,
+            "balance": 50
+        },
+        {
+            "itemId": 421,
+            "balance": 50
+        },
+        {
+            "itemId": 422,
+            "balance": 50
+        },
+        {
+            "itemId": 423,
+            "balance": 50
+        },
+        {
+            "itemId": 424,
+            "balance": 50
+        },
+        {
+            "itemId": 425,
+            "balance": 50
+        },
+        {
+            "itemId": 426,
+            "balance": 50
+        },
+        {
+            "itemId": 427,
+            "balance": 50
+        },
+        {
+            "itemId": 428,
+            "balance": 50
+        },
+        {
+            "itemId": 429,
+            "balance": 50
+        },
+        {
+            "itemId": 430,
+            "balance": 50
+        },
+        {
+            "itemId": 431,
+            "balance": 50
+        },
+        {
+            "itemId": 432,
+            "balance": 50
+        },
+        {
+            "itemId": 433,
+            "balance": 50
+        },
+        {
+            "itemId": 434,
+            "balance": 50
+        },
+        {
+            "itemId": 435,
+            "balance": 50
+        },
+        {
+            "itemId": 436,
+            "balance": 50
+        },
+        {
+            "itemId": 437,
+            "balance": 50
+        },
+        {
+            "itemId": 438,
+            "balance": 50
+        },
+        {
+            "itemId": 439,
+            "balance": 50
+        },
+        {
+            "itemId": 440,
+            "balance": 50
+        },
+        {
+            "itemId": 441,
+            "balance": 50
+        },
+        {
+            "itemId": 442,
+            "balance": 50
+        },
+        {
+            "itemId": 443,
+            "balance": 50
+        },
+        {
+            "itemId": 444,
+            "balance": 50
+        },
+        {
+            "itemId": 445,
+            "balance": 50
+        },
+        {
+            "itemId": 446,
+            "balance": 50
+        },
+        {
+            "itemId": 447,
+            "balance": 50
+        },
+        {
+            "itemId": 448,
+            "balance": 50
+        },
+        {
+            "itemId": 449,
+            "balance": 50
+        },
+        {
+            "itemId": 450,
+            "balance": 49
         }
     ],
     "inventorySlots": [
         {
             "id": 1,
-            "permanent": false,
+            "permanent": true,
             "category": 0,
-            "allowedItems": [
-                {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
-                    "id": 0
-                },
-                {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
-                    "id": 1
-                }
-            ]
+            "allowedItems": []
         },
         {
             "id": 2,
             "permanent": false,
-            "category": 2,
+            "category": 0,
             "allowedItems": [
                 {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
-                    "id": 2
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 78
                 },
                 {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
-                    "id": 3
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 79
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 80
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 81
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 82
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 83
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 84
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 85
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 86
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 87
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 88
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 89
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 90
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 91
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 92
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 93
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 94
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 95
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 96
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 97
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 98
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 99
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 100
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 101
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 102
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 103
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 104
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 105
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 106
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 107
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 108
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 109
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 110
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 111
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 112
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 113
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 114
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 115
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 116
                 }
             ]
         },
         {
             "id": 3,
             "permanent": false,
-            "category": 1,
+            "category": 0,
             "allowedItems": [
                 {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 285
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 286
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 287
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 288
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 289
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 290
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 291
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 292
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 293
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 294
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 295
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 296
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 297
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 298
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 299
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 300
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 301
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 302
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 381
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 382
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 383
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 384
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 385
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 386
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 387
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 388
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": []
+        },
+        {
+            "id": 7,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 1
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 2
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 3
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
                     "id": 4
                 },
                 {
-                    "erc721Contract": "0x1f588854fCD69F8D8e9a5865658c78C2910986C5",
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
                     "id": 5
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 6
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 7
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 8
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 9
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 10
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 11
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 12
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 13
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 14
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 15
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 16
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 17
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 18
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": []
+        },
+        {
+            "id": 9,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 117
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 118
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 119
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 120
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 121
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 122
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 123
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 124
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 125
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 126
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 127
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 128
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 129
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 130
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 131
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 132
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 133
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 134
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 135
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 136
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 137
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 138
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 139
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 140
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 141
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 142
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 143
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 144
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 145
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 146
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 147
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 148
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 149
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 150
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 151
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 152
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 153
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 154
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 155
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 156
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 157
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 158
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 159
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 160
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": []
+        },
+        {
+            "id": 11,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": []
+        },
+        {
+            "id": 12,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 207
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 208
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 209
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 210
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 211
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 212
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 213
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 214
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 215
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 216
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 217
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 218
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 219
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 220
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 221
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 222
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 223
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 224
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 225
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 226
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 227
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 228
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 229
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 230
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 231
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 232
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 233
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 234
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 235
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 236
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 237
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 238
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 239
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 240
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 241
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 242
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 243
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 244
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 245
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 246
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 247
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 248
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 249
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 250
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 251
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 252
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 253
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 254
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 255
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 256
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 257
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 258
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 259
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 260
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 261
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 262
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 263
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 264
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 265
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 266
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 267
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 268
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 269
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 270
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 271
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 272
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 273
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 274
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 275
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 276
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 277
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 278
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 279
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 280
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 281
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 282
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 283
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 284
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 303
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 304
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 305
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 306
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 307
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 308
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 309
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 310
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 311
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 312
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 313
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 314
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 315
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 316
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 317
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 318
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 319
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 320
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 321
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 322
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 323
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 324
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 325
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 326
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 327
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 328
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 329
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 330
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 331
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 332
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 333
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 334
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 335
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 336
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 337
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 338
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 339
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 340
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 341
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 342
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 343
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 344
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 345
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 346
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 347
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 348
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 349
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 350
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 351
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 352
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 353
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 354
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 355
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 356
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 357
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 358
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 359
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 360
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 361
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 362
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 363
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 364
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 365
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 366
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 367
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 368
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 369
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 370
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 371
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 372
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 373
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 374
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 375
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 376
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 377
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 378
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 379
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 380
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 19
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 20
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 21
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 22
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 23
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 24
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 25
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 26
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 27
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 28
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 29
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 30
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 31
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 32
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 33
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 34
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 35
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 36
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 37
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 38
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 39
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 40
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 41
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 42
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 43
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 44
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 45
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 46
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 47
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 48
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 49
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 50
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 51
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 52
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 53
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 54
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 55
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 56
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 57
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 58
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 59
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 60
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 61
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 62
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 63
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 64
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 65
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 66
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 67
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 68
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 69
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 70
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 71
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 72
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 73
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 74
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 75
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 76
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 77
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 389
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 390
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 391
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 392
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 393
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 394
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 395
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 396
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 397
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 398
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 399
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 400
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 401
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 402
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 403
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 404
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 405
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 406
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 407
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 408
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 409
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 410
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 411
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 412
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 413
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 414
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 415
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 416
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 417
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 418
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 419
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 420
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 421
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 422
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 423
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 424
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 425
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 426
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 427
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 428
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 429
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 430
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 431
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 432
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 433
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 434
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 435
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 436
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 437
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 438
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 439
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 440
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 441
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 442
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 443
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 444
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 445
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 446
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 447
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 448
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 449
+                },
+                {
+                    "erc721Contract": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+                    "id": 450
                 }
             ]
         }
@@ -94,6 +3541,66 @@
         },
         {
             "slotSc": 3,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 4,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 5,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 6,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 7,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 8,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 9,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 10,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 11,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 12,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 13,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 14,
+            "erc721Contract": "0x0000000000000000000000000000000000000000",
+            "itemId": 0
+        },
+        {
+            "slotSc": 15,
             "erc721Contract": "0x0000000000000000000000000000000000000000",
             "itemId": 0
         }
