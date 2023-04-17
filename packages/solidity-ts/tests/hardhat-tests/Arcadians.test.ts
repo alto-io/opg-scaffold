@@ -185,17 +185,31 @@ describe('mint max limit per user', function () {
     
     it('Should be able to mint before reaching max limit', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        const maxLimit = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
+        const maxMintPerUser = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         const currentBalance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob);
         const claimedAmount = await arcadiansContracts.arcadiansFacet.claimedAmountMerkle(namedAddresses.bob);
         
-        let canMint = maxLimit - (currentBalance - claimedAmount);
+        let mintsLeft = maxMintPerUser - (currentBalance - claimedAmount);
         
-        for (let i = 0; i < canMint; i++) {
+        for (let i = 0; i < mintsLeft; i++) {
             await arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice});
+            expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(i+1);
         }
-        expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxLimit) + Number(claimedAmount));
+        expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(Number(maxMintPerUser) + Number(claimedAmount));
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
+    })
+
+    it('Should be able to mint multiple tokens', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        
+        const amount = 2;
+        const mintPrice = arcadiansParams.mintPrice * amount;
+        await arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice});
+        expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(amount);
+
+        expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(amount);
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
     })
 });
