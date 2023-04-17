@@ -8,12 +8,13 @@ interface MintItem {
 
 const maxItemsPerTransaction = 100;
 const numberOfItems = 450;
+const amountPerItem = 50;
 const mintItemsList: MintItem[][] = [];
 const numTransactionsNeeded = Math.round(numberOfItems / maxItemsPerTransaction)
 console.log("numTransactionsNeeded: ", numTransactionsNeeded);
 let itemsPerTransaction = [];
 for (let i = 1; i <= numberOfItems; i++) {
-    itemsPerTransaction.push({ id: i, amount: 50 })
+    itemsPerTransaction.push({ id: i, amount: amountPerItem })
     if (itemsPerTransaction.length == maxItemsPerTransaction || i == numberOfItems) {
         mintItemsList.push(itemsPerTransaction);
         itemsPerTransaction = [];
@@ -36,6 +37,8 @@ async function main() {
         const itemsAmounts = mintItemsListTransaction.map((item)=>item.amount);
         
         let tx = await itemsSC.mintBatch(recipientAddress, itemsIds, itemsAmounts);
+        console.log("mintBatch tx " + i + " : ", tx);
+        
         await tx.wait();
     }
     
