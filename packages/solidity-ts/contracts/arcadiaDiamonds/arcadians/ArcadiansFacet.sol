@@ -67,7 +67,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         emit ArcadianClaimedMerkle(msg.sender, amount);
     }
 
-    function _restrictedSafeMint() internal returns (uint tokenId) {
+    function _restrictedMint() internal returns (uint tokenId) {
         tokenId = nextArcadianId();
         if (tokenId > MAX_SUPPLY)
             revert Arcadians_MaximumArcadiansSupplyReached();
@@ -77,7 +77,15 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (mintedTokens >= arcadiansSL.maxMintPerUser) 
             revert Arcadians_MaximumMintedArcadiansPerUserReached();
 
-        _safeMint(msg.sender, nextArcadianId());
+        _safeMint(msg.sender, tokenId);
+    }
+
+    /**
+     * @notice Returns the total amount of arcadians minted
+     * @return uint total amount of arcadians minted
+     */
+    function totalMinted() external view returns (uint) {
+        return _totalSupply();
     }
 
     function nextArcadianId() internal view returns (uint arcadianId) {
@@ -100,7 +108,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function claimWhitelist(uint amount) external nonReentrant {
         _consumeWhitelist(msg.sender, amount);
         for (uint i = 0; i < amount; i++) {
-            _restrictedSafeMint();
+            _restrictedMint();
         }
     }
 
@@ -110,10 +118,14 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function mint()
         external payable nonReentrant
     {
-        if (msg.value != ArcadiansStorage.layout().mintPrice)
+        uint price = ArcadiansStorage.layout().mintPrice;
+        if (msg.value == 0 || msg.value % price != 0)
             revert Arcadians_InvalidPayAmount();
 
-        _restrictedSafeMint();
+        uint amount = msg.value / price;
+        for (uint i = 0; i < amount; i++) {
+            _restrictedMint();
+        }
     }
 
    /**
@@ -131,7 +143,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (msg.value != arcadiansSL.mintPrice) 
             revert Arcadians_InvalidPayAmount();
 
-        uint tokenId = _restrictedSafeMint();
+        uint tokenId = _restrictedMint();
         _equipBatch(tokenId, slotIds, itemsToEquip);
     }
 
