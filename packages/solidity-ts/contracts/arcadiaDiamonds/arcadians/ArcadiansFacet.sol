@@ -118,14 +118,14 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function mint()
         external payable nonReentrant
     {
-        uint price = ArcadiansStorage.layout().mintPrice;
-        if (msg.value == 0 || msg.value % price != 0)
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        if (!arcadiansSL.isPublicMintOpen) 
+            revert Arcadian_PublicMintClosed();
+
+        if (msg.value != arcadiansSL.mintPrice)
             revert Arcadians_InvalidPayAmount();
 
-        uint amount = msg.value / price;
-        for (uint i = 0; i < amount; i++) {
-            _restrictedMint();
-        }
+        _restrictedMint();
     }
 
    /**
