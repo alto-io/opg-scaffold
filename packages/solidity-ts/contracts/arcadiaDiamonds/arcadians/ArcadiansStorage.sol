@@ -11,6 +11,7 @@ library ArcadiansStorage {
         uint totalClaimedMerkle;
         uint maxMintPerUser;
         uint mintPrice;
+        bool isPublicMintOpen;
     }
 
     function layout()

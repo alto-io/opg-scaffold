@@ -148,6 +148,29 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
     /**
+     * @notice This function opens the public mint
+     */
+    function openPublicMint() external onlyManager {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        arcadiansSL.isPublicMintOpen = true;
+    }
+
+    /**
+     * @notice This function closes the public mint
+     */
+    function closePublicMint() external onlyManager {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        arcadiansSL.isPublicMintOpen = false;
+    }
+
+    /**
+     * @notice Returns true if the public mint is open, false otherwise
+     */
+    function publicMintOpen() external view returns (bool) {
+        return ArcadiansStorage.layout().isPublicMintOpen;
+    }
+
+    /**
      * @notice This function updates the price to mint an arcadian
      * @param newMintPrice The new mint price to be set
      */

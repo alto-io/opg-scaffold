@@ -14,6 +14,7 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
     error Arcadians_InvalidPayAmount();
     error Arcadians_MaximumMintedArcadiansPerUserReached();
     error Arcadians_MaximumArcadiansSupplyReached();
+    error Arcadian_PublicMintClosed();
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
