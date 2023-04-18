@@ -10,6 +10,10 @@ library ItemsStorage {
         // wallet address => token id => is claimed 
         mapping(address => mapping(uint => uint)) amountClaimed;
         bool isMigratedToIPFS;
+
+        // token id => is basic item
+        mapping(uint => bool) isBasicItem;
+        uint[] basicItemsIds;
     }
 
     function layout()
