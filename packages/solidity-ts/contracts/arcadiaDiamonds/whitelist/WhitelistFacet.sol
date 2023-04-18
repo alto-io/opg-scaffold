@@ -2,6 +2,7 @@
 pragma solidity 0.8.19;
 
 import { WhitelistInternal } from './WhitelistInternal.sol';
+import { WhitelistStorage } from "./WhitelistStorage.sol";
 
 /**
  * @title WhitelistFacet
@@ -18,7 +19,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @return The amount claimed by the account
      */
     function claimedWhitelist(address account) external view returns (uint) {
-        return _claimedWhitelist(account);
+        return WhitelistStorage.layout().claimed[account];
     }
 
     /**
@@ -27,7 +28,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @return The elegible amount of the account
      */
     function elegibleWhitelist(address account) external view returns (uint) {
-        return _elegibleWhitelist(account);
+        return WhitelistStorage.layout().elegible[account];
     }
     
     /**
@@ -35,7 +36,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @return The total claimed amount
      */
     function totalClaimedWhitelist() external view returns (uint) {
-        return _totalClaimedWhitelist();
+        return WhitelistStorage.layout().totalClaimed;
     }
     
     /**
@@ -43,7 +44,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @return The total elegible amount
      */
     function totalElegibleWhitelist() external view returns (uint) {
-        return _totalElegibleWhitelist();
+        return WhitelistStorage.layout().totalElegible;
     }
 
     /**
