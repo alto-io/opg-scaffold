@@ -51,6 +51,43 @@ describe('Items Diamond Test', function () {
         expect(uri).to.be.equal(baseItemURI + tokenId);
     })
 
+    it('non-deployer should be able to mint basic items', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+
+        const basicItemId = 5;
+        const basicItemAmount = 2;
+        await itemsContracts.itemsFacet.addBasicItem(basicItemId);
+        let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([basicItemId]);
+
+        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mintBasic(basicItemId, basicItemAmount);
+        expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.bob, basicItemId)).to.be.equal(basicItemAmount);
+
+        await itemsContracts.itemsFacet.removeBasicItem(basicItemId);
+        basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([]);
+    });
+
+    it('non-deployer should be able to mint basic items in batch', async () => {
+        
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+
+        const basicItemIds = [5, 6, 7, 8, 9, 10, 11, 12, 13];
+        const basicItemAmounts = [2, 2, 3, 3, 1, 1, 2, 3, 2];
+        await itemsContracts.itemsFacet.addBasicItemBatch(basicItemIds);
+        let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql(basicItemIds);
+
+        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mintBasicBatch(basicItemIds, basicItemAmounts);
+        const accounts = basicItemIds.map(()=>namedAddresses.bob)
+        const balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, basicItemIds)).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(balanceBatch).to.be.eql(basicItemAmounts);
+
+        await itemsContracts.itemsFacet.removeBasicItemBatch(basicItemIds);
+        basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([]);
+    });
+
     it('should be able to claim items if whitelisted', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
 
@@ -80,6 +117,46 @@ describe('Items Diamond Test', function () {
         expect(await itemsContracts.whitelistFacet.totalElegibleWhitelist()).to.be.equal(0);
     })
 })
+
+
+describe('Items basic items tests', function () {
+    it('non-deployer should be able to mint basic items', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+
+        const basicItemId = 5;
+        const basicItemAmount = 2;
+        await itemsContracts.itemsFacet.addBasicItem(basicItemId);
+        let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([basicItemId]);
+
+        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mintBasic(basicItemId, basicItemAmount);
+        expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.bob, basicItemId)).to.be.equal(basicItemAmount);
+
+        await itemsContracts.itemsFacet.removeBasicItem(basicItemId);
+        basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([]);
+    });
+
+    it('non-deployer should be able to mint basic items in batch', async () => {
+        
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+
+        const basicItemIds = [5, 6, 7, 8, 9, 10, 11, 12, 13];
+        const basicItemAmounts = [2, 2, 3, 3, 1, 1, 2, 3, 2];
+        await itemsContracts.itemsFacet.addBasicItemBatch(basicItemIds);
+        let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql(basicItemIds);
+
+        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mintBasicBatch(basicItemIds, basicItemAmounts);
+        const accounts = basicItemIds.map(()=>namedAddresses.bob)
+        const balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, basicItemIds)).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(balanceBatch).to.be.eql(basicItemAmounts);
+
+        await itemsContracts.itemsFacet.removeBasicItemBatch(basicItemIds);
+        basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
+        expect(basicItems).to.be.eql([]);
+    });
+});
 
 describe('Items Diamond Mint, equip and unequip items flow', function () {
     it('should be able to equip and unequip an item from an arcadian', async () => {
