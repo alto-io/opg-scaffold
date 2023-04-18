@@ -418,9 +418,10 @@ contract InventoryInternal is
     ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         
-        for (uint i = 0; i < inventorySL.allowedItems[slotId].length; i++) {
+        uint numAllowedSlots = inventorySL.allowedItems[slotId].length;
+        for (uint i = 0; i < numAllowedSlots; i++) {
             if (inventorySL.allowedItems[slotId][i].id == item.id) {
-                inventorySL.allowedItems[slotId][i] = inventorySL.allowedItems[slotId][inventorySL.allowedItems[slotId].length-1];
+                inventorySL.allowedItems[slotId][i] = inventorySL.allowedItems[slotId][numAllowedSlots-1];
                 inventorySL.allowedItems[slotId].pop();
                 break;
             }
