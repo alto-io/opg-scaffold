@@ -131,7 +131,17 @@ describe('Arcadians Diamond merkle', function () {
     })
 })
 
-describe('mint limits', function () {
+describe('mint restrictions', function () {
+    it('Should be able to open and close public mint', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        
+        await arcadiansContracts.arcadiansFacet.openPublicMint();
+        await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice})
+
+        await arcadiansContracts.arcadiansFacet.closePublicMint();
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadian_PublicMintClosed")
+    })
 
     it('Should be able to update mint price', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
@@ -143,16 +153,17 @@ describe('mint limits', function () {
     
     it('Should be able to mint by paying the right amount ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        const previousBalance: BigInt = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.alice);
         await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice})
-        const newBalance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.alice);
-        expect(newBalance).to.be.equal(Number(previousBalance) + 1)
+        let balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.alice);
+        expect(balance).to.be.equal(1)
     })
 
-    it('Should not be able to mint without sending ether ', async () => {
+    it('Should be able to mint without sending ether if price is 0 ', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint()).
-            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount");
+        await arcadiansContracts.arcadiansFacet.setMintPrice(0);
+        await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: 0})
+        const balance = await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.alice);
+        expect(balance).to.be.equal(1)
     })
 
     it('Should not be able to mint paying a wrong amount ', async () => {

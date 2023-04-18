@@ -58,7 +58,7 @@ export default async function deployAndInitContractsFixture() {
         outputMerkleTree: path.join(__dirname, "../../mocks/ownedArcadiansMerkleTree.json"),
     }
     
-    // Initialise contracts
+    // Init arcadians contract
     const arcadiansParams = { 
         baseTokenUri: baseArcadianURI, 
         maxMintPerUser: 3,
@@ -67,6 +67,9 @@ export default async function deployAndInitContractsFixture() {
     }
     let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', [arcadiansParams.merkleGenerator.merkleRoot, arcadiansParams.baseTokenUri, arcadiansParams.maxMintPerUser, arcadiansParams.mintPrice])
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
+    await tx.wait()
+
+    tx = await arcadiansContracts.arcadiansFacet.openPublicMint();
     await tx.wait()
 
     let itemsMerklePaths: MerklePaths = {
