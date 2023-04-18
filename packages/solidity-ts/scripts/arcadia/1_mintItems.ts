@@ -8,7 +8,7 @@ interface MintItem {
 
 const maxItemsPerTransaction = 100;
 const numberOfItems = 450;
-const amountPerItem = 50;
+const amountPerItem = 5;
 const mintItemsList: MintItem[][] = [];
 const numTransactionsNeeded = Math.round(numberOfItems / maxItemsPerTransaction)
 console.log("numTransactionsNeeded: ", numTransactionsNeeded);
