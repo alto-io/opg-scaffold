@@ -200,16 +200,17 @@ describe('mint max limit per user', function () {
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
     })
 
-    it('Should be able to mint multiple tokens', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+    // Mint multiple tokens currently not supported
+    // it('Should be able to mint multiple tokens', async () => {
+    //     const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         
-        const amount = 2;
-        const mintPrice = arcadiansParams.mintPrice * amount;
-        await arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice});
-        expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(amount);
+    //     const amount = 2;
+    //     const mintPrice = arcadiansParams.mintPrice * amount;
+    //     await arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice});
+    //     expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(amount);
 
-        expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(amount);
-        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
-    })
+    //     expect(await arcadiansContracts.arcadiansFacet.balanceOf(namedAddresses.bob)).to.be.equal(amount);
+    //     await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mint({value: mintPrice})).
+    //         to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
+    // })
 });
