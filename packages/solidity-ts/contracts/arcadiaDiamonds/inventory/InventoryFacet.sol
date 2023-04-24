@@ -37,6 +37,10 @@ contract InventoryFacet is
         return _numSlots();
     }
 
+    function arcadianToBaseItemHash(uint arcadianId) external view returns (bytes32) {
+        return InventoryStorage.layout().arcadianToBaseItemHash[arcadianId];
+    }
+
     /**
      * @notice Returns the details of an inventory slot given its ID
      * @dev Slots are 1-indexed
@@ -70,6 +74,31 @@ contract InventoryFacet is
         InventoryStorage.Item[] calldata items
     ) external onlyManager {
         _createSlot(permanent, category, items);
+    }
+
+    /**
+     * @notice Returns the number tickets avialable for an account that allow to modify the base traits
+     * @param account The accounts to increase the number of tickets
+     */
+    function getBaseModifierTickets(
+        address account,
+        uint slotId
+    ) external view returns (uint) {
+        return _getBaseModifierTickets(account, slotId);
+    }
+
+    /**
+     * @notice Adds tickets to accounts that allow to modify the base traits
+     * @param account The account to increase the number of tickets
+     * @param slotsIds The slots ids to increase the number of tickets
+     * @param amounts the amounts of tickets to increase
+     */
+    function addBaseModifierTickets(
+        address account,
+        uint[] calldata slotsIds,
+        uint[] calldata amounts
+    ) external onlyManager {
+        _addBaseModifierTickets(account, slotsIds, amounts);
     }
 
     /**
@@ -125,43 +154,17 @@ contract InventoryFacet is
     }
 
     /**
-     * @notice Equips a single item to a given slot for a specified Arcadian NFT
-     * @param arcadianId The ID of the Arcadian NFT to equip the item for
-     * @param slotId The slot id in which the items will be equipped
-     * @param item The item to equip in the slot
-     */
-    function equip(
-        uint arcadianId,
-        uint slotId,
-        InventoryStorage.Item calldata item
-    ) external nonReentrant {
-        _equip(arcadianId, slotId, item);
-    }
-
-    /**
      * @notice Equips multiple items to multiple slots for a specified Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to equip the items for
      * @param slotsIds An array of slot ids to equip the items
      * @param items An array of items to equip in the corresponding slots
      */
-    function equipBatch(
+    function equip(
         uint arcadianId,
         uint[] calldata slotsIds,
         InventoryStorage.Item[] calldata items
     ) external nonReentrant {
-        _equipBatch(arcadianId, slotsIds, items);
-    }
-
-    /**
-     * @notice Unequips the item equipped in a given slot for a specified Arcadian NFT
-     * @param arcadianId The ID of the Arcadian NFT to equip the item for
-     * @param slotId The slot id in which the item will be unequipped
-     */
-    function unequip(
-        uint arcadianId,
-        uint slotId
-    ) external nonReentrant {
-        _unequip(arcadianId, slotId);
+        _equip(arcadianId, slotsIds, items, false);
     }
 
     /**
@@ -169,11 +172,11 @@ contract InventoryFacet is
      * @param arcadianId The ID of the Arcadian NFT to equip the item for
      * @param slotIds The slots ids in which the items will be unequipped
      */
-    function unequipBatch(
+    function unequip(
         uint arcadianId,
         uint[] calldata slotIds
     ) external nonReentrant {
-        _unequipBatch(arcadianId, slotIds);
+        _unequip(arcadianId, slotIds);
     }
 
     /**
@@ -186,6 +189,18 @@ contract InventoryFacet is
         uint slotId
     ) external view returns (ItemInSlot memory item) {
         return _equipped(arcadianId, slotId);
+    }
+
+    /**
+     * @notice Retrieves the equipped items in the slot of an Arcadian NFT
+     * @param arcadianId The ID of the Arcadian NFT to query
+     * @param slotIds The slots ids to query
+     */
+    function equippedBatch(
+        uint arcadianId,
+        uint[] calldata slotIds
+    ) external view returns (ItemInSlot[] memory equippedSlot) {
+        return _equippedBatch(arcadianId, slotIds);
     }
 
     /**

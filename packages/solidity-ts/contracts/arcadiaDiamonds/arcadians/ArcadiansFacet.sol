@@ -2,11 +2,9 @@
 pragma solidity 0.8.19;
 
 import { ERC721BaseInternal } from "@solidstate/contracts/token/ERC721/base/ERC721BaseInternal.sol";
-import { ERC721BaseStorage } from "@solidstate/contracts/token/ERC721/base/ERC721BaseStorage.sol";
 import { ERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/ERC721Metadata.sol";
 import { ISolidStateERC721 } from "@solidstate/contracts/token/ERC721/ISolidStateERC721.sol";
 import { SolidStateERC721 } from "@solidstate/contracts/token/ERC721/SolidStateERC721.sol";
-import { ERC721Enumerable } from "@solidstate/contracts/token/ERC721/enumerable/ERC721Enumerable.sol";
 import { ERC721Base } from "@solidstate/contracts/token/ERC721/base/ERC721Base.sol";
 import { IERC721 } from '@solidstate/contracts/interfaces/IERC721.sol';
 import { IERC721Metadata } from "@solidstate/contracts/token/ERC721/metadata/IERC721Metadata.sol";
@@ -15,6 +13,7 @@ import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 import { InventoryStorage } from "../inventory/InventoryStorage.sol";
+import { WhitelistStorage } from "../whitelist/WhitelistStorage.sol";
 
 /**
  * @title ArcadiansFacet
@@ -35,47 +34,36 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         return _tokenURI(tokenId);
     }
 
-    /**
-     * @notice Allow the caller of the transaction to claim the amount of arcadians present in the Merkle tree
-     * @param amount amount of arcadians that the caller wants to claim
-     * @param proof Merkle proof to validate if the caller is eligible to claim the amount given
-     */
-    function claimMerkle(uint amount, bytes32[] memory proof)
-        external nonReentrant
-    {
-
-        if (_totalSupply() + amount > MAX_SUPPLY)
-            revert Arcadians_MaximumArcadiansSupplyReached();
-            
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-
-        // Revert if the arcadian was already claimed before
-        if (amount == 0) 
-            revert Merkle_InvalidClaimAmount();
-
-        // Verify if is elegible
-        bytes memory leaf = abi.encode(msg.sender, amount);
-        _consumeLeaf(proof, leaf);
-
-        // Mint arcadians to address
-        for (uint256 i = 0; i < amount; i++) {
-            _safeMint(msg.sender, nextArcadianId());
-        }
-        arcadiansSL.amountClaimedMerkle[msg.sender] += amount;
-        arcadiansSL.totalClaimedMerkle += amount;
-
-        emit ArcadianClaimedMerkle(msg.sender, amount);
-    }
-
-    function _restrictedMint() internal returns (uint tokenId) {
+    function _mint() internal returns (uint tokenId) {
         tokenId = nextArcadianId();
-        if (tokenId > MAX_SUPPLY)
-            revert Arcadians_MaximumArcadiansSupplyReached();
 
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        uint mintedTokens = _balanceOf(msg.sender) - arcadiansSL.amountClaimedMerkle[msg.sender];
-        if (mintedTokens >= arcadiansSL.maxMintPerUser) 
-            revert Arcadians_MaximumMintedArcadiansPerUserReached();
+        if (_isWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed) && _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender) > 0) {
+            // OG mint flow
+            _consumeWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender, 1);
+        } else if (_isWhitelistClaimActive(WhitelistStorage.PoolId.Restricted) && _elegibleWhitelist(WhitelistStorage.PoolId.Restricted, msg.sender) > 0) { 
+            // Whitelist mint flow
+            _consumeWhitelist(WhitelistStorage.PoolId.Restricted, msg.sender, 1);
+            if (tokenId > MAX_SUPPLY)
+                revert Arcadians_MaximumArcadiansSupplyReached();
+
+            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender);
+            if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
+                revert Arcadians_MaximumMintedArcadiansPerUserReached();
+
+        } else if (arcadiansSL.isPublicMintOpen) {
+            if (tokenId > MAX_SUPPLY)
+                revert Arcadians_MaximumArcadiansSupplyReached();
+
+            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender);
+            if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
+                revert Arcadians_MaximumMintedArcadiansPerUserReached();
+            
+            if (msg.value != arcadiansSL.mintPrice)
+                revert Arcadians_InvalidPayAmount();
+        } else {
+            revert Arcadians_NotElegibleToMint();
+        }
 
         _safeMint(msg.sender, tokenId);
     }
@@ -86,46 +74,6 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      */
     function totalMinted() external view returns (uint) {
         return _totalSupply();
-    }
-
-    function nextArcadianId() internal view returns (uint arcadianId) {
-        arcadianId = _totalSupply() + 1;
-    }
-
-    /**
-     * @notice Returns the amount of arcadians claimed by an address through the Merkle tree
-     * @param account address to check
-     * @return uint amount of tokens claimed by the address
-     */
-    function claimedAmountMerkle(address account) external view returns (uint) {
-        return _claimedAmountMerkle(account);
-    }
-
-    /**
-     * @notice Allow caller to claims tokens from the whitelist
-     * @param amount amount of tokens to claim
-     */
-    function claimWhitelist(uint amount) external nonReentrant {
-        _consumeWhitelist(msg.sender, amount);
-        for (uint i = 0; i < amount; i++) {
-            _restrictedMint();
-        }
-    }
-
-    /**
-     * @notice Mint a token and transfer it to the caller.
-     */
-    function mint()
-        external payable nonReentrant
-    {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        if (!arcadiansSL.isPublicMintOpen) 
-            revert Arcadian_PublicMintClosed();
-
-        if (msg.value != arcadiansSL.mintPrice)
-            revert Arcadians_InvalidPayAmount();
-
-        _restrictedMint();
     }
 
    /**
@@ -139,12 +87,8 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     )
         external payable nonReentrant
     {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        if (msg.value != arcadiansSL.mintPrice) 
-            revert Arcadians_InvalidPayAmount();
-
-        uint tokenId = _restrictedMint();
-        _equipBatch(tokenId, slotIds, itemsToEquip);
+        uint tokenId = _mint();
+        _equip(tokenId, slotIds, itemsToEquip, true);
     }
 
     /**
@@ -219,16 +163,16 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         _setBaseURI(newBaseURI);
     }
 
+    /**
+     * @dev This function returns the base URI
+     * @return The base URI
+     */
     function baseURI() external view returns (string memory) {
         return _baseURI();
     }
 
-    /**
-     * @notice Returns the total claimed amount from the merkle tree
-     * @return The total claimed amount
-     */
-    function totalClaimedMerkle() external view returns (uint) {
-        return _totalClaimedMerkle();
+    function nextArcadianId() internal view returns (uint arcadianId) {
+        arcadianId = _totalSupply() + 1;
     }
 
     // required overrides

@@ -54,6 +54,9 @@ library InventoryStorage {
         EnumerableSet.Bytes32Set baseItemsHashes;
         // arcadian id => base items hash
         mapping(uint => bytes32) arcadianToBaseItemHash;
+
+        // account => slotId => number of tickets to modify the base traits
+        mapping(address => mapping(uint => uint)) baseModifierTicket;
     }
 
     function layout()

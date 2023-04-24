@@ -8,6 +8,7 @@ import { ItemsStorage } from "./ItemsStorage.sol";
 import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
 import { ArrayUtils } from "@solidstate/contracts/utils/ArrayUtils.sol";
+import { WhitelistStorage } from "../whitelist/WhitelistStorage.sol";
 
 contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal, ERC1155EnumerableInternal, ERC1155MetadataInternal {
 
@@ -15,11 +16,13 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     error Items_InvalidItemId();
     error Items_ItemsBasicStatusAlreadyUpdated();
     error Items_MintingNonBasicItem();
-    error Arcadians_MaximumItemMintsExceeded();
+    error Items_MaximumItemMintsExceeded();
 
     event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
 
     using ArrayUtils for uint[];
+
+    uint constant MAX_BASIC_ITEM_PER_USER = 3;
 
     function _claimMerkle(address to, uint itemId, uint amount, bytes32[] memory proof)
         internal
@@ -55,7 +58,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
             _mint(msg.sender, itemIds[i], amounts[i]);
             totalAmount += amounts[i];
         }
-        _consumeWhitelist(msg.sender, totalAmount);
+        _consumeWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender, totalAmount);
     }
 
     function _claimedAmount(address account, uint itemId) internal view returns (uint) {
@@ -66,56 +69,64 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         internal
     {
         if (itemId < 1) revert Items_InvalidItemId();
+        
+        if (!_hasRole(_minterRole(), msg.sender)) {
+            if (!ItemsStorage.layout().isBasicItem[itemId]){
+                revert Items_MintingNonBasicItem();
+            } else if (_balanceOf(msg.sender, itemId) + amount > MAX_BASIC_ITEM_PER_USER) {
+                revert Items_MaximumItemMintsExceeded();
+            }
+        }
 
         ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
 
-    function _mintBatch(address to, uint256[] calldata ids, uint256[] calldata amounts)
+    function _mintBatch(address to, uint256[] calldata itemsIds, uint256[] calldata amounts)
         internal
     {
-        if (ids.min() < 1) revert Items_InvalidItemId();
-        
-        ERC1155BaseInternal._mintBatch(to, ids, amounts, "");
-    }
+        if (itemsIds.min() < 1) revert Items_InvalidItemId();
 
-    function _mintBasic(uint256 itemId, uint256 amount)
-        internal
-    {   
-        if (!ItemsStorage.layout().isBasicItem[itemId]) 
-            revert Items_MintingNonBasicItem();
-
-        _mint(msg.sender, itemId, amount);
-    }
-
-    function _mintBasicBatch(uint256[] calldata itemIds, uint256[] calldata amounts)
-        internal
-    {
-
-        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        for (uint i = 0; i < itemIds.length; i++) {
-            if (!itemsSL.isBasicItem[itemIds[i]]) 
-                revert Items_MintingNonBasicItem();
+        if (!_hasRole(_minterRole(), msg.sender)) {
+            ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
+            for (uint i = 0; i < itemsIds.length; i++) {
+                if (!itemsSL.isBasicItem[itemsIds[i]]) {
+                    revert Items_MintingNonBasicItem();
+                } else if (_balanceOf(msg.sender, itemsIds[i]) + amounts[i] > MAX_BASIC_ITEM_PER_USER) {
+                    revert Items_MaximumItemMintsExceeded();
+                }
+            }
         }
-        _mintBatch(msg.sender, itemIds, amounts);
+        
+        ERC1155BaseInternal._mintBatch(to, itemsIds, amounts, "");
     }
 
     function _addBasicItem(uint itemId) internal {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (itemsSL.isBasicItem[itemId]) revert Items_ItemsBasicStatusAlreadyUpdated();
+        if (itemsSL.isBasicItem[itemId]) 
+            revert Items_ItemsBasicStatusAlreadyUpdated();
 
         itemsSL.isBasicItem[itemId] = true;
         itemsSL.basicItemsIds.push(itemId);
     }
 
-    function _addBasicItemBatch(uint[] calldata itemIds) internal {
+    function _setBasicItem(uint itemId, bool isBasic) internal {
+        if (isBasic) {
+            _addBasicItem(itemId);
+        } else {
+            _removeBasicItem(itemId);
+        }
+    }
+
+    function _setBasicItemBatch(uint[] calldata itemIds, bool[] calldata isBasic) internal {
         for (uint i = 0; i < itemIds.length; i++) {
-            _addBasicItem(itemIds[i]);
+            _setBasicItem(itemIds[i], isBasic[i]);
         }
     }
 
     function _removeBasicItem(uint itemId) internal {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (!itemsSL.isBasicItem[itemId]) revert Items_ItemsBasicStatusAlreadyUpdated();
+        if (!itemsSL.isBasicItem[itemId]) 
+            revert Items_ItemsBasicStatusAlreadyUpdated();
 
         uint numBasicItemsIds = itemsSL.basicItemsIds.length;
         for (uint i = 0; i < numBasicItemsIds; i++) {
@@ -127,19 +138,13 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         }
         delete itemsSL.isBasicItem[itemId];
     }
-
-    function _removeBasicItemBatch(uint[] calldata itemIds) internal {
-        for (uint i = 0; i < itemIds.length; i++) {
-            _removeBasicItem(itemIds[i]);
-        }
+    
+    function _isBasic(uint itemId) internal view returns (bool) {
+        return ItemsStorage.layout().isBasicItem[itemId];
     }
 
     function _basicItems() internal view returns (uint[] storage) {
         return ItemsStorage.layout().basicItemsIds;
-    }
-
-    function _isBasic(uint itemId) internal view returns (bool) {
-        return ItemsStorage.layout().isBasicItem[itemId];
     }
 
     function _migrateToIPFS(string calldata newBaseURI, bool migrate) internal {
