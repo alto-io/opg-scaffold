@@ -1,7 +1,6 @@
 // import { ethers } from "ethers";
 import hre from "hardhat";
 import fs from "fs";
-import { ethers } from "ethers";
 import path from "path";
 
 export default async function getDeployedContracts(network: string) {

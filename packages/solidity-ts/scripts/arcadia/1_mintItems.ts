@@ -6,8 +6,12 @@ interface MintItem {
     amount: number
 }
 
+
 const maxItemsPerTransaction = 100;
-const numberOfItems = 450;
+const numberOfItems = 457;
+export const basicItemsIds = Array.from({length: numberOfItems}, (v, i)=> i + 1).filter((itemId)=>itemId % 3 == 0);
+const isBasicItem = basicItemsIds.map(()=>true)
+
 const amountPerItem = 5;
 const mintItemsList: MintItem[][] = [];
 const numTransactionsNeeded = Math.round(numberOfItems / maxItemsPerTransaction)
@@ -23,10 +27,10 @@ for (let i = 1; i <= numberOfItems; i++) {
 
 async function main() {
     const network = hre.network.name;
-    const { itemsSC } = await getDeployedContracts(network);
+    const { itemsSC, arcadiansSC } = await getDeployedContracts(network);
     const accounts = await hre.getNamedAccounts();
 
-    const recipientAddress = accounts.deployer;
+    const recipientAddress = await arcadiansSC.signer.getAddress();
     console.log("Items recipient address: ", recipientAddress);
     
     console.log("recipientAddress: ", recipientAddress);
@@ -37,12 +41,13 @@ async function main() {
         const itemsAmounts = mintItemsListTransaction.map((item)=>item.amount);
         
         let tx = await itemsSC.mintBatch(recipientAddress, itemsIds, itemsAmounts);
-        console.log("mintBatch tx " + i + " : ", tx);
-        
         await tx.wait();
     }
+    let tx = await itemsSC.setBasicBatch(basicItemsIds, isBasicItem);
+    await tx.wait();
+    console.log("basic items ids: ", basicItemsIds);
     
-
+    
     for (const mintItemsListTransaction of mintItemsList) {
         for (let j = 0; j < mintItemsListTransaction.length; j++) {
             const balance = await itemsSC.balanceOf(recipientAddress, mintItemsListTransaction[j].id);
