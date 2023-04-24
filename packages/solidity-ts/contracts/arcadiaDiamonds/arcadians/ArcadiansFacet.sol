@@ -77,18 +77,16 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
    /**
-     * @notice Mint a token and equip it with given items
-     * @param slotIds IDs of the inventory slots to equip
+     * @notice Mint a token and equip it with the given items
      * @param itemsToEquip array of items to equip in the correspondent slot
      */
     function mintAndEquip(
-        uint[] calldata slotIds,
         InventoryStorage.Item[] calldata itemsToEquip
     )
         external payable nonReentrant
     {
         uint tokenId = _mint();
-        _equip(tokenId, slotIds, itemsToEquip, true);
+        _equip(tokenId, itemsToEquip, true);
     }
 
     /**

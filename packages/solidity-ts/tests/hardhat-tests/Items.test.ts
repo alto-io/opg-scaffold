@@ -150,8 +150,8 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         await arcadiansContracts.arcadiansFacet.openPublicMint();
 
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, slotsIdsToEquip, itemsToEquip)).to.be.true;
-        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(slotsIdsToEquip, itemsToEquip, {value: arcadiansParams.mintPrice})
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.true;
+        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
 
@@ -161,7 +161,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
         }
         
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
 
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         let expectedUri = baseArcadianURI + arcadianId;
@@ -175,7 +175,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }, []);
         await arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds);
         
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, slotsIdsToEquip, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
         
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
@@ -198,7 +198,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
                 itemsToReequip.push(itemsToEquip[i])
             }
         }
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, slotsIdsToReequip, itemsToReequip);
+        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip);
 
         // modify base slots
         const baseSlots = slots.filter((slot)=>slot.category == SlotCategory.Base && !slot.permanent)
@@ -207,7 +207,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const itemsBaseSlots = baseSlots.map(slot=>items.find((item)=>item.id == slot.itemsIdsAllowed[1]));
 
         await arcadiansContracts.inventoryFacet.addBaseModifierTickets(bob.address, baseSlotsIds, ticketsAmounts);
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, baseSlotsIds, itemsBaseSlots);
+        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsBaseSlots);
     })
 
     it('should trigger errors when equipping and unequipping an arcadian', async () => {
@@ -250,23 +250,19 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let slotsIdsToEquip = slots.map(slot=>slot.id);
         let itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(slotsIdsToEquip, itemsToEquip, {value: 0})).
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: 0})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([], [], {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_SlotNotSpecified")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([1], [], {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InputDataMismatch")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([slotsIdsToEquip[0]], [itemsToEquip[0]], {value: arcadiansParams.mintPrice})).
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotSpecified")
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([itemsToEquip[0]], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([slotsIdsToEquip[0]], [itemsToEquip[1]], {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotElegibleForSlot")
-            await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(slotsIdsToEquip, itemsToEquip, {value: arcadiansParams.mintPrice})).
+            await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InsufficientItemBalance")
-            await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(slotsIdsToEquip.slice(0, 1), itemsToEquip.slice(0, 1), {value: arcadiansParams.mintPrice})).
+            await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip.slice(0, 1), {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
             
-        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(slotsIdsToEquip, itemsToEquip, {value: arcadiansParams.mintPrice})
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(slotsIdsToEquip, itemsToEquip, {value: arcadiansParams.mintPrice})).
+        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ArcadianNotUnique")
 
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
@@ -286,22 +282,20 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingEmptySlot")
         
-        const slotsIdsToReequip = [];
         const itemsToReequip = [];
         for (let i = 0; i < slotsIdsToEquip.length; i++) {
             const slotId = slotsIdsToEquip[i];
             if (nonBaseSlotsIds.includes(slotId)) {
-                slotsIdsToReequip.push(slotId);
                 itemsToReequip.push(itemsToEquip[i])
             }
         }
 
-        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, slotsIdsToEquip, itemsToEquip)).
+        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToEquip)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_TicketNeededToModifyBaseSlots")
             
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, slotsIdsToReequip.slice(0,1), itemsToReequip.slice(0,1));
+        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip.slice(0,1));
         
-        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, slotsIdsToReequip.slice(0,1), itemsToReequip.slice(0,1))).
+        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip.slice(0,1))).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemAlreadyEquippedInSlot")
     })
 })
