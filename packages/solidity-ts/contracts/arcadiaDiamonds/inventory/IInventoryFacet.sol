@@ -112,24 +112,20 @@ interface IInventoryFacet {
     /**
      * @notice Equips a single item to a given slot for a specified Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to equip the item for
-     * @param slotId The slot id in which the items will be equipped
      * @param item The item to equip in the slot
      */
     function equip(
         uint arcadianId,
-        uint slotId,
         Item calldata item
     ) external;
 
     /**
-     * @notice Equips multiple items to multiple slots for a specified Arcadian NFT
+     * @notice Equips multiple items in a specified Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to equip the items for
-     * @param slotsIds An array of slot ids to equip the items
      * @param items An array of items to equip in the corresponding slots
      */
     function equipBatch(
         uint arcadianId,
-        uint[] calldata slotsIds,
         Item[] calldata items
     ) external;
 

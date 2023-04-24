@@ -156,15 +156,13 @@ contract InventoryFacet is
     /**
      * @notice Equips multiple items to multiple slots for a specified Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to equip the items for
-     * @param slotsIds An array of slot ids to equip the items
      * @param items An array of items to equip in the corresponding slots
      */
     function equip(
         uint arcadianId,
-        uint[] calldata slotsIds,
         InventoryStorage.Item[] calldata items
     ) external nonReentrant {
-        _equip(arcadianId, slotsIds, items, false);
+        _equip(arcadianId, items, false);
     }
 
     /**
@@ -218,14 +216,12 @@ contract InventoryFacet is
      * @dev The uniqueness is calculated using the existent arcadian items and the input items as well
      * @dev Only items equipped in 'base' category slots are considered for uniqueness
      * @param arcadianId The ID of the Arcadian NFT to query
-     * @param slotsIds An array of slot ids
      * @param items An array of items to check for uniqueness after "equipped" over the existent arcadian items.
      */
     function isArcadianUnique(
         uint arcadianId,
-        uint[] calldata slotsIds,
         InventoryStorage.Item[] calldata items
     ) external view returns (bool) {
-        return _isArcadianUnique(arcadianId, slotsIds, items);
+        return _isArcadianUnique(arcadianId, items);
     }
 }

@@ -22,12 +22,13 @@ contract InventoryInternal is
     error Inventory_InvalidERC1155Contract();
     error Inventory_UnequippingPermanentSlot();
     error Inventory_InvalidSlotId();
-    error Inventory_ItemNotElegibleForSlot();
+    error Inventory_ItemDoesNotHaveSlotAssigned();
     error Inventory_InsufficientItemBalance();
     error Inventory_SlotAlreadyEquipped();
     error Inventory_UnequippingEmptySlot();
     error Inventory_UnequippingBaseSlot();
     error Inventory_SlotNotSpecified();
+    error Inventory_ItemNotSpecified();
     error Inventory_NotArcadianOwner();
     error Inventory_ArcadianNotUnique();
     error Inventory_NotAllBaseSlotsEquipped();
@@ -88,22 +89,20 @@ contract InventoryInternal is
 
     function _equip(
         uint arcadianId,
-        uint[] calldata slotIds,
         InventoryStorage.Item[] calldata items,
         bool freeBaseModifier
     ) internal onlyArcadianOwner(arcadianId) {
 
-        if (slotIds.length == 0) 
-            revert Inventory_SlotNotSpecified();
-
-        if (slotIds.length != items.length) 
-            revert Inventory_InputDataMismatch();
+        if (items.length == 0) 
+            revert Inventory_ItemNotSpecified();
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         bool containsBaseSlots;
-        for (uint i = 0; i < slotIds.length; i++) {
-            _equipSingleSlot(arcadianId, slotIds[i], items[i], freeBaseModifier);
-            containsBaseSlots = containsBaseSlots || inventorySL.slots[slotIds[i]].category == InventoryStorage.SlotCategory.Base;
+        uint[] memory slotsIds = new uint[](items.length);
+        for (uint i = 0; i < items.length; i++) {
+            uint slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
+            containsBaseSlots = containsBaseSlots || inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base;
+            slotsIds[i] = slotId;
         }
 
         if (!_baseSlotsEquipped(arcadianId)) 
@@ -112,20 +111,20 @@ contract InventoryInternal is
         if (containsBaseSlots && !_hashBaseItemsUnchecked(arcadianId)) 
             revert Inventory_ArcadianNotUnique();
 
-        emit ItemsEquipped(msg.sender, arcadianId, slotIds);
+        emit ItemsEquipped(msg.sender, arcadianId, slotsIds);
     }
 
     function _equipSingleSlot(
         uint arcadianId,
-        uint slotId,
         InventoryStorage.Item calldata item,
         bool freeBaseModifier
-    ) internal onlyValidSlot(slotId) {
+    ) internal returns (uint slotId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        slotId = inventorySL.itemSlot[item.erc721Contract][item.id];
         
-        if (inventorySL.itemSlot[item.erc721Contract][item.id] != slotId) 
-            revert Inventory_ItemNotElegibleForSlot();
+        if (slotId == 0 || slotId > InventoryStorage.layout().numSlots) 
+            revert Inventory_ItemDoesNotHaveSlotAssigned();
         
         if (!freeBaseModifier && inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
             if (inventorySL.baseModifierTicket[msg.sender][slotId] < 1)
@@ -261,11 +260,8 @@ contract InventoryInternal is
 
     function _isArcadianUnique(
         uint arcadianId,
-        uint[] calldata slotsIds,
         InventoryStorage.Item[] calldata items
     ) internal view returns (bool) {
-        if (slotsIds.length != items.length) 
-            revert Inventory_InputDataMismatch();
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
@@ -281,13 +277,16 @@ contract InventoryInternal is
             baseItems[i] = inventorySL.equippedItems[arcadianId][slotId];
         }
 
-        for (uint i = 0; i < slotsIds.length; i++) {
-            uint slotId = slotsIds[i];
+        for (uint i = 0; i < items.length; i++) {
+            uint slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+            if (slotId == 0 || slotId > InventoryStorage.layout().numSlots)
+                revert Inventory_ItemDoesNotHaveSlotAssigned();
             
-            if (slotId == 0 && slotId > numSlots) 
+            if (slotId == 0 && slotId > numSlots)
                 revert Inventory_InvalidSlotId();
 
-            if (!baseSlots.contains(slotId)) continue;
+            if (!baseSlots.contains(slotId))
+                continue;
 
             baseSlotsIds[i] = slotId;
             baseItems[i] = items[i];
