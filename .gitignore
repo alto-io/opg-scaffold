@@ -73,4 +73,3 @@ yarn-error.log*
 .DS_Store
 *.pem
 packages/common/src/scaffold.config.json
-packages/solidity-ts/generated/hardhat
