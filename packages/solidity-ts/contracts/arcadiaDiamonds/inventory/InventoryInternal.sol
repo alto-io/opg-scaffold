@@ -9,6 +9,7 @@ import { EnumerableSet } from "@solidstate/contracts/data/EnumerableSet.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
 import { IERC1155 } from "@solidstate/contracts/interfaces/IERC1155.sol";
+import "hardhat/console.sol";
 
 contract InventoryInternal is
     ReentrancyGuard,
@@ -25,13 +26,17 @@ contract InventoryInternal is
     error Inventory_InsufficientItemBalance();
     error Inventory_SlotAlreadyEquipped();
     error Inventory_UnequippingEmptySlot();
+    error Inventory_UnequippingBaseSlot();
     error Inventory_SlotNotSpecified();
     error Inventory_NotArcadianOwner();
     error Inventory_ArcadianNotUnique();
+    error Inventory_NotAllBaseSlotsEquipped();
     error Inventory_InputDataMismatch();
     error Inventory_ItemAlreadyEquippedInSlot();
     error Inventory_ItemAlreadyAllowedInSlot();
     error Inventory_ItemAlreadyDisallowedInSlot();
+    error Inventory_TicketNeededToModifyBaseSlots();
+    error Inventory_NonBaseSlot();
 
     event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
 
@@ -83,27 +88,64 @@ contract InventoryInternal is
 
     function _equip(
         uint arcadianId,
+        uint[] calldata slotIds,
+        InventoryStorage.Item[] calldata items,
+        bool freeBaseModifier
+    ) internal onlyArcadianOwner(arcadianId) {
+
+        if (slotIds.length == 0) 
+            revert Inventory_SlotNotSpecified();
+
+        if (slotIds.length != items.length) 
+            revert Inventory_InputDataMismatch();
+
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        bool containsBaseSlots;
+        for (uint i = 0; i < slotIds.length; i++) {
+            _equipSingleSlot(arcadianId, slotIds[i], items[i], freeBaseModifier);
+            containsBaseSlots = containsBaseSlots || inventorySL.slots[slotIds[i]].category == InventoryStorage.SlotCategory.Base;
+        }
+
+        if (!_baseSlotsEquipped(arcadianId)) 
+            revert Inventory_NotAllBaseSlotsEquipped();
+
+        if (containsBaseSlots && !_hashBaseItemsUnchecked(arcadianId)) 
+            revert Inventory_ArcadianNotUnique();
+
+        emit ItemsEquipped(msg.sender, arcadianId, slotIds);
+    }
+
+    function _equipSingleSlot(
+        uint arcadianId,
         uint slotId,
-        InventoryStorage.Item calldata item
-    ) internal onlyArcadianOwner(arcadianId) onlyValidSlot(slotId) {
+        InventoryStorage.Item calldata item,
+        bool freeBaseModifier
+    ) internal onlyValidSlot(slotId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         
         if (inventorySL.itemSlot[item.erc721Contract][item.id] != slotId) 
             revert Inventory_ItemNotElegibleForSlot();
+        
+        if (!freeBaseModifier && inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+            if (inventorySL.baseModifierTicket[msg.sender][slotId] < 1)
+                revert Inventory_TicketNeededToModifyBaseSlots();
+
+            inventorySL.baseModifierTicket[msg.sender][slotId]--;
+        }
 
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
         if (inventorySL.slots[slotId].permanent && existingItem.erc721Contract != address(0)) 
             revert Inventory_UnequippingPermanentSlot();
+        if (existingItem.erc721Contract == item.erc721Contract && existingItem.id == item.id)
+            revert Inventory_ItemAlreadyEquippedInSlot();
 
-        _unequipUnchecked(arcadianId, slotId);
+        if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0))
+            _unequipUnchecked(arcadianId, slotId);
 
         IERC1155 erc1155Contract = IERC1155(item.erc721Contract);
         if (erc1155Contract.balanceOf(msg.sender, item.id) < 1)
             revert Inventory_InsufficientItemBalance();
-
-        if (existingItem.erc721Contract == item.erc721Contract && existingItem.id == item.id)
-            revert Inventory_ItemAlreadyEquippedInSlot();
 
         erc1155Contract.safeTransferFrom(
             msg.sender,
@@ -114,73 +156,17 @@ contract InventoryInternal is
         );
 
         inventorySL.equippedItems[arcadianId][slotId] = item;
-
-        if (!_hashBaseItemsUnchecked(arcadianId)) 
-            revert Inventory_ArcadianNotUnique();
-
-        uint[] memory slotsIds = new uint[](1);
-        slotsIds[0] = slotId;
-        emit ItemsEquipped(
-            msg.sender,
-            arcadianId,
-            slotsIds
-        );
     }
 
-    function _equipBatch(
-        uint arcadianId,
-        uint[] calldata slotIds,
-        InventoryStorage.Item[] calldata items
-    ) internal onlyArcadianOwner(arcadianId) {
-
-        if (slotIds.length == 0) revert Inventory_SlotNotSpecified();
-
-        if (slotIds.length != items.length) revert Inventory_InputDataMismatch();
-
+    function _baseSlotsEquipped(uint arcadianId) internal view returns (bool) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
-        for (uint i = 0; i < slotIds.length; i++) {
-            uint slotId = slotIds[i];
-
-            if (slotId == 0 && slotId > numSlots) 
-                revert Inventory_InvalidSlotId();
-            
-            if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] != slotId) 
-                revert Inventory_ItemNotElegibleForSlot();
-
-            InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
-
-            if (existingItem.erc721Contract == items[i].erc721Contract && existingItem.id == items[i].id)
-                revert Inventory_ItemAlreadyEquippedInSlot();
-
-            if (inventorySL.slots[slotId].permanent && existingItem.erc721Contract != address(0)) 
-                revert Inventory_UnequippingPermanentSlot();
-
-            _unequipUnchecked(arcadianId, slotId);
-
-            inventorySL.equippedItems[arcadianId][slotId] = items[i];
-
-            IERC1155 erc1155Contract = IERC1155(items[i].erc721Contract);
-            if (erc1155Contract.balanceOf(msg.sender, items[i].id) < 1) 
-                revert Inventory_InsufficientItemBalance();
-
-            erc1155Contract.safeTransferFrom(
-                msg.sender,
-                address(this),
-                items[i].id,
-                1,
-                ''
-            );
+        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
+        for (uint i = 0; i < baseSlots.length(); i++) {
+            if (inventorySL.equippedItems[arcadianId][baseSlots.at(i)].id == 0) {
+                return false;
+            }
         }
-
-        if (!_hashBaseItemsUnchecked(arcadianId)) 
-            revert Inventory_ArcadianNotUnique();
-
-        emit ItemsEquipped(
-            msg.sender,
-            arcadianId,
-            slotIds
-        );
+        return true;
     }
 
     function _unequipUnchecked(
@@ -189,11 +175,8 @@ contract InventoryInternal is
     ) internal {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
+
         IERC1155 erc1155Contract = IERC1155(existingItem.erc721Contract);
-
-        if (existingItem.erc721Contract == address(0)) 
-            return;
-
         erc1155Contract.safeTransferFrom(
             address(this),
             msg.sender,
@@ -204,10 +187,10 @@ contract InventoryInternal is
         delete inventorySL.equippedItems[arcadianId][slotId];
     }
 
-    function _unequip(
+    function _unequipSingleSlot(
         uint arcadianId,
         uint slotId
-    ) internal onlyArcadianOwner(arcadianId) onlyValidSlot(slotId) {
+    ) internal onlyValidSlot(slotId) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         if (inventorySL.slots[slotId].permanent) 
@@ -216,42 +199,22 @@ contract InventoryInternal is
         if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) 
             revert Inventory_UnequippingEmptySlot();
         
+        if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base)
+            revert Inventory_UnequippingBaseSlot();
+
         _unequipUnchecked(arcadianId, slotId);
-
-        _hashBaseItemsUnchecked(arcadianId);
-
-        uint[] memory slots = new uint[](1);
-        slots[0] = slotId;
-        emit ItemsUnequipped(
-            msg.sender,
-            arcadianId,
-            slots
-        );
     }
 
-    function _unequipBatch(
+    function _unequip(
         uint arcadianId,
         uint[] calldata slotIds
     ) internal onlyArcadianOwner(arcadianId) {
 
-        if (slotIds.length == 0) revert Inventory_SlotNotSpecified();
-
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
+        if (slotIds.length == 0) 
+            revert Inventory_SlotNotSpecified();
 
         for (uint i = 0; i < slotIds.length; i++) {
-            uint slotId = slotIds[i];
-
-            if (slotId == 0 || slotId > numSlots) 
-                revert Inventory_InvalidSlotId();
-
-            if (inventorySL.slots[slotId].permanent) 
-                revert Inventory_UnequippingPermanentSlot();
-
-            if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) 
-                revert Inventory_UnequippingEmptySlot();
-            
-            _unequipUnchecked(arcadianId, slotId);
+            _unequipSingleSlot(arcadianId, slotIds[i]);
         }
 
         _hashBaseItemsUnchecked(arcadianId);
@@ -269,6 +232,18 @@ contract InventoryInternal is
     ) internal view returns (ItemInSlot memory) {
         InventoryStorage.Item storage item = InventoryStorage.layout().equippedItems[arcadianId][slotId];
         return ItemInSlot(slotId, item.erc721Contract, item.id);
+    }
+
+    function _equippedBatch(
+        uint arcadianId,
+        uint[] calldata slotIds
+    ) internal view returns (ItemInSlot[] memory equippedSlots) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        equippedSlots = new ItemInSlot[](slotIds.length);
+        for (uint i = 0; i < slotIds.length; i++) {
+            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotIds[i]];
+            equippedSlots[i] = ItemInSlot(slotIds[i], equippedItem.erc721Contract, equippedItem.id);
+        }
     }
 
     function _equippedAll(
@@ -330,7 +305,7 @@ contract InventoryInternal is
         uint arcadianId
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
+        // delete inventorySL.equippedItems[arcadianId][slotId];
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
         bytes memory encodedItems;
         uint baseSlotsLength = baseSlots.length();
@@ -342,7 +317,7 @@ contract InventoryInternal is
         }
 
         bytes32 baseItemsHash = keccak256(encodedItems);
-        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash);
+        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash) || baseSlotsLength == 0;
         inventorySL.baseItemsHashes.remove(inventorySL.arcadianToBaseItemHash[arcadianId]);
         inventorySL.baseItemsHashes.add(baseItemsHash);
         inventorySL.arcadianToBaseItemHash[arcadianId] = baseItemsHash;
@@ -367,6 +342,34 @@ contract InventoryInternal is
         }
 
         emit SlotCreated(msg.sender, newSlot, permanent, category);
+    }
+
+    function _addBaseModifierTickets(
+        address account,
+        uint[] calldata slotIds,
+        uint[] calldata amounts
+    ) internal {
+        if (slotIds.length != amounts.length)
+            revert Inventory_InputDataMismatch();
+
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        uint numSlots = inventorySL.numSlots;
+
+        for (uint i = 0; i < slotIds.length; i++) {
+            if (slotIds[i] == 0 && slotIds[i] > numSlots) 
+                revert Inventory_InvalidSlotId();
+            if (inventorySL.slots[slotIds[i]].category != InventoryStorage.SlotCategory.Base) {
+                revert Inventory_NonBaseSlot();
+            }
+            InventoryStorage.layout().baseModifierTicket[account][slotIds[i]] += amounts[i];
+        }
+    }
+
+    function _getBaseModifierTickets(address account, uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
+        if (InventoryStorage.layout().slots[slotId].category != InventoryStorage.SlotCategory.Base) {
+            revert Inventory_NonBaseSlot();
+        }
+        return InventoryStorage.layout().baseModifierTicket[account][slotId];
     }
 
     function _allowItemsInSlot(

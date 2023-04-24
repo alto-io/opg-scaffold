@@ -5,13 +5,8 @@ import fs from "fs";
 
 import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } from '../hardhat-deploy/01.ArcadiansDiamond.deploy';
 import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
-import { arcadiansMerklePaths } from '~helpers/merkle-tree/merkleGenerator';
-
-// Get merkle root previously generated
-const merkleTree = JSON.parse(fs.readFileSync(arcadiansMerklePaths.outputMerkleTree).toString());
 
 // Diamond init params
-export const merkleRoot = merkleTree.root.toString();
 export const baseArcadianURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
 export const maxMintPerUser = 3;
 export const mintPrice = 2;
@@ -42,7 +37,7 @@ export const func = async() => {
     console.log('Arcadians Diamond Cut: ', cut)
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseArcadianURI, maxMintPerUser, mintPrice])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [baseArcadianURI, maxMintPerUser, mintPrice])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

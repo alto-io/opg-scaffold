@@ -6,21 +6,19 @@ import { UintUtils } from '@solidstate/contracts/utils/UintUtils.sol';
 import { ArcadiansStorage } from "./ArcadiansStorage.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { WhitelistInternal } from "../whitelist/WhitelistInternal.sol";
-import { MerkleInternal } from "../merkle/MerkleInternal.sol";
 import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 
-contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, InventoryInternal {
+contract ArcadiansInternal is RolesInternal, WhitelistInternal, InventoryInternal {
 
     error Arcadians_InvalidPayAmount();
     error Arcadians_MaximumMintedArcadiansPerUserReached();
     error Arcadians_MaximumArcadiansSupplyReached();
-    error Arcadian_PublicMintClosed();
+    error Arcadians_NotElegibleToMint();
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);
     event InventoryAddressChanged(address indexed by, address indexed oldInventoryAddress, address indexed newInventoryAddress);
-    event ArcadianClaimedMerkle(address indexed to, uint256 indexed claimedAmount);
 
     using UintUtils for uint256;
 
@@ -34,14 +32,6 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, MerkleInternal, 
 
     function _baseURI() internal view returns (string memory) {
         return ERC721MetadataStorage.layout().baseURI;
-    }
-
-    function _claimedAmountMerkle(address account) internal view returns (uint) {
-        return ArcadiansStorage.layout().amountClaimedMerkle[account];
-    }
-
-    function _totalClaimedMerkle() internal view returns (uint) {
-        return ArcadiansStorage.layout().totalClaimedMerkle;
     }
 
     function _mintPrice() internal view returns (uint) {

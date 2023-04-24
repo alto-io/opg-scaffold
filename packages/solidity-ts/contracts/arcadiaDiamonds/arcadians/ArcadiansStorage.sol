@@ -7,8 +7,6 @@ library ArcadiansStorage {
         keccak256("equippable.storage.position");
 
     struct Layout {
-        mapping(address => uint) amountClaimedMerkle;
-        uint totalClaimedMerkle;
         uint maxMintPerUser;
         uint mintPrice;
         bool isPublicMintOpen;

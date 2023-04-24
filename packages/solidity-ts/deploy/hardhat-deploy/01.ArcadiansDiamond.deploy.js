@@ -4,7 +4,6 @@ export const arcadiansDiamondName = 'ArcadiansDiamond';
 export const arcadiansDiamondInitName = 'ArcadiansInit';
 export const arcadiansFacetNames = {
     arcadiansFacet: 'ArcadiansFacet',
-    merkleFacet: 'MerkleFacet',
     rolesFacet: 'RolesFacet',
     whitelistFacet: 'WhitelistFacet',
     inventoryFacet: 'InventoryFacet'

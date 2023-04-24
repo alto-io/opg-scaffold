@@ -64,80 +64,45 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
-     * @notice Mints a new item
+     * @notice Mints a new item. Only minter role account can mint non-basic items
      * @param to The address to mint the item to
      * @param itemId The ID of the item to mint
      * @param amount The item amount to be minted
      */
     function mint(address to, uint256 itemId, uint256 amount)
-        public onlyMinter
+        public
     {
         _mint(to, itemId, amount);
     }
 
     /**
-     * @notice Mint a batch of items to a specific address
-     * @dev Only account with minter role can call this function
+     * @notice Mint a batch of items to a specific address. Only minter role account can mint non-basic items
      * @param to The address to receive the minted items
      * @param itemIds An array of items IDs to be minted
      * @param amounts The items amounts to be minted
      */
     function mintBatch(address to, uint256[] calldata itemIds, uint256[] calldata amounts)
-        public onlyMinter
+        public
     {
         _mintBatch(to, itemIds, amounts);
     }
 
     /**
-     * @notice Mints a new basic item
-     * @param itemId The ID of the item to mint
-     * @param amount The item amount to be minted
-     */
-    function mintBasic(uint256 itemId, uint256 amount) external
-    {
-        _mintBasic(itemId, amount);
-    }
-
-    /**
-     * @notice Mints new basic items
-     * @param itemIds The IDs of the items to mint
-     * @param amounts The amounts of the items to mint
-     */
-    function mintBasicBatch(uint256[] calldata itemIds, uint256[] calldata amounts) external
-    {
-        _mintBasicBatch(itemIds, amounts);
-    }
-
-    /**
      * @notice Add an item to the basic item pool
-     * @param itemId The ID of the item to set as basic
+     * @param itemId The item ID
+     * @param basic A boolean representing if a item shoud be set as basic
      */
-    function addBasicItem(uint itemId) external onlyManager {
-        _addBasicItem(itemId);
+    function setBasic(uint itemId, bool basic) external onlyManager {
+        _setBasicItem(itemId, basic);
     }
 
     /**
      * @notice Add items to the basic item pool
      * @param itemIds The IDs of the items to set as basic
+     * @param basic An array of boolean's representing if the items shoud be set as basic
      */
-    function addBasicItemBatch(uint[] calldata itemIds) external onlyManager {
-        _addBasicItemBatch(itemIds);
-    }
-
-    /**
-     * @notice Removes an item from the basic item pool
-     * @param itemId The ID of the item to remove from the basic list
-     */
-    function removeBasicItem(uint itemId) external onlyManager {
-        _removeBasicItem(itemId);
-    }
-
-    /**
-     * @notice Removes items from the basic item pool
-     * @param itemIds The IDs of the items to remove from the basic list
-     */
-    function removeBasicItemBatch(uint[] calldata itemIds) external onlyManager {
-        _removeBasicItemBatch(itemIds);
+    function setBasicBatch(uint[] calldata itemIds, bool[] calldata basic) external onlyManager {
+        _setBasicItemBatch(itemIds, basic);
     }
 
     /**
