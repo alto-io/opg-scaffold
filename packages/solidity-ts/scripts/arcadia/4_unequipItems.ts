@@ -1,7 +1,7 @@
 // import { ethers } from "ethers";
 import hre, { ethers } from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
-import { ItemInSlot } from "./5_fetchDataSC";
+import { ItemInSlot } from "./6_fetchDataSC";
 
 enum SlotCategory { Base, Equippment, Cosmetic}
 interface Slot {
