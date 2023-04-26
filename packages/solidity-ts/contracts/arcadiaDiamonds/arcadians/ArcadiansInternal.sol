@@ -18,7 +18,6 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, InventoryInterna
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);
-    event InventoryAddressChanged(address indexed by, address indexed oldInventoryAddress, address indexed newInventoryAddress);
 
     using UintUtils for uint256;
 

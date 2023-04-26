@@ -24,7 +24,6 @@ contract InventoryInternal is
     error Inventory_InvalidSlotId();
     error Inventory_ItemDoesNotHaveSlotAssigned();
     error Inventory_InsufficientItemBalance();
-    error Inventory_SlotAlreadyEquipped();
     error Inventory_UnequippingEmptySlot();
     error Inventory_UnequippingBaseSlot();
     error Inventory_SlotNotSpecified();
@@ -38,8 +37,6 @@ contract InventoryInternal is
     error Inventory_ItemAlreadyDisallowedInSlot();
     error Inventory_TicketNeededToModifyBaseSlots();
     error Inventory_NonBaseSlot();
-
-    event ArcadiansAddressChanged(address indexed oldArcadiansAddress, address indexed newArcadiansAddress);
 
     event ItemsAllowedInSlotUpdated(
         address indexed by,
