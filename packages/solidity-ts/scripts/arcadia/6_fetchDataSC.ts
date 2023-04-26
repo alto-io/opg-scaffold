@@ -28,7 +28,6 @@ async function main() {
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
     const accounts = await getNamedAccounts();
-    const arcadianId = 0;
 
     const arcadiansOwner = await arcadiansSC.signer.getAddress();
     const balanceArcadians = await arcadiansSC.balanceOf(arcadiansOwner);
@@ -64,12 +63,18 @@ async function main() {
         })
     }
 
-    const equippedAllSC: ItemInSlot[] = await inventorySC.equippedAll(arcadianId);
-    const equippedAll = equippedAllSC.map((itemInSlot) => {return {
-        slotSc: itemInSlot.slotId.toNumber(),
-        erc721Contract: itemInSlot.erc721Contract,
-        itemId: itemInSlot.itemId.toNumber(),
-    }})
+    const equippedArcadians: any = {};
+    for (const arcadianId of ownedArcadians) {
+        const equippedAllSC: ItemInSlot[] = await inventorySC.equippedAll(arcadianId);
+        const equippedAll = equippedAllSC.map((itemInSlot) => {
+            return {
+                slotSc: itemInSlot.slotId.toNumber(),
+                erc721Contract: itemInSlot.erc721Contract,
+                itemId: itemInSlot.itemId.toNumber(),
+            }
+        })
+        equippedArcadians[arcadianId] = equippedAll;
+    }
 
     const dataSC = {
         network,
@@ -81,7 +86,7 @@ async function main() {
         itemsOwner: accounts.deployer,
         ownedItems,
         inventorySlots: slots,
-        equippedAll
+        equippedArcadians
     };
     fs.writeFileSync(dataSCPath, JSON.stringify(dataSC));
 }

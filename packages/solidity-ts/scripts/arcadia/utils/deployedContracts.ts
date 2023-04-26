@@ -9,16 +9,20 @@ export default async function getDeployedContracts(network: string) {
     const deployedInventoryFacetPath = path.join(__dirname, `../../../generated/hardhat/deployments/${network}/InventoryFacet.json`);
     const deployedArcadiansDiamondPath = path.join(__dirname, `../../../generated/hardhat/deployments/${network}/ArcadiansDiamond.json`);
     const deployedArcadiansFacetPath = path.join(__dirname, `../../../generated/hardhat/deployments/${network}/ArcadiansFacet.json`);
+    const deployedWhitelistFacetPath = path.join(__dirname, `../../../generated/hardhat/deployments/${network}/WhitelistFacet.json`);
 
     const itemsDiamond = JSON.parse(fs.readFileSync(deployedItemDiamondPath).toString());
     const itemsFacet = JSON.parse(fs.readFileSync(deployedItemFacetPath).toString());
     const inventoryFacet = JSON.parse(fs.readFileSync(deployedInventoryFacetPath).toString());
     const arcadiansDiamond = JSON.parse(fs.readFileSync(deployedArcadiansDiamondPath).toString());
     const arcadiansFacet = JSON.parse(fs.readFileSync(deployedArcadiansFacetPath).toString());
+    const whitelistFacet = JSON.parse(fs.readFileSync(deployedWhitelistFacetPath).toString());
 
     const itemsSC = await hre.ethers.getContractAt(itemsFacet.abi, itemsDiamond.address);
     const inventorySC = await hre.ethers.getContractAt(inventoryFacet.abi, arcadiansDiamond.address);
     const arcadiansSC = await hre.ethers.getContractAt(arcadiansFacet.abi, arcadiansDiamond.address);
+
+    const whitelistArcadiansSC = await hre.ethers.getContractAt(whitelistFacet.abi, arcadiansDiamond.address);
     
-    return { itemsSC, inventorySC, arcadiansSC }
+    return { itemsSC, inventorySC, arcadiansSC, whitelistArcadiansSC }
 }
