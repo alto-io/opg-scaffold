@@ -8,7 +8,7 @@ library RolesStorage {
 
     struct Layout {
         bytes32 managerRole;
-        bytes32 minterRole;
+        bytes32 automationRole;
     }
 
     function layout()

@@ -17,6 +17,7 @@ contract RolesFacet is RolesInternal, AccessControl {
     function defaultAdminRole() external pure returns (bytes32) {
         return _defaultAdminRole();
     }
+
     /**
      * @notice Returns the ID of the manager role
      * @return The ID of the manager role
@@ -24,11 +25,12 @@ contract RolesFacet is RolesInternal, AccessControl {
     function managerRole() external view returns (bytes32) {
         return _managerRole();
     }
+
     /**
-     * @notice Returns the ID of the minter role
-     * @return The ID of the minter role
+     * @notice Returns the ID of the automation role
+     * @return The ID of the automation role
      */
-    function minterRole() external view returns (bytes32) {
-        return _minterRole();
+    function automationRole() external view returns (bytes32) {
+        return _automationRole();
     }
 }

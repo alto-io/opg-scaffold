@@ -108,7 +108,7 @@ contract InventoryFacet is
         address account,
         uint[] calldata slotsIds,
         uint[] calldata amounts
-    ) external onlyManager {
+    ) external onlyAutomation {
         _addBaseModifierCoupons(account, slotsIds, amounts);
     }
 

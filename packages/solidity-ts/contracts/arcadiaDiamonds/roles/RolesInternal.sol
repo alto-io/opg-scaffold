@@ -7,18 +7,25 @@ import { RolesStorage } from './RolesStorage.sol';
 
 contract RolesInternal is AccessControlInternal {
 
+    error Roles_MissingAdminRole();
+    error Roles_MissingManagerRole();
+    error Roles_MissingAutomationRole();
+
     modifier onlyDefaultAdmin() {
-        _checkRole(_defaultAdminRole());
+        if (!_hasRole(_defaultAdminRole(), msg.sender))
+            revert Roles_MissingAdminRole();
         _;
     }
 
     modifier onlyManager() {
-        _checkRole(_managerRole());
+        if (!_hasRole(_managerRole(), msg.sender))
+            revert Roles_MissingManagerRole();
         _;
     }
 
-    modifier onlyMinter() {
-        _checkRole(_minterRole());
+    modifier onlyAutomation() {
+        if (!_hasRole(_managerRole(), msg.sender) && !_hasRole(_automationRole(), msg.sender))
+            revert Roles_MissingAutomationRole();
         _;
     }
 
@@ -30,17 +37,16 @@ contract RolesInternal is AccessControlInternal {
         return RolesStorage.layout().managerRole;
     }
 
-    function _minterRole() internal view returns (bytes32) {
-        return RolesStorage.layout().minterRole;
+    function _automationRole() internal view returns (bytes32) {
+        return RolesStorage.layout().automationRole;
     }
 
     function _initRoles() internal {
         RolesStorage.Layout storage rolesSL = RolesStorage.layout();
         rolesSL.managerRole = keccak256("manager.role");
-        rolesSL.minterRole = keccak256("minter.role");
+        rolesSL.automationRole = keccak256("automation.role");
 
         _grantRole(_defaultAdminRole(), msg.sender);
         _grantRole(_managerRole(), msg.sender);
-        _grantRole(_minterRole(), msg.sender);
     }
 }

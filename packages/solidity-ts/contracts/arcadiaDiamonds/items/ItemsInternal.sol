@@ -70,7 +70,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     {
         if (itemId < 1) revert Items_InvalidItemId();
         
-        if (!_hasRole(_minterRole(), msg.sender)) {
+        if (!_hasRole(_managerRole(), msg.sender)) {
             if (!ItemsStorage.layout().isBasicItem[itemId]){
                 revert Items_MintingNonBasicItem();
             } else if (_balanceOf(msg.sender, itemId) + amount > MAX_BASIC_ITEM_PER_USER) {
@@ -86,7 +86,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     {
         if (itemsIds.min() < 1) revert Items_InvalidItemId();
 
-        if (!_hasRole(_minterRole(), msg.sender)) {
+        if (!_hasRole(_managerRole(), msg.sender)) {
             ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
             for (uint i = 0; i < itemsIds.length; i++) {
                 if (!itemsSL.isBasicItem[itemsIds[i]]) {
