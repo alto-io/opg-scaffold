@@ -152,6 +152,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.true;
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
+        
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
 
@@ -201,13 +202,24 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip);
 
         // modify base slots
-        const baseSlots = slots.filter((slot)=>slot.category == SlotCategory.Base && !slot.permanent)
+        const baseSlots = slots.filter((slot)=>slot.category == SlotCategory.Base && !slot.permanent);
         const baseSlotsIds = baseSlots.map((slot)=>slot.id);
-        const ticketsAmounts = baseSlots.map(()=>itemAmount);
+        const couponsAmounts = baseSlots.map(()=>itemAmount);
         const itemsBaseSlots = baseSlots.map(slot=>items.find((item)=>item.id == slot.itemsIdsAllowed[1]));
 
-        await arcadiansContracts.inventoryFacet.addBaseModifierTickets(bob.address, baseSlotsIds, ticketsAmounts);
+        await arcadiansContracts.inventoryFacet.addBaseModifierCoupons(bob.address, baseSlotsIds, couponsAmounts);
+        // const baseModifierCouponAll = await arcadiansContracts.inventoryFacet.getBaseModifierCouponAll(bob.address);
+
+        for (let i = 0; i < baseSlotsIds.length; i++) {
+            expect(await arcadiansContracts.inventoryFacet.getBaseModifierCoupon(bob.address, baseSlotsIds[i])).
+                to.be.equal(couponsAmounts[i])
+        }
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsBaseSlots);
+
+        for (let i = 0; i < baseSlotsIds.length; i++) {
+            expect(await arcadiansContracts.inventoryFacet.getBaseModifierCoupon(bob.address, baseSlotsIds[i])).
+                to.be.equal(couponsAmounts[i]-1)
+        }
     })
 
     it('should trigger errors when equipping and unequipping an arcadian', async () => {
@@ -291,7 +303,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
 
         await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToEquip)).
-            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_TicketNeededToModifyBaseSlots")
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_CouponNeededToModifyBaseSlots")
             
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip.slice(0,1));
         

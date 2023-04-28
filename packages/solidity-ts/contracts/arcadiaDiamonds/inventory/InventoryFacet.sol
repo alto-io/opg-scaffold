@@ -77,28 +77,39 @@ contract InventoryFacet is
     }
 
     /**
-     * @notice Returns the number tickets avialable for an account that allow to modify the base traits
-     * @param account The accounts to increase the number of tickets
+     * @notice Returns the number coupons available for an account that allow to modify the base traits
+     * @param account The accounts to increase the number of coupons
+     * @param slotId The slot to get the coupon amount from
      */
-    function getBaseModifierTickets(
+    function getBaseModifierCoupon(
         address account,
         uint slotId
     ) external view returns (uint) {
-        return _getBaseModifierTickets(account, slotId);
+        return _getbaseModifierCoupon(account, slotId);
     }
 
     /**
-     * @notice Adds tickets to accounts that allow to modify the base traits
-     * @param account The account to increase the number of tickets
-     * @param slotsIds The slots ids to increase the number of tickets
-     * @param amounts the amounts of tickets to increase
+     * @notice Returns the number coupons available for an account that allow to modify the base traits
+     * @param account The accounts to increase the number of coupons
      */
-    function addBaseModifierTickets(
+    function getBaseModifierCouponAll(
+        address account
+    ) external view returns (BaseModifierCoupon[] memory) {
+        return _getBaseModifierCouponAll(account);
+    }
+
+    /**
+     * @notice Adds coupons to accounts that allow to modify the base traits
+     * @param account The account to increase the number of coupons
+     * @param slotsIds The slots ids to increase the number of coupons
+     * @param amounts the amounts of coupons to increase
+     */
+    function addBaseModifierCoupons(
         address account,
         uint[] calldata slotsIds,
         uint[] calldata amounts
     ) external onlyManager {
-        _addBaseModifierTickets(account, slotsIds, amounts);
+        _addBaseModifierCoupons(account, slotsIds, amounts);
     }
 
     /**
