@@ -9,7 +9,6 @@ import { EnumerableSet } from "@solidstate/contracts/data/EnumerableSet.sol";
 import { RolesInternal } from "../roles/RolesInternal.sol";
 import { InventoryStorage } from "./InventoryStorage.sol";
 import { IERC1155 } from "@solidstate/contracts/interfaces/IERC1155.sol";
-import "hardhat/console.sol";
 
 contract InventoryInternal is
     ReentrancyGuard,
@@ -35,7 +34,7 @@ contract InventoryInternal is
     error Inventory_ItemAlreadyEquippedInSlot();
     error Inventory_ItemAlreadyAllowedInSlot();
     error Inventory_ItemAlreadyDisallowedInSlot();
-    error Inventory_TicketNeededToModifyBaseSlots();
+    error Inventory_CouponNeededToModifyBaseSlots();
     error Inventory_NonBaseSlot();
 
     event ItemsAllowedInSlotUpdated(
@@ -46,7 +45,8 @@ contract InventoryInternal is
     event ItemsEquipped(
         address indexed by,
         uint indexed arcadianId,
-        uint[] slots
+        uint[] slots,
+        bool baseModifierCouponsConsumed
     );
 
     event ItemsUnequipped(
@@ -62,11 +62,22 @@ contract InventoryInternal is
         InventoryStorage.SlotCategory category
     );
 
-    // Helper struct only used in view functions
+    event BaseModifierCouponAdded(
+        address indexed by,
+        address indexed to,
+        uint[] slotsIds,
+        uint[] amounts
+    );
+
+    // Helper structs only used in view functions to ease data reading from web3
     struct ItemInSlot {
         uint slotId;
         address erc721Contract;
         uint itemId;
+    }
+    struct BaseModifierCoupon {
+        uint slotId;
+        uint amount;
     }
 
     modifier onlyValidSlot(uint slotId) {
@@ -108,7 +119,8 @@ contract InventoryInternal is
         if (containsBaseSlots && !_hashBaseItemsUnchecked(arcadianId)) 
             revert Inventory_ArcadianNotUnique();
 
-        emit ItemsEquipped(msg.sender, arcadianId, slotsIds);
+        bool baseModifierCouponsConsumed = containsBaseSlots && !freeBaseModifier;
+        emit ItemsEquipped(msg.sender, arcadianId, slotsIds, baseModifierCouponsConsumed);
     }
 
     function _equipSingleSlot(
@@ -124,10 +136,10 @@ contract InventoryInternal is
             revert Inventory_ItemDoesNotHaveSlotAssigned();
         
         if (!freeBaseModifier && inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
-            if (inventorySL.baseModifierTicket[msg.sender][slotId] < 1)
-                revert Inventory_TicketNeededToModifyBaseSlots();
+            if (inventorySL.baseModifierCoupon[msg.sender][slotId] < 1)
+                revert Inventory_CouponNeededToModifyBaseSlots();
 
-            inventorySL.baseModifierTicket[msg.sender][slotId]--;
+            inventorySL.baseModifierCoupon[msg.sender][slotId]--;
         }
 
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
@@ -330,7 +342,7 @@ contract InventoryInternal is
         emit SlotCreated(msg.sender, newSlot, permanent, category);
     }
 
-    function _addBaseModifierTickets(
+    function _addBaseModifierCoupons(
         address account,
         uint[] calldata slotIds,
         uint[] calldata amounts
@@ -347,15 +359,30 @@ contract InventoryInternal is
             if (inventorySL.slots[slotIds[i]].category != InventoryStorage.SlotCategory.Base) {
                 revert Inventory_NonBaseSlot();
             }
-            InventoryStorage.layout().baseModifierTicket[account][slotIds[i]] += amounts[i];
+            InventoryStorage.layout().baseModifierCoupon[account][slotIds[i]] += amounts[i];
         }
+
+        emit BaseModifierCouponAdded(msg.sender, account, slotIds, amounts);
     }
 
-    function _getBaseModifierTickets(address account, uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
+    function _getbaseModifierCoupon(address account, uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
         if (InventoryStorage.layout().slots[slotId].category != InventoryStorage.SlotCategory.Base) {
             revert Inventory_NonBaseSlot();
         }
-        return InventoryStorage.layout().baseModifierTicket[account][slotId];
+        return InventoryStorage.layout().baseModifierCoupon[account][slotId];
+    }
+
+    function _getBaseModifierCouponAll(address account) internal view returns (BaseModifierCoupon[] memory) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
+        uint baseSlotsLength = baseSlots.length();
+        BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseSlotsLength);
+        for (uint i = 0; i < baseSlotsLength; i++) {
+            uint slotId = baseSlots.at(i);
+            coupons[i].slotId = slotId;
+            coupons[i].amount = inventorySL.baseModifierCoupon[account][slotId];
+        }
+        return coupons;
     }
 
     function _allowItemsInSlot(
