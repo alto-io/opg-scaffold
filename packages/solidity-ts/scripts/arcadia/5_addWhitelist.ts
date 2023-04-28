@@ -1,4 +1,3 @@
-// import { ethers } from "ethers";
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";

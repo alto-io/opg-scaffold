@@ -1,7 +1,6 @@
 /* global ethers */
 /* eslint prefer-const: "off" */
 import hre from 'hardhat';
-import fs from "fs";
 
 import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } from '../hardhat-deploy/01.ArcadiansDiamond.deploy';
 import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';

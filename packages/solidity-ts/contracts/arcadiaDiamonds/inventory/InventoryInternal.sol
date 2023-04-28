@@ -158,7 +158,7 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
         for (uint i = 0; i < baseSlots.length(); i++) {
-            if (inventorySL.equippedItems[arcadianId][baseSlots.at(i)].id == 0) {
+            if (inventorySL.equippedItems[arcadianId][baseSlots.at(i)].erc721Contract == address(0)) {
                 return false;
             }
         }
@@ -264,34 +264,25 @@ contract InventoryInternal is
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
 
         uint baseSlotsLength = baseSlots.length();
-        uint[] memory baseSlotsIds = new uint[](baseSlotsLength);
-        InventoryStorage.Item[] memory baseItems = new InventoryStorage.Item[](baseSlotsLength);
-        uint numSlots = inventorySL.numSlots;
-
+        bytes memory encodedItems;
         for (uint i = 0; i < baseSlotsLength; i++) {
             uint slotId = baseSlots.at(i);
-            baseSlotsIds[i] = slotId;
-            baseItems[i] = inventorySL.equippedItems[arcadianId][slotId];
-        }
-
-        for (uint i = 0; i < items.length; i++) {
-            uint slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
-            if (slotId == 0 || slotId > InventoryStorage.layout().numSlots)
-                revert Inventory_ItemDoesNotHaveSlotAssigned();
+            InventoryStorage.Item memory item;
+            for (uint j = 0; j < items.length; j++) {
+                if (_allowedSlot(items[j]) == slotId) {
+                    item = items[j];
+                    break;
+                }
+            }
+            if (item.erc721Contract == address(0)) {
+                if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0)) {
+                    item = inventorySL.equippedItems[arcadianId][slotId];
+                } else {
+                    revert Inventory_NotAllBaseSlotsEquipped();
+                }
+            }
             
-            if (slotId == 0 && slotId > numSlots)
-                revert Inventory_InvalidSlotId();
-
-            if (!baseSlots.contains(slotId))
-                continue;
-
-            baseSlotsIds[i] = slotId;
-            baseItems[i] = items[i];
-        }
-
-        bytes memory encodedItems;
-        for (uint i = 0; i < baseSlotsIds.length; i++) {
-            encodedItems = abi.encodePacked(encodedItems, baseSlotsIds[i], baseItems[i].erc721Contract, baseItems[i].id);
+            encodedItems = abi.encodePacked(encodedItems, slotId, item.erc721Contract, item.id);
         }
 
         return !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
@@ -301,7 +292,6 @@ contract InventoryInternal is
         uint arcadianId
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        // delete inventorySL.equippedItems[arcadianId][slotId];
         EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
         bytes memory encodedItems;
         uint baseSlotsLength = baseSlots.length();
