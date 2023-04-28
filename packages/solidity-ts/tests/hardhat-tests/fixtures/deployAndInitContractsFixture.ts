@@ -9,7 +9,7 @@ import deployArcadiansDiamond, { arcadiansDiamondInitName, arcadiansDiamondName,
 import deployItemsDiamond, { itemsDiamondName, itemsDiamondInitName, itemsFacetNames } from '../../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
 import initArcadiansDiamond, { baseArcadianURI } from '../../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
 import initItemsDiamond, { baseItemURI } from '../../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
-import { Item, Slot } from '../Items.test';
+import { Item, Slot, SlotCategory } from '../Items.test';
 
 export default async function deployAndInitContractsFixture() {
     const deploymentHardhatPath = path.join(__dirname, '../../../generated/hardhat/deployments/hardhat');
@@ -78,39 +78,25 @@ export default async function deployAndInitContractsFixture() {
     await tx.wait()
 
     const slots: Slot[] = [
-        { permanent: true, category: 0, id: 1, itemsIdsAllowed: [1, 20] },
-        { permanent: false, category: 0, id: 2, itemsIdsAllowed: [2, 3] },
-        { permanent: false, category: 0, id: 3, itemsIdsAllowed: [4, 5] },
-        { permanent: false, category: 1, id: 4, itemsIdsAllowed: [6, 7] },
-        { permanent: false, category: 1, id: 5, itemsIdsAllowed: [8, 9] },
-        { permanent: false, category: 1, id: 6, itemsIdsAllowed: [10, 11] },
-        { permanent: false, category: 1, id: 7, itemsIdsAllowed: [12, 13] },
-        { permanent: false, category: 2, id: 8, itemsIdsAllowed: [14, 15] },
-        { permanent: false, category: 2, id: 9, itemsIdsAllowed: [16, 17] },
-        { permanent: false, category: 2, id: 10, itemsIdsAllowed: [18, 19] },
+        { permanent: true, category: SlotCategory.Base, id: 1, itemsIdsAllowed: [1, 2] },
+        { permanent: false, category: SlotCategory.Base, id: 2, itemsIdsAllowed: [3, 4] },
+        { permanent: false, category: SlotCategory.Base, id: 3, itemsIdsAllowed: [5, 6] },
+        { permanent: false, category: SlotCategory.Base, id: 4, itemsIdsAllowed: [7, 8] },
+        { permanent: false, category: SlotCategory.Base, id: 5, itemsIdsAllowed: [9, 10] },
+        { permanent: false, category: SlotCategory.Base, id: 6, itemsIdsAllowed: [11, 12] },
+        { permanent: false, category: SlotCategory.Base, id: 7, itemsIdsAllowed: [13, 14] },
+        { permanent: false, category: SlotCategory.Base, id: 8, itemsIdsAllowed: [15, 16] },
+        { permanent: false, category: SlotCategory.Cosmetic, id: 9, itemsIdsAllowed: [17, 18] },
+        { permanent: false, category: SlotCategory.Cosmetic, id: 10, itemsIdsAllowed: [19, 20] },
+        { permanent: false, category: SlotCategory.Cosmetic, id: 11, itemsIdsAllowed: [21, 22] },
+        { permanent: false, category: SlotCategory.Cosmetic, id: 12, itemsIdsAllowed: [23, 24] },
+        { permanent: false, category: SlotCategory.Equippment, id: 13, itemsIdsAllowed: [25, 26] },
+        { permanent: false, category: SlotCategory.Equippment, id: 14, itemsIdsAllowed: [27, 28] },
+        { permanent: false, category: SlotCategory.Equippment, id: 15, itemsIdsAllowed: [29, 30] },
+        { permanent: false, category: SlotCategory.Equippment, id: 16, itemsIdsAllowed: [31, 32] },
+        { permanent: false, category: SlotCategory.Equippment, id: 17, itemsIdsAllowed: [33, 34] },
     ]
-    const items: Item[] = [
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 1 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 2 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 3 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 4 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 5 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 6 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 7 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 8 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 9 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 10 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 11 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 12 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 13 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 14 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 15 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 16 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 17 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 18 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 19 },
-        { erc721Contract: itemsContracts.itemsFacet.address, id: 20 }
-    ]
+    const items: Item[] = Array.from({length: 34}, (v, i)=>({ erc721Contract: itemsContracts.itemsFacet.address, id: i + 1 }))
 
     const basicItemsIds: number[] = items.reduce((acc: number[], item)=>{
         if (item.id % 3 == 0) {

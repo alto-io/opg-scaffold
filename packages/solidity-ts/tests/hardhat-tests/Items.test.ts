@@ -256,9 +256,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotSpecified")
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([itemsToEquip[0]], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
-            await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+        await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InsufficientItemBalance")
-            await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip.slice(0, 1), {value: arcadiansParams.mintPrice})).
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip.slice(0, 7), {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
             
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})

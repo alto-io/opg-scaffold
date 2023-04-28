@@ -27,9 +27,9 @@ async function main() {
     const itemsToEquip: Item[] = [];
     for (const slot of slotsAll) {
         const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
-        
+
         if (numAllowedItems.gt(0)) {
-            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
+            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, 0)
             itemsToEquip.push(itemToEquip);
         }
     }
@@ -43,14 +43,16 @@ async function main() {
 
     const equippedAll = await inventorySC.equippedAll(arcadianId);
     console.log("Items equipped in all slots: ", equippedAll);
-    
 
     const payAmount = await arcadiansSC.mintPrice()
-    const mintAmount = 1;
-    for (let i = 0; i < mintAmount; i++) {
-        let tx = await arcadiansSC.mintAndEquip(itemsToEquip, {value: payAmount});
-        await tx.wait();
+    const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip.slice(0, 8));
+    if (!isArcadianUnique) {
+        console.log("Not minting arcadian because equipments is not unique");
+        return;
     }
+    
+    let tx = await arcadiansSC.mintAndEquip(itemsToEquip, {value: payAmount});
+    await tx.wait();
     const minterAddress = await arcadiansSC.signer.getAddress();
     
     console.log("minterAddress: ", minterAddress);
