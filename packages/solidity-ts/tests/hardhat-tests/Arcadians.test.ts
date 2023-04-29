@@ -44,7 +44,6 @@ describe('Arcadians Diamond whitelist', function () {
         const itemAmount = 1;
         const itemsAmounts = itemsIdsToEquip.map(()=>itemAmount)
 
-        await itemsContracts.itemsFacet.connect(bob).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(bob.address, itemsIdsToEquip, itemsAmounts);
 
         // add to whitelist
@@ -103,9 +102,7 @@ describe('Arcadians Diamond whitelist', function () {
         const claimers = [bob.address, namedAddresses.alice]
         const claimAmounts = [1, 2]
         
-        await itemsContracts.itemsFacet.connect(bob).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(bob.address, itemsIdsToEquip, itemsAmounts);
-        await itemsContracts.itemsFacet.connect(namedAccounts.alice).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(namedAddresses.alice, itemsIdsToEquipAlice, itemsAmountsAlice);
 
         // add to whitelist
@@ -158,7 +155,6 @@ describe('Arcadians Diamond whitelist', function () {
         const itemAmount = 1;
         const itemsAmounts = itemsIdsToEquip.map(()=>itemAmount)
 
-        await itemsContracts.itemsFacet.connect(bob).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(bob.address, itemsIdsToEquip, itemsAmounts);
 
         // add to whitelist
@@ -217,9 +213,7 @@ describe('Arcadians Diamond whitelist', function () {
         const claimers = [bob.address, namedAddresses.alice]
         const claimAmounts = [1, 2]
         
-        await itemsContracts.itemsFacet.connect(bob).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(bob.address, itemsIdsToEquip, itemsAmounts);
-        await itemsContracts.itemsFacet.connect(namedAccounts.alice).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
         await itemsContracts.itemsFacet.mintBatch(namedAddresses.alice, itemsIdsToEquipAlice, itemsAmountsAlice);
 
         // add to whitelist

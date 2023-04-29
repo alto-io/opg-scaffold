@@ -152,8 +152,15 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ItemsStorage.layout().isMigratedToIPFS = migrate;
     }
 
+    function _getInventoryAddress() internal view returns (address) {
+        return ItemsStorage.layout().inventoryAddress;
+    }
 
-    // required overrides
+    function _setInventoryAddress(address inventoryAddress) internal {
+        ItemsStorage.layout().inventoryAddress = inventoryAddress;
+    }
+
+    // overrides
     function _beforeTokenTransfer(
         address operator,
         address from,

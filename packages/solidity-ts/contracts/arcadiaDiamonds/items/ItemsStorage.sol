@@ -14,6 +14,7 @@ library ItemsStorage {
         // token id => is basic item
         mapping(uint => bool) isBasicItem;
         uint[] basicItemsIds;
+        address inventoryAddress;
     }
 
     function layout()

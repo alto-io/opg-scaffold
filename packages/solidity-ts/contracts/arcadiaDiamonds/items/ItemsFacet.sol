@@ -142,6 +142,22 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
+     * @dev Returns the current inventory address
+     * @return The address of the inventory contract
+     */
+    function getInventoryAddress() external view returns (address) {
+        return _getInventoryAddress();
+    }
+
+    /**
+     * @dev Sets the inventory address
+     * @param inventoryAddress The new address of the inventory contract
+     */
+    function setInventoryAddress(address inventoryAddress) external onlyManager {
+        _setInventoryAddress(inventoryAddress);
+    }
+
+    /**
      * @notice Override ERC1155Metadata
      */
     function uri(uint256 tokenId) public view override returns (string memory) {
@@ -163,7 +179,20 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
 
-    // required overrides
+    // overrides
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) public override (ERC1155Base) {
+        // Add red carpet logic for the inventory
+        if (from != msg.sender && !isApprovedForAll(from, msg.sender) && _getInventoryAddress() != msg.sender )
+            revert ERC1155Base__NotOwnerOrApproved();
+        _safeTransfer(msg.sender, from, to, id, amount, data);
+    }
+
     function supportsInterface(bytes4 _interface) external pure returns (bool) {
         return type(IERC1155).interfaceId == _interface;
     }

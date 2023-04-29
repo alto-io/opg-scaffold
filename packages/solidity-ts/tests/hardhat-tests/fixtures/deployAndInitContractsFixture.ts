@@ -73,9 +73,9 @@ export default async function deployAndInitContractsFixture() {
         merkleGenerator: new MerkleGenerator(itemsMerklePaths)
     }
     // init items diamond
-    let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', [itemsParams.merkleGenerator.merkleRoot, itemsParams.baseTokenUri])
-    tx = await itemsContracts.diamond.diamondCut([], itemsContracts.init.address, initItemsFunctionCall)
-    await tx.wait()
+    let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', [itemsParams.merkleGenerator.merkleRoot, itemsParams.baseTokenUri, arcadiansContracts.inventoryFacet.address]);
+    tx = await itemsContracts.diamond.diamondCut([], itemsContracts.init.address, initItemsFunctionCall);
+    await tx.wait();
 
     const slots: Slot[] = [
         { permanent: true, category: SlotCategory.Base, id: 1, itemsIdsAllowed: [1, 2] },

@@ -10,7 +10,6 @@ import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
 import { baseItemURI } from 'deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 import { baseArcadianURI } from 'deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
-import { parseEther } from '@ethersproject/units';
 
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
@@ -32,6 +31,13 @@ describe('Items Diamond Test', function () {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const owner = await itemsContracts.diamond.owner();
         expect(owner).to.be.equal(namedAddresses.deployer);
+    })
+
+    it('should be able to update inventory address', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        await itemsContracts.itemsFacet.setInventoryAddress(namedAddresses.deployer);
+        const inventoryAddress = await itemsContracts.itemsFacet.getInventoryAddress();
+        expect(inventoryAddress).to.be.equal(namedAddresses.deployer);
     })
 
     it('should be able to migrate to ipfs', async () => {
@@ -134,9 +140,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const itemAmount = 1;
         const basicItems = items.filter((item)=>basicItemsIds.includes(item.id))
         const basicItemsAmounts = basicItemsIds.map(()=>itemAmount)
-        const approvalEncoded = itemsContracts.itemsFacet.interface.encodeFunctionData("setApprovalForAll", [arcadiansContracts.inventoryFacet.address, true]);
-        const mintEncoded = itemsContracts.itemsFacet.interface.encodeFunctionData("mintBatch", [bob.address, basicItemsIds, basicItemsAmounts]);
-        await itemsContracts.itemsFacet.connect(bob).multicall([approvalEncoded, mintEncoded]);
+        await itemsContracts.itemsFacet.mintBatch(bob.address, basicItemsIds, basicItemsAmounts);
+        // Multitransaction example
+        // const mintEncoded = itemsContracts.itemsFacet.interface.encodeFunctionData("mintBatch", [bob.address, basicItemsIds, basicItemsAmounts]);
+        // await itemsContracts.itemsFacet.connect(bob).multicall([mintEncoded, ...]);
         
         // mint arcadian
         let nonBasicItems = items.filter((item)=>!basicItemsIds.includes(item.id))
@@ -241,7 +248,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const itemAmount = 2;
         const basicItems = items.filter((item)=>basicItemsIds.includes(item.id))
         const basicItemsAmounts = basicItemsIds.map(()=>itemAmount)
-        await itemsContracts.itemsFacet.connect(bob).setApprovalForAll(arcadiansContracts.inventoryFacet.address, true);
+
+        await expect(itemsContracts.itemsFacet.safeTransferFrom(namedAddresses.alice, namedAddresses.bob, 1, 1, "0x00")).
+            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "ERC1155Base__NotOwnerOrApproved");
+        
         const excessAmounts = basicItemsAmounts.map(()=>4)
         await expect(itemsContracts.itemsFacet.connect(bob).mintBatch(bob.address, basicItemsIds, excessAmounts)).
             to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Items_MaximumItemMintsExceeded");
