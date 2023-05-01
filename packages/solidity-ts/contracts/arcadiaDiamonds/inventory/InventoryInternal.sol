@@ -32,8 +32,6 @@ contract InventoryInternal is
     error Inventory_NotAllBaseSlotsEquipped();
     error Inventory_InputDataMismatch();
     error Inventory_ItemAlreadyEquippedInSlot();
-    error Inventory_ItemAlreadyAllowedInSlot();
-    error Inventory_ItemAlreadyDisallowedInSlot();
     error Inventory_CouponNeededToModifyBaseSlots();
     error Inventory_NonBaseSlot();
 
@@ -398,7 +396,7 @@ contract InventoryInternal is
             if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] > 0) {
 
                 if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] == slotId) 
-                    revert Inventory_ItemAlreadyAllowedInSlot();
+                    continue;
 
                 _disallowItemInSlotUnchecked(slotId, items[i]);
             }
@@ -418,11 +416,9 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         for (uint i = 0; i < items.length; i++) {
-            
-            if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] != slotId) 
-                revert Inventory_ItemAlreadyDisallowedInSlot();
-                
-            _disallowItemInSlotUnchecked(slotId, items[i]);
+            if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] == slotId) {
+                _disallowItemInSlotUnchecked(slotId, items[i]);
+            }
         }
 
         emit ItemsAllowedInSlotUpdated(msg.sender, slotId);
