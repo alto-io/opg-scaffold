@@ -102,11 +102,10 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
 
     function _addBasicItem(uint itemId) internal {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (itemsSL.isBasicItem[itemId]) 
-            revert Items_ItemsBasicStatusAlreadyUpdated();
-
-        itemsSL.isBasicItem[itemId] = true;
-        itemsSL.basicItemsIds.push(itemId);
+        if (!itemsSL.isBasicItem[itemId]) {
+            itemsSL.isBasicItem[itemId] = true;
+            itemsSL.basicItemsIds.push(itemId);
+        }
     }
 
     function _setBasicItem(uint itemId, bool isBasic) internal {
@@ -125,8 +124,9 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
 
     function _removeBasicItem(uint itemId) internal {
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (!itemsSL.isBasicItem[itemId]) 
-            revert Items_ItemsBasicStatusAlreadyUpdated();
+        if (!itemsSL.isBasicItem[itemId]) {
+            return;
+        }
 
         uint numBasicItemsIds = itemsSL.basicItemsIds.length;
         for (uint i = 0; i < numBasicItemsIds; i++) {
