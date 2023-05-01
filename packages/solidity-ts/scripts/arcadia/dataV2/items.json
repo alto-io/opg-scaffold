@@ -1,0 +1,3754 @@
+[
+    {
+        "id": 1,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "AR Goggles 1",
+        "isBasic": true
+    },
+    {
+        "id": 2,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "AR Goggles 2",
+        "isBasic": true
+    },
+    {
+        "id": 3,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "AR Goggles 3",
+        "isBasic": false
+    },
+    {
+        "id": 4,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "AR Goggles 4",
+        "isBasic": false
+    },
+    {
+        "id": 5,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Cyber Mask",
+        "isBasic": false
+    },
+    {
+        "id": 6,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Glasses and Eyebrows",
+        "isBasic": false
+    },
+    {
+        "id": 7,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Sunglasses",
+        "isBasic": false
+    },
+    {
+        "id": 8,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "White Glasses",
+        "isBasic": false
+    },
+    {
+        "id": 9,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "HOUWAR Visor",
+        "isBasic": false
+    },
+    {
+        "id": 10,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Glasses",
+        "isBasic": false
+    },
+    {
+        "id": 11,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Pink Glasses 1",
+        "isBasic": false
+    },
+    {
+        "id": 12,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Pink Glasses 2",
+        "isBasic": false
+    },
+    {
+        "id": 13,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Pink Glasses 3",
+        "isBasic": false
+    },
+    {
+        "id": 14,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Pink Glasses 4",
+        "isBasic": false
+    },
+    {
+        "id": 15,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Travis Glasses",
+        "isBasic": false
+    },
+    {
+        "id": 16,
+        "amount": 1,
+        "slot": "Accessory",
+        "name": "Shades",
+        "isBasic": false
+    },
+    {
+        "id": 17,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Air force base",
+        "isBasic": false
+    },
+    {
+        "id": 18,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Apple red base",
+        "isBasic": false
+    },
+    {
+        "id": 19,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Banana base",
+        "isBasic": true
+    },
+    {
+        "id": 20,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Beach base",
+        "isBasic": true
+    },
+    {
+        "id": 21,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Bumblebee base",
+        "isBasic": false
+    },
+    {
+        "id": 22,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Butter base",
+        "isBasic": false
+    },
+    {
+        "id": 23,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Cobalt base",
+        "isBasic": false
+    },
+    {
+        "id": 24,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Eggplant base",
+        "isBasic": false
+    },
+    {
+        "id": 25,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Fantasy base",
+        "isBasic": false
+    },
+    {
+        "id": 26,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Forest base",
+        "isBasic": false
+    },
+    {
+        "id": 27,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Fuscia base",
+        "isBasic": false
+    },
+    {
+        "id": 28,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Gold base",
+        "isBasic": false
+    },
+    {
+        "id": 29,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Grass base",
+        "isBasic": false
+    },
+    {
+        "id": 30,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Hero base",
+        "isBasic": false
+    },
+    {
+        "id": 31,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Jade base",
+        "isBasic": false
+    },
+    {
+        "id": 32,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Magic base",
+        "isBasic": false
+    },
+    {
+        "id": 33,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Mischievous base",
+        "isBasic": false
+    },
+    {
+        "id": 34,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Princess base",
+        "isBasic": false
+    },
+    {
+        "id": 35,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Rasta base",
+        "isBasic": false
+    },
+    {
+        "id": 36,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Red orange base",
+        "isBasic": false
+    },
+    {
+        "id": 37,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Sci fi base",
+        "isBasic": false
+    },
+    {
+        "id": 38,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Science base",
+        "isBasic": false
+    },
+    {
+        "id": 39,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Sea base",
+        "isBasic": false
+    },
+    {
+        "id": 40,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Sky blue base",
+        "isBasic": false
+    },
+    {
+        "id": 41,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Soldier base",
+        "isBasic": false
+    },
+    {
+        "id": 42,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Teal base",
+        "isBasic": false
+    },
+    {
+        "id": 43,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Tech base",
+        "isBasic": false
+    },
+    {
+        "id": 44,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Villain base",
+        "isBasic": false
+    },
+    {
+        "id": 45,
+        "amount": 1,
+        "slot": "Background",
+        "name": "Water melon base",
+        "isBasic": false
+    },
+    {
+        "id": 46,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Amazon Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 47,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Barbarian Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 48,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Black Leather Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 49,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Black Pants",
+        "isBasic": false
+    },
+    {
+        "id": 50,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Bloodmage Dress",
+        "isBasic": false
+    },
+    {
+        "id": 51,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue Army",
+        "isBasic": false
+    },
+    {
+        "id": 52,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue LBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 53,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue LBoxersA",
+        "isBasic": false
+    },
+    {
+        "id": 54,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue SBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 55,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue Legging",
+        "isBasic": false
+    },
+    {
+        "id": 56,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Blue Sci-Fi Pants",
+        "isBasic": false
+    },
+    {
+        "id": 57,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Boxers",
+        "isBasic": false
+    },
+    {
+        "id": 58,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Camo Army",
+        "isBasic": false
+    },
+    {
+        "id": 59,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Cargo Pants",
+        "isBasic": false
+    },
+    {
+        "id": 60,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Challenger Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 61,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Cyberpunk Legging",
+        "isBasic": false
+    },
+    {
+        "id": 62,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Darkmage Dress",
+        "isBasic": false
+    },
+    {
+        "id": 63,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Deedlit Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 64,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Denim Pants",
+        "isBasic": false
+    },
+    {
+        "id": 65,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Dragon Pants",
+        "isBasic": false
+    },
+    {
+        "id": 66,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Emo Goth Punk Legging",
+        "isBasic": false
+    },
+    {
+        "id": 67,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Fishnets Legging",
+        "isBasic": false
+    },
+    {
+        "id": 68,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Formal Tuxedo Legging",
+        "isBasic": false
+    },
+    {
+        "id": 69,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Gold Boots",
+        "isBasic": false
+    },
+    {
+        "id": 70,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green Army",
+        "isBasic": false
+    },
+    {
+        "id": 71,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green LBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 72,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green LBoxersA",
+        "isBasic": false
+    },
+    {
+        "id": 73,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green Legging",
+        "isBasic": false
+    },
+    {
+        "id": 74,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green Pants",
+        "isBasic": false
+    },
+    {
+        "id": 75,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green SBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 76,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Green Tactical",
+        "isBasic": false
+    },
+    {
+        "id": 77,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Greensocks",
+        "isBasic": false
+    },
+    {
+        "id": 78,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Hero Boots",
+        "isBasic": true
+    },
+    {
+        "id": 79,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Ichigo Pants",
+        "isBasic": true
+    },
+    {
+        "id": 80,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Kerrigan Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 81,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Khaki Shorts",
+        "isBasic": false
+    },
+    {
+        "id": 82,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Kimono Legging",
+        "isBasic": false
+    },
+    {
+        "id": 83,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Knight Pants",
+        "isBasic": false
+    },
+    {
+        "id": 84,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Kunimitsu Legging",
+        "isBasic": false
+    },
+    {
+        "id": 85,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Lich Bottom",
+        "isBasic": false
+    },
+    {
+        "id": 86,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Master Chief Pants",
+        "isBasic": false
+    },
+    {
+        "id": 87,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Mechanic Blue Legging",
+        "isBasic": false
+    },
+    {
+        "id": 88,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Metroid Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 89,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Midnight Army",
+        "isBasic": false
+    },
+    {
+        "id": 90,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Nier Automata Legging",
+        "isBasic": false
+    },
+    {
+        "id": 91,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Ninja Pants",
+        "isBasic": false
+    },
+    {
+        "id": 92,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Orange Army",
+        "isBasic": false
+    },
+    {
+        "id": 93,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Orange LBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 94,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Orange LBoxersA",
+        "isBasic": false
+    },
+    {
+        "id": 95,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Orange SBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 96,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Orange Skirt",
+        "isBasic": false
+    },
+    {
+        "id": 97,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Pink LBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 98,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Pink LBoxersA",
+        "isBasic": false
+    },
+    {
+        "id": 99,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Pink SBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 100,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Priestess Robe Dress",
+        "isBasic": false
+    },
+    {
+        "id": 101,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Priestess Steel Boots",
+        "isBasic": false
+    },
+    {
+        "id": 102,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Purple Pants",
+        "isBasic": false
+    },
+    {
+        "id": 103,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Ranger Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 104,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Red Boots",
+        "isBasic": false
+    },
+    {
+        "id": 105,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Red LBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 106,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Red LBoxersA",
+        "isBasic": false
+    },
+    {
+        "id": 107,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Red Ninja Pants",
+        "isBasic": false
+    },
+    {
+        "id": 108,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Red SBoxers",
+        "isBasic": false
+    },
+    {
+        "id": 109,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Samurai Legging",
+        "isBasic": false
+    },
+    {
+        "id": 110,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Samurai Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 111,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Sci-Fi Pants",
+        "isBasic": false
+    },
+    {
+        "id": 112,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Silver Boots",
+        "isBasic": false
+    },
+    {
+        "id": 113,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Soldier Army Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 114,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Travis Pants",
+        "isBasic": false
+    },
+    {
+        "id": 115,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "White Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 116,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Witcher Leggings",
+        "isBasic": false
+    },
+    {
+        "id": 117,
+        "amount": 1,
+        "slot": "Bottom",
+        "name": "Yellow Robe Armor",
+        "isBasic": true
+    },
+    {
+        "id": 118,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Angry",
+        "isBasic": true
+    },
+    {
+        "id": 119,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Bushy Eyebrows",
+        "isBasic": false
+    },
+    {
+        "id": 120,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Eyepatch",
+        "isBasic": false
+    },
+    {
+        "id": 121,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Fiery Stare",
+        "isBasic": false
+    },
+    {
+        "id": 122,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Happy",
+        "isBasic": false
+    },
+    {
+        "id": 123,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Icy Stare",
+        "isBasic": false
+    },
+    {
+        "id": 124,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Mischief",
+        "isBasic": false
+    },
+    {
+        "id": 125,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Original",
+        "isBasic": false
+    },
+    {
+        "id": 126,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Poison Stare",
+        "isBasic": false
+    },
+    {
+        "id": 127,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Scar",
+        "isBasic": false
+    },
+    {
+        "id": 128,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Shellshocked",
+        "isBasic": false
+    },
+    {
+        "id": 129,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Sneaky",
+        "isBasic": false
+    },
+    {
+        "id": 130,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F uwu Eyes",
+        "isBasic": false
+    },
+    {
+        "id": 131,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "F Winking",
+        "isBasic": false
+    },
+    {
+        "id": 132,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "Kabuki Eyes",
+        "isBasic": false
+    },
+    {
+        "id": 133,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Angry",
+        "isBasic": false
+    },
+    {
+        "id": 134,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Bright",
+        "isBasic": false
+    },
+    {
+        "id": 135,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Bushy",
+        "isBasic": false
+    },
+    {
+        "id": 136,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Fiery Stare",
+        "isBasic": false
+    },
+    {
+        "id": 137,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Happy",
+        "isBasic": false
+    },
+    {
+        "id": 138,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Icy Stare",
+        "isBasic": false
+    },
+    {
+        "id": 139,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Poison Stare",
+        "isBasic": false
+    },
+    {
+        "id": 140,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Shellshocked",
+        "isBasic": false
+    },
+    {
+        "id": 141,
+        "amount": 1,
+        "slot": "Eyes",
+        "name": "M Sneaky",
+        "isBasic": false
+    },
+    {
+        "id": 142,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Bald Head",
+        "isBasic": false
+    },
+    {
+        "id": 143,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "BB Hair",
+        "isBasic": false
+    },
+    {
+        "id": 144,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "BH Hair",
+        "isBasic": false
+    },
+    {
+        "id": 145,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Black Pony",
+        "isBasic": false
+    },
+    {
+        "id": 146,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Blonde Bun",
+        "isBasic": false
+    },
+    {
+        "id": 147,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Blonde Buzzcut",
+        "isBasic": false
+    },
+    {
+        "id": 148,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Blonde Short Pony",
+        "isBasic": false
+    },
+    {
+        "id": 149,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Blue Bob",
+        "isBasic": false
+    },
+    {
+        "id": 150,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Brawler Cut",
+        "isBasic": false
+    },
+    {
+        "id": 151,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Brunette Cascade",
+        "isBasic": false
+    },
+    {
+        "id": 152,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Brunette Short Pony",
+        "isBasic": false
+    },
+    {
+        "id": 153,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Brunette Tied",
+        "isBasic": false
+    },
+    {
+        "id": 154,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Buzzcut",
+        "isBasic": false
+    },
+    {
+        "id": 155,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "CD Locks",
+        "isBasic": false
+    },
+    {
+        "id": 156,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Cool Hair",
+        "isBasic": false
+    },
+    {
+        "id": 157,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Dystopian Mohawk",
+        "isBasic": false
+    },
+    {
+        "id": 158,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Elven Hair",
+        "isBasic": false
+    },
+    {
+        "id": 159,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Green Pony",
+        "isBasic": false
+    },
+    {
+        "id": 160,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "High Pony",
+        "isBasic": false
+    },
+    {
+        "id": 161,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Kabuki Hair",
+        "isBasic": true
+    },
+    {
+        "id": 162,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "LB Hair",
+        "isBasic": true
+    },
+    {
+        "id": 163,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Light Blond Hair",
+        "isBasic": false
+    },
+    {
+        "id": 164,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Mechanic Brown Rat",
+        "isBasic": false
+    },
+    {
+        "id": 165,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Messy Black Hair",
+        "isBasic": false
+    },
+    {
+        "id": 166,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Mohawk Data Cables",
+        "isBasic": false
+    },
+    {
+        "id": 167,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Ombre Green Long",
+        "isBasic": false
+    },
+    {
+        "id": 168,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Ombre Green Short",
+        "isBasic": false
+    },
+    {
+        "id": 169,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Powered Up Hair",
+        "isBasic": false
+    },
+    {
+        "id": 170,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Protag Hair",
+        "isBasic": false
+    },
+    {
+        "id": 171,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Raider Hair",
+        "isBasic": false
+    },
+    {
+        "id": 172,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Rat Tail",
+        "isBasic": false
+    },
+    {
+        "id": 173,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Red Cascade",
+        "isBasic": false
+    },
+    {
+        "id": 174,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Red Pony",
+        "isBasic": false
+    },
+    {
+        "id": 175,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Sakura Hair",
+        "isBasic": false
+    },
+    {
+        "id": 176,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Scorpion Do",
+        "isBasic": false
+    },
+    {
+        "id": 177,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Short White Hair",
+        "isBasic": false
+    },
+    {
+        "id": 178,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Strawberry Brawler",
+        "isBasic": false
+    },
+    {
+        "id": 179,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Tomb Coiffe",
+        "isBasic": false
+    },
+    {
+        "id": 180,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Travis Hair",
+        "isBasic": false
+    },
+    {
+        "id": 181,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Undercroft Hair",
+        "isBasic": false
+    },
+    {
+        "id": 182,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Wanderer Hair",
+        "isBasic": false
+    },
+    {
+        "id": 183,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "White Elven Hair",
+        "isBasic": false
+    },
+    {
+        "id": 184,
+        "amount": 1,
+        "slot": "Hairstyle",
+        "name": "Wild Hair",
+        "isBasic": false
+    },
+    {
+        "id": 185,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "AR Armature",
+        "isBasic": false
+    },
+    {
+        "id": 186,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "B Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 187,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Bangle Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 188,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Beetle Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 189,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "BHero Headband",
+        "isBasic": false
+    },
+    {
+        "id": 190,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Black Band",
+        "isBasic": false
+    },
+    {
+        "id": 191,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Black Hoodie",
+        "isBasic": false
+    },
+    {
+        "id": 192,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Bomber Helm",
+        "isBasic": false
+    },
+    {
+        "id": 193,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Brawler Black",
+        "isBasic": false
+    },
+    {
+        "id": 194,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Brawler Blue",
+        "isBasic": false
+    },
+    {
+        "id": 195,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Brawler Red",
+        "isBasic": false
+    },
+    {
+        "id": 196,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Brown Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 197,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Cat Ears",
+        "isBasic": false
+    },
+    {
+        "id": 198,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Cat Headset",
+        "isBasic": false
+    },
+    {
+        "id": 199,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "CD Cap",
+        "isBasic": false
+    },
+    {
+        "id": 200,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Centurion Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 201,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Dark Knight Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 202,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Gray Hood",
+        "isBasic": false
+    },
+    {
+        "id": 203,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Green Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 204,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Green Hood",
+        "isBasic": false
+    },
+    {
+        "id": 205,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Green Hoodie",
+        "isBasic": false
+    },
+    {
+        "id": 206,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Headset",
+        "isBasic": false
+    },
+    {
+        "id": 207,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Helmet Plume",
+        "isBasic": true
+    },
+    {
+        "id": 208,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Horned Helmet",
+        "isBasic": true
+    },
+    {
+        "id": 209,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "HOUWAR Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 210,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Ichigo Mask",
+        "isBasic": false
+    },
+    {
+        "id": 211,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Kabuto",
+        "isBasic": false
+    },
+    {
+        "id": 212,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Knight Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 213,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Law Helm",
+        "isBasic": false
+    },
+    {
+        "id": 214,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "LB Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 215,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Lich Skull",
+        "isBasic": false
+    },
+    {
+        "id": 216,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Long Red Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 217,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Male Closed Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 218,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Metroid Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 219,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Ninja Mask",
+        "isBasic": false
+    },
+    {
+        "id": 220,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Oni Mask",
+        "isBasic": false
+    },
+    {
+        "id": 221,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Pink Cat Headset",
+        "isBasic": false
+    },
+    {
+        "id": 222,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Purple Hood",
+        "isBasic": false
+    },
+    {
+        "id": 223,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Samurai Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 224,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Sci-Fi Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 225,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Skull Helmet",
+        "isBasic": false
+    },
+    {
+        "id": 226,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Sorcerer Hat",
+        "isBasic": false
+    },
+    {
+        "id": 227,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Thenian Helm",
+        "isBasic": false
+    },
+    {
+        "id": 228,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Visor",
+        "isBasic": false
+    },
+    {
+        "id": 229,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "Wanderer Bandana",
+        "isBasic": false
+    },
+    {
+        "id": 230,
+        "amount": 1,
+        "slot": "Headgear",
+        "name": "White Band",
+        "isBasic": false
+    },
+    {
+        "id": 231,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Ammo Belt L",
+        "isBasic": false
+    },
+    {
+        "id": 232,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Atomizer Bat L",
+        "isBasic": false
+    },
+    {
+        "id": 233,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "AWP L",
+        "isBasic": false
+    },
+    {
+        "id": 234,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Axe L",
+        "isBasic": false
+    },
+    {
+        "id": 235,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Battle Guitar L",
+        "isBasic": false
+    },
+    {
+        "id": 236,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Book L",
+        "isBasic": false
+    },
+    {
+        "id": 237,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Broadsword L",
+        "isBasic": false
+    },
+    {
+        "id": 238,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Buster Cannon L",
+        "isBasic": false
+    },
+    {
+        "id": 239,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Buster Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 240,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Chainsaw L",
+        "isBasic": false
+    },
+    {
+        "id": 241,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Claws L",
+        "isBasic": false
+    },
+    {
+        "id": 242,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Claws L 1",
+        "isBasic": false
+    },
+    {
+        "id": 243,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Crossbow L",
+        "isBasic": false
+    },
+    {
+        "id": 244,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Crystal Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 245,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cursed Katana L",
+        "isBasic": false
+    },
+    {
+        "id": 246,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cyber Punk Katana L",
+        "isBasic": false
+    },
+    {
+        "id": 247,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cybernetic Arm L",
+        "isBasic": false
+    },
+    {
+        "id": 248,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cyberpunk Fire Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 249,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cyberpunk Gun L",
+        "isBasic": false
+    },
+    {
+        "id": 250,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cyberpunk Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 251,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Cypher sword L",
+        "isBasic": false
+    },
+    {
+        "id": 252,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Desert Eagle L",
+        "isBasic": false
+    },
+    {
+        "id": 253,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Elecktra Sai L",
+        "isBasic": false
+    },
+    {
+        "id": 254,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Energy Blade L",
+        "isBasic": false
+    },
+    {
+        "id": 255,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Energy Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 256,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Flamethrower L",
+        "isBasic": false
+    },
+    {
+        "id": 257,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Flying Guillotine L",
+        "isBasic": false
+    },
+    {
+        "id": 258,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Flying Guillotine curved L",
+        "isBasic": false
+    },
+    {
+        "id": 259,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Frostmourne L",
+        "isBasic": false
+    },
+    {
+        "id": 260,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Gauntlet Cannon L",
+        "isBasic": false
+    },
+    {
+        "id": 261,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Gloves L",
+        "isBasic": false
+    },
+    {
+        "id": 262,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Glowing Hands L",
+        "isBasic": false
+    },
+    {
+        "id": 263,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Glowing Scroll L",
+        "isBasic": false
+    },
+    {
+        "id": 264,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Gold Gloves L",
+        "isBasic": false
+    },
+    {
+        "id": 265,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Gunlance L",
+        "isBasic": false
+    },
+    {
+        "id": 266,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Halo Rifle L",
+        "isBasic": false
+    },
+    {
+        "id": 267,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Heavy Machine Gun L",
+        "isBasic": false
+    },
+    {
+        "id": 268,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Ichigo sword L",
+        "isBasic": false
+    },
+    {
+        "id": 269,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Iron Fan L",
+        "isBasic": false
+    },
+    {
+        "id": 270,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Knight Cross L",
+        "isBasic": false
+    },
+    {
+        "id": 271,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Knight Flaming Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 272,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Knight Shield L",
+        "isBasic": false
+    },
+    {
+        "id": 273,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Knight Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 274,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Knight Whip L",
+        "isBasic": false
+    },
+    {
+        "id": 275,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Kunai Dark L",
+        "isBasic": false
+    },
+    {
+        "id": 276,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Kunai L",
+        "isBasic": false
+    },
+    {
+        "id": 277,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Lance L",
+        "isBasic": false
+    },
+    {
+        "id": 278,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Laptop Decker L",
+        "isBasic": false
+    },
+    {
+        "id": 279,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Lich Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 280,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Long Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 281,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Long Sword L 1",
+        "isBasic": false
+    },
+    {
+        "id": 282,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mace L",
+        "isBasic": false
+    },
+    {
+        "id": 283,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mage Book L",
+        "isBasic": false
+    },
+    {
+        "id": 284,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mage Staff L",
+        "isBasic": false
+    },
+    {
+        "id": 285,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mage Wand L",
+        "isBasic": true
+    },
+    {
+        "id": 286,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Magical Quill L",
+        "isBasic": true
+    },
+    {
+        "id": 287,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Martini Glass L",
+        "isBasic": false
+    },
+    {
+        "id": 288,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mechanic Screwdriver L",
+        "isBasic": false
+    },
+    {
+        "id": 289,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Metroid Rifle L",
+        "isBasic": false
+    },
+    {
+        "id": 290,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mobile Phone big L",
+        "isBasic": false
+    },
+    {
+        "id": 291,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Mobile Phone L",
+        "isBasic": false
+    },
+    {
+        "id": 292,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Pistol L",
+        "isBasic": false
+    },
+    {
+        "id": 293,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Pistol L 1",
+        "isBasic": false
+    },
+    {
+        "id": 294,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Poison Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 295,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Potion L",
+        "isBasic": false
+    },
+    {
+        "id": 296,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Priestess Chalice L",
+        "isBasic": false
+    },
+    {
+        "id": 297,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Priestess Hammer L",
+        "isBasic": false
+    },
+    {
+        "id": 298,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Rail Gun L",
+        "isBasic": false
+    },
+    {
+        "id": 299,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Rifle L",
+        "isBasic": false
+    },
+    {
+        "id": 300,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Rifle L 1",
+        "isBasic": false
+    },
+    {
+        "id": 301,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Rocket Launcher L",
+        "isBasic": false
+    },
+    {
+        "id": 302,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Samurai Katana L",
+        "isBasic": false
+    },
+    {
+        "id": 303,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Scept L 1",
+        "isBasic": true
+    },
+    {
+        "id": 304,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Scept L",
+        "isBasic": true
+    },
+    {
+        "id": 305,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Screwdriver L",
+        "isBasic": false
+    },
+    {
+        "id": 306,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Scythe dark L",
+        "isBasic": false
+    },
+    {
+        "id": 307,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Scythe L",
+        "isBasic": false
+    },
+    {
+        "id": 308,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Shield L",
+        "isBasic": false
+    },
+    {
+        "id": 309,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Shuriken L",
+        "isBasic": false
+    },
+    {
+        "id": 310,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Snake Staff L",
+        "isBasic": false
+    },
+    {
+        "id": 311,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Soda Popper L",
+        "isBasic": false
+    },
+    {
+        "id": 312,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Soldier Rifle L",
+        "isBasic": false
+    },
+    {
+        "id": 313,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Sonic L",
+        "isBasic": false
+    },
+    {
+        "id": 314,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Staves L",
+        "isBasic": false
+    },
+    {
+        "id": 315,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Strider Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 316,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Sword Ichigo L",
+        "isBasic": false
+    },
+    {
+        "id": 317,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Tomb Raider Pistol L",
+        "isBasic": false
+    },
+    {
+        "id": 318,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Travis Sword L",
+        "isBasic": false
+    },
+    {
+        "id": 319,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Trident L 1",
+        "isBasic": false
+    },
+    {
+        "id": 320,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Trident L",
+        "isBasic": false
+    },
+    {
+        "id": 321,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Twig-A L",
+        "isBasic": false
+    },
+    {
+        "id": 322,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Twig-B L",
+        "isBasic": false
+    },
+    {
+        "id": 323,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Twig-C L",
+        "isBasic": false
+    },
+    {
+        "id": 324,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Wakizashi L",
+        "isBasic": false
+    },
+    {
+        "id": 325,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "War Hammer L",
+        "isBasic": false
+    },
+    {
+        "id": 326,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Wrench L 1",
+        "isBasic": false
+    },
+    {
+        "id": 327,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Wrench L",
+        "isBasic": false
+    },
+    {
+        "id": 328,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Beard",
+        "isBasic": false
+    },
+    {
+        "id": 329,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Closed Smile",
+        "isBasic": false
+    },
+    {
+        "id": 330,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Flat",
+        "isBasic": false
+    },
+    {
+        "id": 331,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Frowning",
+        "isBasic": false
+    },
+    {
+        "id": 332,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Fullbeard",
+        "isBasic": false
+    },
+    {
+        "id": 333,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Little Smile",
+        "isBasic": false
+    },
+    {
+        "id": 334,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Moustache",
+        "isBasic": false
+    },
+    {
+        "id": 335,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Okay",
+        "isBasic": false
+    },
+    {
+        "id": 336,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "One Fang",
+        "isBasic": false
+    },
+    {
+        "id": 337,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Pucker",
+        "isBasic": false
+    },
+    {
+        "id": 338,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Sad",
+        "isBasic": false
+    },
+    {
+        "id": 339,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Shouting",
+        "isBasic": false
+    },
+    {
+        "id": 340,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Smile",
+        "isBasic": false
+    },
+    {
+        "id": 341,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Smiling",
+        "isBasic": false
+    },
+    {
+        "id": 342,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Toothless",
+        "isBasic": false
+    },
+    {
+        "id": 343,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Uwu Mouth",
+        "isBasic": false
+    },
+    {
+        "id": 344,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Vampire Fangs",
+        "isBasic": false
+    },
+    {
+        "id": 345,
+        "amount": 1,
+        "slot": "Mouth",
+        "name": "Very Sad",
+        "isBasic": false
+    },
+    {
+        "id": 346,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Ammo Belt R",
+        "isBasic": false
+    },
+    {
+        "id": 347,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Atomizer Bat R",
+        "isBasic": false
+    },
+    {
+        "id": 348,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "AWP R",
+        "isBasic": false
+    },
+    {
+        "id": 349,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Axe R",
+        "isBasic": false
+    },
+    {
+        "id": 350,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Battle Guitar R",
+        "isBasic": false
+    },
+    {
+        "id": 351,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Book R",
+        "isBasic": false
+    },
+    {
+        "id": 352,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Broadsword R",
+        "isBasic": false
+    },
+    {
+        "id": 353,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Buster Cannon R",
+        "isBasic": false
+    },
+    {
+        "id": 354,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Buster Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 355,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Chainsaw R",
+        "isBasic": false
+    },
+    {
+        "id": 356,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Claws R",
+        "isBasic": false
+    },
+    {
+        "id": 357,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Claws R 1",
+        "isBasic": false
+    },
+    {
+        "id": 358,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Crossbow R",
+        "isBasic": false
+    },
+    {
+        "id": 359,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Crystal Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 360,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cursed Katana R",
+        "isBasic": false
+    },
+    {
+        "id": 361,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cyber Punk Katana R",
+        "isBasic": false
+    },
+    {
+        "id": 362,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cybernetic Arm R",
+        "isBasic": false
+    },
+    {
+        "id": 363,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cyberpunk Fire Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 364,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cyberpunk Gun R",
+        "isBasic": false
+    },
+    {
+        "id": 365,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cyberpunk Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 366,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Cypher sword R",
+        "isBasic": false
+    },
+    {
+        "id": 367,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Desert Eagle R",
+        "isBasic": false
+    },
+    {
+        "id": 368,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Elecktra Sai R",
+        "isBasic": false
+    },
+    {
+        "id": 369,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Energy Blade R",
+        "isBasic": false
+    },
+    {
+        "id": 370,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Energy Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 371,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Flamethrower R",
+        "isBasic": false
+    },
+    {
+        "id": 372,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Flying Guillotine curved R",
+        "isBasic": false
+    },
+    {
+        "id": 373,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Flying Guillotine R",
+        "isBasic": false
+    },
+    {
+        "id": 374,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Frostmourne R",
+        "isBasic": false
+    },
+    {
+        "id": 375,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Gloves R",
+        "isBasic": false
+    },
+    {
+        "id": 376,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Glowing Hands R",
+        "isBasic": false
+    },
+    {
+        "id": 377,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Glowing Scroll R",
+        "isBasic": false
+    },
+    {
+        "id": 378,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Gold Gloves R",
+        "isBasic": false
+    },
+    {
+        "id": 379,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Grenade Launcher R",
+        "isBasic": false
+    },
+    {
+        "id": 380,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Gunlance R",
+        "isBasic": false
+    },
+    {
+        "id": 381,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Halo Rifle R",
+        "isBasic": true
+    },
+    {
+        "id": 382,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Heavy Machine Gun R",
+        "isBasic": true
+    },
+    {
+        "id": 383,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Ichigo sword R",
+        "isBasic": true
+    },
+    {
+        "id": 384,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Iron Fan R",
+        "isBasic": false
+    },
+    {
+        "id": 385,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Knight Cross R",
+        "isBasic": false
+    },
+    {
+        "id": 386,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Knight Flaming Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 387,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Knight Shield R",
+        "isBasic": false
+    },
+    {
+        "id": 388,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Knight Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 389,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Knight Whip R",
+        "isBasic": true
+    },
+    {
+        "id": 390,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Kunai Dark R",
+        "isBasic": true
+    },
+    {
+        "id": 391,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Kunai R",
+        "isBasic": false
+    },
+    {
+        "id": 392,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Lance R",
+        "isBasic": false
+    },
+    {
+        "id": 393,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Laptop Decker R",
+        "isBasic": false
+    },
+    {
+        "id": 394,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Lich Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 395,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Long Sword R #1",
+        "isBasic": false
+    },
+    {
+        "id": 396,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Long Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 397,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mace R",
+        "isBasic": false
+    },
+    {
+        "id": 398,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mage Book R",
+        "isBasic": false
+    },
+    {
+        "id": 399,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mage Staff R",
+        "isBasic": false
+    },
+    {
+        "id": 400,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mage Wand R",
+        "isBasic": false
+    },
+    {
+        "id": 401,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Magical Quill R",
+        "isBasic": false
+    },
+    {
+        "id": 402,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Martini Glass R",
+        "isBasic": false
+    },
+    {
+        "id": 403,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mechanic Screwdriver R",
+        "isBasic": false
+    },
+    {
+        "id": 404,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Metroid Rifle R",
+        "isBasic": false
+    },
+    {
+        "id": 405,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Gauntlet Cannon R",
+        "isBasic": false
+    },
+    {
+        "id": 406,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mobile Phone big R",
+        "isBasic": false
+    },
+    {
+        "id": 407,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Mobile Phone R",
+        "isBasic": false
+    },
+    {
+        "id": 408,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Pistol R #1",
+        "isBasic": false
+    },
+    {
+        "id": 409,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Pistol R",
+        "isBasic": false
+    },
+    {
+        "id": 410,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Poison Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 411,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Potion R",
+        "isBasic": false
+    },
+    {
+        "id": 412,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Priestess Chalice R",
+        "isBasic": false
+    },
+    {
+        "id": 413,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Priestess Hammer R",
+        "isBasic": false
+    },
+    {
+        "id": 414,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Rail Gun R",
+        "isBasic": false
+    },
+    {
+        "id": 415,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Rifle R #1",
+        "isBasic": false
+    },
+    {
+        "id": 416,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Rifle R",
+        "isBasic": false
+    },
+    {
+        "id": 417,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Rocket Launcher R",
+        "isBasic": false
+    },
+    {
+        "id": 418,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Samurai Katana R",
+        "isBasic": false
+    },
+    {
+        "id": 419,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Scept R #1",
+        "isBasic": false
+    },
+    {
+        "id": 420,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Scept R",
+        "isBasic": false
+    },
+    {
+        "id": 421,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Screwdriver R",
+        "isBasic": false
+    },
+    {
+        "id": 422,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Scythe dark R",
+        "isBasic": false
+    },
+    {
+        "id": 423,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Scythe R",
+        "isBasic": false
+    },
+    {
+        "id": 424,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Shield R",
+        "isBasic": false
+    },
+    {
+        "id": 425,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Shuriken R",
+        "isBasic": false
+    },
+    {
+        "id": 426,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Snake Staff R",
+        "isBasic": false
+    },
+    {
+        "id": 427,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Soda Popper R",
+        "isBasic": false
+    },
+    {
+        "id": 428,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Soldier Rifle R",
+        "isBasic": false
+    },
+    {
+        "id": 429,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Sonic R",
+        "isBasic": false
+    },
+    {
+        "id": 430,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Staves R",
+        "isBasic": false
+    },
+    {
+        "id": 431,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Strider Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 432,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Sword Ichigo R",
+        "isBasic": false
+    },
+    {
+        "id": 433,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Tomb Raider Pistol R",
+        "isBasic": false
+    },
+    {
+        "id": 434,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Travis Sword R",
+        "isBasic": false
+    },
+    {
+        "id": 435,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Trident R #1",
+        "isBasic": false
+    },
+    {
+        "id": 436,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Trident R",
+        "isBasic": false
+    },
+    {
+        "id": 437,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Twig-A R",
+        "isBasic": false
+    },
+    {
+        "id": 438,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Twig-B R",
+        "isBasic": false
+    },
+    {
+        "id": 439,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Twig-C R",
+        "isBasic": false
+    },
+    {
+        "id": 440,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Wakizashi R",
+        "isBasic": false
+    },
+    {
+        "id": 441,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "War Hammer R",
+        "isBasic": false
+    },
+    {
+        "id": 442,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Wrench R 1",
+        "isBasic": false
+    },
+    {
+        "id": 443,
+        "amount": 1,
+        "slot": "Right Hand",
+        "name": "Wrench R",
+        "isBasic": false
+    },
+    {
+        "id": 444,
+        "amount": 1,
+        "slot": "Shadow",
+        "name": "Base",
+        "isBasic": false
+    },
+    {
+        "id": 445,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A Dark",
+        "isBasic": false
+    },
+    {
+        "id": 446,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A Light",
+        "isBasic": false
+    },
+    {
+        "id": 447,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A MDark",
+        "isBasic": false
+    },
+    {
+        "id": 448,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A Medium",
+        "isBasic": false
+    },
+    {
+        "id": 449,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A Pale",
+        "isBasic": false
+    },
+    {
+        "id": 450,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "A Sand",
+        "isBasic": false
+    },
+    {
+        "id": 451,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F Dark",
+        "isBasic": true
+    },
+    {
+        "id": 452,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F Light",
+        "isBasic": true
+    },
+    {
+        "id": 453,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F MDark",
+        "isBasic": true
+    },
+    {
+        "id": 454,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F Medium",
+        "isBasic": true
+    },
+    {
+        "id": 455,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F Pale",
+        "isBasic": true
+    },
+    {
+        "id": 456,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "F Sand",
+        "isBasic": true
+    },
+    {
+        "id": 457,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Dark",
+        "isBasic": true
+    },
+    {
+        "id": 458,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Light #1",
+        "isBasic": true
+    },
+    {
+        "id": 459,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Light",
+        "isBasic": true
+    },
+    {
+        "id": 460,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M MDark",
+        "isBasic": true
+    },
+    {
+        "id": 461,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Medium",
+        "isBasic": true
+    },
+    {
+        "id": 462,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Pale",
+        "isBasic": true
+    },
+    {
+        "id": 463,
+        "amount": 1,
+        "slot": "Skin",
+        "name": "M Sand",
+        "isBasic": true
+    },
+    {
+        "id": 464,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Academy Robe",
+        "isBasic": true
+    },
+    {
+        "id": 465,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Akatsuki Robe",
+        "isBasic": true
+    },
+    {
+        "id": 466,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Amazon Armor",
+        "isBasic": false
+    },
+    {
+        "id": 467,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Bandage Armor",
+        "isBasic": false
+    },
+    {
+        "id": 468,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Barbarian Armor",
+        "isBasic": false
+    },
+    {
+        "id": 469,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Black Hoodie Armor",
+        "isBasic": false
+    },
+    {
+        "id": 470,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Black Leather Jacket",
+        "isBasic": false
+    },
+    {
+        "id": 471,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Black Tank",
+        "isBasic": false
+    },
+    {
+        "id": 472,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Bloodmage Armor",
+        "isBasic": false
+    },
+    {
+        "id": 473,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Blue Sci-Fi Armor",
+        "isBasic": false
+    },
+    {
+        "id": 474,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Blue Shirt",
+        "isBasic": false
+    },
+    {
+        "id": 475,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Blue Tank",
+        "isBasic": false
+    },
+    {
+        "id": 476,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Brown Shirt",
+        "isBasic": false
+    },
+    {
+        "id": 477,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Challenger Armor",
+        "isBasic": false
+    },
+    {
+        "id": 478,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Common Robe",
+        "isBasic": false
+    },
+    {
+        "id": 479,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Cracked Armor",
+        "isBasic": false
+    },
+    {
+        "id": 480,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Cyberpunk Armor",
+        "isBasic": false
+    },
+    {
+        "id": 481,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Deedlit Armor",
+        "isBasic": false
+    },
+    {
+        "id": 482,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Dragon Armor",
+        "isBasic": false
+    },
+    {
+        "id": 483,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Emo Goth Punk Armor",
+        "isBasic": false
+    },
+    {
+        "id": 484,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Formal Tuxedo Armor",
+        "isBasic": false
+    },
+    {
+        "id": 485,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Gold Armor",
+        "isBasic": false
+    },
+    {
+        "id": 486,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Green Hoodie Armor",
+        "isBasic": false
+    },
+    {
+        "id": 487,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Green Tank",
+        "isBasic": false
+    },
+    {
+        "id": 488,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Green Vest",
+        "isBasic": false
+    },
+    {
+        "id": 489,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Ichigo Robe",
+        "isBasic": false
+    },
+    {
+        "id": 490,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Kimono Armor",
+        "isBasic": false
+    },
+    {
+        "id": 491,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Knight Armor",
+        "isBasic": false
+    },
+    {
+        "id": 492,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Kunimitsu Armor",
+        "isBasic": false
+    },
+    {
+        "id": 493,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Lich Robe",
+        "isBasic": false
+    },
+    {
+        "id": 494,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Mage Robe",
+        "isBasic": false
+    },
+    {
+        "id": 495,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Master Chief",
+        "isBasic": false
+    },
+    {
+        "id": 496,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Mechanic Sports Bra",
+        "isBasic": false
+    },
+    {
+        "id": 497,
+        "amount": 1,
+        "slot": "Top",
+        "name": "N Blue Tank",
+        "isBasic": false
+    },
+    {
+        "id": 498,
+        "amount": 1,
+        "slot": "Top",
+        "name": "N Green Tank",
+        "isBasic": false
+    },
+    {
+        "id": 499,
+        "amount": 1,
+        "slot": "Top",
+        "name": "N Orange Tank",
+        "isBasic": false
+    },
+    {
+        "id": 500,
+        "amount": 1,
+        "slot": "Top",
+        "name": "N Pink Tank",
+        "isBasic": false
+    },
+    {
+        "id": 501,
+        "amount": 1,
+        "slot": "Top",
+        "name": "N Red Tank",
+        "isBasic": false
+    },
+    {
+        "id": 502,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Nier Automata Armor",
+        "isBasic": false
+    },
+    {
+        "id": 503,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Ninja Armor",
+        "isBasic": false
+    },
+    {
+        "id": 504,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Orange Armor",
+        "isBasic": false
+    },
+    {
+        "id": 505,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Orange Tank",
+        "isBasic": false
+    },
+    {
+        "id": 506,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Priestess Armor",
+        "isBasic": false
+    },
+    {
+        "id": 507,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Priestess Robe",
+        "isBasic": false
+    },
+    {
+        "id": 508,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Purple Robe",
+        "isBasic": false
+    },
+    {
+        "id": 509,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Ranger Tunic",
+        "isBasic": false
+    },
+    {
+        "id": 510,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Red Armor",
+        "isBasic": false
+    },
+    {
+        "id": 511,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Red Ninja Armor",
+        "isBasic": false
+    },
+    {
+        "id": 512,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Red Priestess Armor",
+        "isBasic": false
+    },
+    {
+        "id": 513,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Red Shirt",
+        "isBasic": false
+    },
+    {
+        "id": 514,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Samurai Armor",
+        "isBasic": false
+    },
+    {
+        "id": 515,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Sci-Fi Armor",
+        "isBasic": false
+    },
+    {
+        "id": 516,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Silver Armor",
+        "isBasic": false
+    },
+    {
+        "id": 517,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Soldier Sleeveless Armor",
+        "isBasic": false
+    },
+    {
+        "id": 518,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Sports Bra",
+        "isBasic": false
+    },
+    {
+        "id": 519,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Starcraft Marine",
+        "isBasic": false
+    },
+    {
+        "id": 520,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Tank Top Gold Chain",
+        "isBasic": false
+    },
+    {
+        "id": 521,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Tomb Raider Armor",
+        "isBasic": false
+    },
+    {
+        "id": 522,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Travis Jacket",
+        "isBasic": false
+    },
+    {
+        "id": 523,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Turtleneck Armor",
+        "isBasic": false
+    },
+    {
+        "id": 524,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Tuxedo",
+        "isBasic": false
+    },
+    {
+        "id": 525,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Vest",
+        "isBasic": false
+    },
+    {
+        "id": 526,
+        "amount": 1,
+        "slot": "Top",
+        "name": "White Robe",
+        "isBasic": false
+    },
+    {
+        "id": 527,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Witcher Tunic",
+        "isBasic": false
+    },
+    {
+        "id": 528,
+        "amount": 1,
+        "slot": "Top",
+        "name": "Yellow Robe",
+        "isBasic": false
+    },
+    {
+        "id": 529,
+        "amount": 1,
+        "slot": "Left Hand",
+        "name": "Grenade Launcher L",
+        "isBasic": false
+    },
+    {
+        "id": 530,
+        "amount": 1,
+        "slot": "Class",
+        "name": "Gunner",
+        "isBasic": true
+    },
+    {
+        "id": 531,
+        "amount": 1,
+        "slot": "Class",
+        "name": "Wizard",
+        "isBasic": true
+    },
+    {
+        "id": 532,
+        "amount": 1,
+        "slot": "Class",
+        "name": "Assassin",
+        "isBasic": true
+    },
+    {
+        "id": 533,
+        "amount": 1,
+        "slot": "Class",
+        "name": "Tech",
+        "isBasic": true
+    },
+    {
+        "id": 534,
+        "amount": 1,
+        "slot": "Class",
+        "name": "Knight",
+        "isBasic": true
+    },
+    {
+        "id": 535,
+        "amount": 1,
+        "slot": "Gender",
+        "name": "Male",
+        "isBasic": true
+    },
+    {
+        "id": 536,
+        "amount": 1,
+        "slot": "Gender",
+        "name": "Female",
+        "isBasic": true
+    }
+]

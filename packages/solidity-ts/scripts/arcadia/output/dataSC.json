@@ -2158,7 +2158,12 @@
             "id": 6,
             "permanent": false,
             "category": 0,
-            "allowedItems": []
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xBd5D7FC50b6C375A9e3a618bb852D6370410B37e",
+                    "id": 458
+                }
+            ]
         },
         {
             "id": 7,
@@ -2243,7 +2248,12 @@
             "id": 8,
             "permanent": false,
             "category": 2,
-            "allowedItems": []
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xBd5D7FC50b6C375A9e3a618bb852D6370410B37e",
+                    "id": 459
+                }
+            ]
         },
         {
             "id": 9,
@@ -2432,13 +2442,23 @@
             "id": 10,
             "permanent": false,
             "category": 0,
-            "allowedItems": []
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xBd5D7FC50b6C375A9e3a618bb852D6370410B37e",
+                    "id": 460
+                }
+            ]
         },
         {
             "id": 11,
             "permanent": false,
             "category": 1,
-            "allowedItems": []
+            "allowedItems": [
+                {
+                    "erc721Contract": "0xBd5D7FC50b6C375A9e3a618bb852D6370410B37e",
+                    "id": 461
+                }
+            ]
         },
         {
             "id": 12,
