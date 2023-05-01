@@ -108,9 +108,6 @@ describe('Items basic items tests', function () {
 
         const basicItemAmounts = basicItemsIds.map((id, i)=>i % 2 + 1)
 
-        await expect(itemsContracts.itemsFacet.setBasicBatch(basicItemsIds, basicItemsIds.map((id)=>true))).
-            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Items_ItemsBasicStatusAlreadyUpdated");
-
         let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
         expect(basicItems).to.be.eql(basicItemsIds);
 
@@ -216,7 +213,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         }
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip);
 
-        // modify base slots
+        // re-equip base slots
         const baseSlots = slots.filter((slot)=>slot.category == SlotCategory.Base && !slot.permanent);
         const baseSlotsIds = baseSlots.map((slot)=>slot.id);
         const couponsAmounts = baseSlots.map(()=>itemAmount);

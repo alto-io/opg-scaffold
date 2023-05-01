@@ -29,7 +29,7 @@ async function main() {
         const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
 
         if (numAllowedItems.gt(0)) {
-            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, 0)
+            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
             itemsToEquip.push(itemToEquip);
         }
     }

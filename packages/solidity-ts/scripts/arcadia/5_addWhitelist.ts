@@ -12,9 +12,9 @@ export interface ClaimableToken {
 
 async function main() {
 
-    const OG : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "data/claimersOG.json")).toString()).slice(0,1);
-    const AL : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "data/claimersAL.json")).toString());
-    const WL : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "data/claimersWL.json")).toString()).slice(0,1);
+    const OG : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "dataV2/claimersOG.json")).toString());
+    const AL : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "dataV2/claimersAL.json")).toString());
+    const WL : ClaimableToken[] = JSON.parse(fs.readFileSync(path.join(__dirname, "dataV2/claimersWL.json")).toString());
 
     const network = hre.network.name;
     const { itemsSC, inventorySC, arcadiansSC, whitelistArcadiansSC } = await getDeployedContracts(network);
