@@ -43,8 +43,7 @@ contract InventoryInternal is
     event ItemsEquipped(
         address indexed by,
         uint indexed arcadianId,
-        uint[] slots,
-        bool baseModifierCouponsConsumed
+        uint[] slots
     );
 
     event ItemsUnequipped(
@@ -65,6 +64,11 @@ contract InventoryInternal is
         address indexed to,
         uint[] slotsIds,
         uint[] amounts
+    );
+
+    event BaseModifierCouponConsumed(
+        address indexed account,
+        uint[] slotsIds
     );
 
     // Helper structs only used in view functions to ease data reading from web3
@@ -103,22 +107,38 @@ contract InventoryInternal is
             revert Inventory_ItemNotSpecified();
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        bool containsBaseSlots;
+        uint numBaseSlotsModified;
         uint[] memory slotsIds = new uint[](items.length);
         for (uint i = 0; i < items.length; i++) {
             uint slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
-            containsBaseSlots = containsBaseSlots || inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base;
+            if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+                numBaseSlotsModified++;
+            }
             slotsIds[i] = slotId;
         }
 
         if (!_baseSlotsEquipped(arcadianId)) 
             revert Inventory_NotAllBaseSlotsEquipped();
 
-        if (containsBaseSlots && !_hashBaseItemsUnchecked(arcadianId)) 
-            revert Inventory_ArcadianNotUnique();
+        if (numBaseSlotsModified > 0) {
+            if (!_hashBaseItemsUnchecked(arcadianId))
+                revert Inventory_ArcadianNotUnique();
+            
+            if (!freeBaseModifier) {
+                uint[] memory baseSlotsModified = new uint[](numBaseSlotsModified);
+                uint counter;
+                for (uint i = 0; i < items.length; i++) {
+                    uint slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+                    if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+                        baseSlotsModified[counter] = slotId;
+                        counter++;
+                    }
+                }
+                emit BaseModifierCouponConsumed(msg.sender, baseSlotsModified);
+            }
+        }
 
-        bool baseModifierCouponsConsumed = containsBaseSlots && !freeBaseModifier;
-        emit ItemsEquipped(msg.sender, arcadianId, slotsIds, baseModifierCouponsConsumed);
+        emit ItemsEquipped(msg.sender, arcadianId, slotsIds);
     }
 
     function _equipSingleSlot(
