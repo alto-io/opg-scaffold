@@ -46,7 +46,7 @@ async function main() {
     fs.writeFileSync(slotsPath, JSON.stringify(slotsAll));
 
     let slotsSC: SlotSC[] = await getAllSlots(inventorySC);
-    console.log("allSlots after: ", slotsSC.map((slot)=>{
+    console.log("allSlots before: ", slotsSC.map((slot)=>{
         (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
         return slot;
     }));
