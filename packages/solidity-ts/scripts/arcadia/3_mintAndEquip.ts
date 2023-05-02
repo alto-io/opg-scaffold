@@ -24,12 +24,15 @@ async function main() {
     const arcadianId = 1;
     const slotsAll: Slot[] = await inventorySC.slotsAll();
     
+    console.log("signer: ", await inventorySC.signer.getAddress());
+    
     const itemsToEquip: Item[] = [];
     for (const slot of slotsAll) {
         const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
 
         if (numAllowedItems.gt(0)) {
-            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
+            // const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
+            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, 0)
             itemsToEquip.push(itemToEquip);
         }
     }
