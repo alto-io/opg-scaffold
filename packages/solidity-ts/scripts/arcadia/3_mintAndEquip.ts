@@ -2,41 +2,30 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
+import { Item, ItemSC, Slot, itemsPath, slotsPath } from "./0_formatLocalData";
+import fs from "fs";
 
-enum SlotCategory { Base, Equippment, Cosmetic}
-interface Slot {
-    id?: number,
-    permanent: boolean,
-    category: SlotCategory
-}
-
-interface Item {
-    erc721Contract: string,
-    id: number
-}
+const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
+let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
 async function main() {
 
     const network = hre.network.name;
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
-
-
-    const arcadianId = 1;
-    const slotsAll: Slot[] = await inventorySC.slotsAll();
     
-    console.log("signer: ", await inventorySC.signer.getAddress());
+    const recipientAddress = await arcadiansSC.signer.getAddress();
+    console.log("recipientAddress: ", recipientAddress);
     
-    const itemsToEquip: Item[] = [];
+    const itemsToEquip: ItemSC[] = [];
     for (const slot of slotsAll) {
-        const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
-
-        if (numAllowedItems.gt(0)) {
-            // const itemToEquip: Item = await inventorySC.allowedItem(slot.id, numAllowedItems.sub(1))
-            const itemToEquip: Item = await inventorySC.allowedItem(slot.id, 0)
-            itemsToEquip.push(itemToEquip);
-        }
+        const item = itemsAll.find((item, i)=>item.slotId == slot.id)
+        // const item = itemsAll.findLast((item, i)=>item.slotId == slot.id)
+        itemsToEquip.push({erc721Contract: itemsSC.address, id: item?.id as number});
     }
-    await itemsSC.setApprovalForAll(inventorySC.address, true);
+
+    const itemsToEquipIds = itemsToEquip.map((item)=>item.id)
+    const itemsToEquipAmounts = itemsToEquip.map(()=>1)
+    await itemsSC.mintBatch(recipientAddress, itemsToEquipIds, itemsToEquipAmounts)
 
     const isPublicMintOpen = await await arcadiansSC.publicMintOpen();
     if (!isPublicMintOpen) {
@@ -44,11 +33,9 @@ async function main() {
         tx.wait()
     }
 
-    const equippedAll = await inventorySC.equippedAll(arcadianId);
-    console.log("Items equipped in all slots: ", equippedAll);
-
     const payAmount = await arcadiansSC.mintPrice()
-    const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip.slice(0, 8));
+    
+    const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip);
     if (!isArcadianUnique) {
         console.log("Not minting arcadian because equipments is not unique");
         return;
@@ -56,17 +43,16 @@ async function main() {
     
     let tx = await arcadiansSC.mintAndEquip(itemsToEquip, {value: payAmount});
     await tx.wait();
-    const minterAddress = await arcadiansSC.signer.getAddress();
     
-    console.log("minterAddress: ", minterAddress);
-    const balance = await arcadiansSC.balanceOf(minterAddress);
-    console.log("balance arcadians: ", balance);
-    const ownedTokens = [];
-    for (let i = 0; i < balance; i++) {
-        const arcadianId: BigNumber = await arcadiansSC.tokenOfOwnerByIndex(minterAddress, i);
-        ownedTokens.push(arcadianId.toNumber());
+    const arcadiansOwner = await arcadiansSC.signer.getAddress();
+    const balanceArcadians = await arcadiansSC.balanceOf(arcadiansOwner);
+    console.log("balanceArcadians: ", balanceArcadians);
+    
+    for (let i = 0; i < balanceArcadians; i++) {
+        const arcadianId: BigNumber = await arcadiansSC.tokenOfOwnerByIndex(arcadiansOwner, i);
+        const equippedAll = await inventorySC.equippedAll(arcadianId);
+        console.log("Arcadian ", arcadianId.toNumber(), " equipment: ", equippedAll);
     }
-    console.log("owned arcadians: ", ownedTokens);
 }
 
 main().catch((error) => {
