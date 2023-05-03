@@ -5,45 +5,14 @@ import path from "path";
 import { ethers } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
 import util from 'util'
-import { MintItem } from "./1_mintItems";
+import { ItemSC, Slot, SlotSC, slotsPath } from "./0_formatLocalData";
 
-enum SlotCategory { Base, Equippment, Cosmetic}
-interface Slot {
-    id: number,
-    name: string,
-    permanent: boolean,
-    category: SlotCategory,
-    allowedItems: number[]
-}
-interface SlotSC {
-    id: number,
-    permanent: boolean,
-    category: SlotCategory,
-    allowedItems: ItemSC[]
-}
-interface ItemSC {
-    erc721Contract: string,
-    id: number
-}
-
-const itemsAll: MintItem[] = JSON.parse(fs.readFileSync(path.join(__dirname, "dataV2/items.json")).toString());
-const slotsPath = path.join(__dirname, "dataV2/slots.json");
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
 async function main() {
 
     const network = hre.network.name;
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
-
-    for (let i = 0; i < itemsAll.length; i++) {
-        // setup allowed items for each slot
-        const slotIndex = slotsAll.findIndex((slot)=>slot.name == itemsAll[i].slot)
-        if (!slotsAll[slotIndex].allowedItems.includes(itemsAll[i].id)) {
-            slotsAll[slotIndex].allowedItems.push(itemsAll[i].id);
-        }
-    }
-
-    fs.writeFileSync(slotsPath, JSON.stringify(slotsAll));
 
     let slotsSC: SlotSC[] = await getAllSlots(inventorySC);
     console.log("allSlots before: ", slotsSC.map((slot)=>{

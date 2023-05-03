@@ -4,16 +4,8 @@ import fs from "fs";
 import { BigNumber, ethers } from "ethers";
 import path from "path";
 import getDeployedContracts from "./utils/deployedContracts";
+import { Item, ItemSC, Slot, SlotSC } from "./0_formatLocalData";
 
-interface Item {
-    id: any,
-    erc721Contract: string
-}
-interface Slot {
-    id: any,
-    permanent: boolean,
-    category: any
-}
 export interface ItemInSlot {
     slotId: any,
     itemId: any,
@@ -45,18 +37,18 @@ async function main() {
         ownedItems.push({itemId: tokensByAccount[i].toNumber(), balance: balance.toNumber()});
     }
 
-    let slotsAll: Slot[] = await inventorySC.slotsAll();
+    let slotsAll: SlotSC[] = await inventorySC.slotsAll();
     const slots: any[] = [];
     for (const slot of slotsAll) {
-        const allowedItems: Item[] = [];
+        const allowedItems: ItemSC[] = [];
         const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
         for (let i = 0; i < numAllowedItems.toNumber(); i++) {
-            let allowedItem: Item = await inventorySC.allowedItem(slot.id, i)
-            allowedItems.push({erc721Contract: allowedItem.erc721Contract, id: allowedItem.id.toNumber() });
+            let allowedItem: ItemSC = await inventorySC.allowedItem(slot.id, i)
+            allowedItems.push({erc721Contract: allowedItem.erc721Contract, id: (allowedItem.id as any).toNumber() });
         }
         
         slots.push({
-            id: slot.id.toNumber(),
+            id: (slot.id as any).toNumber(),
             permanent: slot.permanent,
             category: slot.category,
             allowedItems: allowedItems

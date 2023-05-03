@@ -6,6 +6,7 @@
     "verify": "hardhat etherscan-verify --solc-input --network",
     "tests": "hardhat test --network",
     "merkle-generate": "ts-node helpers/merkle-tree/generateTree.ts",
+    "script:format-local-data": "npx hardhat run ./scripts/arcadia/0_formatLocalData.ts",
     "script:mint-items": "npx hardhat run ./scripts/arcadia/1_mintItems.ts --network",
     "script:create-slots": "npx hardhat run ./scripts/arcadia/2_createSlots.ts --network",
     "script:mint-and-equip": "npx hardhat run ./scripts/arcadia/3_mintAndEquip.ts --network",

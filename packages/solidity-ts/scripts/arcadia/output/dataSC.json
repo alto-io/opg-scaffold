@@ -1,12 +1,4419 @@
 {
-    "network": "mumbai",
-    "itemsSC": "0x1d1d5f0E94783917Ba7fCc26Cb636d69639F9D6E",
-    "inventorySC": "0xf4fE66D7DFa65778146722185b0c1Bce663223b5",
-    "arcadiansSC": "0xf4fE66D7DFa65778146722185b0c1Bce663223b5",
-    "arcadiansOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-    "ownedArcadians": [],
-    "itemsOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-    "ownedItems": [],
-    "inventorySlots": [],
-    "equippedArcadians": {}
+    "network": "localhost",
+    "itemsSC": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+    "inventorySC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansSC": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "arcadiansOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "ownedArcadians": [
+        1
+    ],
+    "itemsOwner": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "ownedItems": [
+        {
+            "itemId": 523,
+            "balance": 1
+        },
+        {
+            "itemId": 2,
+            "balance": 1
+        },
+        {
+            "itemId": 3,
+            "balance": 1
+        },
+        {
+            "itemId": 4,
+            "balance": 1
+        },
+        {
+            "itemId": 5,
+            "balance": 1
+        },
+        {
+            "itemId": 6,
+            "balance": 1
+        },
+        {
+            "itemId": 7,
+            "balance": 1
+        },
+        {
+            "itemId": 8,
+            "balance": 1
+        },
+        {
+            "itemId": 9,
+            "balance": 1
+        },
+        {
+            "itemId": 10,
+            "balance": 1
+        },
+        {
+            "itemId": 11,
+            "balance": 1
+        },
+        {
+            "itemId": 12,
+            "balance": 1
+        },
+        {
+            "itemId": 13,
+            "balance": 1
+        },
+        {
+            "itemId": 14,
+            "balance": 1
+        },
+        {
+            "itemId": 15,
+            "balance": 1
+        },
+        {
+            "itemId": 16,
+            "balance": 1
+        },
+        {
+            "itemId": 529,
+            "balance": 1
+        },
+        {
+            "itemId": 18,
+            "balance": 1
+        },
+        {
+            "itemId": 19,
+            "balance": 1
+        },
+        {
+            "itemId": 20,
+            "balance": 1
+        },
+        {
+            "itemId": 21,
+            "balance": 1
+        },
+        {
+            "itemId": 22,
+            "balance": 1
+        },
+        {
+            "itemId": 23,
+            "balance": 1
+        },
+        {
+            "itemId": 24,
+            "balance": 1
+        },
+        {
+            "itemId": 25,
+            "balance": 1
+        },
+        {
+            "itemId": 26,
+            "balance": 1
+        },
+        {
+            "itemId": 27,
+            "balance": 1
+        },
+        {
+            "itemId": 28,
+            "balance": 1
+        },
+        {
+            "itemId": 29,
+            "balance": 1
+        },
+        {
+            "itemId": 30,
+            "balance": 1
+        },
+        {
+            "itemId": 31,
+            "balance": 1
+        },
+        {
+            "itemId": 32,
+            "balance": 1
+        },
+        {
+            "itemId": 33,
+            "balance": 1
+        },
+        {
+            "itemId": 34,
+            "balance": 1
+        },
+        {
+            "itemId": 35,
+            "balance": 1
+        },
+        {
+            "itemId": 36,
+            "balance": 1
+        },
+        {
+            "itemId": 37,
+            "balance": 1
+        },
+        {
+            "itemId": 38,
+            "balance": 1
+        },
+        {
+            "itemId": 39,
+            "balance": 1
+        },
+        {
+            "itemId": 40,
+            "balance": 1
+        },
+        {
+            "itemId": 41,
+            "balance": 1
+        },
+        {
+            "itemId": 42,
+            "balance": 1
+        },
+        {
+            "itemId": 43,
+            "balance": 1
+        },
+        {
+            "itemId": 44,
+            "balance": 1
+        },
+        {
+            "itemId": 45,
+            "balance": 1
+        },
+        {
+            "itemId": 525,
+            "balance": 1
+        },
+        {
+            "itemId": 47,
+            "balance": 1
+        },
+        {
+            "itemId": 48,
+            "balance": 1
+        },
+        {
+            "itemId": 49,
+            "balance": 1
+        },
+        {
+            "itemId": 50,
+            "balance": 1
+        },
+        {
+            "itemId": 51,
+            "balance": 1
+        },
+        {
+            "itemId": 52,
+            "balance": 1
+        },
+        {
+            "itemId": 53,
+            "balance": 1
+        },
+        {
+            "itemId": 54,
+            "balance": 1
+        },
+        {
+            "itemId": 55,
+            "balance": 1
+        },
+        {
+            "itemId": 56,
+            "balance": 1
+        },
+        {
+            "itemId": 57,
+            "balance": 1
+        },
+        {
+            "itemId": 58,
+            "balance": 1
+        },
+        {
+            "itemId": 59,
+            "balance": 1
+        },
+        {
+            "itemId": 60,
+            "balance": 1
+        },
+        {
+            "itemId": 61,
+            "balance": 1
+        },
+        {
+            "itemId": 62,
+            "balance": 1
+        },
+        {
+            "itemId": 63,
+            "balance": 1
+        },
+        {
+            "itemId": 64,
+            "balance": 1
+        },
+        {
+            "itemId": 65,
+            "balance": 1
+        },
+        {
+            "itemId": 66,
+            "balance": 1
+        },
+        {
+            "itemId": 67,
+            "balance": 1
+        },
+        {
+            "itemId": 68,
+            "balance": 1
+        },
+        {
+            "itemId": 69,
+            "balance": 1
+        },
+        {
+            "itemId": 70,
+            "balance": 1
+        },
+        {
+            "itemId": 71,
+            "balance": 1
+        },
+        {
+            "itemId": 72,
+            "balance": 1
+        },
+        {
+            "itemId": 73,
+            "balance": 1
+        },
+        {
+            "itemId": 74,
+            "balance": 1
+        },
+        {
+            "itemId": 75,
+            "balance": 1
+        },
+        {
+            "itemId": 76,
+            "balance": 1
+        },
+        {
+            "itemId": 77,
+            "balance": 1
+        },
+        {
+            "itemId": 78,
+            "balance": 1
+        },
+        {
+            "itemId": 79,
+            "balance": 1
+        },
+        {
+            "itemId": 80,
+            "balance": 1
+        },
+        {
+            "itemId": 81,
+            "balance": 1
+        },
+        {
+            "itemId": 82,
+            "balance": 1
+        },
+        {
+            "itemId": 83,
+            "balance": 1
+        },
+        {
+            "itemId": 84,
+            "balance": 1
+        },
+        {
+            "itemId": 85,
+            "balance": 1
+        },
+        {
+            "itemId": 86,
+            "balance": 1
+        },
+        {
+            "itemId": 87,
+            "balance": 1
+        },
+        {
+            "itemId": 88,
+            "balance": 1
+        },
+        {
+            "itemId": 89,
+            "balance": 1
+        },
+        {
+            "itemId": 90,
+            "balance": 1
+        },
+        {
+            "itemId": 91,
+            "balance": 1
+        },
+        {
+            "itemId": 92,
+            "balance": 1
+        },
+        {
+            "itemId": 93,
+            "balance": 1
+        },
+        {
+            "itemId": 94,
+            "balance": 1
+        },
+        {
+            "itemId": 95,
+            "balance": 1
+        },
+        {
+            "itemId": 96,
+            "balance": 1
+        },
+        {
+            "itemId": 97,
+            "balance": 1
+        },
+        {
+            "itemId": 98,
+            "balance": 1
+        },
+        {
+            "itemId": 99,
+            "balance": 1
+        },
+        {
+            "itemId": 100,
+            "balance": 1
+        },
+        {
+            "itemId": 101,
+            "balance": 1
+        },
+        {
+            "itemId": 102,
+            "balance": 1
+        },
+        {
+            "itemId": 103,
+            "balance": 1
+        },
+        {
+            "itemId": 104,
+            "balance": 1
+        },
+        {
+            "itemId": 105,
+            "balance": 1
+        },
+        {
+            "itemId": 106,
+            "balance": 1
+        },
+        {
+            "itemId": 107,
+            "balance": 1
+        },
+        {
+            "itemId": 108,
+            "balance": 1
+        },
+        {
+            "itemId": 109,
+            "balance": 1
+        },
+        {
+            "itemId": 110,
+            "balance": 1
+        },
+        {
+            "itemId": 111,
+            "balance": 1
+        },
+        {
+            "itemId": 112,
+            "balance": 1
+        },
+        {
+            "itemId": 113,
+            "balance": 1
+        },
+        {
+            "itemId": 114,
+            "balance": 1
+        },
+        {
+            "itemId": 115,
+            "balance": 1
+        },
+        {
+            "itemId": 116,
+            "balance": 1
+        },
+        {
+            "itemId": 117,
+            "balance": 1
+        },
+        {
+            "itemId": 531,
+            "balance": 1
+        },
+        {
+            "itemId": 119,
+            "balance": 1
+        },
+        {
+            "itemId": 120,
+            "balance": 1
+        },
+        {
+            "itemId": 121,
+            "balance": 1
+        },
+        {
+            "itemId": 122,
+            "balance": 1
+        },
+        {
+            "itemId": 123,
+            "balance": 1
+        },
+        {
+            "itemId": 124,
+            "balance": 1
+        },
+        {
+            "itemId": 125,
+            "balance": 1
+        },
+        {
+            "itemId": 126,
+            "balance": 1
+        },
+        {
+            "itemId": 127,
+            "balance": 1
+        },
+        {
+            "itemId": 128,
+            "balance": 1
+        },
+        {
+            "itemId": 129,
+            "balance": 1
+        },
+        {
+            "itemId": 130,
+            "balance": 1
+        },
+        {
+            "itemId": 131,
+            "balance": 1
+        },
+        {
+            "itemId": 132,
+            "balance": 1
+        },
+        {
+            "itemId": 133,
+            "balance": 1
+        },
+        {
+            "itemId": 134,
+            "balance": 1
+        },
+        {
+            "itemId": 135,
+            "balance": 1
+        },
+        {
+            "itemId": 136,
+            "balance": 1
+        },
+        {
+            "itemId": 137,
+            "balance": 1
+        },
+        {
+            "itemId": 138,
+            "balance": 1
+        },
+        {
+            "itemId": 139,
+            "balance": 1
+        },
+        {
+            "itemId": 140,
+            "balance": 1
+        },
+        {
+            "itemId": 141,
+            "balance": 1
+        },
+        {
+            "itemId": 536,
+            "balance": 1
+        },
+        {
+            "itemId": 143,
+            "balance": 1
+        },
+        {
+            "itemId": 144,
+            "balance": 1
+        },
+        {
+            "itemId": 145,
+            "balance": 1
+        },
+        {
+            "itemId": 146,
+            "balance": 1
+        },
+        {
+            "itemId": 147,
+            "balance": 1
+        },
+        {
+            "itemId": 148,
+            "balance": 1
+        },
+        {
+            "itemId": 149,
+            "balance": 1
+        },
+        {
+            "itemId": 150,
+            "balance": 1
+        },
+        {
+            "itemId": 151,
+            "balance": 1
+        },
+        {
+            "itemId": 152,
+            "balance": 1
+        },
+        {
+            "itemId": 153,
+            "balance": 1
+        },
+        {
+            "itemId": 154,
+            "balance": 1
+        },
+        {
+            "itemId": 155,
+            "balance": 1
+        },
+        {
+            "itemId": 156,
+            "balance": 1
+        },
+        {
+            "itemId": 157,
+            "balance": 1
+        },
+        {
+            "itemId": 158,
+            "balance": 1
+        },
+        {
+            "itemId": 159,
+            "balance": 1
+        },
+        {
+            "itemId": 160,
+            "balance": 1
+        },
+        {
+            "itemId": 161,
+            "balance": 1
+        },
+        {
+            "itemId": 162,
+            "balance": 1
+        },
+        {
+            "itemId": 163,
+            "balance": 1
+        },
+        {
+            "itemId": 164,
+            "balance": 1
+        },
+        {
+            "itemId": 165,
+            "balance": 1
+        },
+        {
+            "itemId": 166,
+            "balance": 1
+        },
+        {
+            "itemId": 167,
+            "balance": 1
+        },
+        {
+            "itemId": 168,
+            "balance": 1
+        },
+        {
+            "itemId": 169,
+            "balance": 1
+        },
+        {
+            "itemId": 170,
+            "balance": 1
+        },
+        {
+            "itemId": 171,
+            "balance": 1
+        },
+        {
+            "itemId": 172,
+            "balance": 1
+        },
+        {
+            "itemId": 173,
+            "balance": 1
+        },
+        {
+            "itemId": 174,
+            "balance": 1
+        },
+        {
+            "itemId": 175,
+            "balance": 1
+        },
+        {
+            "itemId": 176,
+            "balance": 1
+        },
+        {
+            "itemId": 177,
+            "balance": 1
+        },
+        {
+            "itemId": 178,
+            "balance": 1
+        },
+        {
+            "itemId": 179,
+            "balance": 1
+        },
+        {
+            "itemId": 180,
+            "balance": 1
+        },
+        {
+            "itemId": 181,
+            "balance": 1
+        },
+        {
+            "itemId": 182,
+            "balance": 1
+        },
+        {
+            "itemId": 183,
+            "balance": 1
+        },
+        {
+            "itemId": 184,
+            "balance": 1
+        },
+        {
+            "itemId": 528,
+            "balance": 1
+        },
+        {
+            "itemId": 186,
+            "balance": 1
+        },
+        {
+            "itemId": 187,
+            "balance": 1
+        },
+        {
+            "itemId": 188,
+            "balance": 1
+        },
+        {
+            "itemId": 189,
+            "balance": 1
+        },
+        {
+            "itemId": 190,
+            "balance": 1
+        },
+        {
+            "itemId": 191,
+            "balance": 1
+        },
+        {
+            "itemId": 192,
+            "balance": 1
+        },
+        {
+            "itemId": 193,
+            "balance": 1
+        },
+        {
+            "itemId": 194,
+            "balance": 1
+        },
+        {
+            "itemId": 195,
+            "balance": 1
+        },
+        {
+            "itemId": 196,
+            "balance": 1
+        },
+        {
+            "itemId": 197,
+            "balance": 1
+        },
+        {
+            "itemId": 198,
+            "balance": 1
+        },
+        {
+            "itemId": 199,
+            "balance": 1
+        },
+        {
+            "itemId": 200,
+            "balance": 1
+        },
+        {
+            "itemId": 201,
+            "balance": 1
+        },
+        {
+            "itemId": 202,
+            "balance": 1
+        },
+        {
+            "itemId": 203,
+            "balance": 1
+        },
+        {
+            "itemId": 204,
+            "balance": 1
+        },
+        {
+            "itemId": 205,
+            "balance": 1
+        },
+        {
+            "itemId": 206,
+            "balance": 1
+        },
+        {
+            "itemId": 207,
+            "balance": 1
+        },
+        {
+            "itemId": 208,
+            "balance": 1
+        },
+        {
+            "itemId": 209,
+            "balance": 1
+        },
+        {
+            "itemId": 210,
+            "balance": 1
+        },
+        {
+            "itemId": 211,
+            "balance": 1
+        },
+        {
+            "itemId": 212,
+            "balance": 1
+        },
+        {
+            "itemId": 213,
+            "balance": 1
+        },
+        {
+            "itemId": 214,
+            "balance": 1
+        },
+        {
+            "itemId": 215,
+            "balance": 1
+        },
+        {
+            "itemId": 216,
+            "balance": 1
+        },
+        {
+            "itemId": 217,
+            "balance": 1
+        },
+        {
+            "itemId": 218,
+            "balance": 1
+        },
+        {
+            "itemId": 219,
+            "balance": 1
+        },
+        {
+            "itemId": 220,
+            "balance": 1
+        },
+        {
+            "itemId": 221,
+            "balance": 1
+        },
+        {
+            "itemId": 222,
+            "balance": 1
+        },
+        {
+            "itemId": 223,
+            "balance": 1
+        },
+        {
+            "itemId": 224,
+            "balance": 1
+        },
+        {
+            "itemId": 225,
+            "balance": 1
+        },
+        {
+            "itemId": 226,
+            "balance": 1
+        },
+        {
+            "itemId": 227,
+            "balance": 1
+        },
+        {
+            "itemId": 228,
+            "balance": 1
+        },
+        {
+            "itemId": 229,
+            "balance": 1
+        },
+        {
+            "itemId": 230,
+            "balance": 1
+        },
+        {
+            "itemId": 527,
+            "balance": 1
+        },
+        {
+            "itemId": 232,
+            "balance": 1
+        },
+        {
+            "itemId": 233,
+            "balance": 1
+        },
+        {
+            "itemId": 234,
+            "balance": 1
+        },
+        {
+            "itemId": 235,
+            "balance": 1
+        },
+        {
+            "itemId": 236,
+            "balance": 1
+        },
+        {
+            "itemId": 237,
+            "balance": 1
+        },
+        {
+            "itemId": 238,
+            "balance": 1
+        },
+        {
+            "itemId": 239,
+            "balance": 1
+        },
+        {
+            "itemId": 240,
+            "balance": 1
+        },
+        {
+            "itemId": 241,
+            "balance": 1
+        },
+        {
+            "itemId": 242,
+            "balance": 1
+        },
+        {
+            "itemId": 243,
+            "balance": 1
+        },
+        {
+            "itemId": 244,
+            "balance": 1
+        },
+        {
+            "itemId": 245,
+            "balance": 1
+        },
+        {
+            "itemId": 246,
+            "balance": 1
+        },
+        {
+            "itemId": 247,
+            "balance": 1
+        },
+        {
+            "itemId": 248,
+            "balance": 1
+        },
+        {
+            "itemId": 249,
+            "balance": 1
+        },
+        {
+            "itemId": 250,
+            "balance": 1
+        },
+        {
+            "itemId": 251,
+            "balance": 1
+        },
+        {
+            "itemId": 252,
+            "balance": 1
+        },
+        {
+            "itemId": 253,
+            "balance": 1
+        },
+        {
+            "itemId": 254,
+            "balance": 1
+        },
+        {
+            "itemId": 255,
+            "balance": 1
+        },
+        {
+            "itemId": 256,
+            "balance": 1
+        },
+        {
+            "itemId": 257,
+            "balance": 1
+        },
+        {
+            "itemId": 258,
+            "balance": 1
+        },
+        {
+            "itemId": 259,
+            "balance": 1
+        },
+        {
+            "itemId": 260,
+            "balance": 1
+        },
+        {
+            "itemId": 261,
+            "balance": 1
+        },
+        {
+            "itemId": 262,
+            "balance": 1
+        },
+        {
+            "itemId": 263,
+            "balance": 1
+        },
+        {
+            "itemId": 264,
+            "balance": 1
+        },
+        {
+            "itemId": 265,
+            "balance": 1
+        },
+        {
+            "itemId": 266,
+            "balance": 1
+        },
+        {
+            "itemId": 267,
+            "balance": 1
+        },
+        {
+            "itemId": 268,
+            "balance": 1
+        },
+        {
+            "itemId": 269,
+            "balance": 1
+        },
+        {
+            "itemId": 270,
+            "balance": 1
+        },
+        {
+            "itemId": 271,
+            "balance": 1
+        },
+        {
+            "itemId": 272,
+            "balance": 1
+        },
+        {
+            "itemId": 273,
+            "balance": 1
+        },
+        {
+            "itemId": 274,
+            "balance": 1
+        },
+        {
+            "itemId": 275,
+            "balance": 1
+        },
+        {
+            "itemId": 276,
+            "balance": 1
+        },
+        {
+            "itemId": 277,
+            "balance": 1
+        },
+        {
+            "itemId": 278,
+            "balance": 1
+        },
+        {
+            "itemId": 279,
+            "balance": 1
+        },
+        {
+            "itemId": 280,
+            "balance": 1
+        },
+        {
+            "itemId": 281,
+            "balance": 1
+        },
+        {
+            "itemId": 282,
+            "balance": 1
+        },
+        {
+            "itemId": 283,
+            "balance": 1
+        },
+        {
+            "itemId": 284,
+            "balance": 1
+        },
+        {
+            "itemId": 285,
+            "balance": 1
+        },
+        {
+            "itemId": 286,
+            "balance": 1
+        },
+        {
+            "itemId": 287,
+            "balance": 1
+        },
+        {
+            "itemId": 288,
+            "balance": 1
+        },
+        {
+            "itemId": 289,
+            "balance": 1
+        },
+        {
+            "itemId": 290,
+            "balance": 1
+        },
+        {
+            "itemId": 291,
+            "balance": 1
+        },
+        {
+            "itemId": 292,
+            "balance": 1
+        },
+        {
+            "itemId": 293,
+            "balance": 1
+        },
+        {
+            "itemId": 294,
+            "balance": 1
+        },
+        {
+            "itemId": 295,
+            "balance": 1
+        },
+        {
+            "itemId": 296,
+            "balance": 1
+        },
+        {
+            "itemId": 297,
+            "balance": 1
+        },
+        {
+            "itemId": 298,
+            "balance": 1
+        },
+        {
+            "itemId": 299,
+            "balance": 1
+        },
+        {
+            "itemId": 300,
+            "balance": 1
+        },
+        {
+            "itemId": 301,
+            "balance": 1
+        },
+        {
+            "itemId": 302,
+            "balance": 1
+        },
+        {
+            "itemId": 303,
+            "balance": 1
+        },
+        {
+            "itemId": 304,
+            "balance": 1
+        },
+        {
+            "itemId": 305,
+            "balance": 1
+        },
+        {
+            "itemId": 306,
+            "balance": 1
+        },
+        {
+            "itemId": 307,
+            "balance": 1
+        },
+        {
+            "itemId": 308,
+            "balance": 1
+        },
+        {
+            "itemId": 309,
+            "balance": 1
+        },
+        {
+            "itemId": 310,
+            "balance": 1
+        },
+        {
+            "itemId": 311,
+            "balance": 1
+        },
+        {
+            "itemId": 312,
+            "balance": 1
+        },
+        {
+            "itemId": 313,
+            "balance": 1
+        },
+        {
+            "itemId": 314,
+            "balance": 1
+        },
+        {
+            "itemId": 315,
+            "balance": 1
+        },
+        {
+            "itemId": 316,
+            "balance": 1
+        },
+        {
+            "itemId": 317,
+            "balance": 1
+        },
+        {
+            "itemId": 318,
+            "balance": 1
+        },
+        {
+            "itemId": 319,
+            "balance": 1
+        },
+        {
+            "itemId": 320,
+            "balance": 1
+        },
+        {
+            "itemId": 321,
+            "balance": 1
+        },
+        {
+            "itemId": 322,
+            "balance": 1
+        },
+        {
+            "itemId": 323,
+            "balance": 1
+        },
+        {
+            "itemId": 324,
+            "balance": 1
+        },
+        {
+            "itemId": 325,
+            "balance": 1
+        },
+        {
+            "itemId": 326,
+            "balance": 1
+        },
+        {
+            "itemId": 327,
+            "balance": 1
+        },
+        {
+            "itemId": 534,
+            "balance": 1
+        },
+        {
+            "itemId": 329,
+            "balance": 1
+        },
+        {
+            "itemId": 330,
+            "balance": 1
+        },
+        {
+            "itemId": 331,
+            "balance": 1
+        },
+        {
+            "itemId": 332,
+            "balance": 1
+        },
+        {
+            "itemId": 333,
+            "balance": 1
+        },
+        {
+            "itemId": 334,
+            "balance": 1
+        },
+        {
+            "itemId": 335,
+            "balance": 1
+        },
+        {
+            "itemId": 336,
+            "balance": 1
+        },
+        {
+            "itemId": 337,
+            "balance": 1
+        },
+        {
+            "itemId": 338,
+            "balance": 1
+        },
+        {
+            "itemId": 339,
+            "balance": 1
+        },
+        {
+            "itemId": 340,
+            "balance": 1
+        },
+        {
+            "itemId": 341,
+            "balance": 1
+        },
+        {
+            "itemId": 342,
+            "balance": 1
+        },
+        {
+            "itemId": 343,
+            "balance": 1
+        },
+        {
+            "itemId": 344,
+            "balance": 1
+        },
+        {
+            "itemId": 345,
+            "balance": 1
+        },
+        {
+            "itemId": 526,
+            "balance": 1
+        },
+        {
+            "itemId": 347,
+            "balance": 1
+        },
+        {
+            "itemId": 348,
+            "balance": 1
+        },
+        {
+            "itemId": 349,
+            "balance": 1
+        },
+        {
+            "itemId": 350,
+            "balance": 1
+        },
+        {
+            "itemId": 351,
+            "balance": 1
+        },
+        {
+            "itemId": 352,
+            "balance": 1
+        },
+        {
+            "itemId": 353,
+            "balance": 1
+        },
+        {
+            "itemId": 354,
+            "balance": 1
+        },
+        {
+            "itemId": 355,
+            "balance": 1
+        },
+        {
+            "itemId": 356,
+            "balance": 1
+        },
+        {
+            "itemId": 357,
+            "balance": 1
+        },
+        {
+            "itemId": 358,
+            "balance": 1
+        },
+        {
+            "itemId": 359,
+            "balance": 1
+        },
+        {
+            "itemId": 360,
+            "balance": 1
+        },
+        {
+            "itemId": 361,
+            "balance": 1
+        },
+        {
+            "itemId": 362,
+            "balance": 1
+        },
+        {
+            "itemId": 363,
+            "balance": 1
+        },
+        {
+            "itemId": 364,
+            "balance": 1
+        },
+        {
+            "itemId": 365,
+            "balance": 1
+        },
+        {
+            "itemId": 366,
+            "balance": 1
+        },
+        {
+            "itemId": 367,
+            "balance": 1
+        },
+        {
+            "itemId": 368,
+            "balance": 1
+        },
+        {
+            "itemId": 369,
+            "balance": 1
+        },
+        {
+            "itemId": 370,
+            "balance": 1
+        },
+        {
+            "itemId": 371,
+            "balance": 1
+        },
+        {
+            "itemId": 372,
+            "balance": 1
+        },
+        {
+            "itemId": 373,
+            "balance": 1
+        },
+        {
+            "itemId": 374,
+            "balance": 1
+        },
+        {
+            "itemId": 375,
+            "balance": 1
+        },
+        {
+            "itemId": 376,
+            "balance": 1
+        },
+        {
+            "itemId": 377,
+            "balance": 1
+        },
+        {
+            "itemId": 378,
+            "balance": 1
+        },
+        {
+            "itemId": 379,
+            "balance": 1
+        },
+        {
+            "itemId": 380,
+            "balance": 1
+        },
+        {
+            "itemId": 381,
+            "balance": 1
+        },
+        {
+            "itemId": 382,
+            "balance": 1
+        },
+        {
+            "itemId": 383,
+            "balance": 1
+        },
+        {
+            "itemId": 384,
+            "balance": 1
+        },
+        {
+            "itemId": 385,
+            "balance": 1
+        },
+        {
+            "itemId": 386,
+            "balance": 1
+        },
+        {
+            "itemId": 387,
+            "balance": 1
+        },
+        {
+            "itemId": 388,
+            "balance": 1
+        },
+        {
+            "itemId": 389,
+            "balance": 1
+        },
+        {
+            "itemId": 390,
+            "balance": 1
+        },
+        {
+            "itemId": 391,
+            "balance": 1
+        },
+        {
+            "itemId": 392,
+            "balance": 1
+        },
+        {
+            "itemId": 393,
+            "balance": 1
+        },
+        {
+            "itemId": 394,
+            "balance": 1
+        },
+        {
+            "itemId": 395,
+            "balance": 1
+        },
+        {
+            "itemId": 396,
+            "balance": 1
+        },
+        {
+            "itemId": 397,
+            "balance": 1
+        },
+        {
+            "itemId": 398,
+            "balance": 1
+        },
+        {
+            "itemId": 399,
+            "balance": 1
+        },
+        {
+            "itemId": 400,
+            "balance": 1
+        },
+        {
+            "itemId": 401,
+            "balance": 1
+        },
+        {
+            "itemId": 402,
+            "balance": 1
+        },
+        {
+            "itemId": 403,
+            "balance": 1
+        },
+        {
+            "itemId": 404,
+            "balance": 1
+        },
+        {
+            "itemId": 405,
+            "balance": 1
+        },
+        {
+            "itemId": 406,
+            "balance": 1
+        },
+        {
+            "itemId": 407,
+            "balance": 1
+        },
+        {
+            "itemId": 408,
+            "balance": 1
+        },
+        {
+            "itemId": 409,
+            "balance": 1
+        },
+        {
+            "itemId": 410,
+            "balance": 1
+        },
+        {
+            "itemId": 411,
+            "balance": 1
+        },
+        {
+            "itemId": 412,
+            "balance": 1
+        },
+        {
+            "itemId": 413,
+            "balance": 1
+        },
+        {
+            "itemId": 414,
+            "balance": 1
+        },
+        {
+            "itemId": 415,
+            "balance": 1
+        },
+        {
+            "itemId": 416,
+            "balance": 1
+        },
+        {
+            "itemId": 417,
+            "balance": 1
+        },
+        {
+            "itemId": 418,
+            "balance": 1
+        },
+        {
+            "itemId": 419,
+            "balance": 1
+        },
+        {
+            "itemId": 420,
+            "balance": 1
+        },
+        {
+            "itemId": 421,
+            "balance": 1
+        },
+        {
+            "itemId": 422,
+            "balance": 1
+        },
+        {
+            "itemId": 423,
+            "balance": 1
+        },
+        {
+            "itemId": 424,
+            "balance": 1
+        },
+        {
+            "itemId": 425,
+            "balance": 1
+        },
+        {
+            "itemId": 426,
+            "balance": 1
+        },
+        {
+            "itemId": 427,
+            "balance": 1
+        },
+        {
+            "itemId": 428,
+            "balance": 1
+        },
+        {
+            "itemId": 429,
+            "balance": 1
+        },
+        {
+            "itemId": 430,
+            "balance": 1
+        },
+        {
+            "itemId": 431,
+            "balance": 1
+        },
+        {
+            "itemId": 432,
+            "balance": 1
+        },
+        {
+            "itemId": 433,
+            "balance": 1
+        },
+        {
+            "itemId": 434,
+            "balance": 1
+        },
+        {
+            "itemId": 435,
+            "balance": 1
+        },
+        {
+            "itemId": 436,
+            "balance": 1
+        },
+        {
+            "itemId": 437,
+            "balance": 1
+        },
+        {
+            "itemId": 438,
+            "balance": 1
+        },
+        {
+            "itemId": 439,
+            "balance": 1
+        },
+        {
+            "itemId": 440,
+            "balance": 1
+        },
+        {
+            "itemId": 441,
+            "balance": 1
+        },
+        {
+            "itemId": 442,
+            "balance": 1
+        },
+        {
+            "itemId": 443,
+            "balance": 1
+        },
+        {
+            "itemId": 533,
+            "balance": 1
+        },
+        {
+            "itemId": 532,
+            "balance": 1
+        },
+        {
+            "itemId": 446,
+            "balance": 1
+        },
+        {
+            "itemId": 447,
+            "balance": 1
+        },
+        {
+            "itemId": 448,
+            "balance": 1
+        },
+        {
+            "itemId": 449,
+            "balance": 1
+        },
+        {
+            "itemId": 450,
+            "balance": 1
+        },
+        {
+            "itemId": 451,
+            "balance": 1
+        },
+        {
+            "itemId": 452,
+            "balance": 1
+        },
+        {
+            "itemId": 453,
+            "balance": 1
+        },
+        {
+            "itemId": 454,
+            "balance": 1
+        },
+        {
+            "itemId": 455,
+            "balance": 1
+        },
+        {
+            "itemId": 456,
+            "balance": 1
+        },
+        {
+            "itemId": 457,
+            "balance": 1
+        },
+        {
+            "itemId": 458,
+            "balance": 1
+        },
+        {
+            "itemId": 459,
+            "balance": 1
+        },
+        {
+            "itemId": 460,
+            "balance": 1
+        },
+        {
+            "itemId": 461,
+            "balance": 1
+        },
+        {
+            "itemId": 462,
+            "balance": 1
+        },
+        {
+            "itemId": 463,
+            "balance": 1
+        },
+        {
+            "itemId": 524,
+            "balance": 1
+        },
+        {
+            "itemId": 465,
+            "balance": 1
+        },
+        {
+            "itemId": 466,
+            "balance": 1
+        },
+        {
+            "itemId": 467,
+            "balance": 1
+        },
+        {
+            "itemId": 468,
+            "balance": 1
+        },
+        {
+            "itemId": 469,
+            "balance": 1
+        },
+        {
+            "itemId": 470,
+            "balance": 1
+        },
+        {
+            "itemId": 471,
+            "balance": 1
+        },
+        {
+            "itemId": 472,
+            "balance": 1
+        },
+        {
+            "itemId": 473,
+            "balance": 1
+        },
+        {
+            "itemId": 474,
+            "balance": 1
+        },
+        {
+            "itemId": 475,
+            "balance": 1
+        },
+        {
+            "itemId": 476,
+            "balance": 1
+        },
+        {
+            "itemId": 477,
+            "balance": 1
+        },
+        {
+            "itemId": 478,
+            "balance": 1
+        },
+        {
+            "itemId": 479,
+            "balance": 1
+        },
+        {
+            "itemId": 480,
+            "balance": 1
+        },
+        {
+            "itemId": 481,
+            "balance": 1
+        },
+        {
+            "itemId": 482,
+            "balance": 1
+        },
+        {
+            "itemId": 483,
+            "balance": 1
+        },
+        {
+            "itemId": 484,
+            "balance": 1
+        },
+        {
+            "itemId": 485,
+            "balance": 1
+        },
+        {
+            "itemId": 486,
+            "balance": 1
+        },
+        {
+            "itemId": 487,
+            "balance": 1
+        },
+        {
+            "itemId": 488,
+            "balance": 1
+        },
+        {
+            "itemId": 489,
+            "balance": 1
+        },
+        {
+            "itemId": 490,
+            "balance": 1
+        },
+        {
+            "itemId": 491,
+            "balance": 1
+        },
+        {
+            "itemId": 492,
+            "balance": 1
+        },
+        {
+            "itemId": 493,
+            "balance": 1
+        },
+        {
+            "itemId": 494,
+            "balance": 1
+        },
+        {
+            "itemId": 495,
+            "balance": 1
+        },
+        {
+            "itemId": 496,
+            "balance": 1
+        },
+        {
+            "itemId": 497,
+            "balance": 1
+        },
+        {
+            "itemId": 498,
+            "balance": 1
+        },
+        {
+            "itemId": 499,
+            "balance": 1
+        },
+        {
+            "itemId": 500,
+            "balance": 1
+        },
+        {
+            "itemId": 501,
+            "balance": 1
+        },
+        {
+            "itemId": 502,
+            "balance": 1
+        },
+        {
+            "itemId": 503,
+            "balance": 1
+        },
+        {
+            "itemId": 504,
+            "balance": 1
+        },
+        {
+            "itemId": 505,
+            "balance": 1
+        },
+        {
+            "itemId": 506,
+            "balance": 1
+        },
+        {
+            "itemId": 507,
+            "balance": 1
+        },
+        {
+            "itemId": 508,
+            "balance": 1
+        },
+        {
+            "itemId": 509,
+            "balance": 1
+        },
+        {
+            "itemId": 510,
+            "balance": 1
+        },
+        {
+            "itemId": 511,
+            "balance": 1
+        },
+        {
+            "itemId": 512,
+            "balance": 1
+        },
+        {
+            "itemId": 513,
+            "balance": 1
+        },
+        {
+            "itemId": 514,
+            "balance": 1
+        },
+        {
+            "itemId": 515,
+            "balance": 1
+        },
+        {
+            "itemId": 516,
+            "balance": 1
+        },
+        {
+            "itemId": 517,
+            "balance": 1
+        },
+        {
+            "itemId": 518,
+            "balance": 1
+        },
+        {
+            "itemId": 519,
+            "balance": 1
+        },
+        {
+            "itemId": 520,
+            "balance": 1
+        },
+        {
+            "itemId": 521,
+            "balance": 1
+        },
+        {
+            "itemId": 522,
+            "balance": 1
+        }
+    ],
+    "inventorySlots": [
+        {
+            "id": 1,
+            "permanent": true,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 530
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 531
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 532
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 533
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 534
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 118
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 119
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 120
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 121
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 122
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 123
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 124
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 125
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 126
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 127
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 128
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 129
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 130
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 131
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 132
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 133
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 134
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 135
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 136
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 137
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 138
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 139
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 140
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 141
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 328
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 329
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 330
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 331
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 332
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 333
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 334
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 335
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 336
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 337
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 338
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 339
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 340
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 341
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 342
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 343
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 344
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 345
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 444
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 445
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 446
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 447
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 448
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 449
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 450
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 451
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 452
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 453
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 454
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 455
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 456
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 457
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 458
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 459
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 460
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 461
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 462
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 463
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "permanent": false,
+            "category": 0,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 535
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 536
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 142
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 143
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 144
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 145
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 146
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 147
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 148
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 149
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 150
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 151
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 152
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 153
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 154
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 155
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 156
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 157
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 158
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 159
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 160
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 161
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 162
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 163
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 164
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 165
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 166
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 167
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 168
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 169
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 170
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 171
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 172
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 173
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 174
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 175
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 176
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 177
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 178
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 179
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 180
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 181
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 182
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 183
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 184
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 17
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 18
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 19
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 20
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 21
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 22
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 23
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 24
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 25
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 26
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 27
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 28
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 29
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 30
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 31
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 32
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 33
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 34
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 35
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 36
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 37
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 38
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 39
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 40
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 41
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 42
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 43
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 44
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 45
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 185
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 186
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 187
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 188
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 189
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 190
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 191
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 192
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 193
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 194
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 195
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 196
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 197
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 198
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 199
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 200
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 201
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 202
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 203
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 204
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 205
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 206
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 207
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 208
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 209
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 210
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 211
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 212
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 213
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 214
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 215
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 216
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 217
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 218
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 219
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 220
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 221
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 222
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 223
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 224
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 225
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 226
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 227
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 228
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 229
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 230
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 231
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 232
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 233
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 234
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 235
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 236
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 237
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 238
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 239
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 240
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 241
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 242
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 243
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 244
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 245
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 246
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 247
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 248
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 249
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 250
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 251
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 252
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 253
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 254
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 255
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 256
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 257
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 258
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 259
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 260
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 261
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 262
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 263
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 264
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 265
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 266
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 267
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 268
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 269
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 270
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 271
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 272
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 273
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 274
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 275
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 276
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 277
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 278
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 279
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 280
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 281
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 282
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 283
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 284
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 285
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 286
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 287
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 288
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 289
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 290
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 291
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 292
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 293
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 294
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 295
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 296
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 297
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 298
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 299
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 300
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 301
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 302
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 303
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 304
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 305
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 306
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 307
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 308
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 309
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 310
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 311
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 312
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 313
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 314
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 315
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 316
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 317
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 318
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 319
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 320
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 321
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 322
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 323
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 324
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 325
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 326
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 327
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 529
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 346
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 347
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 348
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 349
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 350
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 351
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 352
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 353
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 354
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 355
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 356
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 357
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 358
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 359
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 360
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 361
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 362
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 363
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 364
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 365
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 366
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 367
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 368
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 369
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 370
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 371
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 372
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 373
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 374
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 375
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 376
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 377
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 378
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 379
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 380
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 381
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 382
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 383
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 384
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 385
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 386
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 387
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 388
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 389
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 390
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 391
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 392
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 393
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 394
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 395
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 396
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 397
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 398
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 399
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 400
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 401
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 402
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 403
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 404
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 405
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 406
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 407
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 408
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 409
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 410
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 411
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 412
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 413
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 414
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 415
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 416
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 417
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 418
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 419
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 420
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 421
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 422
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 423
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 424
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 425
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 426
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 427
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 428
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 429
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 430
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 431
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 432
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 433
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 434
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 435
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 436
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 437
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 438
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 439
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 440
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 441
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 442
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 443
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 46
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 47
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 48
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 49
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 50
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 51
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 52
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 53
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 54
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 55
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 56
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 57
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 58
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 59
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 60
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 61
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 62
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 63
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 64
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 65
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 66
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 67
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 68
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 69
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 70
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 71
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 72
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 73
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 74
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 75
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 76
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 77
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 78
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 79
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 80
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 81
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 82
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 83
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 84
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 85
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 86
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 87
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 88
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 89
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 90
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 91
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 92
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 93
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 94
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 95
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 96
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 97
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 98
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 99
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 100
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 101
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 102
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 103
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 104
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 105
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 106
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 107
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 108
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 109
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 110
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 111
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 112
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 113
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 114
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 115
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 116
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 117
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "permanent": false,
+            "category": 1,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 464
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 465
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 466
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 467
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 468
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 469
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 470
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 471
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 472
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 473
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 474
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 475
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 476
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 477
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 478
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 479
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 480
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 481
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 482
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 483
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 484
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 485
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 486
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 487
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 488
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 489
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 490
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 491
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 492
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 493
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 494
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 495
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 496
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 497
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 498
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 499
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 500
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 501
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 502
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 503
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 504
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 505
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 506
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 507
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 508
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 509
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 510
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 511
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 512
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 513
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 514
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 515
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 516
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 517
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 518
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 519
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 520
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 521
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 522
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 523
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 524
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 525
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 526
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 527
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 528
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "permanent": false,
+            "category": 2,
+            "allowedItems": [
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 1
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 2
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 3
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 4
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 5
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 6
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 7
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 8
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 9
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 10
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 11
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 12
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 13
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 14
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 15
+                },
+                {
+                    "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                    "id": 16
+                }
+            ]
+        }
+    ],
+    "equippedArcadians": {
+        "1": [
+            {
+                "slotSc": 1,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 530
+            },
+            {
+                "slotSc": 2,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 118
+            },
+            {
+                "slotSc": 3,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 328
+            },
+            {
+                "slotSc": 4,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 444
+            },
+            {
+                "slotSc": 5,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 445
+            },
+            {
+                "slotSc": 6,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 535
+            },
+            {
+                "slotSc": 7,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 142
+            },
+            {
+                "slotSc": 8,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 17
+            },
+            {
+                "slotSc": 9,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 185
+            },
+            {
+                "slotSc": 10,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 231
+            },
+            {
+                "slotSc": 11,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 346
+            },
+            {
+                "slotSc": 12,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 46
+            },
+            {
+                "slotSc": 13,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 464
+            },
+            {
+                "slotSc": 14,
+                "erc721Contract": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+                "itemId": 1
+            }
+        ]
+    }
 }

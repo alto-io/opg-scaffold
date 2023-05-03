@@ -2,19 +2,7 @@
 import hre, { ethers } from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
 import { ItemInSlot } from "./6_fetchDataSC";
-
-enum SlotCategory { Base, Equippment, Cosmetic}
-interface Slot {
-    id?: number,
-    permanent: boolean,
-    category: SlotCategory,
-    allowedItems?: number[]
-}
-
-interface Item {
-    erc721Contract: string,
-    id: number
-}
+import { Slot, SlotCategory } from "./0_formatLocalData";
 
 async function main() {
 
