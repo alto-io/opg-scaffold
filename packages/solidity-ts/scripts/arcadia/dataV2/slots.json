@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Class",
-        "category": 0,
+        "isBase": false,
         "permanent": true,
         "allowedItems": [
             530,
@@ -15,7 +15,7 @@
     {
         "id": 2,
         "name": "Eyes",
-        "category": 0,
+        "isBase": true,
         "permanent": false,
         "allowedItems": [
             118,
@@ -47,7 +47,7 @@
     {
         "id": 3,
         "name": "Mouth",
-        "category": 0,
+        "isBase": true,
         "permanent": false,
         "allowedItems": [
             328,
@@ -73,7 +73,7 @@
     {
         "id": 4,
         "name": "Shadow",
-        "category": 2,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             444
@@ -82,7 +82,7 @@
     {
         "id": 5,
         "name": "Skin",
-        "category": 0,
+        "isBase": true,
         "permanent": false,
         "allowedItems": [
             445,
@@ -109,7 +109,7 @@
     {
         "id": 6,
         "name": "Gender",
-        "category": 0,
+        "isBase": true,
         "permanent": false,
         "allowedItems": [
             535,
@@ -119,7 +119,7 @@
     {
         "id": 7,
         "name": "Hairstyle",
-        "category": 0,
+        "isBase": true,
         "permanent": false,
         "allowedItems": [
             142,
@@ -170,7 +170,7 @@
     {
         "id": 8,
         "name": "Background",
-        "category": 2,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             17,
@@ -207,7 +207,7 @@
     {
         "id": 9,
         "name": "Headgear",
-        "category": 1,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             185,
@@ -261,7 +261,7 @@
     {
         "id": 10,
         "name": "Left Hand",
-        "category": 1,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             231,
@@ -367,7 +367,7 @@
     {
         "id": 11,
         "name": "Right Hand",
-        "category": 1,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             346,
@@ -473,7 +473,7 @@
     {
         "id": 12,
         "name": "Bottom",
-        "category": 1,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             46,
@@ -553,7 +553,7 @@
     {
         "id": 13,
         "name": "Top",
-        "category": 1,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             464,
@@ -626,7 +626,7 @@
     {
         "id": 14,
         "name": "Accessory",
-        "category": 2,
+        "isBase": false,
         "permanent": false,
         "allowedItems": [
             1,
