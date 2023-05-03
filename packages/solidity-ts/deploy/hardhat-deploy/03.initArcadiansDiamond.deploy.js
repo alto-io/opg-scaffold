@@ -7,8 +7,8 @@ import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/librari
 
 // Diamond init params
 export const baseArcadianURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
-export const maxMintPerUser = 3;
-export const mintPrice = 2;
+export const maxMintPerUser = 2;
+export const mintPrice = 0;
 
 export const func = async() => {
     const diamond = await hre.ethers.getContract(arcadiansDiamondName);

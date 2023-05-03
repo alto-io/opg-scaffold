@@ -56,7 +56,7 @@ export default async function deployAndInitContractsFixture() {
     // Init arcadians contract
     const arcadiansParams = { 
         baseTokenUri: baseArcadianURI, 
-        maxMintPerUser: 3,
+        maxMintPerUser: 2,
         mintPrice: 10
     }
     let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', [arcadiansParams.baseTokenUri, arcadiansParams.maxMintPerUser, arcadiansParams.mintPrice])
