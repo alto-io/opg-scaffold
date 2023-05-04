@@ -27,12 +27,14 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     function _claimMerkle(address to, uint itemId, uint amount, bytes32[] memory proof)
         internal
     {
+        if (itemId < 1) revert Items_InvalidItemId();
+
         ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
 
         bytes memory leaf = abi.encode(to, itemId, amount);
         _consumeLeaf(proof, leaf);
 
-        _mint(to, itemId, amount);
+        ERC1155BaseInternal._mint(to, itemId, amount, "");
 
         itemsSL.amountClaimed[to][itemId] += amount;
         emit ItemClaimedMerkle(to, itemId, amount);
@@ -53,9 +55,13 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         if (itemIds.length != amounts.length) 
             revert Items_InputsLengthMistatch();
 
+
         uint totalAmount = 0;
         for (uint i = 0; i < itemIds.length; i++) {
-            _mint(msg.sender, itemIds[i], amounts[i]);
+            if (itemIds[i] < 1) 
+                revert Items_InvalidItemId();
+
+            ERC1155BaseInternal._mint(msg.sender, itemIds[i], amounts[i], "");
             totalAmount += amounts[i];
         }
         _consumeWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender, totalAmount);
