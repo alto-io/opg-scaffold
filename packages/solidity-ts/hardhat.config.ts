@@ -17,6 +17,13 @@ const mumbaiConfig = {
     saveDeployments: true,
     tags: ["mumbai", "test"]
   }
+const mainnetNetworkConfig = {
+    url: nodeUrl("polygon-mainnet"),
+    // gasPrice: 60000000000,
+    // timeout: 500000,
+    accounts: [process.env.DEPLOYER_PK as string],
+    tags: ["polygon", "production"]
+}
 
 export const config: HardhatUserConfig = {
   preprocess: {
@@ -40,6 +47,7 @@ export const config: HardhatUserConfig = {
         url: 'http://localhost:8545',
       },
       mumbai: mumbaiConfig,
+      production: mainnetNetworkConfig,
   },
   solidity: {
     compilers: [
