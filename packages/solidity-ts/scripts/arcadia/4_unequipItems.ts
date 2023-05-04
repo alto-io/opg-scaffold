@@ -2,7 +2,7 @@
 import hre, { ethers } from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
 import { ItemInSlot } from "./6_fetchDataSC";
-import { Slot, SlotCategory } from "./0_formatLocalData";
+import { Slot } from "./0_formatLocalData";
 
 async function main() {
 
@@ -20,7 +20,7 @@ async function main() {
         const slotId = slotsIds[i];
         const slot = slotsAll.find((s)=> Number(s.id) == Number(slotId));
         
-        if (slot && !slot.permanent && slot.category != SlotCategory.Base) {
+        if (slot && !slot.permanent && !slot.isBase) {
             slotsIdsToUnequip.push(Number(slot.id));
         }
     }

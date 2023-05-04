@@ -56,7 +56,7 @@ contract InventoryInternal is
         address indexed by,
         uint slotId,
         bool permanent,
-        InventoryStorage.SlotCategory category
+        bool isBase
     );
 
     event BaseModifierCouponAdded(
@@ -111,7 +111,7 @@ contract InventoryInternal is
         uint[] memory slotsIds = new uint[](items.length);
         for (uint i = 0; i < items.length; i++) {
             uint slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
-            if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+            if (inventorySL.slots[slotId].isBase) {
                 numBaseSlotsModified++;
             }
             slotsIds[i] = slotId;
@@ -129,7 +129,7 @@ contract InventoryInternal is
                 uint counter;
                 for (uint i = 0; i < items.length; i++) {
                     uint slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
-                    if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+                    if (inventorySL.slots[slotId].isBase) {
                         baseSlotsModified[counter] = slotId;
                         counter++;
                     }
@@ -153,7 +153,7 @@ contract InventoryInternal is
         if (slotId == 0 || slotId > InventoryStorage.layout().numSlots) 
             revert Inventory_ItemDoesNotHaveSlotAssigned();
         
-        if (!freeBaseModifier && inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base) {
+        if (!freeBaseModifier && inventorySL.slots[slotId].isBase) {
             if (inventorySL.baseModifierCoupon[msg.sender][slotId] < 1)
                 revert Inventory_CouponNeededToModifyBaseSlots();
 
@@ -186,9 +186,12 @@ contract InventoryInternal is
 
     function _baseSlotsEquipped(uint arcadianId) internal view returns (bool) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
-        for (uint i = 0; i < baseSlots.length(); i++) {
-            if (inventorySL.equippedItems[arcadianId][baseSlots.at(i)].erc721Contract == address(0)) {
+        uint numSlots = inventorySL.numSlots;
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            if (!inventorySL.slots[slotId].isBase)
+                continue;
+            if (inventorySL.slots[slotId].isBase && inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) {
                 return false;
             }
         }
@@ -225,7 +228,7 @@ contract InventoryInternal is
         if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) 
             revert Inventory_UnequippingEmptySlot();
         
-        if (inventorySL.slots[slotId].category == InventoryStorage.SlotCategory.Base)
+        if (inventorySL.slots[slotId].isBase)
             revert Inventory_UnequippingBaseSlot();
 
         _unequipUnchecked(arcadianId, slotId);
@@ -291,12 +294,14 @@ contract InventoryInternal is
     ) internal view returns (bool) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
+        uint numSlots = inventorySL.numSlots;
 
-        uint baseSlotsLength = baseSlots.length();
         bytes memory encodedItems;
-        for (uint i = 0; i < baseSlotsLength; i++) {
-            uint slotId = baseSlots.at(i);
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            if (!inventorySL.slots[slotId].isBase)
+                continue;
+
             InventoryStorage.Item memory item;
             for (uint j = 0; j < items.length; j++) {
                 if (_allowedSlot(items[j]) == slotId) {
@@ -322,18 +327,19 @@ contract InventoryInternal is
         uint arcadianId
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
         bytes memory encodedItems;
-        uint baseSlotsLength = baseSlots.length();
+        uint numSlots = inventorySL.numSlots;
 
-        for (uint i = 0; i < baseSlotsLength; i++) {
-            uint slotId = baseSlots.at(i);
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            if (!inventorySL.slots[slotId].isBase)
+                continue;
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
             encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.erc721Contract, equippedItem.id);
         }
 
         bytes32 baseItemsHash = keccak256(encodedItems);
-        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash) || baseSlotsLength == 0;
+        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash);
         inventorySL.baseItemsHashes.remove(inventorySL.arcadianToBaseItemHash[arcadianId]);
         inventorySL.baseItemsHashes.add(baseItemsHash);
         inventorySL.arcadianToBaseItemHash[arcadianId] = baseItemsHash;
@@ -341,7 +347,7 @@ contract InventoryInternal is
 
     function _createSlot(
         bool permanent,
-        InventoryStorage.SlotCategory category,
+        bool isBase,
         InventoryStorage.Item[] calldata allowedItems
     ) internal {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
@@ -350,14 +356,14 @@ contract InventoryInternal is
         inventorySL.numSlots += 1;
         uint newSlot = inventorySL.numSlots;
         inventorySL.slots[newSlot].permanent = permanent;
-        inventorySL.slots[newSlot].category = category;
+        inventorySL.slots[newSlot].isBase = isBase;
         inventorySL.slots[newSlot].id = newSlot;
 
         if (allowedItems.length > 0) {
             _allowItemsInSlot(newSlot, allowedItems);
         }
 
-        emit SlotCreated(msg.sender, newSlot, permanent, category);
+        emit SlotCreated(msg.sender, newSlot, permanent, isBase);
     }
 
     function _addBaseModifierCoupons(
@@ -374,7 +380,7 @@ contract InventoryInternal is
         for (uint i = 0; i < slotIds.length; i++) {
             if (slotIds[i] == 0 && slotIds[i] > numSlots) 
                 revert Inventory_InvalidSlotId();
-            if (inventorySL.slots[slotIds[i]].category != InventoryStorage.SlotCategory.Base) {
+            if (!inventorySL.slots[slotIds[i]].isBase) {
                 revert Inventory_NonBaseSlot();
             }
             InventoryStorage.layout().baseModifierCoupon[account][slotIds[i]] += amounts[i];
@@ -384,7 +390,7 @@ contract InventoryInternal is
     }
 
     function _getbaseModifierCoupon(address account, uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
-        if (InventoryStorage.layout().slots[slotId].category != InventoryStorage.SlotCategory.Base) {
+        if (!InventoryStorage.layout().slots[slotId].isBase) {
             revert Inventory_NonBaseSlot();
         }
         return InventoryStorage.layout().baseModifierCoupon[account][slotId];
@@ -392,11 +398,22 @@ contract InventoryInternal is
 
     function _getBaseModifierCouponAll(address account) internal view returns (BaseModifierCoupon[] memory) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        EnumerableSet.UintSet storage baseSlots = inventorySL.categoryToSlots[InventoryStorage.SlotCategory.Base];
-        uint baseSlotsLength = baseSlots.length();
-        BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseSlotsLength);
-        for (uint i = 0; i < baseSlotsLength; i++) {
-            uint slotId = baseSlots.at(i);
+
+        uint numSlots = inventorySL.numSlots;
+
+        uint baseCounter;
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            if (inventorySL.slots[slotId].isBase) {
+                baseCounter++;
+            }
+        }
+
+        BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseCounter);
+        for (uint i = 0; i < numSlots; i++) {
+            uint slotId = i + 1;
+            if (!inventorySL.slots[slotId].isBase)
+                continue;
             coupons[i].slotId = slotId;
             coupons[i].amount = inventorySL.baseModifierCoupon[account][slotId];
         }
@@ -423,8 +440,6 @@ contract InventoryInternal is
             inventorySL.allowedItems[slotId].push(items[i]);
             inventorySL.itemSlot[items[i].erc721Contract][items[i].id] = slotId;
         }
-
-        inventorySL.categoryToSlots[inventorySL.slots[slotId].category].add(slotId);
 
         emit ItemsAllowedInSlotUpdated(msg.sender, slotId);
     }

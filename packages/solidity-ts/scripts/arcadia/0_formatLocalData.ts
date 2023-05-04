@@ -4,7 +4,7 @@ import path from "path";
 
 export interface Slot {
     id: number,
-    name: string,
+    name?: string,
     permanent: boolean,
     isBase: boolean,
     allowedItems: number[]
