@@ -5,14 +5,9 @@ import fs from "fs";
 
 import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.ItemsDiamond.deploy';
-import { itemsMerklePaths } from '~helpers/merkle-tree/merkleGenerator';
 import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
-// Get merkle root previously generated
-export const merkleTree = JSON.parse(fs.readFileSync(itemsMerklePaths.outputMerkleTree).toString());
-
 // Diamond init params
-// export const merkleRoot = merkleTree.root.toString();
 export const merkleRoot = "0x81dc9bb909c953847a26cdab04b23eee53eb18b37ba7e547041d3d61077c03e8";
 export const baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
 
