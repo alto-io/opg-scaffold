@@ -38,7 +38,7 @@ async function main() {
     }
 
     let slotsAll: SlotSC[] = await inventorySC.slotsAll();
-    const slots: any[] = [];
+    const slots: Slot[] = [];
     for (const slot of slotsAll) {
         const allowedItems: ItemSC[] = [];
         const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
@@ -50,8 +50,8 @@ async function main() {
         slots.push({
             id: (slot.id as any).toNumber(),
             permanent: slot.permanent,
-            category: slot.category,
-            allowedItems: allowedItems
+            isBase: slot.isBase,
+            allowedItems: allowedItems.map((item)=>item.id)
         })
     }
 

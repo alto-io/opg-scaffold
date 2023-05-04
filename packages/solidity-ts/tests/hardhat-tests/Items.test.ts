@@ -18,10 +18,9 @@ export interface Item {
     id: number
 }
 
-export enum SlotCategory { Base, Equippment, Cosmetic }
 export interface Slot {
     permanent: boolean,
-    category: SlotCategory,
+    isBase: boolean,
     id: number,
     itemsIdsAllowed: number[]
 }
@@ -130,7 +129,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items
@@ -181,7 +180,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         expect(arcadianUri).to.be.equal(expectedUri);
         
         const nonBaseSlotsIds = slots.reduce((acc: number[], slot: Slot)=>{
-            if (slot.category != SlotCategory.Base) {
+            if (!slot.isBase) {
                 acc.push(slot.id);
             }
             return acc;
@@ -192,7 +191,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            const isBaseSlot = slots.find((slot)=>slot.id == equippedItems[i].slotId)?.category == SlotCategory.Base;
+            const isBaseSlot = slots.find((slot)=>slot.id == equippedItems[i].slotId)?.isBase;
             const item = items.find((item)=>item.id == equippedItems[i].itemId);
             expect(equippedItems[i].itemId).to.be.equal(isBaseSlot ? item?.id : 0);
             expect(equippedItems[i].erc721Contract).to.be.equal(isBaseSlot ? item?.erc721Contract : ethers.constants.AddressZero);
@@ -214,11 +213,11 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip);
 
         // re-equip base slots
-        const baseSlots = slots.filter((slot)=>slot.category == SlotCategory.Base && !slot.permanent);
+        const baseSlots = slots.filter((slot)=>slot.isBase && !slot.permanent);
         const baseSlotsIds = baseSlots.map((slot)=>slot.id);
         const couponsAmounts = baseSlots.map(()=>itemAmount);
         const itemsBaseSlots = baseSlots.map(slot=>items.find((item)=>item.id == slot.itemsIdsAllowed[1]));
-
+        
         await arcadiansContracts.inventoryFacet.addBaseModifierCoupons(bob.address, baseSlotsIds, couponsAmounts);
         // const baseModifierCouponAll = await arcadiansContracts.inventoryFacet.getBaseModifierCouponAll(bob.address);
 
@@ -242,11 +241,11 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // create slot
         const badItem : Item = {erc721Contract: bob.address, id: 2}
-        await expect(arcadiansContracts.inventoryFacet.createSlot(slots[0].permanent, slots[0].category, [badItem])).
+        await expect(arcadiansContracts.inventoryFacet.createSlot(slots[0].permanent, slots[0].isBase, [badItem])).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidERC1155Contract");
 
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items
@@ -297,12 +296,12 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
         
-        const nonBaseSlotsIds = slots.filter((slot)=>slot.category != SlotCategory.Base).map((slot)=>slot.id)
+        const nonBaseSlotsIds = slots.filter((slot)=>!slot.isBase).map((slot)=>slot.id)
         const permanentSlots = slots.filter((slot)=>slot.permanent)
         const permanentSlotsIds = permanentSlots.map((slot)=>slot.id)
         await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, [permanentSlots[0].id])).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingPermanentSlot")
-        const baseSlotsIds = slots.filter((slot)=>slot.category == SlotCategory.Base && !permanentSlotsIds.includes(slot.id)).map((slot)=>slot.id)
+        const baseSlotsIds = slots.filter((slot)=>slot.isBase && !permanentSlotsIds.includes(slot.id)).map((slot)=>slot.id)
         const nonPermanentBaseSlotsIds = baseSlotsIds.filter((slotId)=>!permanentSlotsIds.includes(slotId))
         await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonPermanentBaseSlotsIds)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingBaseSlot")

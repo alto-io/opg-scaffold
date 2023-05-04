@@ -19,8 +19,6 @@ library InventoryStorage {
     using EnumerableSet for EnumerableSet.UintSet;
     using EnumerableSet for EnumerableSet.Bytes32Set;
 
-    enum SlotCategory { Base, Equippment, Cosmetic }
-
     // Holds the information needed to identify an ERC1155 item
     struct Item {
         address erc721Contract;
@@ -31,7 +29,7 @@ library InventoryStorage {
     struct Slot {
         uint id;
         bool permanent;
-        SlotCategory category;
+        bool isBase;
     }
 
     struct Layout {
@@ -39,8 +37,6 @@ library InventoryStorage {
 
         // Slot id => Slot
         mapping(uint => Slot) slots;
-        // Slot category => List of slots
-        mapping(SlotCategory => EnumerableSet.UintSet) categoryToSlots;
 
         // arcadian id => slot id => Items equipped
         mapping(uint => mapping(uint => Item)) equippedItems;

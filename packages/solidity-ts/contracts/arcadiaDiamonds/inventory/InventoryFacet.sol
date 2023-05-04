@@ -65,15 +65,15 @@ contract InventoryFacet is
      * @dev This function is only accessible to the manager role
      * @dev Slots are 1-indexed
      * @param permanent Whether or not the slot can be unequipped once equipped
-     * @param category The category of the slot
+     * @param isBase If the slot is base
      * @param items The list of items to allow in the slot
      */
     function createSlot(
         bool permanent,
-        InventoryStorage.SlotCategory category,
+        bool isBase,
         InventoryStorage.Item[] calldata items
     ) external onlyManager {
-        _createSlot(permanent, category, items);
+        _createSlot(permanent, isBase, items);
     }
 
     /**
@@ -225,7 +225,7 @@ contract InventoryFacet is
     /**
      * @notice Indicates if a list of items applied to an the arcadian is unique
      * @dev The uniqueness is calculated using the existent arcadian items and the input items as well
-     * @dev Only items equipped in 'base' category slots are considered for uniqueness
+     * @dev Only items equipped in 'base' slots are considered for uniqueness
      * @param arcadianId The ID of the Arcadian NFT to query
      * @param items An array of items to check for uniqueness after "equipped" over the existent arcadian items.
      */

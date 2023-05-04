@@ -26,7 +26,7 @@ async function main() {
         if (!matchingSlot) {
             const allowedItems = slot.allowedItems.map((itemId):ItemSC=>({erc721Contract: itemsSC.address, id:itemId}))
             console.log("create slot: ", slot);
-            let tx = await inventorySC.createSlot(slot.permanent, slot.category, allowedItems);
+            let tx = await inventorySC.createSlot(slot.permanent, slot.isBase, allowedItems);
             await tx.wait();
         } else {
             const allowedItemsMissing = matchingSlot.allowedItems.filter((item: ItemSC)=>{
@@ -65,8 +65,8 @@ async function getAllSlots(inventorySC: ethers.Contract) {
         
         let slot: SlotSC = {
             id: slotSC.id.toNumber(),
-            category: slotSC.category,
-            permanent: slotSC.category,
+            isBase: slotSC.isBase,
+            permanent: slotSC.permanent,
             allowedItems: allowedItems
         };
         slotsSC.push(slot);

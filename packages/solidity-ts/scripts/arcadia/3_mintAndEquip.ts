@@ -18,8 +18,8 @@ async function main() {
     
     const itemsToEquip: ItemSC[] = [];
     for (const slot of slotsAll) {
-        const item = itemsAll.find((item, i)=>item.slotId == slot.id)
-        // const item = itemsAll.findLast((item, i)=>item.slotId == slot.id)
+        // const item = itemsAll.find((item, i)=>item.slotId == slot.id)
+        const item = itemsAll.findLast((item, i)=>item.slotId == slot.id)
         itemsToEquip.push({erc721Contract: itemsSC.address, id: item?.id as number});
     }
 

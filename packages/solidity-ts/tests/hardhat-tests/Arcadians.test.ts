@@ -34,7 +34,7 @@ describe('Arcadians Diamond whitelist', function () {
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items
@@ -96,7 +96,7 @@ describe('Arcadians Diamond whitelist', function () {
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items
@@ -156,7 +156,7 @@ describe('Arcadians Diamond whitelist', function () {
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items
@@ -219,7 +219,7 @@ describe('Arcadians Diamond whitelist', function () {
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].category, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
         }
 
         // mint items

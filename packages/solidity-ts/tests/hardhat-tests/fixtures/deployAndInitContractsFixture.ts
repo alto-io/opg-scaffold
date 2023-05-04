@@ -9,7 +9,7 @@ import deployArcadiansDiamond, { arcadiansDiamondInitName, arcadiansDiamondName,
 import deployItemsDiamond, { itemsDiamondName, itemsDiamondInitName, itemsFacetNames } from '../../../deploy/hardhat-deploy/02.ItemsDiamond.deploy';
 import initArcadiansDiamond, { baseArcadianURI } from '../../../deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
 import initItemsDiamond, { baseItemURI } from '../../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
-import { Item, Slot, SlotCategory } from '../Items.test';
+import { Item, Slot } from '../Items.test';
 
 export default async function deployAndInitContractsFixture() {
     const deploymentHardhatPath = path.join(__dirname, '../../../generated/hardhat/deployments/hardhat');
@@ -78,23 +78,23 @@ export default async function deployAndInitContractsFixture() {
     await tx.wait();
 
     const slots: Slot[] = [
-        { permanent: true, category: SlotCategory.Base, id: 1, itemsIdsAllowed: [1, 2] },
-        { permanent: false, category: SlotCategory.Base, id: 2, itemsIdsAllowed: [3, 4] },
-        { permanent: false, category: SlotCategory.Base, id: 3, itemsIdsAllowed: [5, 6] },
-        { permanent: false, category: SlotCategory.Base, id: 4, itemsIdsAllowed: [7, 8] },
-        { permanent: false, category: SlotCategory.Base, id: 5, itemsIdsAllowed: [9, 10] },
-        { permanent: false, category: SlotCategory.Base, id: 6, itemsIdsAllowed: [11, 12] },
-        { permanent: false, category: SlotCategory.Base, id: 7, itemsIdsAllowed: [13, 14] },
-        { permanent: false, category: SlotCategory.Base, id: 8, itemsIdsAllowed: [15, 16] },
-        { permanent: false, category: SlotCategory.Cosmetic, id: 9, itemsIdsAllowed: [17, 18] },
-        { permanent: false, category: SlotCategory.Cosmetic, id: 10, itemsIdsAllowed: [19, 20] },
-        { permanent: false, category: SlotCategory.Cosmetic, id: 11, itemsIdsAllowed: [21, 22] },
-        { permanent: false, category: SlotCategory.Cosmetic, id: 12, itemsIdsAllowed: [23, 24] },
-        { permanent: false, category: SlotCategory.Equippment, id: 13, itemsIdsAllowed: [25, 26] },
-        { permanent: false, category: SlotCategory.Equippment, id: 14, itemsIdsAllowed: [27, 28] },
-        { permanent: false, category: SlotCategory.Equippment, id: 15, itemsIdsAllowed: [29, 30] },
-        { permanent: false, category: SlotCategory.Equippment, id: 16, itemsIdsAllowed: [31, 32] },
-        { permanent: false, category: SlotCategory.Equippment, id: 17, itemsIdsAllowed: [33, 34] },
+        { permanent: true, isBase: true, id: 1, itemsIdsAllowed: [1, 2] },
+        { permanent: false, isBase: true, id: 2, itemsIdsAllowed: [3, 4] },
+        { permanent: false, isBase: true, id: 3, itemsIdsAllowed: [5, 6] },
+        { permanent: false, isBase: true, id: 4, itemsIdsAllowed: [7, 8] },
+        { permanent: false, isBase: true, id: 5, itemsIdsAllowed: [9, 10] },
+        { permanent: false, isBase: true, id: 6, itemsIdsAllowed: [11, 12] },
+        { permanent: false, isBase: true, id: 7, itemsIdsAllowed: [13, 14] },
+        { permanent: false, isBase: true, id: 8, itemsIdsAllowed: [15, 16] },
+        { permanent: false, isBase: false, id: 9, itemsIdsAllowed: [17, 18] },
+        { permanent: false, isBase: false, id: 10, itemsIdsAllowed: [19, 20] },
+        { permanent: false, isBase: false, id: 11, itemsIdsAllowed: [21, 22] },
+        { permanent: false, isBase: false, id: 12, itemsIdsAllowed: [23, 24] },
+        { permanent: false, isBase: false, id: 13, itemsIdsAllowed: [25, 26] },
+        { permanent: false, isBase: false, id: 14, itemsIdsAllowed: [27, 28] },
+        { permanent: false, isBase: false, id: 15, itemsIdsAllowed: [29, 30] },
+        { permanent: false, isBase: false, id: 16, itemsIdsAllowed: [31, 32] },
+        { permanent: false, isBase: false, id: 17, itemsIdsAllowed: [33, 34] },
     ]
     const items: Item[] = Array.from({length: 34}, (v, i)=>({ erc721Contract: itemsContracts.itemsFacet.address, id: i + 1 }))
 
