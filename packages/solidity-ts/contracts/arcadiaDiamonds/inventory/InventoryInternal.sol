@@ -410,12 +410,14 @@ contract InventoryInternal is
         }
 
         BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseCounter);
+        uint counter;
         for (uint i = 0; i < numSlots; i++) {
             uint slotId = i + 1;
             if (!inventorySL.slots[slotId].isBase)
                 continue;
-            coupons[i].slotId = slotId;
-            coupons[i].amount = inventorySL.baseModifierCoupon[account][slotId];
+            coupons[counter].slotId = slotId;
+            coupons[counter].amount = inventorySL.baseModifierCoupon[account][slotId];
+            counter++;
         }
         return coupons;
     }
