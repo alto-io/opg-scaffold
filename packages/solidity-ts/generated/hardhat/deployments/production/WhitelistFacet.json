@@ -1,0 +1,674 @@
+{
+  "address": "0x05fF92D6699b118586019Ca7B456628ce3EBffb5",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Roles_MissingAdminRole",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Roles_MissingAutomationRole",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Roles_MissingManagerRole",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Whitelist_ClaimInactive",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Whitelist_ClaimStateAlreadyUpdated",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Whitelist_ExceedsElegibleAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Whitelist_InputDataMismatch",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum WhitelistStorage.PoolId",
+          "name": "poolId",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalElegibleAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalClaimedAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "WhitelistBalanceChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "claimedGuaranteedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "claimedRestrictedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "elegibleGuaranteedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "elegibleRestrictedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseElegibleGuaranteedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "amounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "increaseElegibleGuaranteedPoolBatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseElegibleRestrictedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "amounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "increaseElegibleRestrictedPoolBatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isClaimActiveGuaranteedPool",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isClaimActiveRestrictedPool",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
+      "name": "setClaimActiveGuaranteedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
+      "name": "setClaimActiveRestrictedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setElegibleGuaranteedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "totalAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "setElegibleGuaranteedPoolBatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setElegibleRestrictedPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "totalAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "setElegibleRestrictedPoolBatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalClaimedGuaranteedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalClaimedRestrictedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalElegibleGuaranteedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalElegibleRestrictedPool",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x84e85bad686a481fd950f966803bdd70e94dc6d2fd921e4ebac59d5d3bef1015",
+  "receipt": {
+    "to": null,
+    "from": "0x0d3174A3c218b12d0C29e2E63C3493C93b700315",
+    "contractAddress": "0x05fF92D6699b118586019Ca7B456628ce3EBffb5",
+    "transactionIndex": 27,
+    "gasUsed": "1162179",
+    "logsBloom": "0x00000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000800000008000000000000000000000000000000000000000000000000000000000800000000000000000000100000000000000000000000000000000000000000000000000000000000080000000000000000000000000020000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000004000000000000000000001000000000000080000000000000000100000000000000000000000000000000000000000000000000000000004000000000000100020",
+    "blockHash": "0xf76c2fb67237df4cc86210276cce3a5c9340c3ca41ca3950d5be8c6d431a4f15",
+    "transactionHash": "0x84e85bad686a481fd950f966803bdd70e94dc6d2fd921e4ebac59d5d3bef1015",
+    "logs": [
+      {
+        "transactionIndex": 27,
+        "blockNumber": 42371503,
+        "transactionHash": "0x84e85bad686a481fd950f966803bdd70e94dc6d2fd921e4ebac59d5d3bef1015",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x0000000000000000000000000d3174a3c218b12d0c29e2e63c3493c93b700315",
+          "0x000000000000000000000000127685d6dd6683085da4b6a041efcef1681e5c9c"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000000b321892768dc440000000000000000000000000000000000000000000000003dee661eb2f5503800000000000000000000000000000000000000000000021cfc1f81e011c3cc0f0000000000000000000000000000000000000000000000003d3b44958b8c73f400000000000000000000000000000000000000000000021cfcd2a369392ca853",
+        "logIndex": 112,
+        "blockHash": "0xf76c2fb67237df4cc86210276cce3a5c9340c3ca41ca3950d5be8c6d431a4f15"
+      }
+    ],
+    "blockNumber": 42371503,
+    "cumulativeGasUsed": "5988994",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "dfed9b36465c28e43c92f377bfc2803f",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Roles_MissingAdminRole\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Roles_MissingAutomationRole\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Roles_MissingManagerRole\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Whitelist_ClaimInactive\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Whitelist_ClaimStateAlreadyUpdated\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Whitelist_ExceedsElegibleAmount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Whitelist_InputDataMismatch\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum WhitelistStorage.PoolId\",\"name\":\"poolId\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalElegibleAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalClaimedAmount\",\"type\":\"uint256\"}],\"name\":\"WhitelistBalanceChanged\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"claimedGuaranteedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"claimedRestrictedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"elegibleGuaranteedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"elegibleRestrictedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"increaseElegibleGuaranteedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"name\":\"increaseElegibleGuaranteedPoolBatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"increaseElegibleRestrictedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"name\":\"increaseElegibleRestrictedPoolBatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isClaimActiveGuaranteedPool\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isClaimActiveRestrictedPool\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"name\":\"setClaimActiveGuaranteedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"name\":\"setClaimActiveRestrictedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"name\":\"setElegibleGuaranteedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"totalAmounts\",\"type\":\"uint256[]\"}],\"name\":\"setElegibleGuaranteedPoolBatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"name\":\"setElegibleRestrictedPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"totalAmounts\",\"type\":\"uint256[]\"}],\"name\":\"setElegibleRestrictedPoolBatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalClaimedGuaranteedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalClaimedRestrictedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalElegibleGuaranteedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalElegibleRestrictedPool\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"claimedGuaranteedPool(address)\":{\"returns\":{\"_0\":\"The amount claimed from the guaranteed pool by the account\"}},\"claimedRestrictedPool(address)\":{\"returns\":{\"_0\":\"The amount claimed from the restricted pool by the account \"}},\"elegibleGuaranteedPool(address)\":{\"returns\":{\"_0\":\"The account elegible amount from the guaranteed pool\"}},\"elegibleRestrictedPool(address)\":{\"returns\":{\"_0\":\"The account elegible amount from the restricted pool\"}},\"increaseElegibleGuaranteedPool(address,uint256)\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"account\":\"The address to add to the whitelist\",\"amount\":\"The amount to whitelist for the address\"}},\"increaseElegibleGuaranteedPoolBatch(address[],uint256[])\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"accounts\":\"An array of addresses to add to the whitelist\",\"amounts\":\"An array of amounts to whitelist for each address\"}},\"increaseElegibleRestrictedPool(address,uint256)\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"account\":\"The address to add to the whitelist\",\"amount\":\"The amount to whitelist for the address\"}},\"increaseElegibleRestrictedPoolBatch(address[],uint256[])\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"accounts\":\"An array of addresses to add to the whitelist\",\"amounts\":\"An array of amounts to whitelist for each address\"}},\"isClaimActiveGuaranteedPool()\":{\"returns\":{\"active\":\"bool indicating if claim is active\"}},\"isClaimActiveRestrictedPool()\":{\"returns\":{\"active\":\"bool indicating if claim is active\"}},\"setClaimActiveGuaranteedPool(bool)\":{\"details\":\"This function can only be called by an address with the manager role\"},\"setClaimActiveRestrictedPool(bool)\":{\"details\":\"This function can only be called by an address with the manager role\"},\"setElegibleGuaranteedPool(address,uint256)\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"account\":\"The address to add to the whitelist\",\"totalAmount\":\"The amount to whitelist for the address\"}},\"setElegibleGuaranteedPoolBatch(address[],uint256[])\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"accounts\":\"An array of addresses to add to the whitelist\",\"totalAmounts\":\"An array of amounts to whitelist for each address\"}},\"setElegibleRestrictedPool(address,uint256)\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"account\":\"The address to add to the whitelist\",\"totalAmount\":\"The amount to whitelist for the address\"}},\"setElegibleRestrictedPoolBatch(address[],uint256[])\":{\"details\":\"This function can only be called by an address with the manager role\",\"params\":{\"accounts\":\"An array of addresses to add to the whitelist\",\"totalAmounts\":\"An array of amounts to whitelist for each address\"}},\"totalClaimedGuaranteedPool()\":{\"returns\":{\"_0\":\"The total claimed amount from the Guaranteed pool\"}},\"totalClaimedRestrictedPool()\":{\"returns\":{\"_0\":\"The total claimed amount from the Restricted pool\"}},\"totalElegibleGuaranteedPool()\":{\"returns\":{\"_0\":\"The total elegible amount from the Guaranteed pool\"}},\"totalElegibleRestrictedPool()\":{\"returns\":{\"_0\":\"The total elegible amount from the Restricted pool\"}}},\"title\":\"WhitelistFacet\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"increaseElegibleGuaranteedPool(address,uint256)\":{\"notice\":\"Increase the account whitelist elegible amount in the Guaranteed pool\"},\"increaseElegibleGuaranteedPoolBatch(address[],uint256[])\":{\"notice\":\"Increase the guaranteed pool elegible amounts for multiple addresses\"},\"increaseElegibleRestrictedPool(address,uint256)\":{\"notice\":\"Increase the account whitelist elegible amount in the restricted pool\"},\"increaseElegibleRestrictedPoolBatch(address[],uint256[])\":{\"notice\":\"Increase the restricted pool elegible amounts for multiple addresses\"},\"isClaimActiveGuaranteedPool()\":{\"notice\":\"Returns true if elegible tokens can be claimed in the guaranteed pool, or false otherwise\"},\"isClaimActiveRestrictedPool()\":{\"notice\":\"Returns true if elegible tokens can be claimed in the restricted pool, or false otherwise\"},\"setClaimActiveGuaranteedPool(bool)\":{\"notice\":\"Updates the claim state to active and enables the guaranteed pool token claim\"},\"setClaimActiveRestrictedPool(bool)\":{\"notice\":\"Updates the claim state to active and enables the restricted pool token claim\"},\"setElegibleGuaranteedPool(address,uint256)\":{\"notice\":\"Adds a new address to the Guaranteed Pool with a specific amount\"},\"setElegibleGuaranteedPoolBatch(address[],uint256[])\":{\"notice\":\"Adds multiple addresses to the Guaranteed Pool with specific amounts\"},\"setElegibleRestrictedPool(address,uint256)\":{\"notice\":\"Adds a new address to the Restricted Pool with a specific amount\"},\"setElegibleRestrictedPoolBatch(address[],uint256[])\":{\"notice\":\"Adds multiple addresses to the Restricted Pool with specific amounts\"}},\"notice\":\"This contract allows the admins to whitelist an address with a specific amount, which can then be used to claim tokens in other contracts. To consume the whitelist, the token contracts should call the internal functions from WhitelistInternal. This contract can be used as a facet of a diamond which follows the EIP-2535 diamond standard.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/arcadiaDiamonds/whitelist/WhitelistFacet.sol\":\"WhitelistFacet\"},\"evmVersion\":\"paris\",\"libraries\":{\":__CACHE_BREAKER__\":\"0x00000000d41867734bbee4c6863d9255b2b06ac1\"},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":250},\"remappings\":[]},\"sources\":{\"@solidstate/contracts/access/access_control/AccessControlInternal.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport { EnumerableSet } from '../../data/EnumerableSet.sol';\\nimport { AddressUtils } from '../../utils/AddressUtils.sol';\\nimport { UintUtils } from '../../utils/UintUtils.sol';\\nimport { IAccessControlInternal } from './IAccessControlInternal.sol';\\nimport { AccessControlStorage } from './AccessControlStorage.sol';\\n\\n/**\\n * @title Role-based access control system\\n * @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts (MIT license)\\n */\\nabstract contract AccessControlInternal is IAccessControlInternal {\\n    using AddressUtils for address;\\n    using EnumerableSet for EnumerableSet.AddressSet;\\n    using UintUtils for uint256;\\n\\n    modifier onlyRole(bytes32 role) {\\n        _checkRole(role);\\n        _;\\n    }\\n\\n    /*\\n     * @notice query whether role is assigned to account\\n     * @param role role to query\\n     * @param account account to query\\n     * @return whether role is assigned to account\\n     */\\n    function _hasRole(\\n        bytes32 role,\\n        address account\\n    ) internal view virtual returns (bool) {\\n        return\\n            AccessControlStorage.layout().roles[role].members.contains(account);\\n    }\\n\\n    /**\\n     * @notice revert if sender does not have given role\\n     * @param role role to query\\n     */\\n    function _checkRole(bytes32 role) internal view virtual {\\n        _checkRole(role, msg.sender);\\n    }\\n\\n    /**\\n     * @notice revert if given account does not have given role\\n     * @param role role to query\\n     * @param account to query\\n     */\\n    function _checkRole(bytes32 role, address account) internal view virtual {\\n        if (!_hasRole(role, account)) {\\n            revert(\\n                string(\\n                    abi.encodePacked(\\n                        'AccessControl: account ',\\n                        account.toString(),\\n                        ' is missing role ',\\n                        uint256(role).toHexString(32)\\n                    )\\n                )\\n            );\\n        }\\n    }\\n\\n    /*\\n     * @notice query admin role for given role\\n     * @param role role to query\\n     * @return admin role\\n     */\\n    function _getRoleAdmin(\\n        bytes32 role\\n    ) internal view virtual returns (bytes32) {\\n        return AccessControlStorage.layout().roles[role].adminRole;\\n    }\\n\\n    /**\\n     * @notice set role as admin role\\n     * @param role role to set\\n     * @param adminRole admin role to set\\n     */\\n    function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {\\n        bytes32 previousAdminRole = _getRoleAdmin(role);\\n        AccessControlStorage.layout().roles[role].adminRole = adminRole;\\n        emit RoleAdminChanged(role, previousAdminRole, adminRole);\\n    }\\n\\n    /*\\n     * @notice assign role to given account\\n     * @param role role to assign\\n     * @param account recipient of role assignment\\n     */\\n    function _grantRole(bytes32 role, address account) internal virtual {\\n        AccessControlStorage.layout().roles[role].members.add(account);\\n        emit RoleGranted(role, account, msg.sender);\\n    }\\n\\n    /*\\n     * @notice unassign role from given account\\n     * @param role role to unassign\\n     * @parm account\\n     */\\n    function _revokeRole(bytes32 role, address account) internal virtual {\\n        AccessControlStorage.layout().roles[role].members.remove(account);\\n        emit RoleRevoked(role, account, msg.sender);\\n    }\\n\\n    /**\\n     * @notice relinquish role\\n     * @param role role to relinquish\\n     */\\n    function _renounceRole(bytes32 role) internal virtual {\\n        _revokeRole(role, msg.sender);\\n    }\\n}\\n\",\"keccak256\":\"0x5c32c5b490b9a2dd9daa533a75f940f0b0f69c9033776f5e274cd2446c224513\",\"license\":\"MIT\"},\"@solidstate/contracts/access/access_control/AccessControlStorage.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport { EnumerableSet } from '../../data/EnumerableSet.sol';\\n\\nlibrary AccessControlStorage {\\n    struct RoleData {\\n        EnumerableSet.AddressSet members;\\n        bytes32 adminRole;\\n    }\\n\\n    struct Layout {\\n        mapping(bytes32 => RoleData) roles;\\n    }\\n\\n    bytes32 internal constant DEFAULT_ADMIN_ROLE = 0x00;\\n\\n    bytes32 internal constant STORAGE_SLOT =\\n        keccak256('solidstate.contracts.storage.AccessControl');\\n\\n    function layout() internal pure returns (Layout storage l) {\\n        bytes32 slot = STORAGE_SLOT;\\n        assembly {\\n            l.slot := slot\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xae788d37a6e20edf7f94be23d78517324f50bccbf0541e10ce0850d7d5bca062\",\"license\":\"MIT\"},\"@solidstate/contracts/access/access_control/IAccessControlInternal.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @title Partial AccessControl interface needed by internal functions\\n */\\ninterface IAccessControlInternal {\\n    event RoleAdminChanged(\\n        bytes32 indexed role,\\n        bytes32 indexed previousAdminRole,\\n        bytes32 indexed newAdminRole\\n    );\\n\\n    event RoleGranted(\\n        bytes32 indexed role,\\n        address indexed account,\\n        address indexed sender\\n    );\\n\\n    event RoleRevoked(\\n        bytes32 indexed role,\\n        address indexed account,\\n        address indexed sender\\n    );\\n}\\n\",\"keccak256\":\"0xcc4a1d78a60955d673104adaee1211de3b3cfb95668f1fbfc43ed0e7f36ad110\",\"license\":\"MIT\"},\"@solidstate/contracts/data/EnumerableSet.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.8;\\n\\n/**\\n * @title Set implementation with enumeration functions\\n * @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts (MIT license)\\n */\\nlibrary EnumerableSet {\\n    error EnumerableSet__IndexOutOfBounds();\\n\\n    struct Set {\\n        bytes32[] _values;\\n        // 1-indexed to allow 0 to signify nonexistence\\n        mapping(bytes32 => uint256) _indexes;\\n    }\\n\\n    struct Bytes32Set {\\n        Set _inner;\\n    }\\n\\n    struct AddressSet {\\n        Set _inner;\\n    }\\n\\n    struct UintSet {\\n        Set _inner;\\n    }\\n\\n    function at(\\n        Bytes32Set storage set,\\n        uint256 index\\n    ) internal view returns (bytes32) {\\n        return _at(set._inner, index);\\n    }\\n\\n    function at(\\n        AddressSet storage set,\\n        uint256 index\\n    ) internal view returns (address) {\\n        return address(uint160(uint256(_at(set._inner, index))));\\n    }\\n\\n    function at(\\n        UintSet storage set,\\n        uint256 index\\n    ) internal view returns (uint256) {\\n        return uint256(_at(set._inner, index));\\n    }\\n\\n    function contains(\\n        Bytes32Set storage set,\\n        bytes32 value\\n    ) internal view returns (bool) {\\n        return _contains(set._inner, value);\\n    }\\n\\n    function contains(\\n        AddressSet storage set,\\n        address value\\n    ) internal view returns (bool) {\\n        return _contains(set._inner, bytes32(uint256(uint160(value))));\\n    }\\n\\n    function contains(\\n        UintSet storage set,\\n        uint256 value\\n    ) internal view returns (bool) {\\n        return _contains(set._inner, bytes32(value));\\n    }\\n\\n    function indexOf(\\n        Bytes32Set storage set,\\n        bytes32 value\\n    ) internal view returns (uint256) {\\n        return _indexOf(set._inner, value);\\n    }\\n\\n    function indexOf(\\n        AddressSet storage set,\\n        address value\\n    ) internal view returns (uint256) {\\n        return _indexOf(set._inner, bytes32(uint256(uint160(value))));\\n    }\\n\\n    function indexOf(\\n        UintSet storage set,\\n        uint256 value\\n    ) internal view returns (uint256) {\\n        return _indexOf(set._inner, bytes32(value));\\n    }\\n\\n    function length(Bytes32Set storage set) internal view returns (uint256) {\\n        return _length(set._inner);\\n    }\\n\\n    function length(AddressSet storage set) internal view returns (uint256) {\\n        return _length(set._inner);\\n    }\\n\\n    function length(UintSet storage set) internal view returns (uint256) {\\n        return _length(set._inner);\\n    }\\n\\n    function add(\\n        Bytes32Set storage set,\\n        bytes32 value\\n    ) internal returns (bool) {\\n        return _add(set._inner, value);\\n    }\\n\\n    function add(\\n        AddressSet storage set,\\n        address value\\n    ) internal returns (bool) {\\n        return _add(set._inner, bytes32(uint256(uint160(value))));\\n    }\\n\\n    function add(UintSet storage set, uint256 value) internal returns (bool) {\\n        return _add(set._inner, bytes32(value));\\n    }\\n\\n    function remove(\\n        Bytes32Set storage set,\\n        bytes32 value\\n    ) internal returns (bool) {\\n        return _remove(set._inner, value);\\n    }\\n\\n    function remove(\\n        AddressSet storage set,\\n        address value\\n    ) internal returns (bool) {\\n        return _remove(set._inner, bytes32(uint256(uint160(value))));\\n    }\\n\\n    function remove(\\n        UintSet storage set,\\n        uint256 value\\n    ) internal returns (bool) {\\n        return _remove(set._inner, bytes32(value));\\n    }\\n\\n    function toArray(\\n        Bytes32Set storage set\\n    ) internal view returns (bytes32[] memory) {\\n        return set._inner._values;\\n    }\\n\\n    function toArray(\\n        AddressSet storage set\\n    ) internal view returns (address[] memory) {\\n        bytes32[] storage values = set._inner._values;\\n        address[] storage array;\\n\\n        assembly {\\n            array.slot := values.slot\\n        }\\n\\n        return array;\\n    }\\n\\n    function toArray(\\n        UintSet storage set\\n    ) internal view returns (uint256[] memory) {\\n        bytes32[] storage values = set._inner._values;\\n        uint256[] storage array;\\n\\n        assembly {\\n            array.slot := values.slot\\n        }\\n\\n        return array;\\n    }\\n\\n    function _at(\\n        Set storage set,\\n        uint256 index\\n    ) private view returns (bytes32) {\\n        if (index >= set._values.length)\\n            revert EnumerableSet__IndexOutOfBounds();\\n        return set._values[index];\\n    }\\n\\n    function _contains(\\n        Set storage set,\\n        bytes32 value\\n    ) private view returns (bool) {\\n        return set._indexes[value] != 0;\\n    }\\n\\n    function _indexOf(\\n        Set storage set,\\n        bytes32 value\\n    ) private view returns (uint256) {\\n        unchecked {\\n            return set._indexes[value] - 1;\\n        }\\n    }\\n\\n    function _length(Set storage set) private view returns (uint256) {\\n        return set._values.length;\\n    }\\n\\n    function _add(\\n        Set storage set,\\n        bytes32 value\\n    ) private returns (bool status) {\\n        if (!_contains(set, value)) {\\n            set._values.push(value);\\n            set._indexes[value] = set._values.length;\\n            status = true;\\n        }\\n    }\\n\\n    function _remove(\\n        Set storage set,\\n        bytes32 value\\n    ) private returns (bool status) {\\n        uint256 valueIndex = set._indexes[value];\\n\\n        if (valueIndex != 0) {\\n            unchecked {\\n                bytes32 last = set._values[set._values.length - 1];\\n\\n                // move last value to now-vacant index\\n\\n                set._values[valueIndex - 1] = last;\\n                set._indexes[last] = valueIndex;\\n            }\\n            // clear last index\\n\\n            set._values.pop();\\n            delete set._indexes[value];\\n\\n            status = true;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xbbaaeb805b3e1e704ceba33c9093285220254b1ff6b4b7f577e515b118e116f6\",\"license\":\"MIT\"},\"@solidstate/contracts/utils/AddressUtils.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.8;\\n\\nimport { UintUtils } from './UintUtils.sol';\\n\\nlibrary AddressUtils {\\n    using UintUtils for uint256;\\n\\n    error AddressUtils__InsufficientBalance();\\n    error AddressUtils__NotContract();\\n    error AddressUtils__SendValueFailed();\\n\\n    function toString(address account) internal pure returns (string memory) {\\n        return uint256(uint160(account)).toHexString(20);\\n    }\\n\\n    function isContract(address account) internal view returns (bool) {\\n        uint256 size;\\n        assembly {\\n            size := extcodesize(account)\\n        }\\n        return size > 0;\\n    }\\n\\n    function sendValue(address payable account, uint256 amount) internal {\\n        (bool success, ) = account.call{ value: amount }('');\\n        if (!success) revert AddressUtils__SendValueFailed();\\n    }\\n\\n    function functionCall(\\n        address target,\\n        bytes memory data\\n    ) internal returns (bytes memory) {\\n        return\\n            functionCall(target, data, 'AddressUtils: failed low-level call');\\n    }\\n\\n    function functionCall(\\n        address target,\\n        bytes memory data,\\n        string memory error\\n    ) internal returns (bytes memory) {\\n        return _functionCallWithValue(target, data, 0, error);\\n    }\\n\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value\\n    ) internal returns (bytes memory) {\\n        return\\n            functionCallWithValue(\\n                target,\\n                data,\\n                value,\\n                'AddressUtils: failed low-level call with value'\\n            );\\n    }\\n\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value,\\n        string memory error\\n    ) internal returns (bytes memory) {\\n        if (value > address(this).balance)\\n            revert AddressUtils__InsufficientBalance();\\n        return _functionCallWithValue(target, data, value, error);\\n    }\\n\\n    /**\\n     * @notice execute arbitrary external call with limited gas usage and amount of copied return data\\n     * @dev derived from https://github.com/nomad-xyz/ExcessivelySafeCall (MIT License)\\n     * @param target recipient of call\\n     * @param gasAmount gas allowance for call\\n     * @param value native token value to include in call\\n     * @param maxCopy maximum number of bytes to copy from return data\\n     * @param data encoded call data\\n     * @return success whether call is successful\\n     * @return returnData copied return data\\n     */\\n    function excessivelySafeCall(\\n        address target,\\n        uint256 gasAmount,\\n        uint256 value,\\n        uint16 maxCopy,\\n        bytes memory data\\n    ) internal returns (bool success, bytes memory returnData) {\\n        returnData = new bytes(maxCopy);\\n\\n        assembly {\\n            // execute external call via assembly to avoid automatic copying of return data\\n            success := call(\\n                gasAmount,\\n                target,\\n                value,\\n                add(data, 0x20),\\n                mload(data),\\n                0,\\n                0\\n            )\\n\\n            // determine whether to limit amount of data to copy\\n            let toCopy := returndatasize()\\n\\n            if gt(toCopy, maxCopy) {\\n                toCopy := maxCopy\\n            }\\n\\n            // store the length of the copied bytes\\n            mstore(returnData, toCopy)\\n\\n            // copy the bytes from returndata[0:toCopy]\\n            returndatacopy(add(returnData, 0x20), 0, toCopy)\\n        }\\n    }\\n\\n    function _functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value,\\n        string memory error\\n    ) private returns (bytes memory) {\\n        if (!isContract(target)) revert AddressUtils__NotContract();\\n\\n        (bool success, bytes memory returnData) = target.call{ value: value }(\\n            data\\n        );\\n\\n        if (success) {\\n            return returnData;\\n        } else if (returnData.length > 0) {\\n            assembly {\\n                let returnData_size := mload(returnData)\\n                revert(add(32, returnData), returnData_size)\\n            }\\n        } else {\\n            revert(error);\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x7d924db4dbd9210923ab08db77db3c77438014c255fd49fa208ebce283d991bf\",\"license\":\"MIT\"},\"@solidstate/contracts/utils/UintUtils.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.8;\\n\\n/**\\n * @title utility functions for uint256 operations\\n * @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts/ (MIT license)\\n */\\nlibrary UintUtils {\\n    error UintUtils__InsufficientHexLength();\\n\\n    bytes16 private constant HEX_SYMBOLS = '0123456789abcdef';\\n\\n    function add(uint256 a, int256 b) internal pure returns (uint256) {\\n        return b < 0 ? sub(a, -b) : a + uint256(b);\\n    }\\n\\n    function sub(uint256 a, int256 b) internal pure returns (uint256) {\\n        return b < 0 ? add(a, -b) : a - uint256(b);\\n    }\\n\\n    function toString(uint256 value) internal pure returns (string memory) {\\n        if (value == 0) {\\n            return '0';\\n        }\\n\\n        uint256 temp = value;\\n        uint256 digits;\\n\\n        while (temp != 0) {\\n            digits++;\\n            temp /= 10;\\n        }\\n\\n        bytes memory buffer = new bytes(digits);\\n\\n        while (value != 0) {\\n            digits -= 1;\\n            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));\\n            value /= 10;\\n        }\\n\\n        return string(buffer);\\n    }\\n\\n    function toHexString(uint256 value) internal pure returns (string memory) {\\n        if (value == 0) {\\n            return '0x00';\\n        }\\n\\n        uint256 length = 0;\\n\\n        for (uint256 temp = value; temp != 0; temp >>= 8) {\\n            unchecked {\\n                length++;\\n            }\\n        }\\n\\n        return toHexString(value, length);\\n    }\\n\\n    function toHexString(\\n        uint256 value,\\n        uint256 length\\n    ) internal pure returns (string memory) {\\n        bytes memory buffer = new bytes(2 * length + 2);\\n        buffer[0] = '0';\\n        buffer[1] = 'x';\\n\\n        unchecked {\\n            for (uint256 i = 2 * length + 1; i > 1; --i) {\\n                buffer[i] = HEX_SYMBOLS[value & 0xf];\\n                value >>= 4;\\n            }\\n        }\\n\\n        if (value != 0) revert UintUtils__InsufficientHexLength();\\n\\n        return string(buffer);\\n    }\\n}\\n\",\"keccak256\":\"0x5aaeaea22a0800402c6f2d8ce6185293bc64f74f6c390c1b1c53b624b43972f8\",\"license\":\"MIT\"},\"contracts/arcadiaDiamonds/roles/RolesInternal.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity 0.8.19;\\n\\nimport { AccessControlInternal } from \\\"@solidstate/contracts/access/access_control/AccessControlInternal.sol\\\";\\nimport { AccessControlStorage } from \\\"@solidstate/contracts/access/access_control/AccessControlStorage.sol\\\";\\nimport { RolesStorage } from './RolesStorage.sol';\\n\\ncontract RolesInternal is AccessControlInternal {\\n\\n    error Roles_MissingAdminRole();\\n    error Roles_MissingManagerRole();\\n    error Roles_MissingAutomationRole();\\n\\n    modifier onlyDefaultAdmin() {\\n        if (!_hasRole(_defaultAdminRole(), msg.sender))\\n            revert Roles_MissingAdminRole();\\n        _;\\n    }\\n\\n    modifier onlyManager() {\\n        if (!_hasRole(_managerRole(), msg.sender))\\n            revert Roles_MissingManagerRole();\\n        _;\\n    }\\n\\n    modifier onlyAutomation() {\\n        if (!_hasRole(_managerRole(), msg.sender) && !_hasRole(_automationRole(), msg.sender))\\n            revert Roles_MissingAutomationRole();\\n        _;\\n    }\\n\\n    function _defaultAdminRole() internal pure returns (bytes32) {\\n        return AccessControlStorage.DEFAULT_ADMIN_ROLE;\\n    }\\n\\n    function _managerRole() internal view returns (bytes32) {\\n        return RolesStorage.layout().managerRole;\\n    }\\n\\n    function _automationRole() internal view returns (bytes32) {\\n        return RolesStorage.layout().automationRole;\\n    }\\n\\n    function _initRoles() internal {\\n        RolesStorage.Layout storage rolesSL = RolesStorage.layout();\\n        rolesSL.managerRole = keccak256(\\\"manager.role\\\");\\n        rolesSL.automationRole = keccak256(\\\"automation.role\\\");\\n\\n        _grantRole(_defaultAdminRole(), msg.sender);\\n        _grantRole(_managerRole(), msg.sender);\\n    }\\n}\",\"keccak256\":\"0xc79fd9cc49fff37652b2a97b8ace4615c36a63675824d3963856772700dd0774\",\"license\":\"UNLICENSED\"},\"contracts/arcadiaDiamonds/roles/RolesStorage.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity 0.8.19;\\n\\nlibrary RolesStorage {\\n\\n    bytes32 constant ROLES_STORAGE_POSITION =\\n        keccak256(\\\"roles.storage.position\\\");\\n\\n    struct Layout {\\n        bytes32 managerRole;\\n        bytes32 automationRole;\\n    }\\n\\n    function layout()\\n        internal\\n        pure\\n        returns (Layout storage es)\\n    {\\n        bytes32 position = ROLES_STORAGE_POSITION;\\n        assembly {\\n            es.slot := position\\n        }\\n    }\\n}\",\"keccak256\":\"0x0a247e6622f9ba7931603dde2772edf95a718380aa2421fbd45462ca1e1e6f65\",\"license\":\"UNLICENSED\"},\"contracts/arcadiaDiamonds/whitelist/WhitelistFacet.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity 0.8.19;\\n\\nimport { WhitelistInternal } from './WhitelistInternal.sol';\\nimport { WhitelistStorage } from \\\"./WhitelistStorage.sol\\\";\\n\\n/**\\n * @title WhitelistFacet\\n * @notice This contract allows the admins to whitelist an address with a specific amount,\\n * which can then be used to claim tokens in other contracts.\\n * To consume the whitelist, the token contracts should call the internal functions from WhitelistInternal.\\n * This contract can be used as a facet of a diamond which follows the EIP-2535 diamond standard.\\n */\\ncontract WhitelistFacet is WhitelistInternal {\\n    /**\\n     * @return The amount claimed from the guaranteed pool by the account\\n     */\\n    function claimedGuaranteedPool(address account) external view returns (uint) {\\n        return _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, account);\\n    }\\n\\n    /**\\n     * @return The amount claimed from the restricted pool by the account \\n     */\\n    function claimedRestrictedPool(address account) external view returns (uint) {\\n        return _claimedWhitelist(WhitelistStorage.PoolId.Restricted, account);\\n    }\\n\\n    /**\\n     * @return The account elegible amount from the guaranteed pool\\n     */\\n    function elegibleGuaranteedPool(address account) external view returns (uint) {\\n        return _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, account);\\n    }\\n\\n    /**\\n     * @return The account elegible amount from the restricted pool\\n     */\\n    function elegibleRestrictedPool(address account) external view returns (uint) {\\n        return _elegibleWhitelist(WhitelistStorage.PoolId.Restricted, account);\\n    }\\n    \\n    /**\\n     * @return The total claimed amount from the Guaranteed pool\\n     */\\n    function totalClaimedGuaranteedPool() external view returns (uint) {\\n        return _totalClaimedWhitelist(WhitelistStorage.PoolId.Guaranteed);\\n    }\\n    \\n    /**\\n     * @return The total claimed amount from the Restricted pool\\n     */\\n    function totalClaimedRestrictedPool() external view returns (uint) {\\n        return _totalClaimedWhitelist(WhitelistStorage.PoolId.Restricted);\\n    }\\n    \\n    /**\\n     * @return The total elegible amount from the Guaranteed pool\\n     */\\n    function totalElegibleGuaranteedPool() external view returns (uint) {\\n        return _totalElegibleWhitelist(WhitelistStorage.PoolId.Guaranteed);\\n    }\\n\\n    /**\\n     * @return The total elegible amount from the Restricted pool\\n     */\\n    function totalElegibleRestrictedPool() external view returns (uint) {\\n        return _totalElegibleWhitelist(WhitelistStorage.PoolId.Restricted);\\n    }\\n\\n    /**\\n     * @notice Increase the account whitelist elegible amount in the Guaranteed pool\\n     * @dev This function can only be called by an address with the manager role\\n     * @param account The address to add to the whitelist\\n     * @param amount The amount to whitelist for the address\\n     */\\n    function increaseElegibleGuaranteedPool(address account, uint amount) onlyManager external {\\n        _increaseWhitelistElegible(WhitelistStorage.PoolId.Guaranteed, account, amount);\\n    }\\n\\n    /**\\n     * @notice Increase the account whitelist elegible amount in the restricted pool\\n     * @dev This function can only be called by an address with the manager role\\n     * @param account The address to add to the whitelist\\n     * @param amount The amount to whitelist for the address\\n     */\\n    function increaseElegibleRestrictedPool(address account, uint amount) onlyManager external {\\n        _increaseWhitelistElegible(WhitelistStorage.PoolId.Restricted, account, amount);\\n    }\\n\\n    /**\\n     * @notice Increase the guaranteed pool elegible amounts for multiple addresses\\n     * @dev This function can only be called by an address with the manager role\\n     * @param accounts An array of addresses to add to the whitelist\\n     * @param amounts An array of amounts to whitelist for each address\\n     */\\n    function increaseElegibleGuaranteedPoolBatch(address[] calldata accounts, uint[] calldata amounts) external onlyManager {\\n        _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId.Guaranteed, accounts, amounts);\\n    }\\n\\n    /**\\n     * @notice Increase the restricted pool elegible amounts for multiple addresses\\n     * @dev This function can only be called by an address with the manager role\\n     * @param accounts An array of addresses to add to the whitelist\\n     * @param amounts An array of amounts to whitelist for each address\\n     */\\n    function increaseElegibleRestrictedPoolBatch(address[] calldata accounts, uint[] calldata amounts) external onlyManager {\\n        _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId.Restricted, accounts, amounts);\\n    }\\n\\n    /**\\n     * @notice Adds a new address to the Guaranteed Pool with a specific amount\\n     * @dev This function can only be called by an address with the manager role\\n     * @param account The address to add to the whitelist\\n     * @param totalAmount The amount to whitelist for the address\\n     */\\n    function setElegibleGuaranteedPool(address account, uint totalAmount) onlyManager external {\\n        _setWhitelistElegible(WhitelistStorage.PoolId.Guaranteed, account, totalAmount);\\n    }\\n\\n    /**\\n     * @notice Adds a new address to the Restricted Pool with a specific amount\\n     * @dev This function can only be called by an address with the manager role\\n     * @param account The address to add to the whitelist\\n     * @param totalAmount The amount to whitelist for the address\\n     */\\n    function setElegibleRestrictedPool(address account, uint totalAmount) onlyManager external {\\n        _setWhitelistElegible(WhitelistStorage.PoolId.Restricted, account, totalAmount);\\n    }\\n\\n    /**\\n     * @notice Adds multiple addresses to the Guaranteed Pool with specific amounts\\n     * @dev This function can only be called by an address with the manager role\\n     * @param accounts An array of addresses to add to the whitelist\\n     * @param totalAmounts An array of amounts to whitelist for each address\\n     */\\n    function setElegibleGuaranteedPoolBatch(address[] calldata accounts, uint[] calldata totalAmounts) external onlyManager {\\n        _setWhitelistElegibleBatch(WhitelistStorage.PoolId.Guaranteed, accounts, totalAmounts);\\n    }\\n\\n    /**\\n     * @notice Adds multiple addresses to the Restricted Pool with specific amounts\\n     * @dev This function can only be called by an address with the manager role\\n     * @param accounts An array of addresses to add to the whitelist\\n     * @param totalAmounts An array of amounts to whitelist for each address\\n     */\\n    function setElegibleRestrictedPoolBatch(address[] calldata accounts, uint[] calldata totalAmounts) external onlyManager {\\n        _setWhitelistElegibleBatch(WhitelistStorage.PoolId.Restricted, accounts, totalAmounts);\\n    }\\n\\n    /**\\n     * @notice Updates the claim state to active and enables the guaranteed pool token claim\\n     * @dev This function can only be called by an address with the manager role\\n     */\\n    function setClaimActiveGuaranteedPool(bool active) external onlyManager {\\n        _setWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed, active);\\n    }\\n\\n    /**\\n     * @notice Updates the claim state to active and enables the restricted pool token claim\\n     * @dev This function can only be called by an address with the manager role\\n     */\\n    function setClaimActiveRestrictedPool(bool active) external onlyManager {\\n        _setWhitelistClaimActive(WhitelistStorage.PoolId.Restricted, active);\\n    }\\n\\n    /**\\n     * @notice Returns true if elegible tokens can be claimed in the guaranteed pool, or false otherwise\\n     * @return active bool indicating if claim is active\\n     */\\n    function isClaimActiveGuaranteedPool() view external returns (bool active) {\\n        return _isWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed);\\n    }\\n\\n    /**\\n     * @notice Returns true if elegible tokens can be claimed in the restricted pool, or false otherwise\\n     * @return active bool indicating if claim is active\\n     */\\n    function isClaimActiveRestrictedPool() view external returns (bool active) {\\n        return _isWhitelistClaimActive(WhitelistStorage.PoolId.Restricted);\\n    }\\n}\",\"keccak256\":\"0x6bd40bfeae5dabe42d26b701f0c3bffa20d41449d5d1db9ebd7de2b24a233019\",\"license\":\"UNLICENSED\"},\"contracts/arcadiaDiamonds/whitelist/WhitelistInternal.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity 0.8.19;\\n\\nimport { WhitelistStorage } from \\\"./WhitelistStorage.sol\\\";\\nimport { RolesInternal } from \\\"./../roles/RolesInternal.sol\\\";\\n\\ncontract WhitelistInternal is RolesInternal {\\n\\n    error Whitelist_ExceedsElegibleAmount();\\n    error Whitelist_InputDataMismatch();\\n    error Whitelist_ClaimStateAlreadyUpdated();\\n    error Whitelist_ClaimInactive();\\n\\n    event WhitelistBalanceChanged(address account, WhitelistStorage.PoolId poolId, uint totalElegibleAmount, uint totalClaimedAmount);\\n\\n    function _totalClaimedWhitelist(WhitelistStorage.PoolId poolId) internal view returns (uint) {\\n        return WhitelistStorage.layout().pools[poolId].totalClaimed;\\n    }\\n\\n    function _totalElegibleWhitelist(WhitelistStorage.PoolId poolId) internal view returns (uint) {\\n        return WhitelistStorage.layout().pools[poolId].totalElegible;\\n    }\\n\\n    function _claimedWhitelist(WhitelistStorage.PoolId poolId, address account) internal view returns (uint) {\\n        return WhitelistStorage.layout().pools[poolId].claimed[account];\\n    }\\n\\n    function _elegibleWhitelist(WhitelistStorage.PoolId poolId, address account) internal view returns (uint) {\\n        return WhitelistStorage.layout().pools[poolId].elegible[account];\\n    }\\n\\n    function _consumeWhitelist(WhitelistStorage.PoolId poolId, address account, uint amount) internal {\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n\\n        if (!whitelistSL.pools[poolId].claimActive)\\n            revert Whitelist_ClaimInactive();\\n\\n        if (whitelistSL.pools[poolId].elegible[account] < amount) \\n            revert Whitelist_ExceedsElegibleAmount();\\n\\n        whitelistSL.pools[poolId].elegible[account] -= amount;\\n        whitelistSL.pools[poolId].claimed[account] += amount;\\n        whitelistSL.pools[poolId].totalClaimed += amount;\\n        whitelistSL.pools[poolId].totalElegible -= amount;\\n\\n        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);\\n    }\\n\\n    function _increaseWhitelistElegible(WhitelistStorage.PoolId poolId, address account, uint amount) internal {\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n        whitelistSL.pools[poolId].elegible[account] += amount;\\n        whitelistSL.pools[poolId].totalElegible += amount;\\n        \\n        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);\\n    }\\n\\n    function _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId poolId, address[] calldata accounts, uint[] calldata amounts) internal {\\n        if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();\\n\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n\\n        for (uint i = 0; i < accounts.length; i++) {\\n            whitelistSL.pools[poolId].elegible[accounts[i]] += amounts[i];\\n            whitelistSL.pools[poolId].totalElegible += amounts[i];\\n            emit WhitelistBalanceChanged(accounts[i], poolId, whitelistSL.pools[poolId].elegible[accounts[i]], whitelistSL.pools[poolId].claimed[accounts[i]]);\\n        }\\n    }\\n\\n    function _setWhitelistElegible(WhitelistStorage.PoolId poolId, address account, uint amount) internal {\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n        whitelistSL.pools[poolId].totalElegible += amount - whitelistSL.pools[poolId].elegible[account];\\n        whitelistSL.pools[poolId].elegible[account] += amount;\\n        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);\\n    }\\n\\n    function _setWhitelistElegibleBatch(WhitelistStorage.PoolId poolId, address[] calldata accounts, uint[] calldata amounts) internal {\\n        if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();\\n\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n\\n        for (uint i = 0; i < accounts.length; i++) {\\n            whitelistSL.pools[poolId].totalElegible += amounts[i] - whitelistSL.pools[poolId].elegible[accounts[i]];\\n            whitelistSL.pools[poolId].elegible[accounts[i]] = amounts[i];\\n            emit WhitelistBalanceChanged(accounts[i], poolId, whitelistSL.pools[poolId].elegible[accounts[i]], whitelistSL.pools[poolId].claimed[accounts[i]]);\\n        }\\n    }\\n\\n    function _isWhitelistClaimActive(WhitelistStorage.PoolId poolId) view internal returns (bool) {\\n        return WhitelistStorage.layout().pools[poolId].claimActive;\\n    }\\n\\n    function _setWhitelistClaimActive(WhitelistStorage.PoolId poolId, bool active) internal {\\n        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();\\n\\n        if (active == whitelistSL.pools[poolId].claimActive) \\n            revert Whitelist_ClaimStateAlreadyUpdated();\\n        \\n        whitelistSL.pools[poolId].claimActive = active;\\n    }\\n}\",\"keccak256\":\"0xb56478a4ec527e0a4889e607e4cbc164e07f3af880460d06dd18ee99faf7b3b0\",\"license\":\"UNLICENSED\"},\"contracts/arcadiaDiamonds/whitelist/WhitelistStorage.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity 0.8.19;\\n\\nlibrary WhitelistStorage {\\n\\n    bytes32 constant WHITELIST_STORAGE_POSITION =\\n        keccak256(\\\"whitelist.storage.position\\\");\\n\\n    enum PoolId { Guaranteed, Restricted }\\n    \\n    struct Pool {\\n        mapping(address => uint) claimed;\\n        mapping(address => uint) elegible;\\n        uint totalClaimed;\\n        uint totalElegible;\\n        bool claimActive;\\n    }\\n\\n    struct Layout {\\n        // pool id => tokens pool\\n        mapping(PoolId => Pool) pools;\\n    }\\n\\n    function layout()\\n        internal\\n        pure\\n        returns (Layout storage es)\\n    {\\n        bytes32 position = WHITELIST_STORAGE_POSITION;\\n        assembly {\\n            es.slot := position\\n        }\\n    }\\n}\",\"keccak256\":\"0x003eafc31e1cd5edd01710403650827b1aa9c49c6c8be2948e74f754b7bbcfeb\",\"license\":\"UNLICENSED\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50611412806100206000396000f3fe608060405234801561001057600080fd5b506004361061012c5760003560e01c80639a211f1a116100ad578063d3442b7a11610071578063d3442b7a1461023c578063d3d7f6f814610244578063d4aa0d0e14610257578063e2d5c0c91461026a578063f154fba31461027d57600080fd5b80639a211f1a146101e8578063b1716b3e146101fb578063b4f212fa1461020e578063b7ad509014610216578063c0e79a3b1461022957600080fd5b806353fb0c80116100f457806353fb0c801461019157806355880dde146101a45780635fcd6d83146101ba5780637017b4a9146101c25780638e94687d146101d557600080fd5b80630599c74514610131578063286fd540146101465780632978261e146101635780633224a303146101765780633e8b5f8414610189575b600080fd5b61014461013f3660046111b3565b610290565b005b61014e6102dc565b60405190151581526020015b60405180910390f35b6101446101713660046111dd565b6102ed565b61014461018436600461124b565b610331565b61014e61037b565b61014461019f36600461124b565b610387565b6101ac6103cb565b60405190815260200161015a565b6101ac6103d7565b6101446101d036600461124b565b6103e3565b6101ac6101e33660046112b7565b610427565b6101ac6101f63660046112b7565b61043a565b6101ac6102093660046112b7565b610447565b6101ac610454565b6101ac6102243660046112b7565b610460565b6101446102373660046111b3565b61046d565b6101ac6104af565b6101446102523660046111b3565b6104bb565b6101446102653660046111b3565b6104fd565b61014461027836600461124b565b61053f565b61014461028b3660046111dd565b610583565b6102af6102a960008051602061139d8339815191525490565b336105c4565b6102cc5760405163d0befa1d60e01b815260040160405180910390fd5b6102d860018383610620565b5050565b60006102e8600061083f565b905090565b6103066102a960008051602061139d8339815191525490565b6103235760405163d0befa1d60e01b815260040160405180910390fd5b61032e600182610892565b50565b61034a6102a960008051602061139d8339815191525490565b6103675760405163d0befa1d60e01b815260040160405180910390fd5b61037560008585858561094f565b50505050565b60006102e8600161083f565b6103a06102a960008051602061139d8339815191525490565b6103bd5760405163d0befa1d60e01b815260040160405180910390fd5b610375600085858585610c23565b60006102e86000610f5b565b60006102e86001610f5b565b6103fc6102a960008051602061139d8339815191525490565b6104195760405163d0befa1d60e01b815260040160405180910390fd5b61037560018585858561094f565b6000610434600083610faa565b92915050565b6000610434600183610faa565b600061043460018361101d565b60006102e86001611082565b600061043460008361101d565b6104866102a960008051602061139d8339815191525490565b6104a35760405163d0befa1d60e01b815260040160405180910390fd5b6102d8600083836110d1565b60006102e86000611082565b6104d46102a960008051602061139d8339815191525490565b6104f15760405163d0befa1d60e01b815260040160405180910390fd5b6102d860008383610620565b6105166102a960008051602061139d8339815191525490565b6105335760405163d0befa1d60e01b815260040160405180910390fd5b6102d8600183836110d1565b6105586102a960008051602061139d8339815191525490565b6105755760405163d0befa1d60e01b815260040160405180910390fd5b610375600185858585610c23565b61059c6102a960008051602061139d8339815191525490565b6105b95760405163d0befa1d60e01b815260040160405180910390fd5b61032e600082610892565b6000610619827fd3889cc5458b268d0544e5534672df1296288ca3f93cbd39bd6f497a5c622811600086815260209190915260409020906001600160a01b038116600090815260018301602052604081205415155b9392505050565b6000805160206113bd833981519152806000856001811115610644576106446112d2565b6001811115610655576106556112d2565b8152602080820192909252604090810160009081206001600160a01b038716825260010190925290205461068990836112fe565b81600086600181111561069e5761069e6112d2565b60018111156106af576106af6112d2565b815260200190815260200160002060030160008282546106cf9190611311565b909155508290508160008660018111156106eb576106eb6112d2565b60018111156106fc576106fc6112d2565b81526020019081526020016000206001016000856001600160a01b03166001600160a01b03168152602001908152602001600020600082825461073f9190611311565b909155507f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c9050838583600082600181111561077d5761077d6112d2565b600181111561078e5761078e6112d2565b81526020019081526020016000206001016000876001600160a01b03166001600160a01b03168152602001908152602001600020548460000160008960018111156107db576107db6112d2565b60018111156107ec576107ec6112d2565b81526020019081526020016000206000016000886001600160a01b03166001600160a01b03168152602001908152602001600020546040516108319493929190611324565b60405180910390a150505050565b60006000805160206113bd8339815191526000836001811115610864576108646112d2565b6001811115610875576108756112d2565b815260208101919091526040016000206004015460ff1692915050565b6000805160206113bd8339815191528060008460018111156108b6576108b66112d2565b60018111156108c7576108c76112d2565b815260208101919091526040016000206004015460ff1615158215150361090157604051634151cc7b60e01b815260040160405180910390fd5b81816000856001811115610917576109176112d2565b6001811115610928576109286112d2565b81526020810191909152604001600020600401805460ff1916911515919091179055505050565b82811461096f576040516311bb761360e01b815260040160405180910390fd5b6000805160206113bd83398151915260005b84811015610c1a5783838281811061099b5761099b61136d565b905060200201358260000160008960018111156109ba576109ba6112d2565b60018111156109cb576109cb6112d2565b815260200190815260200160002060010160008888858181106109f0576109f061136d565b9050602002016020810190610a0591906112b7565b6001600160a01b03166001600160a01b031681526020019081526020016000206000828254610a349190611311565b909155508490508382818110610a4c57610a4c61136d565b90506020020135826000016000896001811115610a6b57610a6b6112d2565b6001811115610a7c57610a7c6112d2565b81526020019081526020016000206003016000828254610a9c9190611311565b909155507f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c9050868683818110610ad557610ad561136d565b9050602002016020810190610aea91906112b7565b88846000826001811115610b0057610b006112d2565b6001811115610b1157610b116112d2565b815260200190815260200160002060010160008a8a87818110610b3657610b3661136d565b9050602002016020810190610b4b91906112b7565b6001600160a01b03166001600160a01b03168152602001908152602001600020548560000160008c6001811115610b8457610b846112d2565b6001811115610b9557610b956112d2565b815260200190815260200160002060000160008b8b88818110610bba57610bba61136d565b9050602002016020810190610bcf91906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054604051610c009493929190611324565b60405180910390a180610c1281611383565b915050610981565b50505050505050565b828114610c43576040516311bb761360e01b815260040160405180910390fd5b6000805160206113bd83398151915260005b84811015610c1a57816000886001811115610c7257610c726112d2565b6001811115610c8357610c836112d2565b81526020019081526020016000206001016000878784818110610ca857610ca861136d565b9050602002016020810190610cbd91906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054848483818110610cf057610cf061136d565b90506020020135610d0191906112fe565b826000896001811115610d1657610d166112d2565b6001811115610d2757610d276112d2565b81526020019081526020016000206003016000828254610d479190611311565b909155508490508382818110610d5f57610d5f61136d565b90506020020135826000016000896001811115610d7e57610d7e6112d2565b6001811115610d8f57610d8f6112d2565b81526020019081526020016000206001016000888885818110610db457610db461136d565b9050602002016020810190610dc991906112b7565b6001600160a01b031681526020810191909152604001600020557f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c868683818110610e1657610e1661136d565b9050602002016020810190610e2b91906112b7565b88846000826001811115610e4157610e416112d2565b6001811115610e5257610e526112d2565b815260200190815260200160002060010160008a8a87818110610e7757610e7761136d565b9050602002016020810190610e8c91906112b7565b6001600160a01b03166001600160a01b03168152602001908152602001600020548560000160008c6001811115610ec557610ec56112d2565b6001811115610ed657610ed66112d2565b815260200190815260200160002060000160008b8b88818110610efb57610efb61136d565b9050602002016020810190610f1091906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054604051610f419493929190611324565b60405180910390a180610f5381611383565b915050610c55565b60006000805160206113bd8339815191526000836001811115610f8057610f806112d2565b6001811115610f9157610f916112d2565b8152602001908152602001600020600201549050919050565b60006000805160206113bd8339815191526000846001811115610fcf57610fcf6112d2565b6001811115610fe057610fe06112d2565b81526020019081526020016000206001016000836001600160a01b03166001600160a01b0316815260200190815260200160002054905092915050565b60006000805160206113bd8339815191526000846001811115611042576110426112d2565b6001811115611053576110536112d2565b8152602080820192909252604090810160009081206001600160a01b0386168252909252902054905092915050565b60006000805160206113bd83398151915260008360018111156110a7576110a76112d2565b60018111156110b8576110b86112d2565b8152602001908152602001600020600301549050919050565b6000805160206113bd833981519152818160008660018111156110f6576110f66112d2565b6001811115611107576111076112d2565b81526020019081526020016000206001016000856001600160a01b03166001600160a01b03168152602001908152602001600020600082825461114a9190611311565b90915550829050816000866001811115611166576111666112d2565b6001811115611177576111776112d2565b8152602001908152602001600020600301600082825461073f9190611311565b80356001600160a01b03811681146111ae57600080fd5b919050565b600080604083850312156111c657600080fd5b6111cf83611197565b946020939093013593505050565b6000602082840312156111ef57600080fd5b8135801515811461061957600080fd5b60008083601f84011261121157600080fd5b50813567ffffffffffffffff81111561122957600080fd5b6020830191508360208260051b850101111561124457600080fd5b9250929050565b6000806000806040858703121561126157600080fd5b843567ffffffffffffffff8082111561127957600080fd5b611285888389016111ff565b9096509450602087013591508082111561129e57600080fd5b506112ab878288016111ff565b95989497509550505050565b6000602082840312156112c957600080fd5b61061982611197565b634e487b7160e01b600052602160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b81810381811115610434576104346112e8565b80820180821115610434576104346112e8565b6001600160a01b0385168152608081016002851061135257634e487b7160e01b600052602160045260246000fd5b84602083015283604083015282606083015295945050505050565b634e487b7160e01b600052603260045260246000fd5b600060018201611395576113956112e8565b506001019056fef6deb63e40d71b08820818e006e23fcceb1fce7a499bc15b71b2526cbf9efa72f38d3885e664c9638de25f02e645e1955ebebe901d7be2c2037db6a5bcbb3588a264697066735822122030da36b2aafacc8abe59be88cb99b7057d90df89bb96148b935699812bd700ce64736f6c63430008130033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061012c5760003560e01c80639a211f1a116100ad578063d3442b7a11610071578063d3442b7a1461023c578063d3d7f6f814610244578063d4aa0d0e14610257578063e2d5c0c91461026a578063f154fba31461027d57600080fd5b80639a211f1a146101e8578063b1716b3e146101fb578063b4f212fa1461020e578063b7ad509014610216578063c0e79a3b1461022957600080fd5b806353fb0c80116100f457806353fb0c801461019157806355880dde146101a45780635fcd6d83146101ba5780637017b4a9146101c25780638e94687d146101d557600080fd5b80630599c74514610131578063286fd540146101465780632978261e146101635780633224a303146101765780633e8b5f8414610189575b600080fd5b61014461013f3660046111b3565b610290565b005b61014e6102dc565b60405190151581526020015b60405180910390f35b6101446101713660046111dd565b6102ed565b61014461018436600461124b565b610331565b61014e61037b565b61014461019f36600461124b565b610387565b6101ac6103cb565b60405190815260200161015a565b6101ac6103d7565b6101446101d036600461124b565b6103e3565b6101ac6101e33660046112b7565b610427565b6101ac6101f63660046112b7565b61043a565b6101ac6102093660046112b7565b610447565b6101ac610454565b6101ac6102243660046112b7565b610460565b6101446102373660046111b3565b61046d565b6101ac6104af565b6101446102523660046111b3565b6104bb565b6101446102653660046111b3565b6104fd565b61014461027836600461124b565b61053f565b61014461028b3660046111dd565b610583565b6102af6102a960008051602061139d8339815191525490565b336105c4565b6102cc5760405163d0befa1d60e01b815260040160405180910390fd5b6102d860018383610620565b5050565b60006102e8600061083f565b905090565b6103066102a960008051602061139d8339815191525490565b6103235760405163d0befa1d60e01b815260040160405180910390fd5b61032e600182610892565b50565b61034a6102a960008051602061139d8339815191525490565b6103675760405163d0befa1d60e01b815260040160405180910390fd5b61037560008585858561094f565b50505050565b60006102e8600161083f565b6103a06102a960008051602061139d8339815191525490565b6103bd5760405163d0befa1d60e01b815260040160405180910390fd5b610375600085858585610c23565b60006102e86000610f5b565b60006102e86001610f5b565b6103fc6102a960008051602061139d8339815191525490565b6104195760405163d0befa1d60e01b815260040160405180910390fd5b61037560018585858561094f565b6000610434600083610faa565b92915050565b6000610434600183610faa565b600061043460018361101d565b60006102e86001611082565b600061043460008361101d565b6104866102a960008051602061139d8339815191525490565b6104a35760405163d0befa1d60e01b815260040160405180910390fd5b6102d8600083836110d1565b60006102e86000611082565b6104d46102a960008051602061139d8339815191525490565b6104f15760405163d0befa1d60e01b815260040160405180910390fd5b6102d860008383610620565b6105166102a960008051602061139d8339815191525490565b6105335760405163d0befa1d60e01b815260040160405180910390fd5b6102d8600183836110d1565b6105586102a960008051602061139d8339815191525490565b6105755760405163d0befa1d60e01b815260040160405180910390fd5b610375600185858585610c23565b61059c6102a960008051602061139d8339815191525490565b6105b95760405163d0befa1d60e01b815260040160405180910390fd5b61032e600082610892565b6000610619827fd3889cc5458b268d0544e5534672df1296288ca3f93cbd39bd6f497a5c622811600086815260209190915260409020906001600160a01b038116600090815260018301602052604081205415155b9392505050565b6000805160206113bd833981519152806000856001811115610644576106446112d2565b6001811115610655576106556112d2565b8152602080820192909252604090810160009081206001600160a01b038716825260010190925290205461068990836112fe565b81600086600181111561069e5761069e6112d2565b60018111156106af576106af6112d2565b815260200190815260200160002060030160008282546106cf9190611311565b909155508290508160008660018111156106eb576106eb6112d2565b60018111156106fc576106fc6112d2565b81526020019081526020016000206001016000856001600160a01b03166001600160a01b03168152602001908152602001600020600082825461073f9190611311565b909155507f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c9050838583600082600181111561077d5761077d6112d2565b600181111561078e5761078e6112d2565b81526020019081526020016000206001016000876001600160a01b03166001600160a01b03168152602001908152602001600020548460000160008960018111156107db576107db6112d2565b60018111156107ec576107ec6112d2565b81526020019081526020016000206000016000886001600160a01b03166001600160a01b03168152602001908152602001600020546040516108319493929190611324565b60405180910390a150505050565b60006000805160206113bd8339815191526000836001811115610864576108646112d2565b6001811115610875576108756112d2565b815260208101919091526040016000206004015460ff1692915050565b6000805160206113bd8339815191528060008460018111156108b6576108b66112d2565b60018111156108c7576108c76112d2565b815260208101919091526040016000206004015460ff1615158215150361090157604051634151cc7b60e01b815260040160405180910390fd5b81816000856001811115610917576109176112d2565b6001811115610928576109286112d2565b81526020810191909152604001600020600401805460ff1916911515919091179055505050565b82811461096f576040516311bb761360e01b815260040160405180910390fd5b6000805160206113bd83398151915260005b84811015610c1a5783838281811061099b5761099b61136d565b905060200201358260000160008960018111156109ba576109ba6112d2565b60018111156109cb576109cb6112d2565b815260200190815260200160002060010160008888858181106109f0576109f061136d565b9050602002016020810190610a0591906112b7565b6001600160a01b03166001600160a01b031681526020019081526020016000206000828254610a349190611311565b909155508490508382818110610a4c57610a4c61136d565b90506020020135826000016000896001811115610a6b57610a6b6112d2565b6001811115610a7c57610a7c6112d2565b81526020019081526020016000206003016000828254610a9c9190611311565b909155507f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c9050868683818110610ad557610ad561136d565b9050602002016020810190610aea91906112b7565b88846000826001811115610b0057610b006112d2565b6001811115610b1157610b116112d2565b815260200190815260200160002060010160008a8a87818110610b3657610b3661136d565b9050602002016020810190610b4b91906112b7565b6001600160a01b03166001600160a01b03168152602001908152602001600020548560000160008c6001811115610b8457610b846112d2565b6001811115610b9557610b956112d2565b815260200190815260200160002060000160008b8b88818110610bba57610bba61136d565b9050602002016020810190610bcf91906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054604051610c009493929190611324565b60405180910390a180610c1281611383565b915050610981565b50505050505050565b828114610c43576040516311bb761360e01b815260040160405180910390fd5b6000805160206113bd83398151915260005b84811015610c1a57816000886001811115610c7257610c726112d2565b6001811115610c8357610c836112d2565b81526020019081526020016000206001016000878784818110610ca857610ca861136d565b9050602002016020810190610cbd91906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054848483818110610cf057610cf061136d565b90506020020135610d0191906112fe565b826000896001811115610d1657610d166112d2565b6001811115610d2757610d276112d2565b81526020019081526020016000206003016000828254610d479190611311565b909155508490508382818110610d5f57610d5f61136d565b90506020020135826000016000896001811115610d7e57610d7e6112d2565b6001811115610d8f57610d8f6112d2565b81526020019081526020016000206001016000888885818110610db457610db461136d565b9050602002016020810190610dc991906112b7565b6001600160a01b031681526020810191909152604001600020557f6526db8cb857c3bc972db45a7984e99efaed17f7a4e51afb85c64450133cb55c868683818110610e1657610e1661136d565b9050602002016020810190610e2b91906112b7565b88846000826001811115610e4157610e416112d2565b6001811115610e5257610e526112d2565b815260200190815260200160002060010160008a8a87818110610e7757610e7761136d565b9050602002016020810190610e8c91906112b7565b6001600160a01b03166001600160a01b03168152602001908152602001600020548560000160008c6001811115610ec557610ec56112d2565b6001811115610ed657610ed66112d2565b815260200190815260200160002060000160008b8b88818110610efb57610efb61136d565b9050602002016020810190610f1091906112b7565b6001600160a01b03166001600160a01b0316815260200190815260200160002054604051610f419493929190611324565b60405180910390a180610f5381611383565b915050610c55565b60006000805160206113bd8339815191526000836001811115610f8057610f806112d2565b6001811115610f9157610f916112d2565b8152602001908152602001600020600201549050919050565b60006000805160206113bd8339815191526000846001811115610fcf57610fcf6112d2565b6001811115610fe057610fe06112d2565b81526020019081526020016000206001016000836001600160a01b03166001600160a01b0316815260200190815260200160002054905092915050565b60006000805160206113bd8339815191526000846001811115611042576110426112d2565b6001811115611053576110536112d2565b8152602080820192909252604090810160009081206001600160a01b0386168252909252902054905092915050565b60006000805160206113bd83398151915260008360018111156110a7576110a76112d2565b60018111156110b8576110b86112d2565b8152602001908152602001600020600301549050919050565b6000805160206113bd833981519152818160008660018111156110f6576110f66112d2565b6001811115611107576111076112d2565b81526020019081526020016000206001016000856001600160a01b03166001600160a01b03168152602001908152602001600020600082825461114a9190611311565b90915550829050816000866001811115611166576111666112d2565b6001811115611177576111776112d2565b8152602001908152602001600020600301600082825461073f9190611311565b80356001600160a01b03811681146111ae57600080fd5b919050565b600080604083850312156111c657600080fd5b6111cf83611197565b946020939093013593505050565b6000602082840312156111ef57600080fd5b8135801515811461061957600080fd5b60008083601f84011261121157600080fd5b50813567ffffffffffffffff81111561122957600080fd5b6020830191508360208260051b850101111561124457600080fd5b9250929050565b6000806000806040858703121561126157600080fd5b843567ffffffffffffffff8082111561127957600080fd5b611285888389016111ff565b9096509450602087013591508082111561129e57600080fd5b506112ab878288016111ff565b95989497509550505050565b6000602082840312156112c957600080fd5b61061982611197565b634e487b7160e01b600052602160045260246000fd5b634e487b7160e01b600052601160045260246000fd5b81810381811115610434576104346112e8565b80820180821115610434576104346112e8565b6001600160a01b0385168152608081016002851061135257634e487b7160e01b600052602160045260246000fd5b84602083015283604083015282606083015295945050505050565b634e487b7160e01b600052603260045260246000fd5b600060018201611395576113956112e8565b506001019056fef6deb63e40d71b08820818e006e23fcceb1fce7a499bc15b71b2526cbf9efa72f38d3885e664c9638de25f02e645e1955ebebe901d7be2c2037db6a5bcbb3588a264697066735822122030da36b2aafacc8abe59be88cb99b7057d90df89bb96148b935699812bd700ce64736f6c63430008130033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "claimedGuaranteedPool(address)": {
+        "returns": {
+          "_0": "The amount claimed from the guaranteed pool by the account"
+        }
+      },
+      "claimedRestrictedPool(address)": {
+        "returns": {
+          "_0": "The amount claimed from the restricted pool by the account "
+        }
+      },
+      "elegibleGuaranteedPool(address)": {
+        "returns": {
+          "_0": "The account elegible amount from the guaranteed pool"
+        }
+      },
+      "elegibleRestrictedPool(address)": {
+        "returns": {
+          "_0": "The account elegible amount from the restricted pool"
+        }
+      },
+      "increaseElegibleGuaranteedPool(address,uint256)": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "account": "The address to add to the whitelist",
+          "amount": "The amount to whitelist for the address"
+        }
+      },
+      "increaseElegibleGuaranteedPoolBatch(address[],uint256[])": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "accounts": "An array of addresses to add to the whitelist",
+          "amounts": "An array of amounts to whitelist for each address"
+        }
+      },
+      "increaseElegibleRestrictedPool(address,uint256)": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "account": "The address to add to the whitelist",
+          "amount": "The amount to whitelist for the address"
+        }
+      },
+      "increaseElegibleRestrictedPoolBatch(address[],uint256[])": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "accounts": "An array of addresses to add to the whitelist",
+          "amounts": "An array of amounts to whitelist for each address"
+        }
+      },
+      "isClaimActiveGuaranteedPool()": {
+        "returns": {
+          "active": "bool indicating if claim is active"
+        }
+      },
+      "isClaimActiveRestrictedPool()": {
+        "returns": {
+          "active": "bool indicating if claim is active"
+        }
+      },
+      "setClaimActiveGuaranteedPool(bool)": {
+        "details": "This function can only be called by an address with the manager role"
+      },
+      "setClaimActiveRestrictedPool(bool)": {
+        "details": "This function can only be called by an address with the manager role"
+      },
+      "setElegibleGuaranteedPool(address,uint256)": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "account": "The address to add to the whitelist",
+          "totalAmount": "The amount to whitelist for the address"
+        }
+      },
+      "setElegibleGuaranteedPoolBatch(address[],uint256[])": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "accounts": "An array of addresses to add to the whitelist",
+          "totalAmounts": "An array of amounts to whitelist for each address"
+        }
+      },
+      "setElegibleRestrictedPool(address,uint256)": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "account": "The address to add to the whitelist",
+          "totalAmount": "The amount to whitelist for the address"
+        }
+      },
+      "setElegibleRestrictedPoolBatch(address[],uint256[])": {
+        "details": "This function can only be called by an address with the manager role",
+        "params": {
+          "accounts": "An array of addresses to add to the whitelist",
+          "totalAmounts": "An array of amounts to whitelist for each address"
+        }
+      },
+      "totalClaimedGuaranteedPool()": {
+        "returns": {
+          "_0": "The total claimed amount from the Guaranteed pool"
+        }
+      },
+      "totalClaimedRestrictedPool()": {
+        "returns": {
+          "_0": "The total claimed amount from the Restricted pool"
+        }
+      },
+      "totalElegibleGuaranteedPool()": {
+        "returns": {
+          "_0": "The total elegible amount from the Guaranteed pool"
+        }
+      },
+      "totalElegibleRestrictedPool()": {
+        "returns": {
+          "_0": "The total elegible amount from the Restricted pool"
+        }
+      }
+    },
+    "title": "WhitelistFacet",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "increaseElegibleGuaranteedPool(address,uint256)": {
+        "notice": "Increase the account whitelist elegible amount in the Guaranteed pool"
+      },
+      "increaseElegibleGuaranteedPoolBatch(address[],uint256[])": {
+        "notice": "Increase the guaranteed pool elegible amounts for multiple addresses"
+      },
+      "increaseElegibleRestrictedPool(address,uint256)": {
+        "notice": "Increase the account whitelist elegible amount in the restricted pool"
+      },
+      "increaseElegibleRestrictedPoolBatch(address[],uint256[])": {
+        "notice": "Increase the restricted pool elegible amounts for multiple addresses"
+      },
+      "isClaimActiveGuaranteedPool()": {
+        "notice": "Returns true if elegible tokens can be claimed in the guaranteed pool, or false otherwise"
+      },
+      "isClaimActiveRestrictedPool()": {
+        "notice": "Returns true if elegible tokens can be claimed in the restricted pool, or false otherwise"
+      },
+      "setClaimActiveGuaranteedPool(bool)": {
+        "notice": "Updates the claim state to active and enables the guaranteed pool token claim"
+      },
+      "setClaimActiveRestrictedPool(bool)": {
+        "notice": "Updates the claim state to active and enables the restricted pool token claim"
+      },
+      "setElegibleGuaranteedPool(address,uint256)": {
+        "notice": "Adds a new address to the Guaranteed Pool with a specific amount"
+      },
+      "setElegibleGuaranteedPoolBatch(address[],uint256[])": {
+        "notice": "Adds multiple addresses to the Guaranteed Pool with specific amounts"
+      },
+      "setElegibleRestrictedPool(address,uint256)": {
+        "notice": "Adds a new address to the Restricted Pool with a specific amount"
+      },
+      "setElegibleRestrictedPoolBatch(address[],uint256[])": {
+        "notice": "Adds multiple addresses to the Restricted Pool with specific amounts"
+      }
+    },
+    "notice": "This contract allows the admins to whitelist an address with a specific amount, which can then be used to claim tokens in other contracts. To consume the whitelist, the token contracts should call the internal functions from WhitelistInternal. This contract can be used as a facet of a diamond which follows the EIP-2535 diamond standard.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}
