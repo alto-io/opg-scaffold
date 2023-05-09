@@ -2,7 +2,7 @@ import hre from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
 import fs from "fs";
 import path from "path";
-import { Item, itemsPath } from "./0_formatLocalData";
+import { Item, itemsPath } from "./utils/interfaces";
 
 
 
@@ -18,11 +18,14 @@ async function main() {
     console.log("Items recipient address: ", recipientAddress);
     const maxItemsPerTransaction = 100;
     
+    // for (let i = 0; i <= itemsAll.length; i += maxItemsPerTransaction) {
     for (let i = 0; i <= itemsAll.length; i += maxItemsPerTransaction) {
 
         let mintItemsTx: Item[] = itemsAll.slice(i, i + maxItemsPerTransaction)
         const itemsIds = mintItemsTx.map((item)=>item.id);
-        const itemsAmounts = mintItemsTx.map((item)=>item.amount);
+        const itemsAmounts = mintItemsTx.map((item)=>item.mintAmount);
+        
+        console.log("inputs: ", recipientAddress, itemsIds, itemsAmounts);
         
         let tx = await itemsSC.mintBatch(recipientAddress, itemsIds, itemsAmounts);
         await tx.wait();

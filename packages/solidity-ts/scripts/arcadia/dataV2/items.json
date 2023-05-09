@@ -4849,5 +4849,14 @@
         "isBasic": true,
         "mintAmount": 1,
         "slotId": 12
+    },
+    {
+        "id": 540,
+        "slotName": "Gender",
+        "layerName": "",
+        "displayName": "Non Binary",
+        "isBasic": true,
+        "mintAmount": 1,
+        "slotId": 6
     }
 ]

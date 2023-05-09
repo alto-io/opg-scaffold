@@ -5,7 +5,7 @@ import path from "path";
 import { ethers } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
 import util from 'util'
-import { ItemSC, Slot, SlotSC, slotsPath } from "./0_formatLocalData";
+import { ItemSC, Slot, SlotSC, slotsPath } from "./utils/interfaces";
 
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 

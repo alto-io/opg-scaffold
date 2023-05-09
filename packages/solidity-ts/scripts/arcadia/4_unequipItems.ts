@@ -2,7 +2,7 @@
 import hre, { ethers } from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
 import { ItemInSlot } from "./6_fetchDataSC";
-import { Slot } from "./0_formatLocalData";
+import { Slot } from "./utils/interfaces";
 
 async function main() {
 
