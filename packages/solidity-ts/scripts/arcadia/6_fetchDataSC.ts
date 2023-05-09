@@ -4,7 +4,7 @@ import fs from "fs";
 import { BigNumber, ethers } from "ethers";
 import path from "path";
 import getDeployedContracts from "./utils/deployedContracts";
-import { Item, ItemSC, Slot, SlotSC } from "./0_formatLocalData";
+import { Item, ItemSC, Slot, SlotSC } from "./utils/interfaces";
 
 export interface ItemInSlot {
     slotId: any,

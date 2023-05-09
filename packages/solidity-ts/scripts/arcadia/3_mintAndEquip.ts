@@ -2,7 +2,7 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
-import { Item, ItemSC, Slot, itemsPath, slotsPath } from "./0_formatLocalData";
+import { Item, ItemSC, Slot, itemsPath, slotsPath } from "./utils/interfaces";
 import fs from "fs";
 
 const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());

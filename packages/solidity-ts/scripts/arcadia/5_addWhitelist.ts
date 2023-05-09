@@ -5,7 +5,7 @@ import getDeployedContracts from "./utils/deployedContracts";
 import fs from "fs";
 import path from "path";
 
-export interface ClaimableToken {
+interface ClaimableToken {
     elegibleAddress: string,
     amount: number
 }
