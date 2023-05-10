@@ -73,7 +73,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @param account account to query
      * @return balance amount of arcadians that can be minted
      */
-    function balanceMint(address account) external view returns (uint balance) {
+    function availableMints(address account) external view returns (uint balance) {
         return  ArcadiansStorage.layout().maxMintPerUser - (_balanceOf(account) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, account)) + _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, account);
     }
 

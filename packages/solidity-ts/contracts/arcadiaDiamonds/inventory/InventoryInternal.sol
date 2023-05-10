@@ -366,6 +366,20 @@ contract InventoryInternal is
         emit SlotCreated(msg.sender, newSlot, permanent, isBase);
     }
 
+    function _setSlotBase(
+        uint slotId,
+        bool isBase
+    ) internal onlyValidSlot(slotId) {
+        InventoryStorage.layout().slots[slotId].isBase = isBase;
+    }
+
+    function _setSlotPermanent(
+        uint slotId,
+        bool permanent
+    ) internal onlyValidSlot(slotId) {
+        InventoryStorage.layout().slots[slotId].permanent = permanent;
+    }
+
     function _addBaseModifierCoupons(
         address account,
         uint[] calldata slotIds,
@@ -432,12 +446,9 @@ contract InventoryInternal is
             if (!items[i].erc721Contract.isContract()) 
                 revert Inventory_InvalidERC1155Contract();
 
-            if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] > 0) {
-
-                if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] == slotId) 
-                    continue;
-
-                _disallowItemInSlotUnchecked(slotId, items[i]);
+            uint currentAllowedSlot = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+            if (currentAllowedSlot > 0 && currentAllowedSlot != slotId) {
+                _disallowItemInSlotUnchecked(currentAllowedSlot, items[i]);
             }
             inventorySL.allowedItems[slotId].push(items[i]);
             inventorySL.itemSlot[items[i].erc721Contract][items[i].id] = slotId;
@@ -450,12 +461,9 @@ contract InventoryInternal is
         uint slotId,
         InventoryStorage.Item[] calldata items
     ) internal virtual onlyValidSlot(slotId) {
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
+        
         for (uint i = 0; i < items.length; i++) {
-            if (inventorySL.itemSlot[items[i].erc721Contract][items[i].id] == slotId) {
-                _disallowItemInSlotUnchecked(slotId, items[i]);
-            }
+            _disallowItemInSlotUnchecked(slotId, items[i]);
         }
 
         emit ItemsAllowedInSlotUpdated(msg.sender, slotId);
