@@ -15,38 +15,65 @@ async function main() {
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
     let slotsSC: SlotSC[] = await getAllSlots(inventorySC);
-    console.log("allSlots before: ", slotsSC.map((slot)=>{
-        (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
-        return slot;
-    }));
+    // console.log("allSlots before: ", slotsSC.map((slot)=>{
+    //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
+    //     return slot;
+    // }));
     
     for (let i = 0; i < slotsAll.length; i++) {
         const slot = slotsAll[i];
-        const matchingSlot = slotsSC.find((slot)=>slot.id == slot.id);
-        if (!matchingSlot) {
+        const slotSC = slotsSC.find((slotSC)=>slotSC.id == slot.id);
+        if (!slotSC) {
             const allowedItems = slot.allowedItems.map((itemId):ItemSC=>({erc721Contract: itemsSC.address, id:itemId}))
             console.log("create slot: ", slot);
             let tx = await inventorySC.createSlot(slot.permanent, slot.isBase, allowedItems);
             await tx.wait();
         } else {
-            const allowedItemsMissing = matchingSlot.allowedItems.filter((item: ItemSC)=>{
-                return !slotsSC[i].allowedItems.some((item: ItemSC)=> {
-                    return item.erc721Contract == item.erc721Contract && item.id == item.id
-                })
-            })
-            console.log("slot " + slot.id + " is updated");
-            if (allowedItemsMissing.length == 0) continue; 
+            // setup missing allowed item ids
+            
+            const allowedItemsIdsMissing = slot.allowedItems
+                .filter((itemId: number)=> !slotSC.allowedItems.some((itemSC: ItemSC)=>itemSC.id == itemId))
 
-            console.log("slot " + slot.id + " allowedItemsMissing: ", allowedItemsMissing);
-            let tx = await inventorySC.allowItemsInSlot(slot.id, allowedItemsMissing);
-            await tx.wait();
+            const allowedItemsMissing: ItemSC[] = allowedItemsIdsMissing.map((itemId: number)=>({erc721Contract: itemsSC.address, id: itemId}));
+
+            if (allowedItemsMissing.length > 0) {
+                console.log("-> slot " + slot.id + " allowedItemsMissing: ", allowedItemsMissing);
+                let tx = await inventorySC.allowItemsInSlot(slot.id, allowedItemsMissing);
+                await tx.wait();
+            } else {
+                console.log("slot " + slot.id + " allowed slots is updated");
+            }
+
+            const allowedItemsIdsExtra = slotSC.allowedItems
+                .filter((itemSC: ItemSC)=> !slot.allowedItems.some((itemId: number)=>itemSC.id == itemId))
+
+            if (allowedItemsIdsExtra.length > 0) {
+                console.log("-> slot " + slot.id + " allowedItemsIdsExtra: ", allowedItemsIdsExtra);
+                let tx = await inventorySC.disallowItemsInSlot(slot.id, allowedItemsIdsExtra);
+                await tx.wait();
+            }
+
+            // Setup slot 'permanent' property
+            if (slotSC.permanent != slot.permanent) {
+                console.log("-> slot " + slot.id + " updating 'permanent' to ", slot.permanent);
+                let tx = await inventorySC.setSlotPermanent(slot.id, slot.permanent);
+                await tx.wait();
+            }
+
+            // Setup slot 'isBase' property
+            if (slotSC.isBase != slot.isBase) {
+                
+                console.log("-> slot " + slot.id + " updating 'isBase' to ", slot.isBase);
+                let tx = await inventorySC.setSlotBase(slot.id, slot.isBase);
+                await tx.wait();
+            }
         }
     }
-    slotsSC = await getAllSlots(inventorySC);
-    console.log("allSlots after: ", slotsSC.map((slot)=>{
-        (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
-        return slot;
-    }));
+    // slotsSC = await getAllSlots(inventorySC);
+    // console.log("allSlots after: ", slotsSC.map((slot)=>{
+    //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
+    //     return slot;
+    // }));
 }
 async function getAllSlots(inventorySC: ethers.Contract) {
     const slotsSC: SlotSC[] = [];

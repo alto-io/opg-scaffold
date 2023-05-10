@@ -4,20 +4,16 @@
     "inventorySC": "0xD9f3f71f253F6DEcbccdfcc4429E53e105e287A7",
     "arcadiansSC": "0xD9f3f71f253F6DEcbccdfcc4429E53e105e287A7",
     "arcadiansOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-    "ownedArcadians": [
-        1
-    ],
     "itemsOwner": "0xaD733B7055eCAebFb3B38626f0148c5d12158F03",
-    "ownedItems": [],
     "inventorySlots": [
         {
             "id": 1,
             "permanent": true,
             "isBase": false,
             "allowedItems": [
-                530,
-                531,
-                532,
+                535,
+                536,
+                537,
                 533,
                 534
             ]
@@ -46,11 +42,11 @@
                 134,
                 135,
                 136,
-                137,
-                138,
-                139,
-                140,
-                141
+                115,
+                114,
+                113,
+                116,
+                117
             ]
         },
         {
@@ -71,11 +67,11 @@
                 338,
                 339,
                 340,
-                341,
-                342,
-                343,
-                344,
-                345
+                325,
+                324,
+                323,
+                326,
+                327
             ]
         },
         {
@@ -83,7 +79,7 @@
             "permanent": false,
             "isBase": false,
             "allowedItems": [
-                444
+                439
             ]
         },
         {
@@ -104,12 +100,11 @@
                 455,
                 456,
                 457,
-                458,
-                459,
-                460,
-                461,
-                462,
-                463
+                443,
+                442,
+                441,
+                440,
+                444
             ]
         },
         {
@@ -117,8 +112,9 @@
             "permanent": false,
             "isBase": true,
             "allowedItems": [
-                535,
-                536
+                540,
+                538,
+                539
             ]
         },
         {
@@ -164,17 +160,17 @@
                 177,
                 178,
                 179,
-                180,
-                181,
-                182,
-                183,
-                184
+                139,
+                138,
+                137,
+                140,
+                141
             ]
         },
         {
             "id": 8,
             "permanent": false,
-            "isBase": false,
+            "isBase": true,
             "allowedItems": [
                 17,
                 18,
@@ -253,11 +249,11 @@
                 223,
                 224,
                 225,
-                226,
-                227,
-                228,
-                229,
-                230
+                182,
+                181,
+                180,
+                183,
+                184
             ]
         },
         {
@@ -357,12 +353,12 @@
                 320,
                 321,
                 322,
-                323,
-                324,
-                325,
-                326,
-                327,
-                529
+                229,
+                228,
+                227,
+                226,
+                520,
+                230
             ]
         },
         {
@@ -463,11 +459,11 @@
                 436,
                 437,
                 438,
-                439,
-                440,
-                441,
-                442,
-                443
+                344,
+                343,
+                342,
+                341,
+                345
             ]
         },
         {
@@ -542,11 +538,8 @@
                 110,
                 111,
                 112,
-                113,
-                114,
-                115,
-                116,
-                117
+                532,
+                527
             ]
         },
         {
@@ -610,15 +603,22 @@
                 517,
                 518,
                 519,
-                520,
+                462,
                 521,
                 522,
                 523,
                 524,
                 525,
                 526,
-                527,
-                528
+                461,
+                528,
+                529,
+                530,
+                531,
+                460,
+                463,
+                459,
+                458
             ]
         },
         {
@@ -644,79 +644,5 @@
                 16
             ]
         }
-    ],
-    "equippedArcadians": {
-        "1": [
-            {
-                "slotSc": 1,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 530
-            },
-            {
-                "slotSc": 2,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 118
-            },
-            {
-                "slotSc": 3,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 328
-            },
-            {
-                "slotSc": 4,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 444
-            },
-            {
-                "slotSc": 5,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 445
-            },
-            {
-                "slotSc": 6,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 535
-            },
-            {
-                "slotSc": 7,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 142
-            },
-            {
-                "slotSc": 8,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 17
-            },
-            {
-                "slotSc": 9,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 185
-            },
-            {
-                "slotSc": 10,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 231
-            },
-            {
-                "slotSc": 11,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 346
-            },
-            {
-                "slotSc": 12,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 46
-            },
-            {
-                "slotSc": 13,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 464
-            },
-            {
-                "slotSc": 14,
-                "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
-                "itemId": 1
-            }
-        ]
-    }
+    ]
 }

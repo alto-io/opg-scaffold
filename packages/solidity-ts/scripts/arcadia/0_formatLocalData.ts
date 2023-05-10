@@ -1,16 +1,29 @@
 // import { ethers } from "ethers";
 import fs from "fs";
 import path from "path";
-import { ClaimableItem, ClaimableItemsObj, Item, Slot, claimableItemsPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath } from "./utils/interfaces";
+import { ClaimableItem, ClaimableItemsObj, Item, ItemKeys, Slot, claimableItemsPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath, stackMintingORAPath } from "./utils/interfaces";
 
 const itemsClaimConverterPathObj: ClaimableItemsObj = JSON.parse(fs.readFileSync(itemsClaimConverterPath).toString());
-const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
+let itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
 async function main() {
-    
+
+    // Convert items keys names
+    let itemsString = JSON.stringify(itemsAll);
+    const itemsKeys = Object.keys(ItemKeys);
+    const itemsValues = Object.values(ItemKeys);
+    for (let i = 0; i < itemsKeys.length; i++) {
+        itemsString = itemsString.replaceAll(itemsValues[i], itemsKeys[i])
+    }
+    let modified = JSON.stringify(itemsAll) != itemsString;
+    if (modified) {
+        console.log("$ Add slot id to items item. Path: ", itemsPath);
+        fs.writeFileSync(itemsPath, itemsString);
+    }
+
     // Add slot id field to each item
-    let modified = false;
+    modified = false;
     for (let i = 0; i < itemsAll.length; i++) {
         const slot = slotsAll.find((s)=>s.name == itemsAll[i].slotName);
         if (slot) {
@@ -27,7 +40,7 @@ async function main() {
         fs.writeFileSync(itemsPath, JSON.stringify(itemsAll));
     }
 
-    // Add items v2 id
+    // Set claimable v2 items
     const claimableSlots = ["Headgear", "Left Hand", "Right Hand", "Bottom", "Top", "Accessory"]
     const owners = Object.keys(itemsClaimConverterPathObj);
     modified = false;
@@ -73,7 +86,6 @@ async function main() {
     console.log("$ Set claimable v2 items. Path: ", claimableItemsPath);
     fs.writeFileSync(claimableItemsPath, JSON.stringify(claimableItemsList));
 
-
     // Create items v2 merkle input
     // type: [[address, itemId, amount], ...]
     let itemsMerkle: any[] = [];
@@ -90,18 +102,20 @@ async function main() {
 
 
     // setup allowed items for each slot
-    modified = false;
+    for (let i = 0; i < slotsAll.length; i++) {
+        slotsAll[i].allowedItems = [];
+    }
     for (let i = 0; i < itemsAll.length; i++) {
         const slotIndex = slotsAll.findIndex((slot)=>slot.id == itemsAll[i].slotId)
-        if (!slotsAll[slotIndex].allowedItems.includes(itemsAll[i].id)) {
-            slotsAll[slotIndex].allowedItems.push(itemsAll[i].id);
-            modified = true;
+        const itemId = itemsAll[i].id;
+        
+        if (!slotsAll[slotIndex].allowedItems.includes(itemId)) {
+            slotsAll[slotIndex].allowedItems.push(itemId);
+            // console.log("slots id ", slotsAll[slotIndex].id, " add item: ", itemId);
         }
     }
-    if (modified) {
-        console.log("$ Setup allowed items for each slot. Path: ", slotsPath);
-        fs.writeFileSync(slotsPath, JSON.stringify(slotsAll));
-    }
+    console.log("$ Setup allowed items for each slot. Path: ", slotsPath);
+    fs.writeFileSync(slotsPath, JSON.stringify(slotsAll));
 }
 
 main().catch((error) => {

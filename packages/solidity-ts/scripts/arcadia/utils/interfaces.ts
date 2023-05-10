@@ -13,6 +13,24 @@ export interface SlotSC {
     isBase: boolean,
     allowedItems: ItemSC[]
 }
+
+export const ItemKeys = {
+    id: "Smart Contract ID",
+    layerName: "Layer Name",
+    displayName: "Display Name",
+    slotId: "slotId",
+    slotName: "Slot Name",
+    isBasic: "Is Basic",
+    mintAmount: "Mint Amount",
+    description: "Description",
+    rarity: "Rarity",
+    pairName: "Pair Name",
+    mirrorName: "Mirror Name",
+    mirrorId: "Mirror ID",
+    set: "Set",
+    image: "Image"
+}
+
 export interface Item {
     id: number,
     layerName: string, // only used to read the ora file
@@ -48,6 +66,7 @@ export interface ClaimableItemsObj {
     [owner: string]: ItemV1V2Converter[]
 }
 
+export const stackMintingORAPath = path.join(__dirname, "../dataV2/stackMintingORA.json");
 export const claimableItemsPath = path.join(__dirname, "../output/claimableItemsV2.json");
 export const itemsClaimConverterPath = path.join(__dirname, "../dataV2/itemsClaimConverter.json");
 export const itemsPath = path.join(__dirname, "../dataV2/items.json");
