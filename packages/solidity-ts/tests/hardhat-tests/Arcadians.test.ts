@@ -7,6 +7,7 @@ import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
 import { BigNumber, ethers } from 'ethers';
 import { Item } from './Items.test';
+import { SlotSC } from '~scripts/arcadia/utils/interfaces';
 
 export const TOKENS_PATH_ARCADIANS = path.join(__dirname, "../mocks/ownedArcadiansMock.json");
 
@@ -48,8 +49,8 @@ describe('Arcadians Diamond whitelist', function () {
 
         // mint balance
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
-        let balanceMint: BigNumber = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser);
+        let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
 
         // add to whitelist
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
@@ -62,8 +63,8 @@ describe('Arcadians Diamond whitelist', function () {
             .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
         const claimAmount = 1;
         await arcadiansContracts.whitelistFacet.increaseElegibleGuaranteedPool(bob.address, claimAmount);
-        balanceMint = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser.add(claimAmount));
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser.add(claimAmount));
         
         expect(await arcadiansContracts.whitelistFacet.elegibleGuaranteedPool(bob.address)).to.be.equal(claimAmount);
         expect(await arcadiansContracts.whitelistFacet.claimedGuaranteedPool(bob.address)).to.be.equal(0);
@@ -78,8 +79,8 @@ describe('Arcadians Diamond whitelist', function () {
         expect(await arcadiansContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(claimAmount-1);
         expect(await arcadiansContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(claimAmount);
 
-        balanceMint = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser);
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
 
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
@@ -176,8 +177,8 @@ describe('Arcadians Diamond whitelist', function () {
 
         // mint balance
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
-        let balanceMint: BigNumber = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser);
+        let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
 
         // increase elegible amount
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
@@ -190,14 +191,14 @@ describe('Arcadians Diamond whitelist', function () {
         expect(await arcadiansContracts.whitelistFacet.totalElegibleRestrictedPool()).to.be.equal(claimAmount);
         expect(await arcadiansContracts.whitelistFacet.totalClaimedRestrictedPool()).to.be.equal(0);
 
-        balanceMint = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser);
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
 
         // mint & equip arcadian
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
 
-        balanceMint = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser.sub(1));
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser.sub(1));
 
         expect(await arcadiansContracts.whitelistFacet.elegibleRestrictedPool(bob.address)).to.be.equal(claimAmount-1);
         expect(await arcadiansContracts.whitelistFacet.claimedRestrictedPool(bob.address)).to.be.equal(claimAmount);
@@ -274,6 +275,67 @@ describe('Arcadians Diamond whitelist', function () {
     })
 })
 
+describe('setup existent slots', function () {
+    it('Should be able to switch the slot base and permanent properties', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
+        
+        const slotId = slots[0].id;
+        await arcadiansContracts.inventoryFacet.createSlot(slots[slotId].permanent, slots[slotId].isBase, items.filter((item)=> slots[slotId].itemsIdsAllowed?.includes(item.id)));
+        
+        await arcadiansContracts.inventoryFacet.setSlotPermanent(slotId, false);
+        await arcadiansContracts.inventoryFacet.setSlotBase(slotId, false);
+        let slot: SlotSC = await arcadiansContracts.inventoryFacet.slot(slotId);
+        expect(slot.isBase).to.be.false;
+        expect(slot.permanent).to.be.false;
+
+        await arcadiansContracts.inventoryFacet.setSlotPermanent(slotId, true);
+        await arcadiansContracts.inventoryFacet.setSlotBase(slotId, true);
+        slot = await arcadiansContracts.inventoryFacet.slot(slotId);
+        expect(slot.isBase).to.be.true;
+        expect(slot.permanent).to.be.true;
+    })
+
+    it('Should be able to allow and disallow items in slots', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
+        
+        const slotId = slots[0].id;
+        const slotId2 = slots[1].id;
+        let allowedItems = items.slice(0, 5);
+        await arcadiansContracts.inventoryFacet.createSlot(slots[slotId].permanent, slots[slotId].isBase, allowedItems);
+        await arcadiansContracts.inventoryFacet.createSlot(slots[slotId].permanent, slots[slotId].isBase, []);
+        for (let i = 0; i < allowedItems.length; i++) {
+            let allowedSlotId: number = await arcadiansContracts.inventoryFacet.allowedSlot(allowedItems[i]);
+            expect(allowedSlotId).to.be.equal(slotId)
+        }
+        let numAllowedItems: number = await arcadiansContracts.inventoryFacet.numAllowedItems(slotId);
+        expect(numAllowedItems).to.be.equal(allowedItems.length)
+
+        await arcadiansContracts.inventoryFacet.disallowItemsInSlot(slotId, allowedItems);
+        for (let i = 0; i < allowedItems.length; i++) {
+            let allowedSlotId: number = await arcadiansContracts.inventoryFacet.allowedSlot(allowedItems[i]);
+            expect(allowedSlotId).to.be.equal(0)
+        }
+        numAllowedItems = await arcadiansContracts.inventoryFacet.numAllowedItems(slotId);
+        expect(numAllowedItems).to.be.equal(0)
+
+        await arcadiansContracts.inventoryFacet.allowItemsInSlot(slotId, allowedItems);
+        for (let i = 0; i < allowedItems.length; i++) {
+            let allowedSlotId: number = await arcadiansContracts.inventoryFacet.allowedSlot(allowedItems[i]);
+            expect(allowedSlotId).to.be.equal(slotId)
+        }
+        numAllowedItems = await arcadiansContracts.inventoryFacet.numAllowedItems(slotId);
+        expect(numAllowedItems).to.be.equal(allowedItems.length)
+        
+
+        await arcadiansContracts.inventoryFacet.allowItemsInSlot(slotId2, allowedItems);
+        for (let i = 0; i < allowedItems.length; i++) {
+            expect(await arcadiansContracts.inventoryFacet.allowedSlot(allowedItems[i])).to.be.equal(slotId2)
+        }
+        expect(await arcadiansContracts.inventoryFacet.numAllowedItems(slotId)).to.be.equal(0)
+        expect(await arcadiansContracts.inventoryFacet.numAllowedItems(slotId2)).to.be.equal(allowedItems.length)
+    })
+})
+
 describe('mint restrictions', function () {
     it('Should be able to open and close public mint', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
@@ -321,4 +383,4 @@ describe('mint max limit per user', function () {
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
     })
-});
+})

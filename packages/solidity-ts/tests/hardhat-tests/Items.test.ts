@@ -155,14 +155,14 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         // mint balance
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
-        let balanceMint: BigNumber = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser);
+        let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
 
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.true;
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
         
-        balanceMint = await arcadiansContracts.arcadiansFacet.balanceMint(bob.address);
-        expect(balanceMint).to.be.equal(maxMintPerUser.sub(1));
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser.sub(1));
 
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
