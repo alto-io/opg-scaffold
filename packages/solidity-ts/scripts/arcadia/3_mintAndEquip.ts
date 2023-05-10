@@ -2,7 +2,7 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
-import { Item, ItemSC, Slot, itemsPath, slotsPath } from "./utils/interfaces";
+import { Item, ItemKeys, ItemSC, Slot, itemsPath, slotsPath } from "./utils/interfaces";
 import fs from "fs";
 
 const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
@@ -19,8 +19,10 @@ async function main() {
     const itemsToEquip: ItemSC[] = [];
     for (const slot of slotsAll) {
         const item = itemsAll.find((item, i)=>item.slotId == slot.id)
-        // const item = itemsAll.findLast((item, i)=>item.slotId == slot.id)
-        itemsToEquip.push({erc721Contract: itemsSC.address, id: item?.id as number});
+        // const item = itemsAll.findLast((item, i)=>(item.slotId]  == slot.id)
+        console.log("slot: ", slot.id, ", item: ", (item as any).id);
+        
+        itemsToEquip.push({erc721Contract: itemsSC.address, id: (item as any).id as number});
     }
 
     const itemsToEquipIds = itemsToEquip.map((item)=>item.id)
@@ -34,6 +36,8 @@ async function main() {
     }
 
     const payAmount = await arcadiansSC.mintPrice()
+    
+    console.log("itemsToEquip: ", itemsToEquip);
     
     const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip);
     if (!isArcadianUnique) {
