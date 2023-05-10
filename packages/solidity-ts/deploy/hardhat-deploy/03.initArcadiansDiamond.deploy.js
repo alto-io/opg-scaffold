@@ -6,7 +6,7 @@ import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } f
 import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 
 // Diamond init params
-export const baseArcadianURI = "https://arcadians.sandbox.outplay.games/v2/arcadians/";
+export const baseArcadianURI = "https://arcadians.dev.outplay.games/v2/arcadians/";
 export const maxMintPerUser = 2;
 export const mintPrice = 0;
 
