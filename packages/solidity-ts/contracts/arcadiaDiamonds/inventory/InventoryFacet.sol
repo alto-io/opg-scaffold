@@ -77,6 +77,32 @@ contract InventoryFacet is
     }
 
     /**
+     * @notice Sets the slot permanent property
+     * @dev This function is only accessible to the manager role
+     * @dev Slots are 1-indexed
+     * @param permanent Whether or not the slot is permanent
+     */
+    function setSlotPermanent(
+        uint slotId,
+        bool permanent
+    ) external onlyManager {
+        _setSlotPermanent(slotId, permanent);
+    }
+
+    /**
+     * @notice Sets the slot base property
+     * @dev This function is only accessible to the manager role
+     * @dev Slots are 1-indexed
+     * @param isBase Whether or not the slot is base
+     */
+    function setSlotBase(
+        uint slotId,
+        bool isBase
+    ) external onlyManager {
+        _setSlotBase(slotId, isBase);
+    }
+
+    /**
      * @notice Returns the number coupons available for an account that allow to modify the base traits
      * @param account The accounts to increase the number of coupons
      * @param slotId The slot to get the coupon amount from
