@@ -22,13 +22,6 @@ export const ItemKeys = {
     slotName: "Slot Name",
     isBasic: "Is Basic",
     mintAmount: "Mint Amount",
-    description: "Description",
-    rarity: "Rarity",
-    pairName: "Pair Name",
-    mirrorName: "Mirror Name",
-    mirrorId: "Mirror ID",
-    set: "Set",
-    image: "Image"
 }
 
 export interface Item {

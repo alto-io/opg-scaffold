@@ -46,6 +46,10 @@ async function main() {
         for (let i = 0; i < numAllowedItems.toNumber(); i++) {
             let allowedItem: ItemSC = await inventorySC.allowedItem(slot.id, i)
             allowedItems.push({erc721Contract: allowedItem.erc721Contract, id: (allowedItem.id as any).toNumber() });
+            let allowedSlot: number = (await inventorySC.allowedSlot(allowedItem)).toNumber()
+            if (allowedSlot != slot.id) {
+                console.log("WARNING: slot.id: ", slot.id, ", allowedSlot:  ", allowedSlot);
+            }
         }
         
         slots.push({

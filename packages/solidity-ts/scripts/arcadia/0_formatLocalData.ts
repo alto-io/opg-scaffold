@@ -16,16 +16,27 @@ async function main() {
     for (let i = 0; i < itemsKeys.length; i++) {
         itemsString = itemsString.replaceAll(itemsValues[i], itemsKeys[i])
     }
+    itemsString = itemsString.replaceAll('"TRUE"', "true")
+    itemsString = itemsString.replaceAll('"FALSE"', "false")
+
     let modified = JSON.stringify(itemsAll) != itemsString;
-    if (modified) {
-        console.log("$ Add slot id to items item. Path: ", itemsPath);
-        fs.writeFileSync(itemsPath, itemsString);
+    itemsAll = JSON.parse(itemsString);
+
+    for (let i = 0; i < itemsAll.length; i++) {
+        itemsAll[i].id = Number(itemsAll[i].id);
+        itemsAll[i].mintAmount = Number(itemsAll[i].mintAmount);
     }
+
+    console.log("$ Convert items keys names. Path: ", itemsPath);
+    fs.writeFileSync(itemsPath, JSON.stringify(itemsAll));
+    
 
     // Add slot id field to each item
     modified = false;
     for (let i = 0; i < itemsAll.length; i++) {
         const slot = slotsAll.find((s)=>s.name == itemsAll[i].slotName);
+        console.log("itemsAll[i].slotName: ", itemsAll[i].slotName);
+        
         if (slot) {
             if (itemsAll[i].slotId != slot.id) {
                 itemsAll[i].slotId = slot.id;
