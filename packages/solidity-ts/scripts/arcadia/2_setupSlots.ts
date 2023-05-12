@@ -9,6 +9,10 @@ import { ItemSC, Slot, SlotSC, slotsPath } from "./utils/interfaces";
 
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
+const MAKE_TRANSACTION = false;
+console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
+
+
 async function main() {
 
     const network = hre.network.name;
@@ -26,8 +30,10 @@ async function main() {
         if (!slotSC) {
             const allowedItems = slot.allowedItems.map((itemId):ItemSC=>({erc721Contract: itemsSC.address, id:itemId}))
             console.log("create slot: ", slot);
-            let tx = await inventorySC.createSlot(slot.permanent, slot.isBase, allowedItems);
-            await tx.wait();
+            if (MAKE_TRANSACTION) {
+                let tx = await inventorySC.createSlot(slot.permanent, slot.isBase, allowedItems);
+                await tx.wait();
+            }
         } else {
             // setup missing allowed item ids
             
@@ -38,8 +44,10 @@ async function main() {
 
             if (allowedItemsMissing.length > 0) {
                 console.log("-> slot " + slot.id + " allowedItemsMissing: ", allowedItemsMissing);
-                let tx = await inventorySC.allowItemsInSlot(slot.id, allowedItemsMissing);
-                await tx.wait();
+                if (MAKE_TRANSACTION) {
+                    let tx = await inventorySC.allowItemsInSlot(slot.id, allowedItemsMissing);
+                    await tx.wait();
+                }
             } else {
                 console.log("slot " + slot.id + " allowed slots is updated");
             }
@@ -49,23 +57,29 @@ async function main() {
 
             if (allowedItemsIdsExtra.length > 0) {
                 console.log("-> slot " + slot.id + " allowedItemsIdsExtra: ", allowedItemsIdsExtra);
-                let tx = await inventorySC.disallowItemsInSlot(slot.id, allowedItemsIdsExtra);
-                await tx.wait();
+                if (MAKE_TRANSACTION) {
+                    let tx = await inventorySC.disallowItemsInSlot(slot.id, allowedItemsIdsExtra);
+                    await tx.wait();
+                }
             }
 
             // Setup slot 'permanent' property
             if (slotSC.permanent != slot.permanent) {
                 console.log("-> slot " + slot.id + " updating 'permanent' to ", slot.permanent);
-                let tx = await inventorySC.setSlotPermanent(slot.id, slot.permanent);
-                await tx.wait();
-            }
+                if (MAKE_TRANSACTION) {
+                    let tx = await inventorySC.setSlotPermanent(slot.id, slot.permanent);
+                    await tx.wait();
+                }
+        }
 
             // Setup slot 'isBase' property
             if (slotSC.isBase != slot.isBase) {
                 
                 console.log("-> slot " + slot.id + " updating 'isBase' to ", slot.isBase);
-                let tx = await inventorySC.setSlotBase(slot.id, slot.isBase);
-                await tx.wait();
+                if (MAKE_TRANSACTION) {
+                    let tx = await inventorySC.setSlotBase(slot.id, slot.isBase);
+                    await tx.wait();
+                }
             }
         }
     }

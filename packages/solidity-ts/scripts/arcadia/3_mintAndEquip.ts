@@ -15,7 +15,7 @@ async function main() {
     
     const recipientAddress = await arcadiansSC.signer.getAddress();
     console.log("recipientAddress: ", recipientAddress);
-    
+
     const itemsToEquip: ItemSC[] = [];
     for (const slot of slotsAll) {
         const item = itemsAll.find((item, i)=>item.slotId == slot.id)
@@ -57,6 +57,105 @@ async function main() {
         const equippedAll = await inventorySC.equippedAll(arcadianId);
         console.log("Arcadian ", arcadianId.toNumber(), " equipment: ", equippedAll);
     }
+
+    
+    // Check uniqueness to see error cause
+    // const itemsToEquip = [
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 539
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 451
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 154
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 120
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 328
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 491
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 95
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 21
+    //     }
+    // ]
+
+    // const baseSlotsIds = slotsAll.filter((slot)=>slot.isBase).map((slot)=>slot.id)
+    // console.log("baseSlotsIds: ", baseSlotsIds);
+    
+
+    // console.log("itemsToEquip: ", itemsToEquip);
+    
+    // const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip);
+    // console.log("isArcadianUnique: ", isArcadianUnique);
+    
+
+
+
+    // Mint to see error cause
+    // const itemsToEquip: ItemSC[] = [
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 538
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 453
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 163
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 133
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 325
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 70
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 70
+    //     },
+    //     {
+    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "id": 19
+    //     }
+    // ]
+
+    // const isArcadianUnique = await inventorySC.isArcadianUnique(0, itemsToEquip);
+    // console.log("isArcadianUnique: ", isArcadianUnique);
+    
+    // if (!isArcadianUnique) {
+    //     console.log("Not minting arcadian because equipments is not unique");
+    //     return;
+    // }
+    
+    // let tx = await arcadiansSC.mintAndEquip(itemsToEquip, {value: 0});
+    // console.log("tx: ", tx);
+    
+    // tx = await tx.wait();
+    // console.log("tx2: ", tx);
 }
 
 main().catch((error) => {

@@ -1,7 +1,7 @@
 // import { ethers } from "ethers";
 import hre, { ethers } from "hardhat";
 import getDeployedContracts from "./utils/deployedContracts";
-import { ItemInSlot } from "./6_fetchDataSC";
+import { ItemInSlot } from "./7_fetchDataSC";
 import { Slot } from "./utils/interfaces";
 
 async function main() {
