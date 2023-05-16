@@ -312,6 +312,7 @@ describe('Items Diamond merkle Test', function () {
         }
     })
 
+    // TODO: IMPORTANT: ON PRODUCTION REVERT CHANGED ON ITEMS MERKLE CLAIM, TO AVOID INFINITE CLAIM
     it('should not able to claim the same tokens twice', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const ids = [1, 2];

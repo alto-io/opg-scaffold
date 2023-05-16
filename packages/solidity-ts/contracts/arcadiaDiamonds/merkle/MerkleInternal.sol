@@ -47,8 +47,9 @@ contract MerkleInternal is RolesInternal {
 
         if (merkleSL.claimInactive) revert Merkle_ClaimInactive();
 
+        // TODO: IMPORTANT: ON PRODUCTION REVERT CHANGED ON ITEMS MERKLE CLAIM, TO AVOID INFINITE CLAIM
         bytes32 proofHash = keccak256(abi.encodePacked(proof));
-        if (merkleSL.claimedProof[proofHash]) revert Merkle_AlreadyClaimed();
+        // if (merkleSL.claimedProof[proofHash]) revert Merkle_AlreadyClaimed();
 
         bytes32 leaf = keccak256(bytes.concat(keccak256(_leaf)));
         bool isValid = MerkleProof.verify(proof, merkleSL.merkleRoot, leaf);
