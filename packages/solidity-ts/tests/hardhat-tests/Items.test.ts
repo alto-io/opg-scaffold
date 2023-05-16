@@ -7,7 +7,7 @@ import { expect } from 'chai';
 import path from "path";
 import { loadFixture } from '@nomicfoundation/hardhat-network-helpers';
 
-import deployAndInitContractsFixture from './fixtures/deployAndInitContractsFixture';
+import deployAndInitContractsFixture, { ItemTest, convertItemsSC } from './fixtures/deployAndInitContractsFixture';
 import { baseItemURI } from 'deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 import { baseArcadianURI } from 'deploy/hardhat-deploy/03.initArcadiansDiamond.deploy';
 
@@ -90,66 +90,23 @@ describe('Items Diamond Test', function () {
     })
 })
 
-
-describe('Items basic items tests', function () {
-    it('non-deployer should be able to mint basic item', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
-
-        const itemId = basicItemsIds[0];
-        const amount = 2;
-        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mint(namedAddresses.bob, basicItemsIds[0], amount);
-        expect(await itemsContracts.itemsFacet.balanceOf(namedAddresses.bob, itemId)).to.be.equal(amount);
-    });
-
-    it('non-deployer should be able to mint basic items in batch', async () => {
-        
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
-
-        const basicItemAmounts = basicItemsIds.map((id, i)=>i % 2 + 1)
-
-        let basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
-        expect(basicItems).to.be.eql(basicItemsIds);
-
-        await itemsContracts.itemsFacet.connect(namedAccounts.bob).mintBatch(namedAddresses.bob, basicItemsIds, basicItemAmounts);
-        const accounts = basicItemsIds.map(()=>namedAddresses.bob)
-        const balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, basicItemsIds)).map((itemId: BigNumber)=> itemId.toNumber());
-        expect(balanceBatch).to.be.eql(basicItemAmounts);
-
-        await itemsContracts.itemsFacet.setBasicBatch(basicItemsIds, basicItemsIds.map((id)=>false));
-        basicItems = (await itemsContracts.itemsFacet.basicItems()).map((itemId: BigNumber)=> itemId.toNumber());
-        expect(basicItems).to.be.eql([]);
-    });
-});
-
 describe('Items Diamond Mint, equip and unequip items flow', function () {
     it('should be able to equip and unequip items from an arcadian', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items } = await loadFixture(deployAndInitContractsFixture);
 
         const bob = namedAccounts.bob;
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
+            const allowedItemsSC = convertItemsSC(allowedItems);
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
         }
 
-        // mint items
-        const itemAmount = 1;
-        const basicItems = items.filter((item)=>basicItemsIds.includes(item.id))
-        const basicItemsAmounts = basicItemsIds.map(()=>itemAmount)
-        await itemsContracts.itemsFacet.mintBatch(bob.address, basicItemsIds, basicItemsAmounts);
-        // Multitransaction example
-        // const mintEncoded = itemsContracts.itemsFacet.interface.encodeFunctionData("mintBatch", [bob.address, basicItemsIds, basicItemsAmounts]);
-        // await itemsContracts.itemsFacet.connect(bob).multicall([mintEncoded, ...]);
-        
         // mint arcadian
-        let nonBasicItems = items.filter((item)=>!basicItemsIds.includes(item.id))
-        let nonBasicItemsIds = nonBasicItems.map((item)=>item.id)
-        let nonBasicItemsAmounts = nonBasicItemsIds.map(()=>itemAmount)
-        
-        await itemsContracts.itemsFacet.mintBatch(bob.address, nonBasicItemsIds, nonBasicItemsAmounts);
-        
-        let slotsIdsToEquip = slots.map(slot=>slot.id);
-        let itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
+        const basicItems = items.filter((item: ItemTest)=>item.isBasic)
+        let nonBasicItems = items.filter((item: ItemTest)=>!item.isBasic)
+        let itemsToEquip = convertItemsSC(basicItems)
 
         await arcadiansContracts.arcadiansFacet.openPublicMint();
 
@@ -157,75 +114,69 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
         let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
         expect(availableMints).to.be.equal(maxMintPerUser);
-
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.true;
+
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
         
         availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
         expect(availableMints).to.be.equal(maxMintPerUser.sub(1));
-
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
-
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
             expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
         }
-        
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
-
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         let expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
+        const nonBaseSlotsIds = slots.filter((slot: Slot)=> !slot.isBase && !slot.permanent).map((slot: Slot)=>slot.id)
         
-        const nonBaseSlotsIds = slots.reduce((acc: number[], slot: Slot)=>{
-            if (!slot.isBase) {
-                acc.push(slot.id);
-            }
-            return acc;
-        }, []);
         await arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds);
         
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
-        
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
-            const isBaseSlot = slots.find((slot)=>slot.id == equippedItems[i].slotId)?.isBase;
+            const slot = slots.find((slot)=>slot.id == equippedItems[i].slotId);
+            const isBaseOrPermanent = slot?.isBase || slot?.permanent;
             const item = items.find((item)=>item.id == equippedItems[i].itemId);
-            expect(equippedItems[i].itemId).to.be.equal(isBaseSlot ? item?.id : 0);
-            expect(equippedItems[i].erc721Contract).to.be.equal(isBaseSlot ? item?.erc721Contract : ethers.constants.AddressZero);
+            expect(equippedItems[i].itemId).to.be.equal(isBaseOrPermanent ? item?.id : 0);
+            expect(equippedItems[i].erc721Contract).to.be.equal(isBaseOrPermanent ? item?.address : ethers.constants.AddressZero);
         }
-
         arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
-        
-        const slotsIdsToReequip = [];
-        const itemsToReequip = [];
-        for (let i = 0; i < slotsIdsToEquip.length; i++) {
-            const slotId = slotsIdsToEquip[i];
-            if (nonBaseSlotsIds.includes(slotId)) {
-                slotsIdsToReequip.push(slotId);
-                itemsToReequip.push(itemsToEquip[i])
-            }
-        }
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip);
 
         // re-equip base slots
-        const baseSlots = slots.filter((slot)=>slot.isBase && !slot.permanent);
+        const itemsToReequip = basicItems.filter((item: ItemTest) => {
+            const itemSlot = slots.find((slot:Slot)=>item.slotId == slot.id)
+            return !itemSlot?.isBase && !itemSlot?.permanent
+        });
+        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, convertItemsSC(itemsToReequip));
+
+
+        // re-equip non-base slots with non basic items
+        const reequipSlots = slots.filter((slot)=>!slot.permanent);
+        const baseSlots = reequipSlots.filter((slot)=>slot.isBase);
         const baseSlotsIds = baseSlots.map((slot)=>slot.id);
-        const couponsAmounts = baseSlots.map(()=>itemAmount);
-        const itemsBaseSlots = baseSlots.map(slot=>items.find((item)=>item.id == slot.itemsIdsAllowed[1]));
+        const couponsAmounts = baseSlotsIds.map(()=>1);
+        const itemsReequip: ItemTest[] = reequipSlots.map((slot)=> nonBasicItems.find((item)=>item.slotId == slot.id) as ItemTest);
         
         await arcadiansContracts.inventoryFacet.addBaseModifierCoupons(bob.address, baseSlotsIds, couponsAmounts);
-        // const baseModifierCouponAll = await arcadiansContracts.inventoryFacet.getBaseModifierCouponAll(bob.address);
-
         for (let i = 0; i < baseSlotsIds.length; i++) {
             expect(await arcadiansContracts.inventoryFacet.getBaseModifierCoupon(bob.address, baseSlotsIds[i])).
                 to.be.equal(couponsAmounts[i])
         }
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsBaseSlots);
+        
+        const itemsToMint = itemsReequip.filter((item: ItemTest) => {
+            const itemSlot = slots.find((slot:Slot)=>item.slotId == slot.id) as Slot
+            return !itemSlot.isBase && !itemSlot.permanent
+        });
+        const itemsToMintIds = itemsToMint.map((item: ItemTest) => item.id)
+        const itemsToMintAmount = itemsToMintIds.map(() => 1)
+        await itemsContracts.itemsFacet.mintBatch(bob.address, itemsToMintIds, itemsToMintAmount);
+        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, convertItemsSC(itemsReequip));
 
         for (let i = 0; i < baseSlotsIds.length; i++) {
             expect(await arcadiansContracts.inventoryFacet.getBaseModifierCoupon(bob.address, baseSlotsIds[i])).
@@ -235,7 +186,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
     it('should trigger errors when equipping and unequipping an arcadian', async () => {
         
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, basicItemsIds } = await loadFixture(deployAndInitContractsFixture);
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items } = await loadFixture(deployAndInitContractsFixture);
 
         const bob = namedAccounts.bob;
 
@@ -245,85 +196,82 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidERC1155Contract");
 
         for (let i = 0; i < slots.length; i++) {
-            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, items.filter((item)=> slots[i].itemsIdsAllowed?.includes(item.id)));
+            const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, convertItemsSC(allowedItems));
         }
 
         // mint items
-        const itemAmount = 2;
-        const basicItems = items.filter((item)=>basicItemsIds.includes(item.id))
-        const basicItemsAmounts = basicItemsIds.map(()=>itemAmount)
-
         await expect(itemsContracts.itemsFacet.safeTransferFrom(namedAddresses.alice, namedAddresses.bob, 1, 1, "0x00")).
             to.be.revertedWithCustomError(itemsContracts.itemsFacet, "ERC1155Base__NotOwnerOrApproved");
         
-        const excessAmounts = basicItemsAmounts.map(()=>4)
-        await expect(itemsContracts.itemsFacet.connect(bob).mintBatch(bob.address, basicItemsIds, excessAmounts)).
-            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Items_MaximumItemMintsExceeded");
         const allItemsIds = items.map((item)=>item.id)
-        await expect(itemsContracts.itemsFacet.connect(bob).mintBatch(bob.address, allItemsIds, basicItemsAmounts)).
-            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Items_MintingNonBasicItem");
-        await itemsContracts.itemsFacet.connect(bob).mintBatch(bob.address, basicItemsIds, basicItemsAmounts);
+        await expect(itemsContracts.itemsFacet.connect(bob).mintBatch(bob.address, [], [])).
+            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Roles_MissingManagerRole");
 
         // mint arcadian
         await arcadiansContracts.arcadiansFacet.openPublicMint();
-        let nonBasicItems = items.filter((item)=>!basicItemsIds.includes(item.id))
-        
-        let nonBasicItemsIds = nonBasicItems.map((item)=>item.id)
-        let nonBasicItemsAmounts = nonBasicItemsIds.map(()=>itemAmount)
-        
-        await itemsContracts.itemsFacet.mintBatch(bob.address, nonBasicItemsIds, nonBasicItemsAmounts);
-        
-        let slotsIdsToEquip = slots.map(slot=>slot.id);
-        let itemsToEquip = slots.map(_slot=>items.find((_item)=>_item.id == _slot.itemsIdsAllowed[0]));
 
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: 0})).
+        const itemAmount = 2;
+        const basicItems = items.filter((item: ItemTest)=>item.isBasic)
+        const basicItemsIds = basicItems.map((item: ItemTest)=>item.id)
+        const basicItemsAmounts = basicItemsIds.map(()=>itemAmount)
+        let nonBasicItems = items.filter((item: ItemTest)=>!item.isBasic)
+        let nonBasicItemsIds = nonBasicItems.map((item)=>item.id)
+        const nonBasicItemsAmounts = nonBasicItemsIds.map(()=>itemAmount)
+        let basicItemsSC = convertItemsSC(basicItems)
+        let nonBasicItemsSC = convertItemsSC(nonBasicItems)
+
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(basicItemsSC, {value: 0})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount")
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotSpecified")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([itemsToEquip[0]], {value: arcadiansParams.mintPrice})).
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([basicItemsSC[0]], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
-        await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+        await expect(arcadiansContracts.arcadiansFacet.mintAndEquip(nonBasicItemsSC, {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InsufficientItemBalance")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip.filter((v, i)=>i != 5), {value: arcadiansParams.mintPrice})).
+
+        await itemsContracts.itemsFacet.mintBatch(bob.address, nonBasicItemsIds, nonBasicItemsAmounts);
+            
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(nonBasicItemsSC.filter((v, i)=>i != 3), {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
-        await expect(arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip.filter((v, i)=>i != 5))).
+        await expect(arcadiansContracts.inventoryFacet.isArcadianUnique(0, basicItemsSC.filter((v, i)=>i != 3))).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
             
-        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(basicItemsSC, {value: arcadiansParams.mintPrice})
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(basicItemsSC, {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ArcadianNotUnique")
 
+            
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
         
-        const nonBaseSlotsIds = slots.filter((slot)=>!slot.isBase).map((slot)=>slot.id)
+        const slotsToUnequip = slots.filter((slot)=>!slot.isBase && !slot.permanent).map((slot)=>slot.id)
         const permanentSlots = slots.filter((slot)=>slot.permanent)
         const permanentSlotsIds = permanentSlots.map((slot)=>slot.id)
         await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, [permanentSlots[0].id])).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingPermanentSlot")
-        const baseSlotsIds = slots.filter((slot)=>slot.isBase && !permanentSlotsIds.includes(slot.id)).map((slot)=>slot.id)
-        const nonPermanentBaseSlotsIds = baseSlotsIds.filter((slotId)=>!permanentSlotsIds.includes(slotId))
+
+        const nonPermanentBaseSlots = slots.filter((slot)=> !slot.permanent && slot.isBase)
+        const nonPermanentBaseSlotsIds = nonPermanentBaseSlots.map((slot)=> slot.id)
         await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonPermanentBaseSlotsIds)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingBaseSlot")
 
-        await arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds);
-        await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds)).
+        await arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, slotsToUnequip);
+        await expect(arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, slotsToUnequip)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_UnequippingEmptySlot")
-        
-        const itemsToReequip = [];
-        for (let i = 0; i < slotsIdsToEquip.length; i++) {
-            const slotId = slotsIdsToEquip[i];
-            if (nonBaseSlotsIds.includes(slotId)) {
-                itemsToReequip.push(itemsToEquip[i])
-            }
-        }
 
-        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToEquip)).
+        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, basicItemsSC)).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_CouponNeededToModifyBaseSlots")
-            
-        await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip.slice(0,1));
+
+        const baseSlots = slots.filter((slot)=> slot.isBase)
+        const baseSlotsIds = baseSlots.map((slot)=> slot.id)
+        await expect(arcadiansContracts.inventoryFacet.addBaseModifierCoupons(bob.address, permanentSlotsIds, permanentSlotsIds.map(()=>1))).
+            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NonBaseSlot")
+
+        const couponsAmounts = nonPermanentBaseSlotsIds.map(()=>1);
+        await arcadiansContracts.inventoryFacet.addBaseModifierCoupons(bob.address, nonPermanentBaseSlotsIds, couponsAmounts);
         
-        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, itemsToReequip.slice(0,1))).
+        await expect(arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, [basicItemsSC[3]])).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemAlreadyEquippedInSlot")
     })
 })

@@ -11,6 +11,17 @@ import initArcadiansDiamond, { baseArcadianURI } from '../../../deploy/hardhat-d
 import initItemsDiamond, { baseItemURI } from '../../../deploy/hardhat-deploy/04.initItemsDiamond.deploy';
 import { Item, Slot } from '../Items.test';
 
+export interface ItemTest {
+    id: number,
+    address: string,
+    isBasic: boolean,
+    slotId: number,
+}
+
+export function convertItemsSC (itemsTest: ItemTest[]): Item[] {
+    return itemsTest.map((item: ItemTest): Item =>  ({erc721Contract: item.address, id: item.id}))
+}
+
 export default async function deployAndInitContractsFixture() {
     const deploymentHardhatPath = path.join(__dirname, '../../../generated/hardhat/deployments/hardhat');
     if (fs.existsSync(deploymentHardhatPath)) {
@@ -79,33 +90,36 @@ export default async function deployAndInitContractsFixture() {
 
     const slots: Slot[] = [
         { permanent: true, isBase: true, id: 1, itemsIdsAllowed: [1, 2] },
-        { permanent: false, isBase: true, id: 2, itemsIdsAllowed: [3, 4] },
+        { permanent: true, isBase: false, id: 2, itemsIdsAllowed: [3, 4] },
         { permanent: false, isBase: true, id: 3, itemsIdsAllowed: [5, 6] },
         { permanent: false, isBase: true, id: 4, itemsIdsAllowed: [7, 8] },
-        { permanent: false, isBase: true, id: 5, itemsIdsAllowed: [9, 10] },
-        { permanent: false, isBase: true, id: 6, itemsIdsAllowed: [11, 12] },
-        { permanent: false, isBase: true, id: 7, itemsIdsAllowed: [13, 14] },
-        { permanent: false, isBase: true, id: 8, itemsIdsAllowed: [15, 16] },
-        { permanent: false, isBase: false, id: 9, itemsIdsAllowed: [17, 18] },
-        { permanent: false, isBase: false, id: 10, itemsIdsAllowed: [19, 20] },
-        { permanent: false, isBase: false, id: 11, itemsIdsAllowed: [21, 22] },
-        { permanent: false, isBase: false, id: 12, itemsIdsAllowed: [23, 24] },
-        { permanent: false, isBase: false, id: 13, itemsIdsAllowed: [25, 26] },
-        { permanent: false, isBase: false, id: 14, itemsIdsAllowed: [27, 28] },
-        { permanent: false, isBase: false, id: 15, itemsIdsAllowed: [29, 30] },
-        { permanent: false, isBase: false, id: 16, itemsIdsAllowed: [31, 32] },
-        { permanent: false, isBase: false, id: 17, itemsIdsAllowed: [33, 34] },
+        { permanent: false, isBase: false, id: 5, itemsIdsAllowed: [9, 10] },
+        { permanent: false, isBase: false, id: 6, itemsIdsAllowed: [11, 12] },
     ]
-    const items: Item[] = Array.from({length: 34}, (v, i)=>({ erc721Contract: itemsContracts.itemsFacet.address, id: i + 1 }))
 
-    const basicItemsIds: number[] = items.reduce((acc: number[], item)=>{
-        if (item.id % 3 == 0) {
-            acc.push(item.id);
-        }
-        return acc;
-    }, [])
+    const items: ItemTest[] = [
+        { address: itemsContracts.itemsFacet.address, id: 1, isBasic: true, slotId: 1 },
+        { address: itemsContracts.itemsFacet.address, id: 2, isBasic: false, slotId: 1 },
+        { address: itemsContracts.itemsFacet.address, id: 3, isBasic: true, slotId: 2 },
+        { address: itemsContracts.itemsFacet.address, id: 4, isBasic: false, slotId: 2 },
+        { address: itemsContracts.itemsFacet.address, id: 5, isBasic: true, slotId: 3 },
+        { address: itemsContracts.itemsFacet.address, id: 6, isBasic: false, slotId: 3 },
+        { address: itemsContracts.itemsFacet.address, id: 7, isBasic: true, slotId: 4 },
+        { address: itemsContracts.itemsFacet.address, id: 8, isBasic: false, slotId: 4 },
+        { address: itemsContracts.itemsFacet.address, id: 9, isBasic: true, slotId: 5 },
+        { address: itemsContracts.itemsFacet.address, id: 10, isBasic: false, slotId: 5 },
+        { address: itemsContracts.itemsFacet.address, id: 11, isBasic: true, slotId: 6 },
+        { address: itemsContracts.itemsFacet.address, id: 12, isBasic: false, slotId: 6 }
+    ]
+
+    const itemsTransferRequired: boolean[] = items.map((item: ItemTest) => {
+        const itemSlot = slots.find((slot: Slot) => slot.id == item.slotId) as Slot;
+        return !item.isBasic && !itemSlot.isBase && !itemSlot.permanent;
+    })
     
-    await itemsContracts.itemsFacet.setBasicBatch(basicItemsIds, basicItemsIds.map(()=>true));
+    console.log("input: ", convertItemsSC(items), itemsTransferRequired);
+    
+    await arcadiansContracts.inventoryFacet.setItemsTransferRequired(convertItemsSC(items), itemsTransferRequired);
 
-    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, basicItemsIds };
+    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items };
 }

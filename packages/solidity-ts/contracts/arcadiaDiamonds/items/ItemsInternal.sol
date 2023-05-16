@@ -75,14 +75,6 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         internal
     {
         if (itemId < 1) revert Items_InvalidItemId();
-        
-        if (!_hasRole(_managerRole(), msg.sender)) {
-            if (!ItemsStorage.layout().isBasicItem[itemId]){
-                revert Items_MintingNonBasicItem();
-            } else if (_balanceOf(msg.sender, itemId) + amount > MAX_BASIC_ITEM_PER_USER) {
-                revert Items_MaximumItemMintsExceeded();
-            }
-        }
 
         ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
@@ -92,65 +84,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     {
         if (itemsIds.min() < 1) revert Items_InvalidItemId();
 
-        if (!_hasRole(_managerRole(), msg.sender)) {
-            ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-            for (uint i = 0; i < itemsIds.length; i++) {
-                if (!itemsSL.isBasicItem[itemsIds[i]]) {
-                    revert Items_MintingNonBasicItem();
-                } else if (_balanceOf(msg.sender, itemsIds[i]) + amounts[i] > MAX_BASIC_ITEM_PER_USER) {
-                    revert Items_MaximumItemMintsExceeded();
-                }
-            }
-        }
-        
         ERC1155BaseInternal._mintBatch(to, itemsIds, amounts, "");
-    }
-
-    function _addBasicItem(uint itemId) internal {
-        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (!itemsSL.isBasicItem[itemId]) {
-            itemsSL.isBasicItem[itemId] = true;
-            itemsSL.basicItemsIds.push(itemId);
-        }
-    }
-
-    function _setBasicItem(uint itemId, bool isBasic) internal {
-        if (isBasic) {
-            _addBasicItem(itemId);
-        } else {
-            _removeBasicItem(itemId);
-        }
-    }
-
-    function _setBasicItemBatch(uint[] calldata itemIds, bool[] calldata isBasic) internal {
-        for (uint i = 0; i < itemIds.length; i++) {
-            _setBasicItem(itemIds[i], isBasic[i]);
-        }
-    }
-
-    function _removeBasicItem(uint itemId) internal {
-        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
-        if (!itemsSL.isBasicItem[itemId]) {
-            return;
-        }
-
-        uint numBasicItemsIds = itemsSL.basicItemsIds.length;
-        for (uint i = 0; i < numBasicItemsIds; i++) {
-            if (itemsSL.basicItemsIds[i] == itemId) {
-                itemsSL.basicItemsIds[i] = itemsSL.basicItemsIds[numBasicItemsIds-1];
-                itemsSL.basicItemsIds.pop();
-                break;
-            }
-        }
-        delete itemsSL.isBasicItem[itemId];
-    }
-    
-    function _isBasic(uint itemId) internal view returns (bool) {
-        return ItemsStorage.layout().isBasicItem[itemId];
-    }
-
-    function _basicItems() internal view returns (uint[] storage) {
-        return ItemsStorage.layout().basicItemsIds;
     }
 
     function _migrateToIPFS(string calldata newBaseURI, bool migrate) internal {

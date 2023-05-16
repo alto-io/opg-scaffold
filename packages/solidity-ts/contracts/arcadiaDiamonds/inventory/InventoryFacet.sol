@@ -139,6 +139,18 @@ contract InventoryFacet is
     }
 
     /**
+     * @notice Sets the items transfer required on equip
+     * @param items The list of items
+     * @param requiresTransfer If it requires item transfer to be equipped
+     */
+    function setItemsTransferRequired(
+        InventoryStorage.Item[] calldata items,
+        bool[] calldata requiresTransfer
+    ) external onlyManager {
+        _setItemsTransferRequired(items, requiresTransfer);
+    }
+
+    /**
      * @notice Adds items to the list of allowed items for an inventory slot
      * @param slotId The slot id
      * @param items The list of items to allow in the slot

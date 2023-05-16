@@ -64,62 +64,27 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
-     * @notice Mints a new item. Only minter role account can mint non-basic items
+     * @notice Mints a new item. Only minter role account can mint
      * @param to The address to mint the item to
      * @param itemId The ID of the item to mint
      * @param amount The item amount to be minted
      */
     function mint(address to, uint256 itemId, uint256 amount)
-        public
+        public onlyManager
     {
         _mint(to, itemId, amount);
     }
 
     /**
-     * @notice Mint a batch of items to a specific address. Only minter role account can mint non-basic items
+     * @notice Mint a batch of items to a specific address. Only minter role account can mint
      * @param to The address to receive the minted items
      * @param itemIds An array of items IDs to be minted
      * @param amounts The items amounts to be minted
      */
     function mintBatch(address to, uint256[] calldata itemIds, uint256[] calldata amounts)
-        public
+        public onlyManager
     {
         _mintBatch(to, itemIds, amounts);
-    }
-
-    /**
-     * @notice Add an item to the basic item pool
-     * @param itemId The item ID
-     * @param basic A boolean representing if a item shoud be set as basic
-     */
-    function setBasic(uint itemId, bool basic) external onlyManager {
-        _setBasicItem(itemId, basic);
-    }
-
-    /**
-     * @notice Add items to the basic item pool
-     * @param itemIds The IDs of the items to set as basic
-     * @param basic An array of boolean's representing if the items shoud be set as basic
-     */
-    function setBasicBatch(uint[] calldata itemIds, bool[] calldata basic) external onlyManager {
-        _setBasicItemBatch(itemIds, basic);
-    }
-
-    /**
-     * @notice Returns true if an item is basic, false otherwise
-     * @param itemId The item ID to query 
-     * @return isBasic Bool that indicates if an item is basic
-     */
-    function isBasic(uint itemId) external view returns (bool) {
-        return _isBasic(itemId);
-    }
-
-    /**
-     * @notice Returns all the basic items
-     * @return itemIds The IDs of all the basic items
-     */
-    function basicItems() external view returns (uint[] memory itemIds) {
-        return _basicItems();
     }
 
     /**

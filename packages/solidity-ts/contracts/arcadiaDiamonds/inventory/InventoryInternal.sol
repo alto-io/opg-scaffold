@@ -97,6 +97,10 @@ contract InventoryInternal is
         return InventoryStorage.layout().numSlots;
     }
 
+    function _transferRequired(InventoryStorage.Slot storage slot) internal view returns (bool required) {
+        required = !slot.isBase && !slot.permanent;
+    }
+
     function _equip(
         uint arcadianId,
         InventoryStorage.Item[] calldata items,
@@ -169,17 +173,20 @@ contract InventoryInternal is
         if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0))
             _unequipUnchecked(arcadianId, slotId);
 
-        IERC1155 erc1155Contract = IERC1155(item.erc721Contract);
-        if (erc1155Contract.balanceOf(msg.sender, item.id) < 1)
-            revert Inventory_InsufficientItemBalance();
+        bool requiresTransfer = inventorySL.requiresTransfer[item.erc721Contract][item.id];
+        if (requiresTransfer) {
+            IERC1155 erc1155Contract = IERC1155(item.erc721Contract);
+            if (erc1155Contract.balanceOf(msg.sender, item.id) < 1)
+                revert Inventory_InsufficientItemBalance();
 
-        erc1155Contract.safeTransferFrom(
-            msg.sender,
-            address(this),
-            item.id,
-            1,
-            ''
-        );
+            erc1155Contract.safeTransferFrom(
+                msg.sender,
+                address(this),
+                item.id,
+                1,
+                ''
+            );
+        }
 
         inventorySL.equippedItems[arcadianId][slotId] = item;
     }
@@ -205,14 +212,17 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
 
-        IERC1155 erc1155Contract = IERC1155(existingItem.erc721Contract);
-        erc1155Contract.safeTransferFrom(
-            address(this),
-            msg.sender,
-            existingItem.id,
-            1,
-            ''
-        );
+        bool requiresTransfer = inventorySL.requiresTransfer[existingItem.erc721Contract][existingItem.id];
+        if (requiresTransfer) {
+            IERC1155 erc1155Contract = IERC1155(existingItem.erc721Contract);
+            erc1155Contract.safeTransferFrom(
+                address(this),
+                msg.sender,
+                existingItem.id,
+                1,
+                ''
+            );
+        }
         delete inventorySL.equippedItems[arcadianId][slotId];
     }
 
@@ -436,6 +446,18 @@ contract InventoryInternal is
         return coupons;
     }
 
+    function _setItemsTransferRequired(
+        InventoryStorage.Item[] calldata items,
+        bool[] calldata requiresTransfer
+    ) internal {
+        if (items.length != requiresTransfer.length)
+            revert Inventory_InputDataMismatch();
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+        for (uint i = 0; i < items.length; i++) {
+            inventorySL.requiresTransfer[items[i].erc721Contract][items[i].id] = requiresTransfer[i];
+        }
+    }
+    
     function _allowItemsInSlot(
         uint slotId,
         InventoryStorage.Item[] calldata items
@@ -461,7 +483,7 @@ contract InventoryInternal is
         uint slotId,
         InventoryStorage.Item[] calldata items
     ) internal virtual onlyValidSlot(slotId) {
-        
+
         for (uint i = 0; i < items.length; i++) {
             _disallowItemInSlotUnchecked(slotId, items[i]);
         }
