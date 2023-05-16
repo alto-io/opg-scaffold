@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import { Item, ItemKeys, itemsPath } from "./utils/interfaces";
 
-export const itemsAll = JSON.parse(fs.readFileSync(itemsPath).toString());
+const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 
 async function main() {
     const network = hre.network.name;

@@ -12,7 +12,7 @@
     "script:mint-and-equip": "npx hardhat run ./scripts/arcadia/3_mintAndEquip.ts --network",
     "script:unequip-items": "npx hardhat run ./scripts/arcadia/4_unequipItems.ts --network",
     "script:add-whitelist": "npx hardhat run ./scripts/arcadia/5_addWhitelist.ts --network",
-    "script:set-basic-items": "npx hardhat run ./scripts/arcadia/6_setBasicItems.ts --network",
+    "script:set-transfer-required": "npx hardhat run ./scripts/arcadia/6_setTransferRequired.ts --network",
     "script:fetch-data": "npx hardhat run ./scripts/arcadia/7_fetchDataSC.ts --network",
     "deploy": "npx hardhat deploy --network",
     "chain:hardhat": "cross-env BUILDING=true hardhat node --network hardhat --no-deploy",

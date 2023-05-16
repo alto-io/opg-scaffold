@@ -4,7 +4,7 @@ import fs from "fs";
 import { BigNumber, ethers } from "ethers";
 import path from "path";
 import getDeployedContracts from "./utils/deployedContracts";
-import { Item, ItemSC, Slot, SlotSC } from "./utils/interfaces";
+import { Item, ItemSC, Slot, SlotSC, itemsPath, slotsPath } from "./utils/interfaces";
 
 export interface ItemInSlot {
     slotId: any,
@@ -13,6 +13,9 @@ export interface ItemInSlot {
 }
 
 const dataSCPath = path.join(__dirname, "output/dataSC.json");
+
+const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
+const slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
 async function main() {
 
@@ -38,27 +41,7 @@ async function main() {
     //     ownedItems.push({itemId: tokensByAccount[i].toNumber(), balance: balance.toNumber()});
     // }
 
-    let slotsAll: SlotSC[] = await inventorySC.slotsAll();
-    const slots: Slot[] = [];
-    for (const slot of slotsAll) {
-        const allowedItems: ItemSC[] = [];
-        const numAllowedItems: BigNumber = await inventorySC.numAllowedItems(slot.id)
-        for (let i = 0; i < numAllowedItems.toNumber(); i++) {
-            let allowedItem: ItemSC = await inventorySC.allowedItem(slot.id, i)
-            allowedItems.push({erc721Contract: allowedItem.erc721Contract, id: (allowedItem.id as any).toNumber() });
-            let allowedSlot: number = (await inventorySC.allowedSlot(allowedItem)).toNumber()
-            if (allowedSlot != slot.id) {
-                console.log("WARNING: slot.id: ", slot.id, ", allowedSlot:  ", allowedSlot);
-            }
-        }
-        
-        slots.push({
-            id: (slot.id as any).toNumber(),
-            permanent: slot.permanent,
-            isBase: slot.isBase,
-            allowedItems: allowedItems.map((item)=>item.id)
-        })
-    }
+    let slots: SlotSC[] = await getAllSlots(inventorySC, itemsSC);
 
     // const equippedArcadians: any = {};
     // for (const arcadianId of ownedArcadians) {
@@ -86,6 +69,43 @@ async function main() {
         // equippedArcadians
     };
     fs.writeFileSync(dataSCPath, JSON.stringify(dataSC));
+}
+
+async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
+    let slotsSC: SlotSC[] = [];
+
+    const numSlots = await inventorySC.numSlots();
+    if (numSlots == 0) {
+        return slotsSC;
+    }
+
+    // Initialize
+    for (let i = 0; i < slotsAll.length; i++) {
+        const slotId = slotsAll[i].id;
+        let slotSC = await inventorySC.slot(slotId);
+        
+        let slot: SlotSC = {
+            id: slotSC.id.toNumber(),
+            isBase: slotSC.isBase,
+            permanent: slotSC.permanent,
+            allowedItems: []
+        };
+        slotsSC.push(slot);
+    }
+
+    // Get slot for each item
+    for (let i = 0; i < itemsAll.length; i++) {
+        const itemSC: ItemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id}
+        const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
+        slotsSC = slotsSC.map((slot: SlotSC)=> {
+            if (slot.id === allowedSlot) {
+                slot.allowedItems.push(itemSC);
+            }
+            return slot;
+        })
+        
+    }
+    return slotsSC;
 }
 
 main().catch((error) => {
