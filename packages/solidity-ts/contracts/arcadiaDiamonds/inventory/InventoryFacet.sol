@@ -164,14 +164,12 @@ contract InventoryFacet is
     
     /**
      * @notice Removes items from the list of allowed items
-     * @param slotId The ID of the inventory slot
      * @param items The list of items to disallow in the slot
      */
-    function disallowItemsInSlot(
-        uint slotId,
+    function disallowItems(
         InventoryStorage.Item[] calldata items
     ) external onlyManager {
-        _disallowItemsInSlot(slotId, items);
+        _disallowItems(items);
     }
 
     /**
@@ -181,25 +179,6 @@ contract InventoryFacet is
      */
     function allowedSlot(InventoryStorage.Item calldata item) external view returns (uint) {
         return _allowedSlot(item);
-    }
-
-    /**
-     * @notice Returns the allowed item for a given slot and the index
-     * @param slotId The slot id to query
-     * @param index The index of the item
-     * @return A list of all the items that are allowed in the slot
-     */
-    function allowedItem(uint slotId, uint index) external view returns (InventoryStorage.Item memory) {
-        return _allowedItem(slotId, index);
-    }
-
-    /**
-     * @notice Returns the number of allowed items for a given slot
-     * @param slotId The slot id to check
-     * @return A list of all the items that are allowed in the slot
-     */
-    function numAllowedItems(uint slotId) external view returns (uint) {
-        return _numAllowedItems(slotId);
     }
 
     /**

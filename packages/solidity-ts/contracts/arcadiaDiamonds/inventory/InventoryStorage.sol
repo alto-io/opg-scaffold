@@ -47,9 +47,6 @@ library InventoryStorage {
         // item address => item id => equip items requires transfer
         mapping(address => mapping(uint => bool)) requiresTransfer;
 
-        // slot id => items
-        mapping(uint => InventoryStorage.Item[]) allowedItems;
-
         // List of all the existent hashes
         EnumerableSet.Bytes32Set baseItemsHashes;
         // arcadian id => base items hash

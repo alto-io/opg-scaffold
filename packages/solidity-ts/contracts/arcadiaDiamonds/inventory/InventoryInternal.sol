@@ -37,7 +37,7 @@ contract InventoryInternal is
 
     event ItemsAllowedInSlotUpdated(
         address indexed by,
-        uint slotId
+        InventoryStorage.Item[] items
     );
 
     event ItemsEquipped(
@@ -226,34 +226,26 @@ contract InventoryInternal is
         delete inventorySL.equippedItems[arcadianId][slotId];
     }
 
-    function _unequipSingleSlot(
-        uint arcadianId,
-        uint slotId
-    ) internal onlyValidSlot(slotId) {
-        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-
-        if (inventorySL.slots[slotId].permanent) 
-            revert Inventory_UnequippingPermanentSlot();
-
-        if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) 
-            revert Inventory_UnequippingEmptySlot();
-        
-        if (inventorySL.slots[slotId].isBase)
-            revert Inventory_UnequippingBaseSlot();
-
-        _unequipUnchecked(arcadianId, slotId);
-    }
-
     function _unequip(
         uint arcadianId,
         uint[] calldata slotIds
     ) internal onlyArcadianOwner(arcadianId) {
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         if (slotIds.length == 0) 
             revert Inventory_SlotNotSpecified();
 
         for (uint i = 0; i < slotIds.length; i++) {
-            _unequipSingleSlot(arcadianId, slotIds[i]);
+            if (inventorySL.slots[slotIds[i]].permanent) 
+                revert Inventory_UnequippingPermanentSlot();
+
+            if (inventorySL.equippedItems[arcadianId][slotIds[i]].erc721Contract == address(0)) 
+                revert Inventory_UnequippingEmptySlot();
+            
+            if (inventorySL.slots[slotIds[i]].isBase)
+                revert Inventory_UnequippingBaseSlot();
+
+            _unequipUnchecked(arcadianId, slotIds[i]);
         }
 
         _hashBaseItemsUnchecked(arcadianId);
@@ -468,57 +460,25 @@ contract InventoryInternal is
             if (!items[i].erc721Contract.isContract()) 
                 revert Inventory_InvalidERC1155Contract();
 
-            uint currentAllowedSlot = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
-            if (currentAllowedSlot > 0 && currentAllowedSlot != slotId) {
-                _disallowItemInSlotUnchecked(currentAllowedSlot, items[i]);
-            }
-            inventorySL.allowedItems[slotId].push(items[i]);
             inventorySL.itemSlot[items[i].erc721Contract][items[i].id] = slotId;
         }
 
-        emit ItemsAllowedInSlotUpdated(msg.sender, slotId);
+        emit ItemsAllowedInSlotUpdated(msg.sender, items);
     }
 
-    function _disallowItemsInSlot(
-        uint slotId,
+    function _disallowItems(
         InventoryStorage.Item[] calldata items
-    ) internal virtual onlyValidSlot(slotId) {
-
-        for (uint i = 0; i < items.length; i++) {
-            _disallowItemInSlotUnchecked(slotId, items[i]);
-        }
-
-        emit ItemsAllowedInSlotUpdated(msg.sender, slotId);
-    }
-
-    function _disallowItemInSlotUnchecked(
-        uint slotId,
-        InventoryStorage.Item calldata item
     ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        
-        uint numAllowedSlots = inventorySL.allowedItems[slotId].length;
-        for (uint i = 0; i < numAllowedSlots; i++) {
-            if (inventorySL.allowedItems[slotId][i].id == item.id) {
-                inventorySL.allowedItems[slotId][i] = inventorySL.allowedItems[slotId][numAllowedSlots-1];
-                inventorySL.allowedItems[slotId].pop();
-                break;
-            }
+        for (uint i = 0; i < items.length; i++) {
+            delete inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
         }
-        
-        delete inventorySL.itemSlot[item.erc721Contract][item.id];
+
+        emit ItemsAllowedInSlotUpdated(msg.sender, items);
     }
 
     function _allowedSlot(InventoryStorage.Item calldata item) internal view returns (uint) {
         return InventoryStorage.layout().itemSlot[item.erc721Contract][item.id];
-    }
-
-    function _allowedItem(uint slotId, uint index) internal view onlyValidSlot(slotId) returns (InventoryStorage.Item memory) {
-        return InventoryStorage.layout().allowedItems[slotId][index];
-    }
-
-    function _numAllowedItems(uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
-        return InventoryStorage.layout().allowedItems[slotId].length;
     }
 
     function _slot(uint slotId) internal view returns (InventoryStorage.Slot storage slot) {
