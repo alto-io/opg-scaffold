@@ -43,6 +43,10 @@ library InventoryStorage {
 
         // item address => item id => allowed slot id
         mapping(address => mapping(uint => uint)) itemSlot;
+        
+        // item address => item id => equip items requires transfer
+        mapping(address => mapping(uint => bool)) requiresTransfer;
+
         // slot id => items
         mapping(uint => InventoryStorage.Item[]) allowedItems;
 
