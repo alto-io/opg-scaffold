@@ -2,14 +2,15 @@
 import hre from "hardhat";
 import fs from "fs";
 import path from "path";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
 import util from 'util'
-import { ItemSC, Slot, SlotSC, slotsPath } from "./utils/interfaces";
+import { Item, ItemSC, Slot, SlotSC, itemsPath, slotsPath } from "./utils/interfaces";
 
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
+const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 
-const MAKE_TRANSACTION = false;
+const MAKE_TRANSACTION = true;
 console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
 
 
@@ -18,7 +19,9 @@ async function main() {
     const network = hre.network.name;
     const { itemsSC, inventorySC, arcadiansSC } = await getDeployedContracts(network);
 
-    let slotsSC: SlotSC[] = await getAllSlots(inventorySC);
+    let slotsSC: SlotSC[] = await getAllSlots(inventorySC, itemsSC);
+    // console.log("slotsSC: ", slotsSC);
+    
     // console.log("allSlots before: ", slotsSC.map((slot)=>{
     //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
     //     return slot;
@@ -58,7 +61,7 @@ async function main() {
             if (allowedItemsIdsExtra.length > 0) {
                 console.log("-> slot " + slot.id + " allowedItemsIdsExtra: ", allowedItemsIdsExtra);
                 if (MAKE_TRANSACTION) {
-                    let tx = await inventorySC.disallowItemsInSlot(slot.id, allowedItemsIdsExtra);
+                    let tx = await inventorySC.disallowItems(allowedItemsIdsExtra);
                     await tx.wait();
                 }
             }
@@ -83,34 +86,45 @@ async function main() {
             }
         }
     }
-    // slotsSC = await getAllSlots(inventorySC);
+    // slotsSC = await getAllSlots(inventorySC, itemsSC);
     // console.log("allSlots after: ", slotsSC.map((slot)=>{
     //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
     //     return slot;
     // }));
 }
-async function getAllSlots(inventorySC: ethers.Contract) {
-    const slotsSC: SlotSC[] = [];
+async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
+    let slotsSC: SlotSC[] = [];
+
     const numSlots = await inventorySC.numSlots();
-    
-    for (let i = 0; i < numSlots; i++) {
-        const slotId = i+1;
+    if (numSlots == 0) {
+        return slotsSC;
+    }
+
+    // Initialize
+    for (let i = 0; i < slotsAll.length; i++) {
+        const slotId = slotsAll[i].id;
         let slotSC = await inventorySC.slot(slotId);
-        const numAllowedItems = await inventorySC.numAllowedItems(slotId);
-        const allowedItems: ItemSC[] = [];
-        for (let j = 0; j < numAllowedItems; j++) {
-            const allowedItemSC = await inventorySC.allowedItem(slotId, j);
-            const allowedItem : ItemSC = { erc721Contract: allowedItemSC.erc721Contract, id: allowedItemSC.id.toNumber() }
-            allowedItems.push(allowedItem);
-        }
         
         let slot: SlotSC = {
             id: slotSC.id.toNumber(),
             isBase: slotSC.isBase,
             permanent: slotSC.permanent,
-            allowedItems: allowedItems
+            allowedItems: []
         };
         slotsSC.push(slot);
+    }
+
+    // Get slot for each item
+    for (let i = 0; i < itemsAll.length; i++) {
+        const itemSC: ItemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id}
+        const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
+        slotsSC = slotsSC.map((slot: SlotSC)=> {
+            if (slot.id === allowedSlot) {
+                slot.allowedItems.push(itemSC);
+            }
+            return slot;
+        })
+        
     }
     return slotsSC;
 }
