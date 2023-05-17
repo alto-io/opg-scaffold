@@ -468,16 +468,8 @@
         "slotId": 12
     },
     {
-        "layerName": "",
-        "id": 53,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Corporal Leggings",
-        "id": 54,
+        "id": 53,
         "displayName": "Corporal Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -486,7 +478,7 @@
     },
     {
         "layerName": "Galactic Leggings",
-        "id": 55,
+        "id": 54,
         "displayName": "Galactic Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -495,7 +487,7 @@
     },
     {
         "layerName": "Forgotmy Leggings",
-        "id": 56,
+        "id": 55,
         "displayName": "Forgotmy Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -504,7 +496,7 @@
     },
     {
         "layerName": "Guileless Leggings",
-        "id": 57,
+        "id": 56,
         "displayName": "Guileless Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -513,7 +505,7 @@
     },
     {
         "layerName": "Natalya Pocket Legs",
-        "id": 58,
+        "id": 57,
         "displayName": "Natalya Pocket Legs",
         "slotName": "Bottom",
         "isBasic": false,
@@ -522,7 +514,7 @@
     },
     {
         "layerName": "Galahad Leggings",
-        "id": 59,
+        "id": 58,
         "displayName": "Galahad Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -531,7 +523,7 @@
     },
     {
         "layerName": "Shadow Runner Legs",
-        "id": 60,
+        "id": 59,
         "displayName": "Shadow Runner Legs",
         "slotName": "Bottom",
         "isBasic": false,
@@ -540,7 +532,7 @@
     },
     {
         "layerName": "Hermione Raiments",
-        "id": 61,
+        "id": 60,
         "displayName": "Hermione Raiments",
         "slotName": "Bottom",
         "isBasic": false,
@@ -549,7 +541,7 @@
     },
     {
         "layerName": "Labyrinth Leggings",
-        "id": 62,
+        "id": 61,
         "displayName": "Labyrinth Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -558,7 +550,7 @@
     },
     {
         "layerName": "Jag Leggings",
-        "id": 63,
+        "id": 62,
         "displayName": "Jag Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -567,7 +559,7 @@
     },
     {
         "layerName": "Tiamat Leggings",
-        "id": 64,
+        "id": 63,
         "displayName": "Tiamat Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -576,7 +568,7 @@
     },
     {
         "layerName": "Adams Leggings",
-        "id": 65,
+        "id": 64,
         "displayName": "Adams Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -585,7 +577,7 @@
     },
     {
         "layerName": "Canary Leggings",
-        "id": 66,
+        "id": 65,
         "displayName": "Canary Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -594,7 +586,7 @@
     },
     {
         "layerName": "Bond Leggings",
-        "id": 67,
+        "id": 66,
         "displayName": "Bond Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -603,7 +595,7 @@
     },
     {
         "layerName": "Midas Leggings",
-        "id": 68,
+        "id": 67,
         "displayName": "Midas Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -612,7 +604,7 @@
     },
     {
         "layerName": "Hannibal Leggings",
-        "id": 69,
+        "id": 68,
         "displayName": "Hannibal Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -621,7 +613,7 @@
     },
     {
         "layerName": "Green Underwear",
-        "id": 70,
+        "id": 69,
         "displayName": "Green Underwear",
         "slotName": "Bottom",
         "isBasic": true,
@@ -630,7 +622,7 @@
     },
     {
         "layerName": "Strider Leggings",
-        "id": 71,
+        "id": 70,
         "displayName": "Strider Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -639,7 +631,7 @@
     },
     {
         "layerName": "Blitzkrieg Leggings",
-        "id": 72,
+        "id": 71,
         "displayName": "Blitzkrieg Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -647,16 +639,8 @@
         "slotId": 12
     },
     {
-        "layerName": "",
-        "id": 73,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Ranger Leggings",
-        "id": 74,
+        "id": 72,
         "displayName": "Ranger Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -665,7 +649,7 @@
     },
     {
         "layerName": "Streetpop Leggings",
-        "id": 75,
+        "id": 73,
         "displayName": "Streetpop Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -674,7 +658,7 @@
     },
     {
         "layerName": "Necromantic Leggings",
-        "id": 76,
+        "id": 74,
         "displayName": "Necromantic Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -683,7 +667,7 @@
     },
     {
         "layerName": "Bleached Leggings",
-        "id": 77,
+        "id": 75,
         "displayName": "Bleached Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -692,7 +676,7 @@
     },
     {
         "layerName": "Bladed Leggings",
-        "id": 78,
+        "id": 76,
         "displayName": "Bladed Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -701,7 +685,7 @@
     },
     {
         "layerName": "Craft Leggings",
-        "id": 79,
+        "id": 77,
         "displayName": "Craft Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -710,7 +694,7 @@
     },
     {
         "layerName": "Ayane Leggings",
-        "id": 80,
+        "id": 78,
         "displayName": "Ayane Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -719,7 +703,7 @@
     },
     {
         "layerName": "Arthur Leggings",
-        "id": 81,
+        "id": 79,
         "displayName": "Arthur Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -728,7 +712,7 @@
     },
     {
         "layerName": "Kunoichi Leggings",
-        "id": 82,
+        "id": 80,
         "displayName": "Kunoichi Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -737,7 +721,7 @@
     },
     {
         "layerName": "Archlich Leggings",
-        "id": 83,
+        "id": 81,
         "displayName": "Archlich Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -746,7 +730,7 @@
     },
     {
         "layerName": "Spartan Leggings",
-        "id": 84,
+        "id": 82,
         "displayName": "Spartan Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -755,7 +739,7 @@
     },
     {
         "layerName": "Techxpert Leggings",
-        "id": 85,
+        "id": 83,
         "displayName": "Techxpert Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -764,7 +748,7 @@
     },
     {
         "layerName": "Power Suit Leggings",
-        "id": 86,
+        "id": 84,
         "displayName": "Power Suit Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -773,7 +757,7 @@
     },
     {
         "layerName": "Midnight Leggings",
-        "id": 87,
+        "id": 85,
         "displayName": "Midnight Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -782,7 +766,7 @@
     },
     {
         "layerName": "Resistance Leggings",
-        "id": 88,
+        "id": 86,
         "displayName": "Resistance Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -791,7 +775,7 @@
     },
     {
         "layerName": "Shinobi Leggings",
-        "id": 89,
+        "id": 87,
         "displayName": "Shinobi Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -800,7 +784,7 @@
     },
     {
         "layerName": "Citrus Leggings",
-        "id": 90,
+        "id": 88,
         "displayName": "Citrus Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -809,7 +793,7 @@
     },
     {
         "layerName": "Orange Underwear",
-        "id": 91,
+        "id": 89,
         "displayName": "Orange Underwear",
         "slotName": "Bottom",
         "isBasic": true,
@@ -817,16 +801,8 @@
         "slotId": 12
     },
     {
-        "layerName": "",
-        "id": 92,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Mandarin Leggings",
-        "id": 93,
+        "id": 90,
         "displayName": "Mandarin Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -835,7 +811,7 @@
     },
     {
         "layerName": "Pink Underwear",
-        "id": 94,
+        "id": 91,
         "displayName": "Pink Underwear",
         "slotName": "Bottom",
         "isBasic": true,
@@ -843,16 +819,8 @@
         "slotId": 12
     },
     {
-        "layerName": "",
-        "id": 95,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Consecrated Leggings",
-        "id": 96,
+        "id": 92,
         "displayName": "Consecrated Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -861,7 +829,7 @@
     },
     {
         "layerName": "Divine Leggings",
-        "id": 97,
+        "id": 93,
         "displayName": "Divine Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -870,7 +838,7 @@
     },
     {
         "layerName": "Strange Leggings",
-        "id": 98,
+        "id": 94,
         "displayName": "Strange Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -879,7 +847,7 @@
     },
     {
         "layerName": "Sniper Leggings",
-        "id": 99,
+        "id": 95,
         "displayName": "Sniper Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -888,7 +856,7 @@
     },
     {
         "layerName": "Bloodshot Leggings",
-        "id": 100,
+        "id": 96,
         "displayName": "Bloodshot Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -897,7 +865,7 @@
     },
     {
         "layerName": "Red Underwear",
-        "id": 101,
+        "id": 97,
         "displayName": "Red Underwear",
         "slotName": "Bottom",
         "isBasic": true,
@@ -906,7 +874,7 @@
     },
     {
         "layerName": "Nokizaru Leggings",
-        "id": 102,
+        "id": 98,
         "displayName": "Nokizaru Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -914,16 +882,8 @@
         "slotId": 12
     },
     {
-        "layerName": "",
-        "id": 103,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Crimson Leggings",
-        "id": 104,
+        "id": 99,
         "displayName": "Crimson Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -932,7 +892,7 @@
     },
     {
         "layerName": "Yoroi Leggings",
-        "id": 105,
+        "id": 100,
         "displayName": "Yoroi Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -941,7 +901,7 @@
     },
     {
         "layerName": "Assault Leggings",
-        "id": 106,
+        "id": 101,
         "displayName": "Assault Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -950,7 +910,7 @@
     },
     {
         "layerName": "Crusader Leggings",
-        "id": 107,
+        "id": 102,
         "displayName": "Crusader Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -959,7 +919,7 @@
     },
     {
         "layerName": "Recruit Leggings",
-        "id": 108,
+        "id": 103,
         "displayName": "Recruit Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -968,7 +928,7 @@
     },
     {
         "layerName": "Otaku Leggings",
-        "id": 109,
+        "id": 104,
         "displayName": "Otaku Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -977,7 +937,7 @@
     },
     {
         "layerName": "Angel Leggings",
-        "id": 110,
+        "id": 105,
         "displayName": "Angel Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -986,7 +946,7 @@
     },
     {
         "layerName": "Slayer Leggings",
-        "id": 111,
+        "id": 106,
         "displayName": "Slayer Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -995,7 +955,7 @@
     },
     {
         "layerName": "Celestial Leggings",
-        "id": 112,
+        "id": 107,
         "displayName": "Celestial Leggings",
         "slotName": "Bottom",
         "isBasic": false,
@@ -1004,7 +964,7 @@
     },
     {
         "layerName": "Anger",
-        "id": 113,
+        "id": 108,
         "displayName": "Anger",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1013,7 +973,7 @@
     },
     {
         "layerName": "Bushy",
-        "id": 114,
+        "id": 109,
         "displayName": "Bushy",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1022,7 +982,7 @@
     },
     {
         "layerName": "Patch",
-        "id": 115,
+        "id": 110,
         "displayName": "Patch",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1031,7 +991,7 @@
     },
     {
         "layerName": "Fire",
-        "id": 116,
+        "id": 111,
         "displayName": "Fire",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1040,7 +1000,7 @@
     },
     {
         "layerName": "Happy",
-        "id": 117,
+        "id": 112,
         "displayName": "Happy",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1049,7 +1009,7 @@
     },
     {
         "layerName": "Ice",
-        "id": 118,
+        "id": 113,
         "displayName": "Ice",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1058,7 +1018,7 @@
     },
     {
         "layerName": "Mischief",
-        "id": 119,
+        "id": 114,
         "displayName": "Mischief",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1067,7 +1027,7 @@
     },
     {
         "layerName": "Original",
-        "id": 120,
+        "id": 115,
         "displayName": "Original",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1076,7 +1036,7 @@
     },
     {
         "layerName": "Poison",
-        "id": 121,
+        "id": 116,
         "displayName": "Poison",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1085,7 +1045,7 @@
     },
     {
         "layerName": "Scar",
-        "id": 122,
+        "id": 117,
         "displayName": "Scar",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1094,7 +1054,7 @@
     },
     {
         "layerName": "Shellshock",
-        "id": 123,
+        "id": 118,
         "displayName": "Shellshock",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1103,7 +1063,7 @@
     },
     {
         "layerName": "Sneaky",
-        "id": 124,
+        "id": 119,
         "displayName": "Sneaky",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1112,7 +1072,7 @@
     },
     {
         "layerName": "uwu-eyed",
-        "id": 125,
+        "id": 120,
         "displayName": "uwu-eyed",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1121,7 +1081,7 @@
     },
     {
         "layerName": "Wink",
-        "id": 126,
+        "id": 121,
         "displayName": "Wink",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1130,7 +1090,7 @@
     },
     {
         "layerName": "Kabuki",
-        "id": 127,
+        "id": 122,
         "displayName": "Kabuki",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1139,7 +1099,7 @@
     },
     {
         "layerName": "Rage",
-        "id": 128,
+        "id": 123,
         "displayName": "Rage",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1148,7 +1108,7 @@
     },
     {
         "layerName": "Bright",
-        "id": 129,
+        "id": 124,
         "displayName": "Bright",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1157,7 +1117,7 @@
     },
     {
         "layerName": "Furrowed",
-        "id": 130,
+        "id": 125,
         "displayName": "Furrowed",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1166,7 +1126,7 @@
     },
     {
         "layerName": "Infernal",
-        "id": 131,
+        "id": 126,
         "displayName": "Infernal",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1175,7 +1135,7 @@
     },
     {
         "layerName": "Friendly",
-        "id": 132,
+        "id": 127,
         "displayName": "Friendly",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1184,7 +1144,7 @@
     },
     {
         "layerName": "Arctic",
-        "id": 133,
+        "id": 128,
         "displayName": "Arctic",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1193,7 +1153,7 @@
     },
     {
         "layerName": "Corrosive",
-        "id": 134,
+        "id": 129,
         "displayName": "Corrosive",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1202,7 +1162,7 @@
     },
     {
         "layerName": "Surprised",
-        "id": 135,
+        "id": 130,
         "displayName": "Surprised",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1211,7 +1171,7 @@
     },
     {
         "layerName": "Suspicious",
-        "id": 136,
+        "id": 131,
         "displayName": "Suspicious",
         "slotName": "Eyes",
         "isBasic": true,
@@ -1220,7 +1180,7 @@
     },
     {
         "layerName": "Close Shave",
-        "id": 137,
+        "id": 132,
         "displayName": "Close Shave",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1229,7 +1189,7 @@
     },
     {
         "layerName": "Blonde",
-        "id": 138,
+        "id": 133,
         "displayName": "Blonde",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1238,7 +1198,7 @@
     },
     {
         "layerName": "Dirty Blonde",
-        "id": 139,
+        "id": 134,
         "displayName": "Dirty Blonde",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1247,7 +1207,7 @@
     },
     {
         "layerName": "Black Pony",
-        "id": 140,
+        "id": 135,
         "displayName": "Black Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1256,7 +1216,7 @@
     },
     {
         "layerName": "Blonde Bun",
-        "id": 141,
+        "id": 136,
         "displayName": "Blonde Bun",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1265,7 +1225,7 @@
     },
     {
         "layerName": "Blonde Buzzcut",
-        "id": 142,
+        "id": 137,
         "displayName": "Blonde Buzzcut",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1274,7 +1234,7 @@
     },
     {
         "layerName": "Blonde Pony",
-        "id": 143,
+        "id": 138,
         "displayName": "Blonde Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1283,7 +1243,7 @@
     },
     {
         "layerName": "Blue Bob",
-        "id": 144,
+        "id": 139,
         "displayName": "Blue Bob",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1292,7 +1252,7 @@
     },
     {
         "layerName": "Brawler Cut",
-        "id": 145,
+        "id": 140,
         "displayName": "Brawler Cut",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1301,7 +1261,7 @@
     },
     {
         "layerName": "Brunette Cascade",
-        "id": 146,
+        "id": 141,
         "displayName": "Brunette Cascade",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1310,7 +1270,7 @@
     },
     {
         "layerName": "Brunette Pony",
-        "id": 147,
+        "id": 142,
         "displayName": "Brunette Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1319,7 +1279,7 @@
     },
     {
         "layerName": "Brunette Tied",
-        "id": 148,
+        "id": 143,
         "displayName": "Brunette Tied",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1328,7 +1288,7 @@
     },
     {
         "layerName": "Buzzcut Buzzcut",
-        "id": 149,
+        "id": 144,
         "displayName": "Buzzcut Buzzcut",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1337,7 +1297,7 @@
     },
     {
         "layerName": "Frizzy",
-        "id": 150,
+        "id": 145,
         "displayName": "Frizzy",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1346,7 +1306,7 @@
     },
     {
         "layerName": "Fonz",
-        "id": 151,
+        "id": 146,
         "displayName": "Fonz",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1355,7 +1315,7 @@
     },
     {
         "layerName": "Mohawk",
-        "id": 152,
+        "id": 147,
         "displayName": "Mohawk",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1364,7 +1324,7 @@
     },
     {
         "layerName": "Orien",
-        "id": 153,
+        "id": 148,
         "displayName": "Orien",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1373,7 +1333,7 @@
     },
     {
         "layerName": "Green Pony",
-        "id": 154,
+        "id": 149,
         "displayName": "Green Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1382,7 +1342,7 @@
     },
     {
         "layerName": "High Pony",
-        "id": 155,
+        "id": 150,
         "displayName": "High Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1391,7 +1351,7 @@
     },
     {
         "layerName": "Kabuki Coiffe",
-        "id": 156,
+        "id": 151,
         "displayName": "Kabuki Coiffe",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1400,7 +1360,7 @@
     },
     {
         "layerName": "Long Blonde",
-        "id": 157,
+        "id": 152,
         "displayName": "Long Blonde",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1409,7 +1369,7 @@
     },
     {
         "layerName": "Light Blonde",
-        "id": 158,
+        "id": 153,
         "displayName": "Light Blonde",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1418,7 +1378,7 @@
     },
     {
         "layerName": "Brown Rat Tail",
-        "id": 159,
+        "id": 154,
         "displayName": "Brown Rat Tail",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1427,7 +1387,7 @@
     },
     {
         "layerName": "Messy",
-        "id": 160,
+        "id": 155,
         "displayName": "Messy",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1436,7 +1396,7 @@
     },
     {
         "layerName": "Decker Mohawk",
-        "id": 161,
+        "id": 156,
         "displayName": "Decker Mohawk",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1445,7 +1405,7 @@
     },
     {
         "layerName": "Green Long",
-        "id": 162,
+        "id": 157,
         "displayName": "Green Long",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1454,7 +1414,7 @@
     },
     {
         "layerName": "Green Short",
-        "id": 163,
+        "id": 158,
         "displayName": "Green Short",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1463,7 +1423,7 @@
     },
     {
         "layerName": "Super Dragon",
-        "id": 164,
+        "id": 159,
         "displayName": "Super Dragon",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1472,7 +1432,7 @@
     },
     {
         "layerName": "Protag",
-        "id": 165,
+        "id": 160,
         "displayName": "Protag",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1481,7 +1441,7 @@
     },
     {
         "layerName": "Rider",
-        "id": 166,
+        "id": 161,
         "displayName": "Rider",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1490,7 +1450,7 @@
     },
     {
         "layerName": "Dark Rat Tail",
-        "id": 167,
+        "id": 162,
         "displayName": "Dark Rat Tail",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1499,7 +1459,7 @@
     },
     {
         "layerName": "Red Cascade",
-        "id": 168,
+        "id": 163,
         "displayName": "Red Cascade",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1508,7 +1468,7 @@
     },
     {
         "layerName": "Red Pony",
-        "id": 169,
+        "id": 164,
         "displayName": "Red Pony",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1517,7 +1477,7 @@
     },
     {
         "layerName": "Sakura",
-        "id": 170,
+        "id": 165,
         "displayName": "Sakura",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1526,7 +1486,7 @@
     },
     {
         "layerName": "Scorpion",
-        "id": 171,
+        "id": 166,
         "displayName": "Scorpion",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1535,7 +1495,7 @@
     },
     {
         "layerName": "Short White",
-        "id": 172,
+        "id": 167,
         "displayName": "Short White",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1544,7 +1504,7 @@
     },
     {
         "layerName": "Strawberry",
-        "id": 173,
+        "id": 168,
         "displayName": "Strawberry",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1553,7 +1513,7 @@
     },
     {
         "layerName": "Raider",
-        "id": 174,
+        "id": 169,
         "displayName": "Raider",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1562,7 +1522,7 @@
     },
     {
         "layerName": "Travis",
-        "id": 175,
+        "id": 170,
         "displayName": "Travis",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1571,7 +1531,7 @@
     },
     {
         "layerName": "Undercroft",
-        "id": 176,
+        "id": 171,
         "displayName": "Undercroft",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1580,7 +1540,7 @@
     },
     {
         "layerName": "Wanderer",
-        "id": 177,
+        "id": 172,
         "displayName": "Wanderer",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1589,7 +1549,7 @@
     },
     {
         "layerName": "Riven White",
-        "id": 178,
+        "id": 173,
         "displayName": "Riven White",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1598,7 +1558,7 @@
     },
     {
         "layerName": "Wild",
-        "id": 179,
+        "id": 174,
         "displayName": "Wild",
         "slotName": "Hairstyle",
         "isBasic": true,
@@ -1607,7 +1567,7 @@
     },
     {
         "layerName": "Cyberjack Headset",
-        "id": 180,
+        "id": 175,
         "displayName": "Cyberjack Headset",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1616,7 +1576,7 @@
     },
     {
         "layerName": "Red Bandana",
-        "id": 181,
+        "id": 176,
         "displayName": "Red Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1625,7 +1585,7 @@
     },
     {
         "layerName": "Bandana Bangle",
-        "id": 182,
+        "id": 177,
         "displayName": "Bandana Bangle",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1634,7 +1594,7 @@
     },
     {
         "layerName": "Beetle Helmet",
-        "id": 183,
+        "id": 178,
         "displayName": "Beetle Helmet",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1643,7 +1603,7 @@
     },
     {
         "layerName": "Jeweled Headband",
-        "id": 184,
+        "id": 179,
         "displayName": "Jeweled Headband",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1652,7 +1612,7 @@
     },
     {
         "layerName": "Black Headband",
-        "id": 185,
+        "id": 180,
         "displayName": "Black Headband",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1661,7 +1621,7 @@
     },
     {
         "layerName": "Black Hoodie",
-        "id": 186,
+        "id": 181,
         "displayName": "Black Hoodie",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1670,7 +1630,7 @@
     },
     {
         "layerName": "Bomber Helm",
-        "id": 187,
+        "id": 182,
         "displayName": "Bomber Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1679,7 +1639,7 @@
     },
     {
         "layerName": "Brawler Black Bandana",
-        "id": 188,
+        "id": 183,
         "displayName": "Brawler Black Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1688,7 +1648,7 @@
     },
     {
         "layerName": "Brawler Blue Bandana",
-        "id": 189,
+        "id": 184,
         "displayName": "Brawler Blue Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1697,7 +1657,7 @@
     },
     {
         "layerName": "Brawler Red Bandana",
-        "id": 190,
+        "id": 185,
         "displayName": "Brawler Red Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1706,7 +1666,7 @@
     },
     {
         "layerName": "Brown Bandana",
-        "id": 191,
+        "id": 186,
         "displayName": "Brown Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1715,7 +1675,7 @@
     },
     {
         "layerName": "Neko Ears",
-        "id": 192,
+        "id": 187,
         "displayName": "Neko Ears",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1724,7 +1684,7 @@
     },
     {
         "layerName": "Neko Headset",
-        "id": 193,
+        "id": 188,
         "displayName": "Neko Headset",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1733,7 +1693,7 @@
     },
     {
         "layerName": "Red Cap",
-        "id": 194,
+        "id": 189,
         "displayName": "Red Cap",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1742,7 +1702,7 @@
     },
     {
         "layerName": "Centurion Helm",
-        "id": 195,
+        "id": 190,
         "displayName": "Centurion Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1751,7 +1711,7 @@
     },
     {
         "layerName": "Dark Knight Helm",
-        "id": 196,
+        "id": 191,
         "displayName": "Dark Knight Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1760,7 +1720,7 @@
     },
     {
         "layerName": "Gray Hood",
-        "id": 197,
+        "id": 192,
         "displayName": "Gray Hood",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1769,7 +1729,7 @@
     },
     {
         "layerName": "Green Bandana",
-        "id": 198,
+        "id": 193,
         "displayName": "Green Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1778,7 +1738,7 @@
     },
     {
         "layerName": "Green Hood",
-        "id": 199,
+        "id": 194,
         "displayName": "Green Hood",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1787,7 +1747,7 @@
     },
     {
         "layerName": "Green Hoodie",
-        "id": 200,
+        "id": 195,
         "displayName": "Green Hoodie",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1796,7 +1756,7 @@
     },
     {
         "layerName": "Standard Headset",
-        "id": 201,
+        "id": 196,
         "displayName": "Standard Headset",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1805,7 +1765,7 @@
     },
     {
         "layerName": "Plumed Helm",
-        "id": 202,
+        "id": 197,
         "displayName": "Plumed Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1814,7 +1774,7 @@
     },
     {
         "layerName": "Horned Helm",
-        "id": 203,
+        "id": 198,
         "displayName": "Horned Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1823,7 +1783,7 @@
     },
     {
         "layerName": "Hat of Wealth and Respect",
-        "id": 204,
+        "id": 199,
         "displayName": "Hat of Wealth and Respect",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1832,7 +1792,7 @@
     },
     {
         "layerName": "Hollow Mask",
-        "id": 205,
+        "id": 200,
         "displayName": "Hollow Mask",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1841,7 +1801,7 @@
     },
     {
         "layerName": "Honor Helm",
-        "id": 206,
+        "id": 201,
         "displayName": "Honor Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1850,7 +1810,7 @@
     },
     {
         "layerName": "Noble Helm",
-        "id": 207,
+        "id": 202,
         "displayName": "Noble Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1859,7 +1819,7 @@
     },
     {
         "layerName": "Law Helm",
-        "id": 208,
+        "id": 203,
         "displayName": "Law Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1868,7 +1828,7 @@
     },
     {
         "layerName": "Hulk Bandana",
-        "id": 209,
+        "id": 204,
         "displayName": "Hulk Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1877,7 +1837,7 @@
     },
     {
         "layerName": "Flaming Skull Helm",
-        "id": 210,
+        "id": 205,
         "displayName": "Flaming Skull Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1886,7 +1846,7 @@
     },
     {
         "layerName": "Long Red Bandana",
-        "id": 211,
+        "id": 206,
         "displayName": "Long Red Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1895,7 +1855,7 @@
     },
     {
         "layerName": "Closed Helm",
-        "id": 212,
+        "id": 207,
         "displayName": "Closed Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1904,7 +1864,7 @@
     },
     {
         "layerName": "Meteor Helm",
-        "id": 213,
+        "id": 208,
         "displayName": "Meteor Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1913,7 +1873,7 @@
     },
     {
         "layerName": "Ninja Mask",
-        "id": 214,
+        "id": 209,
         "displayName": "Ninja Mask",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1922,7 +1882,7 @@
     },
     {
         "layerName": "Oni Mask",
-        "id": 215,
+        "id": 210,
         "displayName": "Oni Mask",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1931,7 +1891,7 @@
     },
     {
         "layerName": "Pink Neko Headset",
-        "id": 216,
+        "id": 211,
         "displayName": "Pink Neko Headset",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1940,7 +1900,7 @@
     },
     {
         "layerName": "Purple Hood",
-        "id": 217,
+        "id": 212,
         "displayName": "Purple Hood",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1949,7 +1909,7 @@
     },
     {
         "layerName": "Samurai Helm",
-        "id": 218,
+        "id": 213,
         "displayName": "Samurai Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1958,7 +1918,7 @@
     },
     {
         "layerName": "Cybernetic Helm",
-        "id": 219,
+        "id": 214,
         "displayName": "Cybernetic Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1967,7 +1927,7 @@
     },
     {
         "layerName": "Grinning Skull Helm",
-        "id": 220,
+        "id": 215,
         "displayName": "Grinning Skull Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1976,7 +1936,7 @@
     },
     {
         "layerName": "Wizardly Hat",
-        "id": 221,
+        "id": 216,
         "displayName": "Wizardly Hat",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1985,7 +1945,7 @@
     },
     {
         "layerName": "Master Helm",
-        "id": 222,
+        "id": 217,
         "displayName": "Master Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -1994,7 +1954,7 @@
     },
     {
         "layerName": "Ultimate Helm",
-        "id": 223,
+        "id": 218,
         "displayName": "Ultimate Helm",
         "slotName": "Headgear",
         "isBasic": false,
@@ -2003,7 +1963,7 @@
     },
     {
         "layerName": "Nomad Bandana",
-        "id": 224,
+        "id": 219,
         "displayName": "Nomad Bandana",
         "slotName": "Headgear",
         "isBasic": false,
@@ -2012,7 +1972,7 @@
     },
     {
         "layerName": "White Headband",
-        "id": 225,
+        "id": 220,
         "displayName": "White Headband",
         "slotName": "Headgear",
         "isBasic": false,
@@ -2021,7 +1981,7 @@
     },
     {
         "layerName": "Bulletstorm L",
-        "id": 226,
+        "id": 221,
         "displayName": "Bulletstorm L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2030,7 +1990,7 @@
     },
     {
         "layerName": "Atomizer Bat L",
-        "id": 227,
+        "id": 222,
         "displayName": "Atomizer Bat L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2039,7 +1999,7 @@
     },
     {
         "layerName": "Bullseye Sniper Rifle L",
-        "id": 228,
+        "id": 223,
         "displayName": "Bullseye Sniper Rifle L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2048,7 +2008,7 @@
     },
     {
         "layerName": "Common Axe L",
-        "id": 229,
+        "id": 224,
         "displayName": "Common Axe L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2057,7 +2017,7 @@
     },
     {
         "layerName": "Axe of Strings L",
-        "id": 230,
+        "id": 225,
         "displayName": "Axe of Strings L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2066,7 +2026,7 @@
     },
     {
         "layerName": "Tome of Incantations L",
-        "id": 231,
+        "id": 226,
         "displayName": "Tome of Incantations L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2075,7 +2035,7 @@
     },
     {
         "layerName": "Common Broadsword L",
-        "id": 232,
+        "id": 227,
         "displayName": "Common Broadsword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2084,7 +2044,7 @@
     },
     {
         "layerName": "Blue Flashfire Gun L",
-        "id": 233,
+        "id": 228,
         "displayName": "Blue Flashfire Gun L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2093,7 +2053,7 @@
     },
     {
         "layerName": "Massive Greatsword L",
-        "id": 234,
+        "id": 229,
         "displayName": "Massive Greatsword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2102,7 +2062,7 @@
     },
     {
         "layerName": "Stainless Chainsaw L",
-        "id": 235,
+        "id": 230,
         "displayName": "Stainless Chainsaw L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2111,7 +2071,7 @@
     },
     {
         "layerName": "Savage Fangs L",
-        "id": 236,
+        "id": 231,
         "displayName": "Savage Fangs L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2120,7 +2080,7 @@
     },
     {
         "layerName": "Venomous Talons L",
-        "id": 237,
+        "id": 232,
         "displayName": "Venomous Talons L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2129,7 +2089,7 @@
     },
     {
         "layerName": "Night Hunter L",
-        "id": 238,
+        "id": 233,
         "displayName": "Night Hunter L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2138,7 +2098,7 @@
     },
     {
         "layerName": "Crystal Sword L",
-        "id": 239,
+        "id": 234,
         "displayName": "Crystal Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2147,7 +2107,7 @@
     },
     {
         "layerName": "Ichika's Doomblade L",
-        "id": 240,
+        "id": 235,
         "displayName": "Ichika's Doomblade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2156,7 +2116,7 @@
     },
     {
         "layerName": "Cyberpunk Katana L",
-        "id": 241,
+        "id": 236,
         "displayName": "Cyberpunk Katana L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2165,7 +2125,7 @@
     },
     {
         "layerName": "Iron Fist L",
-        "id": 242,
+        "id": 237,
         "displayName": "Iron Fist L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2174,7 +2134,7 @@
     },
     {
         "layerName": "Neuromantic Saber L",
-        "id": 243,
+        "id": 238,
         "displayName": "Neuromantic Saber L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2183,7 +2143,7 @@
     },
     {
         "layerName": "Vaporizer L",
-        "id": 244,
+        "id": 239,
         "displayName": "Vaporizer L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2192,7 +2152,7 @@
     },
     {
         "layerName": "Cyberpunk Sword L",
-        "id": 245,
+        "id": 240,
         "displayName": "Cyberpunk Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2201,7 +2161,7 @@
     },
     {
         "layerName": "Cypher Sword L",
-        "id": 246,
+        "id": 241,
         "displayName": "Cypher Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2210,7 +2170,7 @@
     },
     {
         "layerName": "Sand Falcon L",
-        "id": 247,
+        "id": 242,
         "displayName": "Sand Falcon L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2219,7 +2179,7 @@
     },
     {
         "layerName": "Common Sai L",
-        "id": 248,
+        "id": 243,
         "displayName": "Common Sai L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2228,7 +2188,7 @@
     },
     {
         "layerName": "Energy Blade L",
-        "id": 249,
+        "id": 244,
         "displayName": "Energy Blade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2237,7 +2197,7 @@
     },
     {
         "layerName": "Energy Sword L",
-        "id": 250,
+        "id": 245,
         "displayName": "Energy Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2246,7 +2206,7 @@
     },
     {
         "layerName": "Inferno L",
-        "id": 251,
+        "id": 246,
         "displayName": "Inferno L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2255,7 +2215,7 @@
     },
     {
         "layerName": "Levitating Blade of Justice L",
-        "id": 252,
+        "id": 247,
         "displayName": "Levitating Blade of Justice L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2264,7 +2224,7 @@
     },
     {
         "layerName": "Master Cleaver L",
-        "id": 253,
+        "id": 248,
         "displayName": "Master Cleaver L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2273,7 +2233,7 @@
     },
     {
         "layerName": "Dark Blade of Zulax L",
-        "id": 254,
+        "id": 249,
         "displayName": "Dark Blade of Zulax L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2282,7 +2242,7 @@
     },
     {
         "layerName": "Thunder Punch L",
-        "id": 255,
+        "id": 250,
         "displayName": "Thunder Punch L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2291,7 +2251,7 @@
     },
     {
         "layerName": "Shadow Striker L",
-        "id": 256,
+        "id": 251,
         "displayName": "Shadow Striker L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2300,7 +2260,7 @@
     },
     {
         "layerName": "Luminescent Gauntlets L",
-        "id": 257,
+        "id": 252,
         "displayName": "Luminescent Gauntlets L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2309,7 +2269,7 @@
     },
     {
         "layerName": "Radiant Manuscript L",
-        "id": 258,
+        "id": 253,
         "displayName": "Radiant Manuscript L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2318,7 +2278,7 @@
     },
     {
         "layerName": "Treasure Hunter's Delight L",
-        "id": 259,
+        "id": 254,
         "displayName": "Treasure Hunter's Delight L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2327,7 +2287,7 @@
     },
     {
         "layerName": "The Caliber Saber L",
-        "id": 260,
+        "id": 255,
         "displayName": "The Caliber Saber L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2336,7 +2296,7 @@
     },
     {
         "layerName": "The Light of the Heavens L",
-        "id": 261,
+        "id": 256,
         "displayName": "The Light of the Heavens L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2345,7 +2305,7 @@
     },
     {
         "layerName": "Heavy Machine Gun L",
-        "id": 262,
+        "id": 257,
         "displayName": "Heavy Machine Gun L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2354,7 +2314,7 @@
     },
     {
         "layerName": "The Blade of Deep Thought L",
-        "id": 263,
+        "id": 258,
         "displayName": "The Blade of Deep Thought L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2363,7 +2323,7 @@
     },
     {
         "layerName": "Iron Fan L",
-        "id": 264,
+        "id": 259,
         "displayName": "Iron Fan L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2372,7 +2332,7 @@
     },
     {
         "layerName": "Knight's Mark L",
-        "id": 265,
+        "id": 260,
         "displayName": "Knight's Mark L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2381,7 +2341,7 @@
     },
     {
         "layerName": "Flame Tongue L",
-        "id": 266,
+        "id": 261,
         "displayName": "Flame Tongue L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2390,7 +2350,7 @@
     },
     {
         "layerName": "Kite Shield L",
-        "id": 267,
+        "id": 262,
         "displayName": "Kite Shield L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2399,7 +2359,7 @@
     },
     {
         "layerName": "Valorous Blade L",
-        "id": 268,
+        "id": 263,
         "displayName": "Valorous Blade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2408,7 +2368,7 @@
     },
     {
         "layerName": "Noble Tail L",
-        "id": 269,
+        "id": 264,
         "displayName": "Noble Tail L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2417,7 +2377,7 @@
     },
     {
         "layerName": "Shadow Spikes L",
-        "id": 270,
+        "id": 265,
         "displayName": "Shadow Spikes L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2426,7 +2386,7 @@
     },
     {
         "layerName": "Vapor Darts L",
-        "id": 271,
+        "id": 266,
         "displayName": "Vapor Darts L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2435,7 +2395,7 @@
     },
     {
         "layerName": "Squire's Lance L",
-        "id": 272,
+        "id": 267,
         "displayName": "Squire's Lance L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2444,7 +2404,7 @@
     },
     {
         "layerName": "Hacker Chase Cyberdeck 88 L",
-        "id": 273,
+        "id": 268,
         "displayName": "Hacker Chase Cyberdeck 88 L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2453,7 +2413,7 @@
     },
     {
         "layerName": "Lich Sword L",
-        "id": 274,
+        "id": 269,
         "displayName": "Lich Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2462,7 +2422,7 @@
     },
     {
         "layerName": "Dragon's Fury L",
-        "id": 275,
+        "id": 270,
         "displayName": "Dragon's Fury L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2471,7 +2431,7 @@
     },
     {
         "layerName": "Widowmaker L",
-        "id": 276,
+        "id": 271,
         "displayName": "Widowmaker L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2480,7 +2440,7 @@
     },
     {
         "layerName": "Cudgel of Paul the Wise L",
-        "id": 277,
+        "id": 272,
         "displayName": "Cudgel of Paul the Wise L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2489,7 +2449,7 @@
     },
     {
         "layerName": "Grimoire of Arcana L",
-        "id": 278,
+        "id": 273,
         "displayName": "Grimoire of Arcana L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2498,7 +2458,7 @@
     },
     {
         "layerName": "Staff of the Archmage L",
-        "id": 279,
+        "id": 274,
         "displayName": "Staff of the Archmage L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2507,7 +2467,7 @@
     },
     {
         "layerName": "Netherworld Wand L",
-        "id": 280,
+        "id": 275,
         "displayName": "Netherworld Wand L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2516,7 +2476,7 @@
     },
     {
         "layerName": "Constellation Scribe L",
-        "id": 281,
+        "id": 276,
         "displayName": "Constellation Scribe L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2525,7 +2485,7 @@
     },
     {
         "layerName": "Shaken Not Stirred L",
-        "id": 282,
+        "id": 277,
         "displayName": "Shaken Not Stirred L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2534,7 +2494,7 @@
     },
     {
         "layerName": "Gadgeteer's Multitool L",
-        "id": 283,
+        "id": 278,
         "displayName": "Gadgeteer's Multitool L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2543,7 +2503,7 @@
     },
     {
         "layerName": "Gravimetric Cannon L",
-        "id": 284,
+        "id": 279,
         "displayName": "Gravimetric Cannon L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2552,7 +2512,7 @@
     },
     {
         "layerName": "VenkaTech Mk3000 L",
-        "id": 285,
+        "id": 280,
         "displayName": "VenkaTech Mk3000 L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2561,7 +2521,7 @@
     },
     {
         "layerName": "VenkaTech Mk2000 L",
-        "id": 286,
+        "id": 281,
         "displayName": "VenkaTech Mk2000 L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2570,7 +2530,7 @@
     },
     {
         "layerName": "Peacemaker L",
-        "id": 287,
+        "id": 282,
         "displayName": "Peacemaker L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2579,7 +2539,7 @@
     },
     {
         "layerName": "Arcane Revolver L",
-        "id": 288,
+        "id": 283,
         "displayName": "Arcane Revolver L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2588,7 +2548,7 @@
     },
     {
         "layerName": "Scorpion Blade L",
-        "id": 289,
+        "id": 284,
         "displayName": "Scorpion Blade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2597,7 +2557,7 @@
     },
     {
         "layerName": "Endless Potion of Possibilities L",
-        "id": 290,
+        "id": 285,
         "displayName": "Endless Potion of Possibilities L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2606,7 +2566,7 @@
     },
     {
         "layerName": "Sacred Vessel of the Divine L",
-        "id": 291,
+        "id": 286,
         "displayName": "Sacred Vessel of the Divine L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2615,7 +2575,7 @@
     },
     {
         "layerName": "Gavel of Sacred Judgment L",
-        "id": 292,
+        "id": 287,
         "displayName": "Gavel of Sacred Judgment L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2624,7 +2584,7 @@
     },
     {
         "layerName": "Magnetronic Bazooka L",
-        "id": 293,
+        "id": 288,
         "displayName": "Magnetronic Bazooka L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2633,7 +2593,7 @@
     },
     {
         "layerName": "Thunderbolt L",
-        "id": 294,
+        "id": 289,
         "displayName": "Thunderbolt L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2642,7 +2602,7 @@
     },
     {
         "layerName": "Ian's Disintegrator L",
-        "id": 295,
+        "id": 290,
         "displayName": "Ian's Disintegrator L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2651,7 +2611,7 @@
     },
     {
         "layerName": "Doom Bringer L",
-        "id": 296,
+        "id": 291,
         "displayName": "Doom Bringer L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2660,7 +2620,7 @@
     },
     {
         "layerName": "Blade of Honor L",
-        "id": 297,
+        "id": 292,
         "displayName": "Blade of Honor L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2669,7 +2629,7 @@
     },
     {
         "layerName": "Royal Wand of Power L",
-        "id": 298,
+        "id": 293,
         "displayName": "Royal Wand of Power L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2678,7 +2638,7 @@
     },
     {
         "layerName": "Vile Scepter of Janeman the Mad L",
-        "id": 299,
+        "id": 294,
         "displayName": "Vile Scepter of Janeman the Mad L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2687,7 +2647,7 @@
     },
     {
         "layerName": "Screw Turner L",
-        "id": 300,
+        "id": 295,
         "displayName": "Screw Turner L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2696,7 +2656,7 @@
     },
     {
         "layerName": "Death Scythe L",
-        "id": 301,
+        "id": 296,
         "displayName": "Death Scythe L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2705,7 +2665,7 @@
     },
     {
         "layerName": "Reaperblade L",
-        "id": 302,
+        "id": 297,
         "displayName": "Reaperblade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2714,7 +2674,7 @@
     },
     {
         "layerName": "Shining Barrier L",
-        "id": 303,
+        "id": 298,
         "displayName": "Shining Barrier L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2723,7 +2683,7 @@
     },
     {
         "layerName": "Shards of Shadow L",
-        "id": 304,
+        "id": 299,
         "displayName": "Shards of Shadow L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2732,7 +2692,7 @@
     },
     {
         "layerName": "Serpent Scepter L",
-        "id": 305,
+        "id": 300,
         "displayName": "Serpent Scepter L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2741,7 +2701,7 @@
     },
     {
         "layerName": "Fizzy Fury L",
-        "id": 306,
+        "id": 301,
         "displayName": "Fizzy Fury L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2750,7 +2710,7 @@
     },
     {
         "layerName": "Annihilator L",
-        "id": 307,
+        "id": 302,
         "displayName": "Annihilator L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2759,7 +2719,7 @@
     },
     {
         "layerName": "Resonating Blade L",
-        "id": 308,
+        "id": 303,
         "displayName": "Resonating Blade L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2768,7 +2728,7 @@
     },
     {
         "layerName": "Magna-Staff L",
-        "id": 309,
+        "id": 304,
         "displayName": "Magna-Staff L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2777,7 +2737,7 @@
     },
     {
         "layerName": "Ranger's Edge L",
-        "id": 310,
+        "id": 305,
         "displayName": "Ranger's Edge L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2786,7 +2746,7 @@
     },
     {
         "layerName": "Edge of the Eastern Winds L",
-        "id": 311,
+        "id": 306,
         "displayName": "Edge of the Eastern Winds L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2795,7 +2755,7 @@
     },
     {
         "layerName": "Artifact Hunter L",
-        "id": 312,
+        "id": 307,
         "displayName": "Artifact Hunter L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2804,7 +2764,7 @@
     },
     {
         "layerName": "Travis Sword L",
-        "id": 313,
+        "id": 308,
         "displayName": "Travis Sword L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2813,7 +2773,7 @@
     },
     {
         "layerName": "Neptune's Wrath L",
-        "id": 314,
+        "id": 309,
         "displayName": "Neptune's Wrath L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2822,7 +2782,7 @@
     },
     {
         "layerName": "Poseidon's Demise L",
-        "id": 315,
+        "id": 310,
         "displayName": "Poseidon's Demise L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2831,7 +2791,7 @@
     },
     {
         "layerName": "Sturdy Branch L",
-        "id": 316,
+        "id": 311,
         "displayName": "Sturdy Branch L",
         "slotName": "Left Hand",
         "isBasic": true,
@@ -2840,7 +2800,7 @@
     },
     {
         "layerName": "Handy Stick L",
-        "id": 317,
+        "id": 312,
         "displayName": "Handy Stick L",
         "slotName": "Left Hand",
         "isBasic": true,
@@ -2849,7 +2809,7 @@
     },
     {
         "layerName": "Discarded Rod L",
-        "id": 318,
+        "id": 313,
         "displayName": "Discarded Rod L",
         "slotName": "Left Hand",
         "isBasic": true,
@@ -2858,7 +2818,7 @@
     },
     {
         "layerName": "Blade of Duty L",
-        "id": 319,
+        "id": 314,
         "displayName": "Blade of Duty L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2867,7 +2827,7 @@
     },
     {
         "layerName": "Maul of Blood L",
-        "id": 320,
+        "id": 315,
         "displayName": "Maul of Blood L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2876,7 +2836,7 @@
     },
     {
         "layerName": "Engineer's Autowrench L",
-        "id": 321,
+        "id": 316,
         "displayName": "Engineer's Autowrench L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2885,7 +2845,7 @@
     },
     {
         "layerName": "Mechanic's Handy Wrench L",
-        "id": 322,
+        "id": 317,
         "displayName": "Mechanic's Handy Wrench L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -2894,7 +2854,7 @@
     },
     {
         "layerName": "Beard",
-        "id": 323,
+        "id": 318,
         "displayName": "Beard",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2903,7 +2863,7 @@
     },
     {
         "layerName": "Smile",
-        "id": 324,
+        "id": 319,
         "displayName": "Smile",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2912,7 +2872,7 @@
     },
     {
         "layerName": "Flat",
-        "id": 325,
+        "id": 320,
         "displayName": "Flat",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2921,7 +2881,7 @@
     },
     {
         "layerName": "Frown",
-        "id": 326,
+        "id": 321,
         "displayName": "Frown",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2930,7 +2890,7 @@
     },
     {
         "layerName": "Full Beard",
-        "id": 327,
+        "id": 322,
         "displayName": "Full Beard",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2939,7 +2899,7 @@
     },
     {
         "layerName": "Slight Smile",
-        "id": 328,
+        "id": 323,
         "displayName": "Slight Smile",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2948,7 +2908,7 @@
     },
     {
         "layerName": "Moustache",
-        "id": 329,
+        "id": 324,
         "displayName": "Moustache",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2957,7 +2917,7 @@
     },
     {
         "layerName": "Okay",
-        "id": 330,
+        "id": 325,
         "displayName": "Okay",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2966,7 +2926,7 @@
     },
     {
         "layerName": "Fang",
-        "id": 331,
+        "id": 326,
         "displayName": "Fang",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2975,7 +2935,7 @@
     },
     {
         "layerName": "Pucker",
-        "id": 332,
+        "id": 327,
         "displayName": "Pucker",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2984,7 +2944,7 @@
     },
     {
         "layerName": "Sad",
-        "id": 333,
+        "id": 328,
         "displayName": "Sad",
         "slotName": "Mouth",
         "isBasic": true,
@@ -2993,7 +2953,7 @@
     },
     {
         "layerName": "Shout",
-        "id": 334,
+        "id": 329,
         "displayName": "Shout",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3002,7 +2962,7 @@
     },
     {
         "layerName": "Smile",
-        "id": 335,
+        "id": 330,
         "displayName": "Smile",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3011,7 +2971,7 @@
     },
     {
         "layerName": "Big Smile",
-        "id": 336,
+        "id": 331,
         "displayName": "Big Smile",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3020,7 +2980,7 @@
     },
     {
         "layerName": "Toothless",
-        "id": 337,
+        "id": 332,
         "displayName": "Toothless",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3029,7 +2989,7 @@
     },
     {
         "layerName": "uWu",
-        "id": 338,
+        "id": 333,
         "displayName": "uWu",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3038,7 +2998,7 @@
     },
     {
         "layerName": "Vampire",
-        "id": 339,
+        "id": 334,
         "displayName": "Vampire",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3047,7 +3007,7 @@
     },
     {
         "layerName": "Very Sad",
-        "id": 340,
+        "id": 335,
         "displayName": "Very Sad",
         "slotName": "Mouth",
         "isBasic": true,
@@ -3056,7 +3016,7 @@
     },
     {
         "layerName": "Bulletstorm R",
-        "id": 341,
+        "id": 336,
         "displayName": "Bulletstorm R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3065,7 +3025,7 @@
     },
     {
         "layerName": "Atomizer Bat R",
-        "id": 342,
+        "id": 337,
         "displayName": "Atomizer Bat R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3074,7 +3034,7 @@
     },
     {
         "layerName": "Bullseye Sniper Rifle R",
-        "id": 343,
+        "id": 338,
         "displayName": "Bullseye Sniper Rifle R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3083,7 +3043,7 @@
     },
     {
         "layerName": "Common Axe R",
-        "id": 344,
+        "id": 339,
         "displayName": "Common Axe R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3092,7 +3052,7 @@
     },
     {
         "layerName": "Axe of Strings R",
-        "id": 345,
+        "id": 340,
         "displayName": "Axe of Strings R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3101,7 +3061,7 @@
     },
     {
         "layerName": "Tome of Incantations R",
-        "id": 346,
+        "id": 341,
         "displayName": "Tome of Incantations R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3110,7 +3070,7 @@
     },
     {
         "layerName": "Common Broadsword R",
-        "id": 347,
+        "id": 342,
         "displayName": "Common Broadsword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3119,7 +3079,7 @@
     },
     {
         "layerName": "Blue Flashfire Gun R",
-        "id": 348,
+        "id": 343,
         "displayName": "Blue Flashfire Gun R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3128,7 +3088,7 @@
     },
     {
         "layerName": "Massive Greatsword R",
-        "id": 349,
+        "id": 344,
         "displayName": "Massive Greatsword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3137,7 +3097,7 @@
     },
     {
         "layerName": "Stainless Chainsaw R",
-        "id": 350,
+        "id": 345,
         "displayName": "Stainless Chainsaw R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3146,7 +3106,7 @@
     },
     {
         "layerName": "Savage Fangs R",
-        "id": 351,
+        "id": 346,
         "displayName": "Savage Fangs R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3155,7 +3115,7 @@
     },
     {
         "layerName": "Venomous Talons R",
-        "id": 352,
+        "id": 347,
         "displayName": "Venomous Talons R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3164,7 +3124,7 @@
     },
     {
         "layerName": "Night Hunter R",
-        "id": 353,
+        "id": 348,
         "displayName": "Night Hunter R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3173,7 +3133,7 @@
     },
     {
         "layerName": "Crystal Sword R",
-        "id": 354,
+        "id": 349,
         "displayName": "Crystal Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3182,7 +3142,7 @@
     },
     {
         "layerName": "Ichika's Doomblade R",
-        "id": 355,
+        "id": 350,
         "displayName": "Ichika's Doomblade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3191,7 +3151,7 @@
     },
     {
         "layerName": "Cyberpunk Katana R",
-        "id": 356,
+        "id": 351,
         "displayName": "Cyberpunk Katana R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3200,7 +3160,7 @@
     },
     {
         "layerName": "Iron Fist R",
-        "id": 357,
+        "id": 352,
         "displayName": "Iron Fist R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3209,7 +3169,7 @@
     },
     {
         "layerName": "Neuromantic Saber R",
-        "id": 358,
+        "id": 353,
         "displayName": "Neuromantic Saber R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3218,7 +3178,7 @@
     },
     {
         "layerName": "Vaporizer R",
-        "id": 359,
+        "id": 354,
         "displayName": "Vaporizer R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3227,7 +3187,7 @@
     },
     {
         "layerName": "Cyberpunk Sword R",
-        "id": 360,
+        "id": 355,
         "displayName": "Cyberpunk Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3236,7 +3196,7 @@
     },
     {
         "layerName": "Cypher Sword R",
-        "id": 361,
+        "id": 356,
         "displayName": "Cypher Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3245,7 +3205,7 @@
     },
     {
         "layerName": "Sand Falcon R",
-        "id": 362,
+        "id": 357,
         "displayName": "Sand Falcon R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3254,7 +3214,7 @@
     },
     {
         "layerName": "Common Sai R",
-        "id": 363,
+        "id": 358,
         "displayName": "Common Sai R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3263,7 +3223,7 @@
     },
     {
         "layerName": "Energy Blade R",
-        "id": 364,
+        "id": 359,
         "displayName": "Energy Blade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3272,7 +3232,7 @@
     },
     {
         "layerName": "Energy Sword R",
-        "id": 365,
+        "id": 360,
         "displayName": "Energy Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3281,7 +3241,7 @@
     },
     {
         "layerName": "Inferno R",
-        "id": 366,
+        "id": 361,
         "displayName": "Inferno R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3290,7 +3250,7 @@
     },
     {
         "layerName": "Master Cleaver R",
-        "id": 367,
+        "id": 362,
         "displayName": "Master Cleaver R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3299,7 +3259,7 @@
     },
     {
         "layerName": "Levitating Blade of Justice R",
-        "id": 368,
+        "id": 363,
         "displayName": "Levitating Blade of Justice R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3308,7 +3268,7 @@
     },
     {
         "layerName": "Dark Blade of Zulax R",
-        "id": 369,
+        "id": 364,
         "displayName": "Dark Blade of Zulax R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3317,7 +3277,7 @@
     },
     {
         "layerName": "Shadow Striker R",
-        "id": 370,
+        "id": 365,
         "displayName": "Shadow Striker R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3326,7 +3286,7 @@
     },
     {
         "layerName": "Luminescent Gauntlets R",
-        "id": 371,
+        "id": 366,
         "displayName": "Luminescent Gauntlets R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3335,7 +3295,7 @@
     },
     {
         "layerName": "Radiant Manuscript R",
-        "id": 372,
+        "id": 367,
         "displayName": "Radiant Manuscript R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3344,7 +3304,7 @@
     },
     {
         "layerName": "Treasure Hunter's Delight R",
-        "id": 373,
+        "id": 368,
         "displayName": "Treasure Hunter's Delight R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3353,7 +3313,7 @@
     },
     {
         "layerName": "Explosive Rain R",
-        "id": 374,
+        "id": 369,
         "displayName": "Explosive Rain R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3362,7 +3322,7 @@
     },
     {
         "layerName": "The Caliber Saber R",
-        "id": 375,
+        "id": 370,
         "displayName": "The Caliber Saber R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3371,7 +3331,7 @@
     },
     {
         "layerName": "The Light of the Heavens R",
-        "id": 376,
+        "id": 371,
         "displayName": "The Light of the Heavens R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3380,7 +3340,7 @@
     },
     {
         "layerName": "Heavy Machine Gun R",
-        "id": 377,
+        "id": 372,
         "displayName": "Heavy Machine Gun R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3389,7 +3349,7 @@
     },
     {
         "layerName": "The Blade of Deep Thought R",
-        "id": 378,
+        "id": 373,
         "displayName": "The Blade of Deep Thought R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3398,7 +3358,7 @@
     },
     {
         "layerName": "Iron Fan R",
-        "id": 379,
+        "id": 374,
         "displayName": "Iron Fan R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3407,7 +3367,7 @@
     },
     {
         "layerName": "Knight's Mark R",
-        "id": 380,
+        "id": 375,
         "displayName": "Knight's Mark R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3416,7 +3376,7 @@
     },
     {
         "layerName": "Flame Tongue R",
-        "id": 381,
+        "id": 376,
         "displayName": "Flame Tongue R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3425,7 +3385,7 @@
     },
     {
         "layerName": "Kite Shield R",
-        "id": 382,
+        "id": 377,
         "displayName": "Kite Shield R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3434,7 +3394,7 @@
     },
     {
         "layerName": "Valorous Blade R",
-        "id": 383,
+        "id": 378,
         "displayName": "Valorous Blade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3443,7 +3403,7 @@
     },
     {
         "layerName": "Noble Tail R",
-        "id": 384,
+        "id": 379,
         "displayName": "Noble Tail R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3452,7 +3412,7 @@
     },
     {
         "layerName": "Shadow Spikes R",
-        "id": 385,
+        "id": 380,
         "displayName": "Shadow Spikes R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3461,7 +3421,7 @@
     },
     {
         "layerName": "Vapor Darts R",
-        "id": 386,
+        "id": 381,
         "displayName": "Vapor Darts R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3470,7 +3430,7 @@
     },
     {
         "layerName": "Squire's Lance R",
-        "id": 387,
+        "id": 382,
         "displayName": "Squire's Lance R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3479,7 +3439,7 @@
     },
     {
         "layerName": "Hacker Chase Cyberdeck 88 R",
-        "id": 388,
+        "id": 383,
         "displayName": "Hacker Chase Cyberdeck 88 R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3488,7 +3448,7 @@
     },
     {
         "layerName": "Lich Sword R",
-        "id": 389,
+        "id": 384,
         "displayName": "Lich Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3497,7 +3457,7 @@
     },
     {
         "layerName": "Widowmaker R",
-        "id": 390,
+        "id": 385,
         "displayName": "Widowmaker R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3506,7 +3466,7 @@
     },
     {
         "layerName": "Dragon's Fury R",
-        "id": 391,
+        "id": 386,
         "displayName": "Dragon's Fury R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3515,7 +3475,7 @@
     },
     {
         "layerName": "Cudgel of Paul the Wise R",
-        "id": 392,
+        "id": 387,
         "displayName": "Cudgel of Paul the Wise R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3524,7 +3484,7 @@
     },
     {
         "layerName": "Grimoire of Arcana R",
-        "id": 393,
+        "id": 388,
         "displayName": "Grimoire of Arcana R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3533,7 +3493,7 @@
     },
     {
         "layerName": "Staff of the Archmage R",
-        "id": 394,
+        "id": 389,
         "displayName": "Staff of the Archmage R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3542,7 +3502,7 @@
     },
     {
         "layerName": "Netherworld Wand R",
-        "id": 395,
+        "id": 390,
         "displayName": "Netherworld Wand R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3551,7 +3511,7 @@
     },
     {
         "layerName": "Constellation Scribe R",
-        "id": 396,
+        "id": 391,
         "displayName": "Constellation Scribe R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3560,7 +3520,7 @@
     },
     {
         "layerName": "Shaken Not Stirred R",
-        "id": 397,
+        "id": 392,
         "displayName": "Shaken Not Stirred R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3569,7 +3529,7 @@
     },
     {
         "layerName": "Gadgeteer's Multitool R",
-        "id": 398,
+        "id": 393,
         "displayName": "Gadgeteer's Multitool R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3578,7 +3538,7 @@
     },
     {
         "layerName": "Gravimetric Cannon R",
-        "id": 399,
+        "id": 394,
         "displayName": "Gravimetric Cannon R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3587,7 +3547,7 @@
     },
     {
         "layerName": "Thunder Punch R",
-        "id": 400,
+        "id": 395,
         "displayName": "Thunder Punch R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3596,7 +3556,7 @@
     },
     {
         "layerName": "VenkaTech Mk3000 R",
-        "id": 401,
+        "id": 396,
         "displayName": "VenkaTech Mk3000 R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3605,7 +3565,7 @@
     },
     {
         "layerName": "VenkaTech Mk2000 R",
-        "id": 402,
+        "id": 397,
         "displayName": "VenkaTech Mk2000 R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3614,7 +3574,7 @@
     },
     {
         "layerName": "Peacemaker R",
-        "id": 403,
+        "id": 398,
         "displayName": "Peacemaker R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3623,7 +3583,7 @@
     },
     {
         "layerName": "Arcane Revolver R",
-        "id": 404,
+        "id": 399,
         "displayName": "Arcane Revolver R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3632,7 +3592,7 @@
     },
     {
         "layerName": "Scorpion Blade R",
-        "id": 405,
+        "id": 400,
         "displayName": "Scorpion Blade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3641,7 +3601,7 @@
     },
     {
         "layerName": "Endless Potion of Possibilities R",
-        "id": 406,
+        "id": 401,
         "displayName": "Endless Potion of Possibilities R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3650,7 +3610,7 @@
     },
     {
         "layerName": "Sacred Vessel of the Divine R",
-        "id": 407,
+        "id": 402,
         "displayName": "Sacred Vessel of the Divine R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3659,7 +3619,7 @@
     },
     {
         "layerName": "Gavel of Sacred Judgment R",
-        "id": 408,
+        "id": 403,
         "displayName": "Gavel of Sacred Judgment R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3668,7 +3628,7 @@
     },
     {
         "layerName": "Magnetronic Bazooka R",
-        "id": 409,
+        "id": 404,
         "displayName": "Magnetronic Bazooka R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3677,7 +3637,7 @@
     },
     {
         "layerName": "Thunderbolt R",
-        "id": 410,
+        "id": 405,
         "displayName": "Thunderbolt R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3686,7 +3646,7 @@
     },
     {
         "layerName": "Ian's Disintegrator R",
-        "id": 411,
+        "id": 406,
         "displayName": "Ian's Disintegrator R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3695,7 +3655,7 @@
     },
     {
         "layerName": "Doom Bringer R",
-        "id": 412,
+        "id": 407,
         "displayName": "Doom Bringer R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3704,7 +3664,7 @@
     },
     {
         "layerName": "Blade of Honor R",
-        "id": 413,
+        "id": 408,
         "displayName": "Blade of Honor R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3713,7 +3673,7 @@
     },
     {
         "layerName": "Royal Wand of Power R",
-        "id": 414,
+        "id": 409,
         "displayName": "Royal Wand of Power R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3722,7 +3682,7 @@
     },
     {
         "layerName": "Vile Scepter of Janeman the Mad R",
-        "id": 415,
+        "id": 410,
         "displayName": "Vile Scepter of Janeman the Mad R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3731,7 +3691,7 @@
     },
     {
         "layerName": "Screw Turner R",
-        "id": 416,
+        "id": 411,
         "displayName": "Screw Turner R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3740,7 +3700,7 @@
     },
     {
         "layerName": "Death Scythe R",
-        "id": 417,
+        "id": 412,
         "displayName": "Death Scythe R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3749,7 +3709,7 @@
     },
     {
         "layerName": "Reaperblade R",
-        "id": 418,
+        "id": 413,
         "displayName": "Reaperblade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3758,7 +3718,7 @@
     },
     {
         "layerName": "Shining Barrier R",
-        "id": 419,
+        "id": 414,
         "displayName": "Shining Barrier R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3767,7 +3727,7 @@
     },
     {
         "layerName": "Shards of Shadow R",
-        "id": 420,
+        "id": 415,
         "displayName": "Shards of Shadow R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3776,7 +3736,7 @@
     },
     {
         "layerName": "Serpent Scepter R",
-        "id": 421,
+        "id": 416,
         "displayName": "Serpent Scepter R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3785,7 +3745,7 @@
     },
     {
         "layerName": "Fizzy Fury R",
-        "id": 422,
+        "id": 417,
         "displayName": "Fizzy Fury R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3794,7 +3754,7 @@
     },
     {
         "layerName": "Annihilator R",
-        "id": 423,
+        "id": 418,
         "displayName": "Annihilator R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3803,7 +3763,7 @@
     },
     {
         "layerName": "Resonating Blade R",
-        "id": 424,
+        "id": 419,
         "displayName": "Resonating Blade R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3812,7 +3772,7 @@
     },
     {
         "layerName": "Magna-Staff R",
-        "id": 425,
+        "id": 420,
         "displayName": "Magna-Staff R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3821,7 +3781,7 @@
     },
     {
         "layerName": "Ranger's Edge R",
-        "id": 426,
+        "id": 421,
         "displayName": "Ranger's Edge R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3830,7 +3790,7 @@
     },
     {
         "layerName": "Edge of the Eastern Winds R",
-        "id": 427,
+        "id": 422,
         "displayName": "Edge of the Eastern Winds R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3839,7 +3799,7 @@
     },
     {
         "layerName": "Artifact Hunter R",
-        "id": 428,
+        "id": 423,
         "displayName": "Artifact Hunter R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3848,7 +3808,7 @@
     },
     {
         "layerName": "Travis Sword R",
-        "id": 429,
+        "id": 424,
         "displayName": "Travis Sword R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3857,7 +3817,7 @@
     },
     {
         "layerName": "Neptune's Wrath R",
-        "id": 430,
+        "id": 425,
         "displayName": "Neptune's Wrath R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3866,7 +3826,7 @@
     },
     {
         "layerName": "Poseidon's Demise R",
-        "id": 431,
+        "id": 426,
         "displayName": "Poseidon's Demise R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3875,7 +3835,7 @@
     },
     {
         "layerName": "Sturdy Branch R",
-        "id": 432,
+        "id": 427,
         "displayName": "Sturdy Branch R",
         "slotName": "Right Hand",
         "isBasic": true,
@@ -3884,7 +3844,7 @@
     },
     {
         "layerName": "Handy Stick R",
-        "id": 433,
+        "id": 428,
         "displayName": "Handy Stick R",
         "slotName": "Right Hand",
         "isBasic": true,
@@ -3893,7 +3853,7 @@
     },
     {
         "layerName": "Discarded Rod R",
-        "id": 434,
+        "id": 429,
         "displayName": "Discarded Rod R",
         "slotName": "Right Hand",
         "isBasic": true,
@@ -3902,7 +3862,7 @@
     },
     {
         "layerName": "Blade of Duty R",
-        "id": 435,
+        "id": 430,
         "displayName": "Blade of Duty R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3911,7 +3871,7 @@
     },
     {
         "layerName": "Maul of Blood R",
-        "id": 436,
+        "id": 431,
         "displayName": "Maul of Blood R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3920,7 +3880,7 @@
     },
     {
         "layerName": "Engineer's Autowrench R",
-        "id": 437,
+        "id": 432,
         "displayName": "Engineer's Autowrench R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3929,7 +3889,7 @@
     },
     {
         "layerName": "Mechanic's Handy Wrench R",
-        "id": 438,
+        "id": 433,
         "displayName": "Mechanic's Handy Wrench R",
         "slotName": "Right Hand",
         "isBasic": false,
@@ -3938,7 +3898,7 @@
     },
     {
         "layerName": "Base",
-        "id": 439,
+        "id": 434,
         "displayName": "Base",
         "slotName": "Shadow",
         "isBasic": true,
@@ -3947,7 +3907,7 @@
     },
     {
         "layerName": "NB Dark",
-        "id": 440,
+        "id": 435,
         "displayName": "NB Dark",
         "slotName": "Skin",
         "isBasic": true,
@@ -3956,7 +3916,7 @@
     },
     {
         "layerName": "NB Light",
-        "id": 441,
+        "id": 436,
         "displayName": "NB Light",
         "slotName": "Skin",
         "isBasic": true,
@@ -3965,7 +3925,7 @@
     },
     {
         "layerName": "NB MDark",
-        "id": 442,
+        "id": 437,
         "displayName": "NB MDark",
         "slotName": "Skin",
         "isBasic": true,
@@ -3974,7 +3934,7 @@
     },
     {
         "layerName": "NB Medium",
-        "id": 443,
+        "id": 438,
         "displayName": "NB Medium",
         "slotName": "Skin",
         "isBasic": true,
@@ -3983,7 +3943,7 @@
     },
     {
         "layerName": "NB Pale",
-        "id": 444,
+        "id": 439,
         "displayName": "NB Pale",
         "slotName": "Skin",
         "isBasic": true,
@@ -3992,7 +3952,7 @@
     },
     {
         "layerName": "NB Sand",
-        "id": 445,
+        "id": 440,
         "displayName": "NB Sand",
         "slotName": "Skin",
         "isBasic": true,
@@ -4001,7 +3961,7 @@
     },
     {
         "layerName": "F Dark",
-        "id": 446,
+        "id": 441,
         "displayName": "F Dark",
         "slotName": "Skin",
         "isBasic": true,
@@ -4010,7 +3970,7 @@
     },
     {
         "layerName": "F Light",
-        "id": 447,
+        "id": 442,
         "displayName": "F Light",
         "slotName": "Skin",
         "isBasic": true,
@@ -4019,7 +3979,7 @@
     },
     {
         "layerName": "F MDark",
-        "id": 448,
+        "id": 443,
         "displayName": "F MDark",
         "slotName": "Skin",
         "isBasic": true,
@@ -4028,7 +3988,7 @@
     },
     {
         "layerName": "F Medium",
-        "id": 449,
+        "id": 444,
         "displayName": "F Medium",
         "slotName": "Skin",
         "isBasic": true,
@@ -4037,7 +3997,7 @@
     },
     {
         "layerName": "F Pale",
-        "id": 450,
+        "id": 445,
         "displayName": "F Pale",
         "slotName": "Skin",
         "isBasic": true,
@@ -4046,7 +4006,7 @@
     },
     {
         "layerName": "F Sand",
-        "id": 451,
+        "id": 446,
         "displayName": "F Sand",
         "slotName": "Skin",
         "isBasic": true,
@@ -4055,7 +4015,7 @@
     },
     {
         "layerName": "M Dark",
-        "id": 452,
+        "id": 447,
         "displayName": "M Dark",
         "slotName": "Skin",
         "isBasic": true,
@@ -4064,7 +4024,7 @@
     },
     {
         "layerName": "M Light",
-        "id": 453,
+        "id": 448,
         "displayName": "M Light",
         "slotName": "Skin",
         "isBasic": true,
@@ -4073,7 +4033,7 @@
     },
     {
         "layerName": "M MDark",
-        "id": 454,
+        "id": 449,
         "displayName": "M MDark",
         "slotName": "Skin",
         "isBasic": true,
@@ -4082,7 +4042,7 @@
     },
     {
         "layerName": "M Medium",
-        "id": 455,
+        "id": 450,
         "displayName": "M Medium",
         "slotName": "Skin",
         "isBasic": true,
@@ -4091,7 +4051,7 @@
     },
     {
         "layerName": "M Pale",
-        "id": 456,
+        "id": 451,
         "displayName": "M Pale",
         "slotName": "Skin",
         "isBasic": true,
@@ -4100,7 +4060,7 @@
     },
     {
         "layerName": "M Sand",
-        "id": 457,
+        "id": 452,
         "displayName": "M Sand",
         "slotName": "Skin",
         "isBasic": true,
@@ -4109,7 +4069,7 @@
     },
     {
         "layerName": "Academy Robe",
-        "id": 458,
+        "id": 453,
         "displayName": "Academy Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4118,7 +4078,7 @@
     },
     {
         "layerName": "Dark Arts Robe",
-        "id": 459,
+        "id": 454,
         "displayName": "Dark Arts Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4127,7 +4087,7 @@
     },
     {
         "layerName": "Diana Armor",
-        "id": 460,
+        "id": 455,
         "displayName": "Diana Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4136,7 +4096,7 @@
     },
     {
         "layerName": "Honor Wrappings",
-        "id": 461,
+        "id": 456,
         "displayName": "Honor Wrappings",
         "slotName": "Top",
         "isBasic": false,
@@ -4145,7 +4105,7 @@
     },
     {
         "layerName": "Coman Armor",
-        "id": 462,
+        "id": 457,
         "displayName": "Coman Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4154,7 +4114,7 @@
     },
     {
         "layerName": "Hacker Hoodie",
-        "id": 463,
+        "id": 458,
         "displayName": "Hacker Hoodie",
         "slotName": "Top",
         "isBasic": false,
@@ -4163,7 +4123,7 @@
     },
     {
         "layerName": "Matrix Jacket",
-        "id": 464,
+        "id": 459,
         "displayName": "Matrix Jacket",
         "slotName": "Top",
         "isBasic": false,
@@ -4172,7 +4132,7 @@
     },
     {
         "layerName": "Muscle Shirt",
-        "id": 465,
+        "id": 460,
         "displayName": "Muscle Shirt",
         "slotName": "Top",
         "isBasic": false,
@@ -4181,7 +4141,7 @@
     },
     {
         "layerName": "Bloody Armor",
-        "id": 466,
+        "id": 461,
         "displayName": "Bloody Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4190,7 +4150,7 @@
     },
     {
         "layerName": "Galactic Armor",
-        "id": 467,
+        "id": 462,
         "displayName": "Galactic Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4199,7 +4159,7 @@
     },
     {
         "layerName": "Corporal Shirt",
-        "id": 468,
+        "id": 463,
         "displayName": "Corporal Shirt",
         "slotName": "Top",
         "isBasic": false,
@@ -4208,7 +4168,7 @@
     },
     {
         "layerName": "Training Shirt (Brown)",
-        "id": 469,
+        "id": 464,
         "displayName": "Training Shirt (Brown)",
         "slotName": "Top",
         "isBasic": false,
@@ -4217,7 +4177,7 @@
     },
     {
         "layerName": "Galahad Armor",
-        "id": 470,
+        "id": 465,
         "displayName": "Galahad Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4226,7 +4186,7 @@
     },
     {
         "layerName": "Basic Robes",
-        "id": 471,
+        "id": 466,
         "displayName": "Basic Robes",
         "slotName": "Top",
         "isBasic": false,
@@ -4235,7 +4195,7 @@
     },
     {
         "layerName": "Rescued Armor",
-        "id": 472,
+        "id": 467,
         "displayName": "Rescued Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4244,7 +4204,7 @@
     },
     {
         "layerName": "Shadow Runner Armor",
-        "id": 473,
+        "id": 468,
         "displayName": "Shadow Runner Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4253,7 +4213,7 @@
     },
     {
         "layerName": "Labyrinth Armor",
-        "id": 474,
+        "id": 469,
         "displayName": "Labyrinth Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4262,7 +4222,7 @@
     },
     {
         "layerName": "Tiamat Armor",
-        "id": 475,
+        "id": 470,
         "displayName": "Tiamat Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4271,7 +4231,7 @@
     },
     {
         "layerName": "Adams Armor",
-        "id": 476,
+        "id": 471,
         "displayName": "Adams Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4280,7 +4240,7 @@
     },
     {
         "layerName": "Bond Armor",
-        "id": 477,
+        "id": 472,
         "displayName": "Bond Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4289,7 +4249,7 @@
     },
     {
         "layerName": "Midas Armor",
-        "id": 478,
+        "id": 473,
         "displayName": "Midas Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4298,7 +4258,7 @@
     },
     {
         "layerName": "Arsenal Armor",
-        "id": 479,
+        "id": 474,
         "displayName": "Arsenal Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4307,7 +4267,7 @@
     },
     {
         "layerName": "Romanova Armor",
-        "id": 480,
+        "id": 475,
         "displayName": "Romanova Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4316,7 +4276,7 @@
     },
     {
         "layerName": "Bleached Robe",
-        "id": 481,
+        "id": 476,
         "displayName": "Bleached Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4325,7 +4285,7 @@
     },
     {
         "layerName": "Ayane Robe",
-        "id": 482,
+        "id": 477,
         "displayName": "Ayane Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4334,7 +4294,7 @@
     },
     {
         "layerName": "Arthur Breastplate",
-        "id": 483,
+        "id": 478,
         "displayName": "Arthur Breastplate",
         "slotName": "Top",
         "isBasic": false,
@@ -4343,7 +4303,7 @@
     },
     {
         "layerName": "Kunoichi Armor",
-        "id": 484,
+        "id": 479,
         "displayName": "Kunoichi Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4352,7 +4312,7 @@
     },
     {
         "layerName": "Archlich Robe",
-        "id": 485,
+        "id": 480,
         "displayName": "Archlich Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4361,7 +4321,7 @@
     },
     {
         "layerName": "Merlin Robes",
-        "id": 486,
+        "id": 481,
         "displayName": "Merlin Robes",
         "slotName": "Top",
         "isBasic": false,
@@ -4370,7 +4330,7 @@
     },
     {
         "layerName": "Spartan Armor",
-        "id": 487,
+        "id": 482,
         "displayName": "Spartan Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4379,7 +4339,7 @@
     },
     {
         "layerName": "Techxpert Armor",
-        "id": 488,
+        "id": 483,
         "displayName": "Techxpert Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4388,7 +4348,7 @@
     },
     {
         "layerName": "Training Tank (Blue)",
-        "id": 489,
+        "id": 484,
         "displayName": "Training Tank (Blue)",
         "slotName": "Top",
         "isBasic": true,
@@ -4397,7 +4357,7 @@
     },
     {
         "layerName": "Training Tank (Green)",
-        "id": 490,
+        "id": 485,
         "displayName": "Training Tank (Green)",
         "slotName": "Top",
         "isBasic": true,
@@ -4406,7 +4366,7 @@
     },
     {
         "layerName": "Training Tank (Orange)",
-        "id": 491,
+        "id": 486,
         "displayName": "Training Tank (Orange)",
         "slotName": "Top",
         "isBasic": true,
@@ -4415,7 +4375,7 @@
     },
     {
         "layerName": "Training Tank (Pink)",
-        "id": 492,
+        "id": 487,
         "displayName": "Training Tank (Pink)",
         "slotName": "Top",
         "isBasic": true,
@@ -4424,7 +4384,7 @@
     },
     {
         "layerName": "Training Tank (Red)",
-        "id": 493,
+        "id": 488,
         "displayName": "Training Tank (Red)",
         "slotName": "Top",
         "isBasic": true,
@@ -4433,7 +4393,7 @@
     },
     {
         "layerName": "Resistance Armor",
-        "id": 494,
+        "id": 489,
         "displayName": "Resistance Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4442,7 +4402,7 @@
     },
     {
         "layerName": "Shinobi Armor",
-        "id": 495,
+        "id": 490,
         "displayName": "Shinobi Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4451,7 +4411,7 @@
     },
     {
         "layerName": "Citrus Top",
-        "id": 496,
+        "id": 491,
         "displayName": "Citrus Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4460,7 +4420,7 @@
     },
     {
         "layerName": "Consecrated Armor",
-        "id": 497,
+        "id": 492,
         "displayName": "Consecrated Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4469,7 +4429,7 @@
     },
     {
         "layerName": "Divine Robe",
-        "id": 498,
+        "id": 493,
         "displayName": "Divine Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4478,7 +4438,7 @@
     },
     {
         "layerName": "Strange Robe",
-        "id": 499,
+        "id": 494,
         "displayName": "Strange Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4487,7 +4447,7 @@
     },
     {
         "layerName": "Sniper Tunic",
-        "id": 500,
+        "id": 495,
         "displayName": "Sniper Tunic",
         "slotName": "Top",
         "isBasic": false,
@@ -4496,7 +4456,7 @@
     },
     {
         "layerName": "Bloodshot Armor",
-        "id": 501,
+        "id": 496,
         "displayName": "Bloodshot Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4505,7 +4465,7 @@
     },
     {
         "layerName": "Nokizaru Armor",
-        "id": 502,
+        "id": 497,
         "displayName": "Nokizaru Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4514,7 +4474,7 @@
     },
     {
         "layerName": "Ember Armor",
-        "id": 503,
+        "id": 498,
         "displayName": "Ember Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4523,7 +4483,7 @@
     },
     {
         "layerName": "Redshirt Shirt",
-        "id": 504,
+        "id": 499,
         "displayName": "Redshirt Shirt",
         "slotName": "Top",
         "isBasic": false,
@@ -4532,7 +4492,7 @@
     },
     {
         "layerName": "Crimson Hakama",
-        "id": 505,
+        "id": 500,
         "displayName": "Crimson Hakama",
         "slotName": "Top",
         "isBasic": false,
@@ -4541,7 +4501,7 @@
     },
     {
         "layerName": "Assault Armor",
-        "id": 506,
+        "id": 501,
         "displayName": "Assault Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4550,7 +4510,7 @@
     },
     {
         "layerName": "Crusader Armor",
-        "id": 507,
+        "id": 502,
         "displayName": "Crusader Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4559,7 +4519,7 @@
     },
     {
         "layerName": "Recruit Top",
-        "id": 508,
+        "id": 503,
         "displayName": "Recruit Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4568,7 +4528,7 @@
     },
     {
         "layerName": "Boris Top",
-        "id": 509,
+        "id": 504,
         "displayName": "Boris Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4577,7 +4537,7 @@
     },
     {
         "layerName": "Marine Armor",
-        "id": 510,
+        "id": 505,
         "displayName": "Marine Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4586,7 +4546,7 @@
     },
     {
         "layerName": "Gilded Top",
-        "id": 511,
+        "id": 506,
         "displayName": "Gilded Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4595,7 +4555,7 @@
     },
     {
         "layerName": "Lara Top",
-        "id": 512,
+        "id": 507,
         "displayName": "Lara Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4604,7 +4564,7 @@
     },
     {
         "layerName": "Otaku Jacket",
-        "id": 513,
+        "id": 508,
         "displayName": "Otaku Jacket",
         "slotName": "Top",
         "isBasic": false,
@@ -4613,7 +4573,7 @@
     },
     {
         "layerName": "Turtleneck Top",
-        "id": 514,
+        "id": 509,
         "displayName": "Turtleneck Top",
         "slotName": "Top",
         "isBasic": false,
@@ -4622,7 +4582,7 @@
     },
     {
         "layerName": "Penguin Armor",
-        "id": 515,
+        "id": 510,
         "displayName": "Penguin Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4631,7 +4591,7 @@
     },
     {
         "layerName": "The Vest",
-        "id": 516,
+        "id": 511,
         "displayName": "The Vest",
         "slotName": "Top",
         "isBasic": false,
@@ -4640,7 +4600,7 @@
     },
     {
         "layerName": "Angel Robes",
-        "id": 517,
+        "id": 512,
         "displayName": "Angel Robes",
         "slotName": "Top",
         "isBasic": false,
@@ -4649,7 +4609,7 @@
     },
     {
         "layerName": "Slayer Armor",
-        "id": 518,
+        "id": 513,
         "displayName": "Slayer Armor",
         "slotName": "Top",
         "isBasic": false,
@@ -4658,7 +4618,7 @@
     },
     {
         "layerName": "Celestial Robe",
-        "id": 519,
+        "id": 514,
         "displayName": "Celestial Robe",
         "slotName": "Top",
         "isBasic": false,
@@ -4667,7 +4627,7 @@
     },
     {
         "layerName": "Explosive Rain L",
-        "id": 520,
+        "id": 515,
         "displayName": "Explosive Rain L",
         "slotName": "Left Hand",
         "isBasic": false,
@@ -4676,7 +4636,7 @@
     },
     {
         "layerName": "Training Shirt (Orange)",
-        "id": 521,
+        "id": 516,
         "displayName": "Training Shirt (Orange)",
         "slotName": "Top",
         "isBasic": false,
@@ -4685,7 +4645,7 @@
     },
     {
         "layerName": "Training Shirt (Green)",
-        "id": 522,
+        "id": 517,
         "displayName": "Training Shirt (Green)",
         "slotName": "Top",
         "isBasic": false,
@@ -4694,7 +4654,7 @@
     },
     {
         "layerName": "Training Shirt (Pink)",
-        "id": 523,
+        "id": 518,
         "displayName": "Training Shirt (Pink)",
         "slotName": "Top",
         "isBasic": false,
@@ -4703,7 +4663,7 @@
     },
     {
         "layerName": "Training Shirt (Red)",
-        "id": 524,
+        "id": 519,
         "displayName": "Training Shirt (Red)",
         "slotName": "Top",
         "isBasic": false,
@@ -4712,7 +4672,7 @@
     },
     {
         "layerName": "Training Shirt (Blue)",
-        "id": 525,
+        "id": 520,
         "displayName": "Training Shirt (Blue)",
         "slotName": "Top",
         "isBasic": false,
@@ -4721,7 +4681,7 @@
     },
     {
         "layerName": "Training Tank (Brown)",
-        "id": 526,
+        "id": 521,
         "displayName": "Training Tank (Brown)",
         "slotName": "Top",
         "isBasic": true,
@@ -4730,7 +4690,7 @@
     },
     {
         "layerName": "Autumn Underwear",
-        "id": 527,
+        "id": 522,
         "displayName": "Autumn Underwear",
         "slotName": "Bottom",
         "isBasic": true,
@@ -4739,7 +4699,7 @@
     },
     {
         "layerName": "Topaz Tank",
-        "id": 528,
+        "id": 523,
         "displayName": "Topaz Tank",
         "slotName": "Top",
         "isBasic": false,
@@ -4748,7 +4708,7 @@
     },
     {
         "layerName": "Sapphire Tank",
-        "id": 529,
+        "id": 524,
         "displayName": "Sapphire Tank",
         "slotName": "Top",
         "isBasic": false,
@@ -4757,7 +4717,7 @@
     },
     {
         "layerName": "Emerald Tank",
-        "id": 530,
+        "id": 525,
         "displayName": "Emerald Tank",
         "slotName": "Top",
         "isBasic": false,
@@ -4766,7 +4726,7 @@
     },
     {
         "layerName": "Oak Shirt",
-        "id": 531,
+        "id": 526,
         "displayName": "Oak Shirt",
         "slotName": "Top",
         "isBasic": false,
@@ -4774,16 +4734,8 @@
         "slotId": 13
     },
     {
-        "layerName": "",
-        "id": 532,
-        "displayName": "",
-        "slotName": "",
-        "isBasic": "",
-        "mintAmount": 0
-    },
-    {
         "layerName": "Gunner",
-        "id": 533,
+        "id": 527,
         "displayName": "Gunner",
         "slotName": "Class",
         "isBasic": true,
@@ -4792,7 +4744,7 @@
     },
     {
         "layerName": "Wizard",
-        "id": 534,
+        "id": 528,
         "displayName": "Wizard",
         "slotName": "Class",
         "isBasic": true,
@@ -4801,7 +4753,7 @@
     },
     {
         "layerName": "Assassin",
-        "id": 535,
+        "id": 529,
         "displayName": "Assassin",
         "slotName": "Class",
         "isBasic": true,
@@ -4810,7 +4762,7 @@
     },
     {
         "layerName": "Tech",
-        "id": 536,
+        "id": 530,
         "displayName": "Tech",
         "slotName": "Class",
         "isBasic": true,
@@ -4819,7 +4771,7 @@
     },
     {
         "layerName": "Knight",
-        "id": 537,
+        "id": 531,
         "displayName": "Knight",
         "slotName": "Class",
         "isBasic": true,
@@ -4828,7 +4780,7 @@
     },
     {
         "layerName": "Male",
-        "id": 538,
+        "id": 532,
         "displayName": "Male",
         "slotName": "Gender",
         "isBasic": true,
@@ -4837,7 +4789,7 @@
     },
     {
         "layerName": "Female",
-        "id": 539,
+        "id": 533,
         "displayName": "Female",
         "slotName": "Gender",
         "isBasic": true,
@@ -4846,7 +4798,7 @@
     },
     {
         "layerName": "Non-Binary",
-        "id": 540,
+        "id": 534,
         "displayName": "Non-Binary",
         "slotName": "Gender",
         "isBasic": true,
@@ -4855,7 +4807,7 @@
     },
     {
         "layerName": "Astonishmint",
-        "id": 541,
+        "id": 535,
         "displayName": "Astonishmint",
         "slotName": "Background",
         "isBasic": true,
