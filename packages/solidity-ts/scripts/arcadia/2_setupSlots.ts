@@ -10,9 +10,8 @@ import { Item, ItemSC, Slot, SlotSC, itemsPath, slotsPath } from "./utils/interf
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 
-const MAKE_TRANSACTION = true;
+const MAKE_TRANSACTION = false;
 console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
-
 
 async function main() {
 
@@ -26,6 +25,13 @@ async function main() {
     //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
     //     return slot;
     // }));
+
+    // const itemsToDisallow = await getItemsToDisallow(inventorySC, itemsSC);
+    // console.log("disallowItems: ", itemsToDisallow.map((item)=>item.id));
+    // if (MAKE_TRANSACTION && itemsToDisallow.length > 0) {
+    //     let tx = await inventorySC.disallowItems(itemsToDisallow);
+    //     await tx.wait();
+    // }
     
     for (let i = 0; i < slotsAll.length; i++) {
         const slot = slotsAll[i];
@@ -92,6 +98,21 @@ async function main() {
     //     return slot;
     // }));
 }
+
+async function getItemsToDisallow(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
+    const itemsToDisallow: ItemSC[] = [];
+    for (let i = 0; i < itemsAll.length; i++) {
+        if (!itemsAll[i].slotId) {
+            const itemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id};
+            const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
+            if (allowedSlot > 0) {
+                itemsToDisallow.push(itemSC);
+            }
+        }
+    }
+    return itemsToDisallow;
+}
+
 async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
     let slotsSC: SlotSC[] = [];
 
@@ -115,7 +136,11 @@ async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contrac
     }
 
     // Get slot for each item
+    const itemsToRemove: number[] = [];
     for (let i = 0; i < itemsAll.length; i++) {
+        if (!itemsAll[i].slotId) {
+            itemsToRemove.push(itemsAll[i].id);
+        }
         const itemSC: ItemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id}
         const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
         slotsSC = slotsSC.map((slot: SlotSC)=> {
@@ -124,8 +149,8 @@ async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contrac
             }
             return slot;
         })
-        
     }
+    
     return slotsSC;
 }
 

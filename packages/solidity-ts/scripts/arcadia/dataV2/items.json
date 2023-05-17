@@ -144,261 +144,261 @@
         "slotId": 14
     },
     {
-        "layerName": "Skytower City (Base)",
+        "layerName": "Skytower City",
         "id": 17,
-        "displayName": "Skytower City (Base)",
+        "displayName": "Skytower City",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Lunar Citadel (Base)",
+        "layerName": "Lunar Citadel",
         "id": 18,
-        "displayName": "Lunar Citadel (Base)",
+        "displayName": "Lunar Citadel",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Celestial Temple (Base)",
+        "layerName": "Celestial Temple",
         "id": 19,
-        "displayName": "Celestial Temple (Base)",
+        "displayName": "Celestial Temple",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Astral Grotto (Base)",
+        "layerName": "Astral Grotto",
         "id": 20,
-        "displayName": "Astral Grotto (Base)",
+        "displayName": "Astral Grotto",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Starlight Refuge (Base)",
+        "layerName": "Starlight Refuge",
         "id": 21,
-        "displayName": "Starlight Refuge (Base)",
+        "displayName": "Starlight Refuge",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Arcanum Outpost (Base)",
+        "layerName": "Arcanum Outpost",
         "id": 22,
-        "displayName": "Arcanum Outpost (Base)",
+        "displayName": "Arcanum Outpost",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Azure Sky Port (Base)",
+        "layerName": "Azure Sky Port",
         "id": 23,
-        "displayName": "Azure Sky Port (Base)",
+        "displayName": "Azure Sky Port",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Echoes of Eternity (Base)",
+        "layerName": "Echoes of Eternity",
         "id": 24,
-        "displayName": "Echoes of Eternity (Base)",
+        "displayName": "Echoes of Eternity",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Crystalhaven Sanctuary (Base)",
+        "layerName": "Crystalhaven Sanctuary",
         "id": 25,
-        "displayName": "Crystalhaven Sanctuary (Base)",
+        "displayName": "Crystalhaven Sanctuary",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Eldertree Grove (Base)",
+        "layerName": "Eldertree Grove",
         "id": 26,
-        "displayName": "Eldertree Grove (Base)",
+        "displayName": "Eldertree Grove",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Dragonfire Canyon (Base)",
+        "layerName": "Dragonfire Canyon",
         "id": 27,
-        "displayName": "Dragonfire Canyon (Base)",
+        "displayName": "Dragonfire Canyon",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Shimmering Isles (Base)",
+        "layerName": "Shimmering Isles",
         "id": 28,
-        "displayName": "Shimmering Isles (Base)",
+        "displayName": "Shimmering Isles",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Elemental Glade (Base)",
+        "layerName": "Elemental Glade",
         "id": 29,
-        "displayName": "Elemental Glade (Base)",
+        "displayName": "Elemental Glade",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Starfall Keep (Base)",
+        "layerName": "Starfall Keep",
         "id": 30,
-        "displayName": "Starfall Keep (Base)",
+        "displayName": "Starfall Keep",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Shadowvale Woods (Base)",
+        "layerName": "Shadowvale Woods",
         "id": 31,
-        "displayName": "Shadowvale Woods (Base)",
+        "displayName": "Shadowvale Woods",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Thunderhead Peak (Base)",
+        "layerName": "Thunderhead Peak",
         "id": 32,
-        "displayName": "Thunderhead Peak (Base)",
+        "displayName": "Thunderhead Peak",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Starlight Village (Base)",
+        "layerName": "Starlight Village",
         "id": 33,
-        "displayName": "Starlight Village (Base)",
+        "displayName": "Starlight Village",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Solaria Kingdom (Base)",
+        "layerName": "Solaria Kingdom",
         "id": 34,
-        "displayName": "Solaria Kingdom (Base)",
+        "displayName": "Solaria Kingdom",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Nexus Bastion (Base)",
+        "layerName": "Nexus Bastion",
         "id": 35,
-        "displayName": "Nexus Bastion (Base)",
+        "displayName": "Nexus Bastion",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Stormwarden Stronghold (Base)",
+        "layerName": "Stormwarden Stronghold",
         "id": 36,
-        "displayName": "Stormwarden Stronghold (Base)",
+        "displayName": "Stormwarden Stronghold",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Gravity Rift Fortress (Base)",
+        "layerName": "Gravity Rift Fortress",
         "id": 37,
-        "displayName": "Gravity Rift Fortress (Base)",
+        "displayName": "Gravity Rift Fortress",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Voidgate Tower (Base)",
+        "layerName": "Voidgate Tower",
         "id": 38,
-        "displayName": "Voidgate Tower (Base)",
+        "displayName": "Voidgate Tower",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Poseidon's Rest (Base)",
+        "layerName": "Poseidon's Rest",
         "id": 39,
-        "displayName": "Poseidon's Rest (Base)",
+        "displayName": "Poseidon's Rest",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Raptor's Aerie (Base)",
+        "layerName": "Raptor's Aerie",
         "id": 40,
-        "displayName": "Raptor's Aerie (Base)",
+        "displayName": "Raptor's Aerie",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Taufik's Last Stand (Base)",
+        "layerName": "Taufik's Last Stand",
         "id": 41,
-        "displayName": "Taufik's Last Stand (Base)",
+        "displayName": "Taufik's Last Stand",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Eldritch Marsh (Base)",
+        "layerName": "Eldritch Marsh",
         "id": 42,
-        "displayName": "Eldritch Marsh (Base)",
+        "displayName": "Eldritch Marsh",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Knowhere (Base)",
+        "layerName": "Knowhere",
         "id": 43,
-        "displayName": "Knowhere (Base)",
+        "displayName": "Knowhere",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "Skullcrusher Mountain (Base)",
+        "layerName": "Skullcrusher Mountain",
         "id": 44,
-        "displayName": "Skullcrusher Mountain (Base)",
+        "displayName": "Skullcrusher Mountain",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 8
     },
     {
-        "layerName": "The Infinite Ocean (Base)",
+        "layerName": "The Infinite Ocean",
         "id": 45,
-        "displayName": "The Infinite Ocean (Base)",
+        "displayName": "The Infinite Ocean",
         "slotName": "Background",
         "isBasic": true,
         "mintAmount": 0,
@@ -468,13 +468,12 @@
         "slotId": 12
     },
     {
-        "layerName": "Tighty Tealies",
+        "layerName": "",
         "id": 53,
-        "displayName": "Tighty Tealies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Corporal Leggings",
@@ -648,13 +647,12 @@
         "slotId": 12
     },
     {
-        "layerName": "Tighty Greenies",
+        "layerName": "",
         "id": 73,
-        "displayName": "Tighty Greenies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Ranger Leggings",
@@ -819,13 +817,12 @@
         "slotId": 12
     },
     {
-        "layerName": "Tighty Orangies",
+        "layerName": "",
         "id": 92,
-        "displayName": "Tighty Orangies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Mandarin Leggings",
@@ -846,13 +843,12 @@
         "slotId": 12
     },
     {
-        "layerName": "Tighty Pinkies",
+        "layerName": "",
         "id": 95,
-        "displayName": "Tighty Pinkies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Consecrated Leggings",
@@ -918,13 +914,12 @@
         "slotId": 12
     },
     {
-        "layerName": "Tighty Reddies",
+        "layerName": "",
         "id": 103,
-        "displayName": "Tighty Reddies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Crimson Leggings",
@@ -4779,13 +4774,12 @@
         "slotId": 13
     },
     {
-        "layerName": "Tighty Autumnies",
+        "layerName": "",
         "id": 532,
-        "displayName": "Tighty Autumnies",
-        "slotName": "Bottom",
-        "isBasic": true,
-        "mintAmount": 0,
-        "slotId": 12
+        "displayName": "",
+        "slotName": "",
+        "isBasic": "",
+        "mintAmount": 0
     },
     {
         "layerName": "Gunner",
@@ -4858,5 +4852,14 @@
         "isBasic": true,
         "mintAmount": 0,
         "slotId": 6
+    },
+    {
+        "layerName": "Astonishmint",
+        "id": 541,
+        "displayName": "Astonishmint",
+        "slotName": "Background",
+        "isBasic": true,
+        "mintAmount": 0,
+        "slotId": 8
     }
 ]

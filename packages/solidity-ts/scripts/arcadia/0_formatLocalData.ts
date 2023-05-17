@@ -42,7 +42,7 @@ async function main() {
                 itemsAll[i].slotId = slot.id;
                 modified = true;
             }
-        } else {
+        } else if (itemsAll[i].slotName) {
             throw new Error("No slot found: " + itemsAll[i].slotName);
         }
     }
@@ -119,6 +119,11 @@ async function main() {
     for (let i = 0; i < itemsAll.length; i++) {
         const slotIndex = slotsAll.findIndex((slot)=>slot.id == itemsAll[i].slotId)
         const itemId = itemsAll[i].id;
+        
+        if (slotIndex == -1) {
+            console.log("item ", itemsAll[i].id, " has no slot");
+            continue;
+        }
         
         if (!slotsAll[slotIndex].allowedItems.includes(itemId)) {
             slotsAll[slotIndex].allowedItems.push(itemId);

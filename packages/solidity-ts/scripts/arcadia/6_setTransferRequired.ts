@@ -21,7 +21,7 @@ async function main() {
     // Set basic items
     for (let i = 0; i <= itemsAll.length; i += maxItemsPerTransaction) {
 
-        let partialItems: Item[] = itemsAll.slice(i, i + maxItemsPerTransaction)
+        let partialItems: Item[] = itemsAll.slice(i, i + maxItemsPerTransaction).filter((item:Item)=>!!item.slotId)
 
         // Set basic items
         const itemsTransferRequired = partialItems.map((item: Item) => {
