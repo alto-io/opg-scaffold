@@ -22,8 +22,6 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
 
     using ArrayUtils for uint[];
 
-    uint constant MAX_BASIC_ITEM_PER_USER = 3;
-
     function _claimMerkle(address to, uint itemId, uint amount, bytes32[] memory proof)
         internal
     {
