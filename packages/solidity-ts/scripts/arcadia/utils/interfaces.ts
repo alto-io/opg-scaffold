@@ -47,7 +47,7 @@ export interface ItemV1V2Converter {
     slot: string
 }
 export interface ClaimableItem {
-    owner: string,
+    owner?: string,
     nameV1: string,
     nameV2: string,
     idV2: number,
@@ -61,6 +61,8 @@ export interface ClaimableItemsObj {
 
 export const stackMintingORAPath = path.join(__dirname, "../dataV2/stackMintingORA.json");
 export const claimableItemsPath = path.join(__dirname, "../output/claimableItemsV2.json");
+export const claimableItemsGlobalPath = path.join(__dirname, "../output/claimableItemsGlobalV2.json");
+export const claimableItemsCounterPath = path.join(__dirname, "../output/claimableItemsCounter.json");
 export const itemsClaimConverterPath = path.join(__dirname, "../dataV2/itemsClaimConverter.json");
 export const itemsPath = path.join(__dirname, "../dataV2/items.json");
 export const slotsPath = path.join(__dirname, "../dataV2/slots.json");
