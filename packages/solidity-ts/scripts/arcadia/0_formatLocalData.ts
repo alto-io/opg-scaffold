@@ -1,9 +1,11 @@
 // import { ethers } from "ethers";
 import fs from "fs";
 import path from "path";
-import { ClaimableItem, ClaimableItemsObj, Item, ItemKeys, Slot, claimableItemsPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath, stackMintingORAPath } from "./utils/interfaces";
+import { ClaimableItem, ClaimableItemsObj, Item, ItemKeys, ItemV1V2Converter, Slot, claimableItemsCounterPath, claimableItemsGlobalPath, claimableItemsPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath } from "./utils/interfaces";
 
 const itemsClaimConverterPathObj: ClaimableItemsObj = JSON.parse(fs.readFileSync(itemsClaimConverterPath).toString());
+const claimableItemsGlobalObj = JSON.parse(fs.readFileSync(claimableItemsGlobalPath).toString());
+let claimableItemsCounterObj = JSON.parse(fs.readFileSync(claimableItemsCounterPath).toString());
 let itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
@@ -103,14 +105,37 @@ async function main() {
     for (let i = 0; i < claimableItemsList.length; i++) {
         const claimableItem = claimableItemsList[i];
 
+        claimableItemsCounterObj[claimableItem.owner as string] = claimableItemsCounterObj[claimableItem.owner as string] || 0;
+
         if (claimableItem && !isNaN(claimableItem.idV2)) {
             const itemMerkle = [claimableItem.owner, claimableItem.idV2, claimableItem.amount]
             itemsMerkle.push(itemMerkle);
+
+            claimableItemsCounterObj[claimableItem.owner as string] += claimableItem.amount;
         }
     }
+    const arr = Object.entries(claimableItemsCounterObj);
+    arr.sort((a:any, b:any) => b[1] - a[1]);
+    claimableItemsCounterObj = Object.fromEntries(arr);
     console.log("$ Create items v2 merkle input. Path: ", itemsMerklePath);
     fs.writeFileSync(itemsMerklePath, JSON.stringify(itemsMerkle));
+    console.log("$ Set claimable items counter. Path: ", claimableItemsCounterPath);
+    fs.writeFileSync(claimableItemsCounterPath, JSON.stringify(claimableItemsCounterObj));
 
+    // Set global item claim amounts
+    for (let i = 0; i < claimableItemsList.length; i++) {
+        const itemUser = claimableItemsList[i];
+        let itemGlobal: ClaimableItem = claimableItemsGlobalObj[itemUser.idV2]
+        if (itemGlobal) {
+            itemGlobal.amount += itemUser.amount;
+        } else {
+            delete itemUser.owner;
+            itemGlobal = itemUser;
+        }
+        claimableItemsGlobalObj[itemUser.idV2] = itemGlobal;
+    }
+    console.log("$ Set claimable global v2 items. Path: ", claimableItemsGlobalPath);
+    fs.writeFileSync(claimableItemsGlobalPath, JSON.stringify(claimableItemsGlobalObj));
 
     // setup allowed items for each slot
     for (let i = 0; i < slotsAll.length; i++) {
