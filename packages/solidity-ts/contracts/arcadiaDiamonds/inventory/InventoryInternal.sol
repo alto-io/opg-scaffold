@@ -121,7 +121,7 @@ contract InventoryInternal is
             slotsIds[i] = slotId;
         }
 
-        if (!_baseSlotsEquipped(arcadianId)) 
+        if (!_baseAndPermanentSlotsEquipped(arcadianId)) 
             revert Inventory_NotAllBaseSlotsEquipped();
 
         if (numBaseSlotsModified > 0) {
@@ -191,14 +191,15 @@ contract InventoryInternal is
         inventorySL.equippedItems[arcadianId][slotId] = item;
     }
 
-    function _baseSlotsEquipped(uint arcadianId) internal view returns (bool) {
+    function _baseAndPermanentSlotsEquipped(uint arcadianId) internal view returns (bool) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint numSlots = inventorySL.numSlots;
         for (uint i = 0; i < numSlots; i++) {
             uint slotId = i + 1;
-            if (!inventorySL.slots[slotId].isBase)
+            InventoryStorage.Slot storage slot = inventorySL.slots[slotId];
+            if (!slot.isBase && !slot.permanent)
                 continue;
-            if (inventorySL.slots[slotId].isBase && inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) {
+            if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) {
                 return false;
             }
         }
