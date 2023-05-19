@@ -1,11 +1,12 @@
 // import { ethers } from "ethers";
 import fs from "fs";
 import path from "path";
-import { ClaimableItem, ClaimableItemsObj, Item, ItemKeys, ItemV1V2Converter, Slot, claimableItemsCounterPath, claimableItemsGlobalPath, claimableItemsPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath } from "./utils/interfaces";
+import { ClaimableItem, ClaimableItemsObj, Item, ItemKeys, ItemV1V2Converter, Slot, claimableItemsCounterPath, claimableItemsGlobalPath, claimableItemsPath, extensiveItemsClaimPath, itemsClaimConverterPath, itemsMerklePath, itemsPath, slotsPath } from "./utils/interfaces";
 
 const itemsClaimConverterPathObj: ClaimableItemsObj = JSON.parse(fs.readFileSync(itemsClaimConverterPath).toString());
 const claimableItemsGlobalObj = JSON.parse(fs.readFileSync(claimableItemsGlobalPath).toString());
 let claimableItemsCounterObj = JSON.parse(fs.readFileSync(claimableItemsCounterPath).toString());
+let extensiveItemsClaimObj = JSON.parse(fs.readFileSync(extensiveItemsClaimPath).toString());
 let itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 
@@ -114,6 +115,7 @@ async function main() {
             claimableItemsCounterObj[claimableItem.owner as string] += claimableItem.amount;
         }
     }
+    // Sort object in descendent order
     const arr = Object.entries(claimableItemsCounterObj);
     arr.sort((a:any, b:any) => b[1] - a[1]);
     claimableItemsCounterObj = Object.fromEntries(arr);
@@ -136,6 +138,23 @@ async function main() {
     }
     console.log("$ Set claimable global v2 items. Path: ", claimableItemsGlobalPath);
     fs.writeFileSync(claimableItemsGlobalPath, JSON.stringify(claimableItemsGlobalObj));
+
+    // Create extensive Items Claim
+    const addressesToTestClaim = ["0x3A8daBE9fDE637fF05f50CEc758777d537D7CB87", "0xaD733B7055eCAebFb3B38626f0148c5d12158F03", "0xEfC5f324005584DA93aeD3C74677790fA648A74b"]
+    const maxAmountPerItem = 30;
+    extensiveItemsClaimObj = [];
+    for (let i = 0; i < itemsAll.length; i++) {
+        const item = itemsAll[i];
+        for (let j = 0; j < addressesToTestClaim.length; j++) {
+            const address = addressesToTestClaim[j];
+            const amount = 1 + Math.floor(Math.random() * (maxAmountPerItem -1))
+            const merkleEntry = [address, item.id, amount]
+            extensiveItemsClaimObj.push(merkleEntry)
+        }
+    }
+    console.log("$ Create extensive Items Claim. Path: ", extensiveItemsClaimPath);
+    fs.writeFileSync(extensiveItemsClaimPath, JSON.stringify(extensiveItemsClaimObj));
+
 
     // setup allowed items for each slot
     for (let i = 0; i < slotsAll.length; i++) {
