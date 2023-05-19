@@ -1,5 +1,15 @@
 import path from "path";
 
+export const stackMintingORAPath = path.join(__dirname, "../dataV2/stackMintingORA.json");
+export const claimableItemsPath = path.join(__dirname, "../output/claimableItemsV2.json");
+export const claimableItemsGlobalPath = path.join(__dirname, "../output/claimableItemsGlobalV2.json");
+export const claimableItemsCounterPath = path.join(__dirname, "../output/claimableItemsCounter.json");
+export const extensiveItemsClaimPath = path.join(__dirname, "../output/extensiveItemsClaim.json");
+export const itemsClaimConverterPath = path.join(__dirname, "../dataV2/itemsClaimConverter.json");
+export const itemsPath = path.join(__dirname, "../dataV2/items.json");
+export const slotsPath = path.join(__dirname, "../dataV2/slots.json");
+export const itemsMerklePath = path.join(__dirname, "../output/itemsMerkle.json");
+
 export interface Slot {
     id: number,
     name?: string,
@@ -58,12 +68,3 @@ export interface ClaimableItem {
 export interface ClaimableItemsObj {
     [owner: string]: ItemV1V2Converter[]
 }
-
-export const stackMintingORAPath = path.join(__dirname, "../dataV2/stackMintingORA.json");
-export const claimableItemsPath = path.join(__dirname, "../output/claimableItemsV2.json");
-export const claimableItemsGlobalPath = path.join(__dirname, "../output/claimableItemsGlobalV2.json");
-export const claimableItemsCounterPath = path.join(__dirname, "../output/claimableItemsCounter.json");
-export const itemsClaimConverterPath = path.join(__dirname, "../dataV2/itemsClaimConverter.json");
-export const itemsPath = path.join(__dirname, "../dataV2/items.json");
-export const slotsPath = path.join(__dirname, "../dataV2/slots.json");
-export const itemsMerklePath = path.join(__dirname, "../output/itemsMerkle.json");
