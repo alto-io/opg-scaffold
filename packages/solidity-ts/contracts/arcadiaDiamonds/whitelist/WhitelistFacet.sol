@@ -12,60 +12,63 @@ import { WhitelistStorage } from "./WhitelistStorage.sol";
  * This contract can be used as a facet of a diamond which follows the EIP-2535 diamond standard.
  */
 contract WhitelistFacet is WhitelistInternal {
+    WhitelistStorage.PoolId constant GuaranteedPool = WhitelistStorage.PoolId.Guaranteed;
+    WhitelistStorage.PoolId constant RestrictedPool = WhitelistStorage.PoolId.Restricted;
+
     /**
      * @return The amount claimed from the guaranteed pool by the account
      */
     function claimedGuaranteedPool(address account) external view returns (uint) {
-        return _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, account);
+        return _claimedWhitelist(GuaranteedPool, account);
     }
 
     /**
      * @return The amount claimed from the restricted pool by the account 
      */
     function claimedRestrictedPool(address account) external view returns (uint) {
-        return _claimedWhitelist(WhitelistStorage.PoolId.Restricted, account);
+        return _claimedWhitelist(RestrictedPool, account);
     }
 
     /**
      * @return The account elegible amount from the guaranteed pool
      */
     function elegibleGuaranteedPool(address account) external view returns (uint) {
-        return _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, account);
+        return _elegibleWhitelist(GuaranteedPool, account);
     }
 
     /**
      * @return The account elegible amount from the restricted pool
      */
     function elegibleRestrictedPool(address account) external view returns (uint) {
-        return _elegibleWhitelist(WhitelistStorage.PoolId.Restricted, account);
+        return _elegibleWhitelist(RestrictedPool, account);
     }
     
     /**
      * @return The total claimed amount from the Guaranteed pool
      */
     function totalClaimedGuaranteedPool() external view returns (uint) {
-        return _totalClaimedWhitelist(WhitelistStorage.PoolId.Guaranteed);
+        return _totalClaimedWhitelist(GuaranteedPool);
     }
     
     /**
      * @return The total claimed amount from the Restricted pool
      */
     function totalClaimedRestrictedPool() external view returns (uint) {
-        return _totalClaimedWhitelist(WhitelistStorage.PoolId.Restricted);
+        return _totalClaimedWhitelist(RestrictedPool);
     }
     
     /**
      * @return The total elegible amount from the Guaranteed pool
      */
     function totalElegibleGuaranteedPool() external view returns (uint) {
-        return _totalElegibleWhitelist(WhitelistStorage.PoolId.Guaranteed);
+        return _totalElegibleWhitelist(GuaranteedPool);
     }
 
     /**
      * @return The total elegible amount from the Restricted pool
      */
     function totalElegibleRestrictedPool() external view returns (uint) {
-        return _totalElegibleWhitelist(WhitelistStorage.PoolId.Restricted);
+        return _totalElegibleWhitelist(RestrictedPool);
     }
 
     /**
@@ -75,7 +78,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param amount The amount to whitelist for the address
      */
     function increaseElegibleGuaranteedPool(address account, uint amount) onlyManager external {
-        _increaseWhitelistElegible(WhitelistStorage.PoolId.Guaranteed, account, amount);
+        _increaseWhitelistElegible(GuaranteedPool, account, amount);
     }
 
     /**
@@ -85,7 +88,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param amount The amount to whitelist for the address
      */
     function increaseElegibleRestrictedPool(address account, uint amount) onlyManager external {
-        _increaseWhitelistElegible(WhitelistStorage.PoolId.Restricted, account, amount);
+        _increaseWhitelistElegible(RestrictedPool, account, amount);
     }
 
     /**
@@ -95,7 +98,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param amounts An array of amounts to whitelist for each address
      */
     function increaseElegibleGuaranteedPoolBatch(address[] calldata accounts, uint[] calldata amounts) external onlyManager {
-        _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId.Guaranteed, accounts, amounts);
+        _increaseWhitelistElegibleBatch(GuaranteedPool, accounts, amounts);
     }
 
     /**
@@ -105,7 +108,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param amounts An array of amounts to whitelist for each address
      */
     function increaseElegibleRestrictedPoolBatch(address[] calldata accounts, uint[] calldata amounts) external onlyManager {
-        _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId.Restricted, accounts, amounts);
+        _increaseWhitelistElegibleBatch(RestrictedPool, accounts, amounts);
     }
 
     /**
@@ -115,7 +118,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param totalAmount The amount to whitelist for the address
      */
     function setElegibleGuaranteedPool(address account, uint totalAmount) onlyManager external {
-        _setWhitelistElegible(WhitelistStorage.PoolId.Guaranteed, account, totalAmount);
+        _setWhitelistElegible(GuaranteedPool, account, totalAmount);
     }
 
     /**
@@ -125,7 +128,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param totalAmount The amount to whitelist for the address
      */
     function setElegibleRestrictedPool(address account, uint totalAmount) onlyManager external {
-        _setWhitelistElegible(WhitelistStorage.PoolId.Restricted, account, totalAmount);
+        _setWhitelistElegible(RestrictedPool, account, totalAmount);
     }
 
     /**
@@ -135,7 +138,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param totalAmounts An array of amounts to whitelist for each address
      */
     function setElegibleGuaranteedPoolBatch(address[] calldata accounts, uint[] calldata totalAmounts) external onlyManager {
-        _setWhitelistElegibleBatch(WhitelistStorage.PoolId.Guaranteed, accounts, totalAmounts);
+        _setWhitelistElegibleBatch(GuaranteedPool, accounts, totalAmounts);
     }
 
     /**
@@ -145,7 +148,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @param totalAmounts An array of amounts to whitelist for each address
      */
     function setElegibleRestrictedPoolBatch(address[] calldata accounts, uint[] calldata totalAmounts) external onlyManager {
-        _setWhitelistElegibleBatch(WhitelistStorage.PoolId.Restricted, accounts, totalAmounts);
+        _setWhitelistElegibleBatch(RestrictedPool, accounts, totalAmounts);
     }
 
     /**
@@ -153,7 +156,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @dev This function can only be called by an address with the manager role
      */
     function setClaimActiveGuaranteedPool(bool active) external onlyManager {
-        _setWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed, active);
+        _setWhitelistClaimActive(GuaranteedPool, active);
     }
 
     /**
@@ -161,7 +164,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @dev This function can only be called by an address with the manager role
      */
     function setClaimActiveRestrictedPool(bool active) external onlyManager {
-        _setWhitelistClaimActive(WhitelistStorage.PoolId.Restricted, active);
+        _setWhitelistClaimActive(RestrictedPool, active);
     }
 
     /**
@@ -169,7 +172,7 @@ contract WhitelistFacet is WhitelistInternal {
      * @return active bool indicating if claim is active
      */
     function isClaimActiveGuaranteedPool() view external returns (bool active) {
-        return _isWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed);
+        return _isWhitelistClaimActive(GuaranteedPool);
     }
 
     /**
@@ -177,6 +180,6 @@ contract WhitelistFacet is WhitelistInternal {
      * @return active bool indicating if claim is active
      */
     function isClaimActiveRestrictedPool() view external returns (bool active) {
-        return _isWhitelistClaimActive(WhitelistStorage.PoolId.Restricted);
+        return _isWhitelistClaimActive(RestrictedPool);
     }
 }

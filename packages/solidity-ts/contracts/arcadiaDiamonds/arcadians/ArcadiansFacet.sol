@@ -22,6 +22,8 @@ import { WhitelistStorage } from "../whitelist/WhitelistStorage.sol";
  */
 contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     using EnumerableMap for EnumerableMap.UintToAddressMap;
+    WhitelistStorage.PoolId constant GuaranteedPool = WhitelistStorage.PoolId.Guaranteed;
+    WhitelistStorage.PoolId constant RestrictedPool = WhitelistStorage.PoolId.Restricted;
 
     /**
      * @notice Returns the URI for a given arcadian
@@ -38,16 +40,16 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         tokenId = nextArcadianId();
 
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        if (_isWhitelistClaimActive(WhitelistStorage.PoolId.Guaranteed) && _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender) > 0) {
+        if (_isWhitelistClaimActive(GuaranteedPool) && _elegibleWhitelist(GuaranteedPool, msg.sender) > 0) {
             // OG mint flow
-            _consumeWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender, 1);
-        } else if (_isWhitelistClaimActive(WhitelistStorage.PoolId.Restricted) && _elegibleWhitelist(WhitelistStorage.PoolId.Restricted, msg.sender) > 0) { 
+            _consumeWhitelist(GuaranteedPool, msg.sender, 1);
+        } else if (_isWhitelistClaimActive(RestrictedPool) && _elegibleWhitelist(RestrictedPool, msg.sender) > 0) { 
             // Whitelist mint flow
-            _consumeWhitelist(WhitelistStorage.PoolId.Restricted, msg.sender, 1);
+            _consumeWhitelist(RestrictedPool, msg.sender, 1);
             if (tokenId > MAX_SUPPLY)
                 revert Arcadians_MaximumArcadiansSupplyReached();
 
-            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender);
+            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(GuaranteedPool, msg.sender);
             if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
                 revert Arcadians_MaximumMintedArcadiansPerUserReached();
 
@@ -55,7 +57,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
             if (tokenId > MAX_SUPPLY)
                 revert Arcadians_MaximumArcadiansSupplyReached();
 
-            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, msg.sender);
+            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(GuaranteedPool, msg.sender);
             if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
                 revert Arcadians_MaximumMintedArcadiansPerUserReached();
             
@@ -74,7 +76,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @return balance amount of arcadians that can be minted
      */
     function availableMints(address account) external view returns (uint balance) {
-        return  ArcadiansStorage.layout().maxMintPerUser - (_balanceOf(account) - _claimedWhitelist(WhitelistStorage.PoolId.Guaranteed, account)) + _elegibleWhitelist(WhitelistStorage.PoolId.Guaranteed, account);
+        return  ArcadiansStorage.layout().maxMintPerUser - (_balanceOf(account) - _claimedWhitelist(GuaranteedPool, account)) + _elegibleWhitelist(GuaranteedPool, account);
     }
 
     /**
