@@ -13,7 +13,7 @@ async function main() {
     let equippedAll: ItemInSlot[] = await inventorySC.equippedAll(arcadianId);
     let slotsAll: Slot[] = await inventorySC.slotsAll();
     
-    const slotsIds = equippedAll.filter((item: ItemInSlot)=>item.erc721Contract != ethers.constants.AddressZero).map((item: ItemInSlot)=>item.slotId);
+    const slotsIds = equippedAll.filter((item: ItemInSlot)=>item.erc1155Contract != ethers.constants.AddressZero).map((item: ItemInSlot)=>item.slotId);
     
     const slotsIdsToUnequip: number[] = [];
     for (let i = 0; i < slotsIds.length; i++) {

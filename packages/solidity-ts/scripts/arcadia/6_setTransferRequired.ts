@@ -30,7 +30,7 @@ async function main() {
         });
         
         console.log("-> setting items transfer required from ", partialItems[0].id, " to ", partialItems[partialItems.length-1].id);
-        const items: ItemSC[] = partialItems.map((item): ItemSC => ({erc721Contract: itemsSC.address, id: item.id}));
+        const items: ItemSC[] = partialItems.map((item): ItemSC => ({erc1155Contract: itemsSC.address, id: item.id}));
         items.map((item, index)=>console.log(item.id, " needs transfer: ", itemsTransferRequired[index]))
         
         const tx = await inventorySC.setItemsTransferRequired(items, itemsTransferRequired);

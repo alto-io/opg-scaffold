@@ -44,7 +44,7 @@ export interface Item {
     mintAmount: number
 }
 export interface ItemSC {
-    erc721Contract: string,
+    erc1155Contract: string,
     id: number
 }
 

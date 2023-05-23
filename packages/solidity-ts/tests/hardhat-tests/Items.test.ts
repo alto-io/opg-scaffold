@@ -14,7 +14,7 @@ import { baseArcadianURI } from 'deploy/hardhat-deploy/03.initArcadiansDiamond.d
 export const TOKENS_PATH_ITEMS = path.join(__dirname, "../mocks/ownedItemsMock.json");
 
 export interface Item {
-    erc721Contract: string,
+    erc1155Contract: string,
     id: number
 }
 
@@ -125,7 +125,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
-            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
+            expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         }
         expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
@@ -142,7 +142,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             const isBaseOrPermanent = slot?.isBase || slot?.permanent;
             const item = items.find((item)=>item.id == equippedItems[i].itemId);
             expect(equippedItems[i].itemId).to.be.equal(isBaseOrPermanent ? item?.id : 0);
-            expect(equippedItems[i].erc721Contract).to.be.equal(isBaseOrPermanent ? item?.address : ethers.constants.AddressZero);
+            expect(equippedItems[i].erc1155Contract).to.be.equal(isBaseOrPermanent ? item?.address : ethers.constants.AddressZero);
         }
         arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         expectedUri = baseArcadianURI + arcadianId;
@@ -191,7 +191,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         const bob = namedAccounts.bob;
 
         // create slot
-        const badItem : Item = {erc721Contract: bob.address, id: 2}
+        const badItem : Item = {erc1155Contract: bob.address, id: 2}
         await expect(arcadiansContracts.inventoryFacet.createSlot(slots[0].permanent, slots[0].isBase, [badItem])).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_InvalidERC1155Contract");
 

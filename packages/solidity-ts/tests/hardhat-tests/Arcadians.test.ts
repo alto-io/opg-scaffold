@@ -89,7 +89,7 @@ describe('Arcadians Diamond whitelist', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
-            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
+            expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         }
     })
 
@@ -151,7 +151,7 @@ describe('Arcadians Diamond whitelist', function () {
         // let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         // for (let i = 0; i < equippedItems.length; i++) {
         //     expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
-        //     expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
+        //     expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         // }
     })
 
@@ -216,7 +216,7 @@ describe('Arcadians Diamond whitelist', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
-            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
+            expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         }
     })
 
@@ -278,7 +278,7 @@ describe('Arcadians Diamond whitelist', function () {
         let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
-            expect(equippedItems[i].erc721Contract).to.be.equal((itemsToEquip[i] as Item).erc721Contract);
+            expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         }
     })
 })

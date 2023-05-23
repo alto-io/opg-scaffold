@@ -37,7 +37,7 @@ async function main() {
         const slot = slotsAll[i];
         const slotSC = slotsSC.find((slotSC)=>slotSC.id == slot.id);
         if (!slotSC) {
-            const allowedItems = slot.allowedItems.map((itemId):ItemSC=>({erc721Contract: itemsSC.address, id:itemId}))
+            const allowedItems = slot.allowedItems.map((itemId):ItemSC=>({erc1155Contract: itemsSC.address, id:itemId}))
             console.log("create slot: ", slot);
             if (MAKE_TRANSACTION) {
                 let tx = await inventorySC.createSlot(slot.permanent, slot.isBase, allowedItems);
@@ -49,7 +49,7 @@ async function main() {
             const allowedItemsIdsMissing = slot.allowedItems
                 .filter((itemId: number)=> !slotSC.allowedItems.some((itemSC: ItemSC)=>itemSC.id == itemId))
 
-            const allowedItemsMissing: ItemSC[] = allowedItemsIdsMissing.map((itemId: number)=>({erc721Contract: itemsSC.address, id: itemId}));
+            const allowedItemsMissing: ItemSC[] = allowedItemsIdsMissing.map((itemId: number)=>({erc1155Contract: itemsSC.address, id: itemId}));
 
             if (allowedItemsMissing.length > 0) {
                 console.log("-> slot " + slot.id + " allowedItemsMissing: ", allowedItemsMissing);
@@ -103,7 +103,7 @@ async function getItemsToDisallow(inventorySC: ethers.Contract, itemsSC: ethers.
     const itemsToDisallow: ItemSC[] = [];
     for (let i = 0; i < itemsAll.length; i++) {
         if (!itemsAll[i].slotId) {
-            const itemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id};
+            const itemSC = {erc1155Contract: itemsSC.address, id: itemsAll[i].id};
             const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
             if (allowedSlot > 0) {
                 itemsToDisallow.push(itemSC);
@@ -141,7 +141,7 @@ async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contrac
         if (!itemsAll[i].slotId) {
             itemsToRemove.push(itemsAll[i].id);
         }
-        const itemSC: ItemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id}
+        const itemSC: ItemSC = {erc1155Contract: itemsSC.address, id: itemsAll[i].id}
         const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
         slotsSC = slotsSC.map((slot: SlotSC)=> {
             if (slot.id === allowedSlot) {

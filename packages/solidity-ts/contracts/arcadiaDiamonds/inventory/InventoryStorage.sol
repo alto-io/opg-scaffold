@@ -21,7 +21,7 @@ library InventoryStorage {
 
     // Holds the information needed to identify an ERC1155 item
     struct Item {
-        address erc721Contract;
+        address erc1155Contract;
         uint id;
     }
 

@@ -74,7 +74,7 @@ contract InventoryInternal is
     // Helper structs only used in view functions to ease data reading from web3
     struct ItemInSlot {
         uint8 slotId;
-        address erc721Contract;
+        address erc1155Contract;
         uint itemId;
     }
     struct BaseModifierCoupon {
@@ -128,7 +128,7 @@ contract InventoryInternal is
                 uint8[] memory baseSlotsModified = new uint8[](numBaseSlotsModified);
                 uint counter;
                 for (uint i = 0; i < items.length; i++) {
-                    uint8 slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+                    uint8 slotId = inventorySL.itemSlot[items[i].erc1155Contract][items[i].id];
                     if (inventorySL.slots[slotId].isBase) {
                         baseSlotsModified[counter] = slotId;
                         counter++;
@@ -148,7 +148,7 @@ contract InventoryInternal is
     ) internal returns (uint8 slotId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        slotId = inventorySL.itemSlot[item.erc721Contract][item.id];
+        slotId = inventorySL.itemSlot[item.erc1155Contract][item.id];
         
         if (slotId == 0 || slotId > InventoryStorage.layout().numSlots) 
             revert Inventory_ItemDoesNotHaveSlotAssigned();
@@ -161,17 +161,17 @@ contract InventoryInternal is
         }
 
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
-        if (inventorySL.slots[slotId].permanent && existingItem.erc721Contract != address(0)) 
+        if (inventorySL.slots[slotId].permanent && existingItem.erc1155Contract != address(0)) 
             revert Inventory_UnequippingPermanentSlot();
-        if (existingItem.erc721Contract == item.erc721Contract && existingItem.id == item.id)
+        if (existingItem.erc1155Contract == item.erc1155Contract && existingItem.id == item.id)
             revert Inventory_ItemAlreadyEquippedInSlot();
 
-        if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0))
+        if (inventorySL.equippedItems[arcadianId][slotId].erc1155Contract != address(0))
             _unequipUnchecked(arcadianId, slotId);
 
-        bool requiresTransfer = inventorySL.requiresTransfer[item.erc721Contract][item.id];
+        bool requiresTransfer = inventorySL.requiresTransfer[item.erc1155Contract][item.id];
         if (requiresTransfer) {
-            IERC1155 erc1155Contract = IERC1155(item.erc721Contract);
+            IERC1155 erc1155Contract = IERC1155(item.erc1155Contract);
             if (erc1155Contract.balanceOf(msg.sender, item.id) < 1)
                 revert Inventory_InsufficientItemBalance();
 
@@ -195,7 +195,7 @@ contract InventoryInternal is
             InventoryStorage.Slot storage slot = inventorySL.slots[slotId];
             if (!slot.isBase && !slot.permanent)
                 continue;
-            if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract == address(0)) {
+            if (inventorySL.equippedItems[arcadianId][slotId].erc1155Contract == address(0)) {
                 return false;
             }
         }
@@ -209,9 +209,9 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
 
-        bool requiresTransfer = inventorySL.requiresTransfer[existingItem.erc721Contract][existingItem.id];
+        bool requiresTransfer = inventorySL.requiresTransfer[existingItem.erc1155Contract][existingItem.id];
         if (requiresTransfer) {
-            IERC1155 erc1155Contract = IERC1155(existingItem.erc721Contract);
+            IERC1155 erc1155Contract = IERC1155(existingItem.erc1155Contract);
             erc1155Contract.safeTransferFrom(
                 address(this),
                 msg.sender,
@@ -236,7 +236,7 @@ contract InventoryInternal is
             if (inventorySL.slots[slotsIds[i]].permanent) 
                 revert Inventory_UnequippingPermanentSlot();
 
-            if (inventorySL.equippedItems[arcadianId][slotsIds[i]].erc721Contract == address(0)) 
+            if (inventorySL.equippedItems[arcadianId][slotsIds[i]].erc1155Contract == address(0)) 
                 revert Inventory_UnequippingEmptySlot();
             
             if (inventorySL.slots[slotsIds[i]].isBase)
@@ -259,7 +259,7 @@ contract InventoryInternal is
         uint8 slotId
     ) internal view returns (ItemInSlot memory) {
         InventoryStorage.Item storage item = InventoryStorage.layout().equippedItems[arcadianId][slotId];
-        return ItemInSlot(slotId, item.erc721Contract, item.id);
+        return ItemInSlot(slotId, item.erc1155Contract, item.id);
     }
 
     function _equippedBatch(
@@ -270,7 +270,7 @@ contract InventoryInternal is
         equippedSlots = new ItemInSlot[](slotsIds.length);
         for (uint i = 0; i < slotsIds.length; i++) {
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotsIds[i]];
-            equippedSlots[i] = ItemInSlot(slotsIds[i], equippedItem.erc721Contract, equippedItem.id);
+            equippedSlots[i] = ItemInSlot(slotsIds[i], equippedItem.erc1155Contract, equippedItem.id);
         }
     }
 
@@ -283,7 +283,7 @@ contract InventoryInternal is
         for (uint8 i = 0; i < numSlots; i++) {
             uint8 slotId = i + 1;
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
-            equippedSlots[i] = ItemInSlot(slotId, equippedItem.erc721Contract, equippedItem.id);
+            equippedSlots[i] = ItemInSlot(slotId, equippedItem.erc1155Contract, equippedItem.id);
         }
     }
 
@@ -308,15 +308,15 @@ contract InventoryInternal is
                     break;
                 }
             }
-            if (item.erc721Contract == address(0)) {
-                if (inventorySL.equippedItems[arcadianId][slotId].erc721Contract != address(0)) {
+            if (item.erc1155Contract == address(0)) {
+                if (inventorySL.equippedItems[arcadianId][slotId].erc1155Contract != address(0)) {
                     item = inventorySL.equippedItems[arcadianId][slotId];
                 } else {
                     revert Inventory_NotAllBaseSlotsEquipped();
                 }
             }
             
-            encodedItems = abi.encodePacked(encodedItems, slotId, item.erc721Contract, item.id);
+            encodedItems = abi.encodePacked(encodedItems, slotId, item.erc1155Contract, item.id);
         }
 
         return !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
@@ -334,7 +334,7 @@ contract InventoryInternal is
             if (!inventorySL.slots[slotId].isBase)
                 continue;
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
-            encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.erc721Contract, equippedItem.id);
+            encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.erc1155Contract, equippedItem.id);
         }
 
         bytes32 baseItemsHash = keccak256(encodedItems);
@@ -443,7 +443,7 @@ contract InventoryInternal is
             revert Inventory_InputDataMismatch();
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         for (uint i = 0; i < items.length; i++) {
-            inventorySL.requiresTransfer[items[i].erc721Contract][items[i].id] = requiresTransfer[i];
+            inventorySL.requiresTransfer[items[i].erc1155Contract][items[i].id] = requiresTransfer[i];
         }
     }
     
@@ -454,10 +454,10 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         for (uint i = 0; i < items.length; i++) {
-            if (!items[i].erc721Contract.isContract()) 
+            if (!items[i].erc1155Contract.isContract()) 
                 revert Inventory_InvalidERC1155Contract();
 
-            inventorySL.itemSlot[items[i].erc721Contract][items[i].id] = slotId;
+            inventorySL.itemSlot[items[i].erc1155Contract][items[i].id] = slotId;
         }
 
         emit ItemsAllowedInSlotUpdated(msg.sender, items);
@@ -468,14 +468,14 @@ contract InventoryInternal is
     ) internal virtual {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         for (uint i = 0; i < items.length; i++) {
-            delete inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+            delete inventorySL.itemSlot[items[i].erc1155Contract][items[i].id];
         }
 
         emit ItemsAllowedInSlotUpdated(msg.sender, items);
     }
 
     function _allowedSlot(InventoryStorage.Item calldata item) internal view returns (uint) {
-        return InventoryStorage.layout().itemSlot[item.erc721Contract][item.id];
+        return InventoryStorage.layout().itemSlot[item.erc1155Contract][item.id];
     }
 
     function _slot(uint8 slotId) internal view returns (InventoryStorage.Slot storage slot) {

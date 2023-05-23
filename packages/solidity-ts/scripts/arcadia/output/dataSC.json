@@ -12,23 +12,23 @@
             "permanent": true,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 527
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 528
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 529
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 530
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 531
                 }
             ]
@@ -39,99 +39,99 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 108
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 109
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 110
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 111
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 112
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 113
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 114
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 115
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 116
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 117
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 118
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 119
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 120
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 121
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 122
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 123
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 124
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 125
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 126
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 127
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 128
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 129
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 130
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 131
                 }
             ]
@@ -142,75 +142,75 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 318
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 319
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 320
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 321
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 322
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 323
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 324
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 325
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 326
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 327
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 328
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 329
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 330
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 331
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 332
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 333
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 334
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 335
                 }
             ]
@@ -221,7 +221,7 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 434
                 }
             ]
@@ -232,75 +232,75 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 435
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 436
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 437
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 438
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 439
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 440
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 441
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 442
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 443
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 444
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 445
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 446
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 447
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 448
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 449
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 450
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 451
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 452
                 }
             ]
@@ -311,15 +311,15 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 532
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 533
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 534
                 }
             ]
@@ -330,175 +330,175 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 132
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 133
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 134
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 135
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 136
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 137
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 138
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 139
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 140
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 141
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 142
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 143
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 144
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 145
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 146
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 147
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 148
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 149
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 150
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 151
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 152
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 153
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 154
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 155
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 156
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 157
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 158
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 159
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 160
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 161
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 162
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 163
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 164
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 165
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 166
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 167
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 168
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 169
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 170
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 171
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 172
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 173
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 174
                 }
             ]
@@ -509,123 +509,123 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 17
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 18
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 19
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 20
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 21
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 22
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 23
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 24
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 25
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 26
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 27
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 28
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 29
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 30
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 31
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 32
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 33
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 34
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 35
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 36
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 37
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 38
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 39
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 40
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 41
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 42
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 43
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 44
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 45
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 535
                 }
             ]
@@ -636,187 +636,187 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 175
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 176
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 177
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 178
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 179
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 180
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 181
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 182
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 183
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 184
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 185
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 186
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 187
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 188
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 189
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 190
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 191
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 192
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 193
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 194
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 195
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 196
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 197
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 198
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 199
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 200
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 201
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 202
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 203
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 204
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 205
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 206
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 207
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 208
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 209
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 210
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 211
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 212
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 213
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 214
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 215
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 216
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 217
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 218
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 219
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 220
                 }
             ]
@@ -827,395 +827,395 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 221
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 222
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 223
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 224
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 225
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 226
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 227
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 228
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 229
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 230
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 231
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 232
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 233
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 234
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 235
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 236
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 237
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 238
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 239
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 240
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 241
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 242
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 243
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 244
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 245
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 246
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 247
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 248
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 249
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 250
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 251
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 252
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 253
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 254
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 255
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 256
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 257
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 258
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 259
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 260
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 261
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 262
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 263
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 264
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 265
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 266
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 267
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 268
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 269
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 270
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 271
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 272
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 273
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 274
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 275
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 276
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 277
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 278
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 279
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 280
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 281
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 282
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 283
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 284
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 285
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 286
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 287
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 288
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 289
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 290
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 291
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 292
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 293
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 294
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 295
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 296
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 297
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 298
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 299
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 300
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 301
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 302
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 303
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 304
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 305
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 306
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 307
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 308
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 309
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 310
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 311
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 312
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 313
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 314
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 315
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 316
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 317
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 515
                 }
             ]
@@ -1226,395 +1226,395 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 336
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 337
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 338
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 339
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 340
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 341
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 342
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 343
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 344
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 345
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 346
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 347
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 348
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 349
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 350
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 351
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 352
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 353
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 354
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 355
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 356
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 357
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 358
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 359
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 360
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 361
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 362
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 363
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 364
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 365
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 366
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 367
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 368
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 369
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 370
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 371
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 372
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 373
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 374
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 375
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 376
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 377
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 378
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 379
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 380
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 381
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 382
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 383
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 384
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 385
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 386
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 387
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 388
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 389
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 390
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 391
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 392
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 393
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 394
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 395
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 396
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 397
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 398
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 399
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 400
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 401
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 402
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 403
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 404
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 405
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 406
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 407
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 408
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 409
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 410
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 411
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 412
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 413
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 414
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 415
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 416
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 417
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 418
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 419
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 420
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 421
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 422
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 423
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 424
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 425
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 426
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 427
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 428
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 429
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 430
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 431
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 432
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 433
                 }
             ]
@@ -1625,255 +1625,255 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 46
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 47
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 48
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 49
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 50
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 51
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 52
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 53
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 54
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 55
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 56
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 57
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 58
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 59
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 60
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 61
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 62
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 63
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 64
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 65
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 66
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 67
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 68
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 69
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 70
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 71
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 72
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 73
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 74
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 75
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 76
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 77
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 78
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 79
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 80
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 81
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 82
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 83
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 84
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 85
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 86
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 87
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 88
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 89
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 90
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 91
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 92
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 93
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 94
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 95
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 96
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 97
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 98
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 99
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 100
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 101
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 102
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 103
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 104
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 105
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 106
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 107
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 522
                 }
             ]
@@ -1884,291 +1884,291 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 453
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 454
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 455
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 456
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 457
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 458
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 459
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 460
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 461
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 462
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 463
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 464
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 465
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 466
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 467
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 468
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 469
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 470
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 471
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 472
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 473
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 474
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 475
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 476
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 477
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 478
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 479
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 480
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 481
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 482
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 483
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 484
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 485
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 486
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 487
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 488
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 489
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 490
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 491
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 492
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 493
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 494
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 495
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 496
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 497
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 498
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 499
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 500
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 501
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 502
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 503
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 504
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 505
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 506
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 507
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 508
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 509
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 510
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 511
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 512
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 513
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 514
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 516
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 517
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 518
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 519
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 520
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 521
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 523
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 524
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 525
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 526
                 }
             ]
@@ -2179,67 +2179,67 @@
             "permanent": false,
             "allowedItems": [
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 1
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 2
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 3
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 4
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 5
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 6
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 7
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 8
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 9
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 10
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 11
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 12
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 13
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 14
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 15
                 },
                 {
-                    "erc721Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
+                    "erc1155Contract": "0xB742F6395Ad1122BA128e4dBE6305d9099B4Db4a",
                     "id": 16
                 }
             ]

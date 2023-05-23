@@ -9,7 +9,7 @@ import { Item, ItemSC, Slot, SlotSC, itemsPath, slotsPath } from "./utils/interf
 export interface ItemInSlot {
     slotId: any,
     itemId: any,
-    erc721Contract: string
+    erc1155Contract: string
 }
 
 const dataSCPath = path.join(__dirname, "output/dataSC.json");
@@ -49,7 +49,7 @@ async function main() {
     //     const equippedAll = equippedAllSC.map((itemInSlot) => {
     //         return {
     //             slotSc: itemInSlot.slotId.toNumber(),
-    //             erc721Contract: itemInSlot.erc721Contract,
+    //             erc1155Contract: itemInSlot.erc1155Contract,
     //             itemId: itemInSlot.itemId.toNumber(),
     //         }
     //     })
@@ -95,7 +95,7 @@ async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contrac
 
     // Get slot for each item
     for (let i = 0; i < itemsAll.length; i++) {
-        const itemSC: ItemSC = {erc721Contract: itemsSC.address, id: itemsAll[i].id}
+        const itemSC: ItemSC = {erc1155Contract: itemsSC.address, id: itemsAll[i].id}
         const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
         slotsSC = slotsSC.map((slot: SlotSC)=> {
             if (slot.id === allowedSlot) {

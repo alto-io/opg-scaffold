@@ -19,7 +19,7 @@ export interface ItemTest {
 }
 
 export function convertItemsSC (itemsTest: ItemTest[]): Item[] {
-    return itemsTest.map((item: ItemTest): Item =>  ({erc721Contract: item.address, id: item.id}))
+    return itemsTest.map((item: ItemTest): Item =>  ({erc1155Contract: item.address, id: item.id}))
 }
 
 export default async function deployAndInitContractsFixture() {

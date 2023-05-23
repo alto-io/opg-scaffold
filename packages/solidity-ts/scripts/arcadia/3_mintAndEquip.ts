@@ -22,7 +22,7 @@ async function main() {
         // const item = itemsAll.findLast((item, i)=>(item.slotId]  == slot.id)
         console.log("slot: ", slot.id, ", item: ", (item as any).id);
         
-        itemsToEquip.push({erc721Contract: itemsSC.address, id: (item as any).id as number});
+        itemsToEquip.push({erc1155Contract: itemsSC.address, id: (item as any).id as number});
     }
 
     const itemsToEquipIds = itemsToEquip.map((item)=>item.id)
@@ -63,39 +63,39 @@ async function main() {
     // // 540, 441, 137, 125, 330, 432, 493, 95, 25
     // const itemsToEquip = [
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 540
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 441
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 125
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 330
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 432
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 493
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 493
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 95
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 25
     //     }
     // ]
@@ -115,35 +115,35 @@ async function main() {
     // Mint to see error cause
     // const itemsToEquip: ItemSC[] = [
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 538
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 453
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 163
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 133
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 325
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 70
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 70
     //     },
     //     {
-    //         "erc721Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
+    //         "erc1155Contract": "0x7d0364A3c1e0428d925Df4cB037E627c2B5A2e3a",
     //         "id": 19
     //     }
     // ]
