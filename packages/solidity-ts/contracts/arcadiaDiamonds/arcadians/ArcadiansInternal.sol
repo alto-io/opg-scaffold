@@ -19,7 +19,7 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, InventoryInterna
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
     event BaseURIChanged(address indexed by, string oldBaseURI, string newBaseURI);
 
-    using UintUtils for uint256;
+    using UintUtils for uint;
 
     uint constant MAX_SUPPLY = 6666;
 

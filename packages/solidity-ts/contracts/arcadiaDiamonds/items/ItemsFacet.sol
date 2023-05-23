@@ -40,7 +40,7 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
      * @param amounts The amounts of the items to claim
      * @param proofs The Merkle proofs for the items
      */
-    function claimMerkleBatch(uint256[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
+    function claimMerkleBatch(uint[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
         _claimMerkleBatch(msg.sender, itemsIds, amounts, proofs);
     }
 
@@ -69,7 +69,7 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
      * @param itemId The ID of the item to mint
      * @param amount The item amount to be minted
      */
-    function mint(address to, uint256 itemId, uint256 amount)
+    function mint(address to, uint itemId, uint amount)
         public onlyManager
     {
         _mint(to, itemId, amount);
@@ -81,7 +81,7 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
      * @param itemIds An array of items IDs to be minted
      * @param amounts The items amounts to be minted
      */
-    function mintBatch(address to, uint256[] calldata itemIds, uint256[] calldata amounts)
+    function mintBatch(address to, uint[] calldata itemIds, uint[] calldata amounts)
         public onlyManager
     {
         _mintBatch(to, itemIds, amounts);
@@ -125,7 +125,7 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     /**
      * @notice Override ERC1155Metadata
      */
-    function uri(uint256 tokenId) public view override returns (string memory) {
+    function uri(uint tokenId) public view override returns (string memory) {
         if (ItemsStorage.layout().isMigratedToIPFS) {
             return string.concat(super.uri(tokenId), ".json");
         } else {
@@ -148,8 +148,8 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     function safeTransferFrom(
         address from,
         address to,
-        uint256 id,
-        uint256 amount,
+        uint id,
+        uint amount,
         bytes memory data
     ) public override (ERC1155Base) {
         // Add red carpet logic for the inventory
@@ -166,8 +166,8 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
         address operator,
         address from,
         address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
+        uint[] memory ids,
+        uint[] memory amounts,
         bytes memory data
     )
         internal

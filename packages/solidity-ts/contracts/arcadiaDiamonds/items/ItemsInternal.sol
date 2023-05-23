@@ -18,7 +18,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     error Items_MintingNonBasicItem();
     error Items_MaximumItemMintsExceeded();
 
-    event ItemClaimedMerkle(address indexed to, uint256 indexed itemId, uint amount);
+    event ItemClaimedMerkle(address indexed to, uint indexed itemId, uint amount);
 
     using ArrayUtils for uint[];
 
@@ -38,13 +38,13 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         emit ItemClaimedMerkle(to, itemId, amount);
     }
 
-    function _claimMerkleBatch(address to, uint256[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
+    function _claimMerkleBatch(address to, uint[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
         if (itemIds.length != amounts.length) 
             revert Items_InputsLengthMistatch();
         
-        for (uint256 i = 0; i < itemIds.length; i++) {
+        for (uint i = 0; i < itemIds.length; i++) {
             _claimMerkle(to, itemIds[i], amounts[i], proofs[i]);
         }
     }
@@ -69,7 +69,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         return ItemsStorage.layout().amountClaimed[account][itemId];
     }
 
-    function _mint(address to, uint256 itemId, uint256 amount)
+    function _mint(address to, uint itemId, uint amount)
         internal
     {
         if (itemId < 1) revert Items_InvalidItemId();
@@ -77,7 +77,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ERC1155BaseInternal._mint(to, itemId, amount, "");
     }
 
-    function _mintBatch(address to, uint256[] calldata itemsIds, uint256[] calldata amounts)
+    function _mintBatch(address to, uint[] calldata itemsIds, uint[] calldata amounts)
         internal
     {
         if (itemsIds.min() < 1) revert Items_InvalidItemId();
@@ -103,8 +103,8 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         address operator,
         address from,
         address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
+        uint[] memory ids,
+        uint[] memory amounts,
         bytes memory data
     )
         internal

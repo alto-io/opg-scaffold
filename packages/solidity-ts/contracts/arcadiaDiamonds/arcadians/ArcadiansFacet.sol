@@ -29,7 +29,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @return The URI for the given token ID
      */
     function tokenURI(
-        uint256 tokenId
+        uint tokenId
     ) external view override (ERC721Metadata, IERC721Metadata) returns (string memory) {
         return _tokenURI(tokenId);
     }
@@ -185,8 +185,8 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     // required overrides
     function _handleApproveMessageValue(
         address operator,
-        uint256 tokenId,
-        uint256 value
+        uint tokenId,
+        uint value
     ) internal virtual override {
         if (value > 0) revert SolidStateERC721__PayableApproveNotSupported();
         super._handleApproveMessageValue(operator, tokenId, value);
@@ -195,8 +195,8 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function _handleTransferMessageValue(
         address from,
         address to,
-        uint256 tokenId,
-        uint256 value
+        uint tokenId,
+        uint value
     ) internal virtual override {
         if (value > 0) revert SolidStateERC721__PayableTransferNotSupported();
         super._handleTransferMessageValue(from, to, tokenId, value);
@@ -205,7 +205,7 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     function _beforeTokenTransfer(
         address from,
         address to,
-        uint256 tokenId
+        uint tokenId
     ) internal virtual override {
         super._beforeTokenTransfer(from, to, tokenId);
     }
