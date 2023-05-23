@@ -47,7 +47,7 @@ contract InventoryFacet is
      * @param slotId The ID of the inventory slot
      * @return existentSlot The details of the inventory slot
      */
-    function slot(uint slotId) external view returns (InventoryStorage.Slot memory existentSlot) {
+    function slot(uint8 slotId) external view returns (InventoryStorage.Slot memory existentSlot) {
         return _slot(slotId);
     }
 
@@ -83,7 +83,7 @@ contract InventoryFacet is
      * @param permanent Whether or not the slot is permanent
      */
     function setSlotPermanent(
-        uint slotId,
+        uint8 slotId,
         bool permanent
     ) external onlyManager {
         _setSlotPermanent(slotId, permanent);
@@ -96,7 +96,7 @@ contract InventoryFacet is
      * @param isBase Whether or not the slot is base
      */
     function setSlotBase(
-        uint slotId,
+        uint8 slotId,
         bool isBase
     ) external onlyManager {
         _setSlotBase(slotId, isBase);
@@ -109,7 +109,7 @@ contract InventoryFacet is
      */
     function getBaseModifierCoupon(
         address account,
-        uint slotId
+        uint8 slotId
     ) external view returns (uint) {
         return _getbaseModifierCoupon(account, slotId);
     }
@@ -132,7 +132,7 @@ contract InventoryFacet is
      */
     function addBaseModifierCoupons(
         address account,
-        uint[] calldata slotsIds,
+        uint8[] calldata slotsIds,
         uint[] calldata amounts
     ) external onlyAutomation {
         _addBaseModifierCoupons(account, slotsIds, amounts);
@@ -156,7 +156,7 @@ contract InventoryFacet is
      * @param items The list of items to allow in the slot
      */
     function allowItemsInSlot(
-        uint slotId,
+        uint8 slotId,
         InventoryStorage.Item[] calldata items
     ) external onlyManager {
         _allowItemsInSlot(slotId, items);
@@ -196,13 +196,13 @@ contract InventoryFacet is
     /**
      * @notice Unequips the items equipped in multiple slots for a specified Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to equip the item for
-     * @param slotIds The slots ids in which the items will be unequipped
+     * @param slotsIds The slots ids in which the items will be unequipped
      */
     function unequip(
         uint arcadianId,
-        uint[] calldata slotIds
+        uint8[] calldata slotsIds
     ) external nonReentrant {
-        _unequip(arcadianId, slotIds);
+        _unequip(arcadianId, slotsIds);
     }
 
     /**
@@ -212,7 +212,7 @@ contract InventoryFacet is
      */
     function equipped(
         uint arcadianId,
-        uint slotId
+        uint8 slotId
     ) external view returns (ItemInSlot memory item) {
         return _equipped(arcadianId, slotId);
     }
@@ -220,13 +220,13 @@ contract InventoryFacet is
     /**
      * @notice Retrieves the equipped items in the slot of an Arcadian NFT
      * @param arcadianId The ID of the Arcadian NFT to query
-     * @param slotIds The slots ids to query
+     * @param slotsIds The slots ids to query
      */
     function equippedBatch(
         uint arcadianId,
-        uint[] calldata slotIds
+        uint8[] calldata slotsIds
     ) external view returns (ItemInSlot[] memory equippedSlot) {
-        return _equippedBatch(arcadianId, slotIds);
+        return _equippedBatch(arcadianId, slotsIds);
     }
 
     /**

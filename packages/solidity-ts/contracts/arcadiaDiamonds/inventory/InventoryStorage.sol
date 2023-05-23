@@ -27,22 +27,22 @@ library InventoryStorage {
 
     // Holds the general information about a slot
     struct Slot {
-        uint id;
+        uint8 id;
         bool permanent;
         bool isBase;
     }
 
     struct Layout {
-        uint numSlots;
+        uint8 numSlots;
 
         // Slot id => Slot
-        mapping(uint => Slot) slots;
+        mapping(uint8 => Slot) slots;
 
         // arcadian id => slot id => Items equipped
-        mapping(uint => mapping(uint => Item)) equippedItems;
+        mapping(uint => mapping(uint8 => Item)) equippedItems;
 
         // item address => item id => allowed slot id
-        mapping(address => mapping(uint => uint)) itemSlot;
+        mapping(address => mapping(uint => uint8)) itemSlot;
         
         // item address => item id => equip items requires transfer
         mapping(address => mapping(uint => bool)) requiresTransfer;

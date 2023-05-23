@@ -49,12 +49,12 @@ contract InventoryInternal is
     event ItemsUnequipped(
         address indexed by,
         uint indexed arcadianId,
-        uint[] slots
+        uint8[] slotsIds
     );
 
     event SlotCreated(
         address indexed by,
-        uint slotId,
+        uint8 indexed slotId,
         bool permanent,
         bool isBase
     );
@@ -62,27 +62,27 @@ contract InventoryInternal is
     event BaseModifierCouponAdded(
         address indexed by,
         address indexed to,
-        uint[] slotsIds,
+        uint8[] slotsIds,
         uint[] amounts
     );
 
     event BaseModifierCouponConsumed(
         address indexed account,
-        uint[] slotsIds
+        uint8[] slotsIds
     );
 
     // Helper structs only used in view functions to ease data reading from web3
     struct ItemInSlot {
-        uint slotId;
+        uint8 slotId;
         address erc721Contract;
         uint itemId;
     }
     struct BaseModifierCoupon {
-        uint slotId;
+        uint8 slotId;
         uint amount;
     }
 
-    modifier onlyValidSlot(uint slotId) {
+    modifier onlyValidSlot(uint8 slotId) {
         if (slotId == 0 || slotId > InventoryStorage.layout().numSlots) revert Inventory_InvalidSlotId();
         _;
     }
@@ -111,10 +111,10 @@ contract InventoryInternal is
             revert Inventory_ItemNotSpecified();
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numBaseSlotsModified;
+        uint8 numBaseSlotsModified;
         uint[] memory slotsIds = new uint[](items.length);
         for (uint i = 0; i < items.length; i++) {
-            uint slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
+            uint8 slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
             if (inventorySL.slots[slotId].isBase) {
                 numBaseSlotsModified++;
             }
@@ -129,10 +129,10 @@ contract InventoryInternal is
                 revert Inventory_ArcadianNotUnique();
             
             if (!freeBaseModifier) {
-                uint[] memory baseSlotsModified = new uint[](numBaseSlotsModified);
+                uint8[] memory baseSlotsModified = new uint8[](numBaseSlotsModified);
                 uint counter;
                 for (uint i = 0; i < items.length; i++) {
-                    uint slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
+                    uint8 slotId = inventorySL.itemSlot[items[i].erc721Contract][items[i].id];
                     if (inventorySL.slots[slotId].isBase) {
                         baseSlotsModified[counter] = slotId;
                         counter++;
@@ -149,7 +149,7 @@ contract InventoryInternal is
         uint arcadianId,
         InventoryStorage.Item calldata item,
         bool freeBaseModifier
-    ) internal returns (uint slotId) {
+    ) internal returns (uint8 slotId) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         slotId = inventorySL.itemSlot[item.erc721Contract][item.id];
@@ -193,9 +193,9 @@ contract InventoryInternal is
 
     function _baseAndPermanentSlotsEquipped(uint arcadianId) internal view returns (bool) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        uint8 numSlots = inventorySL.numSlots;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             InventoryStorage.Slot storage slot = inventorySL.slots[slotId];
             if (!slot.isBase && !slot.permanent)
                 continue;
@@ -208,7 +208,7 @@ contract InventoryInternal is
 
     function _unequipUnchecked(
         uint arcadianId,
-        uint slotId
+        uint8 slotId
     ) internal {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
@@ -229,24 +229,24 @@ contract InventoryInternal is
 
     function _unequip(
         uint arcadianId,
-        uint[] calldata slotIds
+        uint8[] calldata slotsIds
     ) internal onlyArcadianOwner(arcadianId) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        if (slotIds.length == 0) 
+        if (slotsIds.length == 0) 
             revert Inventory_SlotNotSpecified();
 
-        for (uint i = 0; i < slotIds.length; i++) {
-            if (inventorySL.slots[slotIds[i]].permanent) 
+        for (uint i = 0; i < slotsIds.length; i++) {
+            if (inventorySL.slots[slotsIds[i]].permanent) 
                 revert Inventory_UnequippingPermanentSlot();
 
-            if (inventorySL.equippedItems[arcadianId][slotIds[i]].erc721Contract == address(0)) 
+            if (inventorySL.equippedItems[arcadianId][slotsIds[i]].erc721Contract == address(0)) 
                 revert Inventory_UnequippingEmptySlot();
             
-            if (inventorySL.slots[slotIds[i]].isBase)
+            if (inventorySL.slots[slotsIds[i]].isBase)
                 revert Inventory_UnequippingBaseSlot();
 
-            _unequipUnchecked(arcadianId, slotIds[i]);
+            _unequipUnchecked(arcadianId, slotsIds[i]);
         }
 
         _hashBaseItemsUnchecked(arcadianId);
@@ -254,13 +254,13 @@ contract InventoryInternal is
         emit ItemsUnequipped(
             msg.sender,
             arcadianId,
-            slotIds
+            slotsIds
         );
     }
 
     function _equipped(
         uint arcadianId,
-        uint slotId
+        uint8 slotId
     ) internal view returns (ItemInSlot memory) {
         InventoryStorage.Item storage item = InventoryStorage.layout().equippedItems[arcadianId][slotId];
         return ItemInSlot(slotId, item.erc721Contract, item.id);
@@ -268,13 +268,13 @@ contract InventoryInternal is
 
     function _equippedBatch(
         uint arcadianId,
-        uint[] calldata slotIds
+        uint8[] calldata slotsIds
     ) internal view returns (ItemInSlot[] memory equippedSlots) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        equippedSlots = new ItemInSlot[](slotIds.length);
-        for (uint i = 0; i < slotIds.length; i++) {
-            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotIds[i]];
-            equippedSlots[i] = ItemInSlot(slotIds[i], equippedItem.erc721Contract, equippedItem.id);
+        equippedSlots = new ItemInSlot[](slotsIds.length);
+        for (uint i = 0; i < slotsIds.length; i++) {
+            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotsIds[i]];
+            equippedSlots[i] = ItemInSlot(slotsIds[i], equippedItem.erc721Contract, equippedItem.id);
         }
     }
 
@@ -282,12 +282,12 @@ contract InventoryInternal is
         uint arcadianId
     ) internal view returns (ItemInSlot[] memory equippedSlots) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
         equippedSlots = new ItemInSlot[](numSlots);
-        for (uint i = 0; i < numSlots; i++) {
-            uint slot = i + 1;
-            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slot];
-            equippedSlots[i] = ItemInSlot(slot, equippedItem.erc721Contract, equippedItem.id);
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
+            InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
+            equippedSlots[i] = ItemInSlot(slotId, equippedItem.erc721Contract, equippedItem.id);
         }
     }
 
@@ -297,11 +297,11 @@ contract InventoryInternal is
     ) internal view returns (bool) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
 
         bytes memory encodedItems;
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             if (!inventorySL.slots[slotId].isBase)
                 continue;
 
@@ -331,10 +331,10 @@ contract InventoryInternal is
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         bytes memory encodedItems;
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
 
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             if (!inventorySL.slots[slotId].isBase)
                 continue;
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
@@ -357,27 +357,27 @@ contract InventoryInternal is
 
         // slots are 1-index
         inventorySL.numSlots += 1;
-        uint newSlot = inventorySL.numSlots;
-        inventorySL.slots[newSlot].permanent = permanent;
-        inventorySL.slots[newSlot].isBase = isBase;
-        inventorySL.slots[newSlot].id = newSlot;
+        uint8 newSlotId = inventorySL.numSlots;
+        inventorySL.slots[newSlotId].permanent = permanent;
+        inventorySL.slots[newSlotId].isBase = isBase;
+        inventorySL.slots[newSlotId].id = newSlotId;
 
         if (allowedItems.length > 0) {
-            _allowItemsInSlot(newSlot, allowedItems);
+            _allowItemsInSlot(newSlotId, allowedItems);
         }
 
-        emit SlotCreated(msg.sender, newSlot, permanent, isBase);
+        emit SlotCreated(msg.sender, newSlotId, permanent, isBase);
     }
 
     function _setSlotBase(
-        uint slotId,
+        uint8 slotId,
         bool isBase
     ) internal onlyValidSlot(slotId) {
         InventoryStorage.layout().slots[slotId].isBase = isBase;
     }
 
     function _setSlotPermanent(
-        uint slotId,
+        uint8 slotId,
         bool permanent
     ) internal onlyValidSlot(slotId) {
         InventoryStorage.layout().slots[slotId].permanent = permanent;
@@ -385,28 +385,28 @@ contract InventoryInternal is
 
     function _addBaseModifierCoupons(
         address account,
-        uint[] calldata slotIds,
+        uint8[] calldata slotsIds,
         uint[] calldata amounts
     ) internal {
-        if (slotIds.length != amounts.length)
+        if (slotsIds.length != amounts.length)
             revert Inventory_InputDataMismatch();
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
 
-        for (uint i = 0; i < slotIds.length; i++) {
-            if (slotIds[i] == 0 && slotIds[i] > numSlots) 
+        for (uint i = 0; i < slotsIds.length; i++) {
+            if (slotsIds[i] == 0 && slotsIds[i] > numSlots) 
                 revert Inventory_InvalidSlotId();
-            if (!inventorySL.slots[slotIds[i]].isBase) {
+            if (!inventorySL.slots[slotsIds[i]].isBase) {
                 revert Inventory_NonBaseSlot();
             }
-            InventoryStorage.layout().baseModifierCoupon[account][slotIds[i]] += amounts[i];
+            InventoryStorage.layout().baseModifierCoupon[account][slotsIds[i]] += amounts[i];
         }
 
-        emit BaseModifierCouponAdded(msg.sender, account, slotIds, amounts);
+        emit BaseModifierCouponAdded(msg.sender, account, slotsIds, amounts);
     }
 
-    function _getbaseModifierCoupon(address account, uint slotId) internal view onlyValidSlot(slotId) returns (uint) {
+    function _getbaseModifierCoupon(address account, uint8 slotId) internal view onlyValidSlot(slotId) returns (uint) {
         if (!InventoryStorage.layout().slots[slotId].isBase) {
             revert Inventory_NonBaseSlot();
         }
@@ -416,11 +416,11 @@ contract InventoryInternal is
     function _getBaseModifierCouponAll(address account) internal view returns (BaseModifierCoupon[] memory) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
 
         uint baseCounter;
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             if (inventorySL.slots[slotId].isBase) {
                 baseCounter++;
             }
@@ -428,8 +428,8 @@ contract InventoryInternal is
 
         BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseCounter);
         uint counter;
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             if (!inventorySL.slots[slotId].isBase)
                 continue;
             coupons[counter].slotId = slotId;
@@ -452,7 +452,7 @@ contract InventoryInternal is
     }
     
     function _allowItemsInSlot(
-        uint slotId,
+        uint8 slotId,
         InventoryStorage.Item[] calldata items
     ) internal virtual onlyValidSlot(slotId) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
@@ -482,18 +482,18 @@ contract InventoryInternal is
         return InventoryStorage.layout().itemSlot[item.erc721Contract][item.id];
     }
 
-    function _slot(uint slotId) internal view returns (InventoryStorage.Slot storage slot) {
+    function _slot(uint8 slotId) internal view returns (InventoryStorage.Slot storage slot) {
         return InventoryStorage.layout().slots[slotId];
     }
 
     function _slotsAll() internal view returns (InventoryStorage.Slot[] memory slotsAll) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         
-        uint numSlots = inventorySL.numSlots;
+        uint8 numSlots = inventorySL.numSlots;
         slotsAll = new InventoryStorage.Slot[](numSlots);
 
-        for (uint i = 0; i < numSlots; i++) {
-            uint slotId = i + 1;
+        for (uint8 i = 0; i < numSlots; i++) {
+            uint8 slotId = i + 1;
             slotsAll[i] = inventorySL.slots[slotId];
         }
     }
