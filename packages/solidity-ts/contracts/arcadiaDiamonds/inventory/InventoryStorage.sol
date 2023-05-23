@@ -13,9 +13,6 @@ library InventoryStorage {
     bytes32 constant INVENTORY_STORAGE_POSITION =
         keccak256("inventory.storage.position");
 
-    uint constant ERC721_ITEM_TYPE = 721;
-    uint constant ERC1155_ITEM_TYPE = 1155;
-
     using EnumerableSet for EnumerableSet.UintSet;
     using EnumerableSet for EnumerableSet.Bytes32Set;
 
