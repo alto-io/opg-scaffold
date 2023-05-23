@@ -31,57 +31,63 @@ contract WhitelistInternal is RolesInternal {
 
     function _consumeWhitelist(WhitelistStorage.PoolId poolId, address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
 
-        if (!whitelistSL.pools[poolId].claimActive)
+        if (!pool.claimActive)
             revert Whitelist_ClaimInactive();
 
-        if (whitelistSL.pools[poolId].elegible[account] < amount) 
+        if (pool.elegible[account] < amount) 
             revert Whitelist_ExceedsElegibleAmount();
 
-        whitelistSL.pools[poolId].elegible[account] -= amount;
-        whitelistSL.pools[poolId].claimed[account] += amount;
-        whitelistSL.pools[poolId].totalClaimed += amount;
-        whitelistSL.pools[poolId].totalElegible -= amount;
+        pool.elegible[account] -= amount;
+        pool.claimed[account] += amount;
+        pool.totalClaimed += amount;
+        pool.totalElegible -= amount;
 
-        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);
+        emit WhitelistBalanceChanged(account, poolId, pool.elegible[account], pool.claimed[account]);
     }
 
     function _increaseWhitelistElegible(WhitelistStorage.PoolId poolId, address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
-        whitelistSL.pools[poolId].elegible[account] += amount;
-        whitelistSL.pools[poolId].totalElegible += amount;
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
+        pool.elegible[account] += amount;
+        pool.totalElegible += amount;
         
-        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);
+        emit WhitelistBalanceChanged(account, poolId, pool.elegible[account], pool.claimed[account]);
     }
 
     function _increaseWhitelistElegibleBatch(WhitelistStorage.PoolId poolId, address[] calldata accounts, uint[] calldata amounts) internal {
         if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();
 
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
 
         for (uint i = 0; i < accounts.length; i++) {
-            whitelistSL.pools[poolId].elegible[accounts[i]] += amounts[i];
-            whitelistSL.pools[poolId].totalElegible += amounts[i];
-            emit WhitelistBalanceChanged(accounts[i], poolId, whitelistSL.pools[poolId].elegible[accounts[i]], whitelistSL.pools[poolId].claimed[accounts[i]]);
+            pool.elegible[accounts[i]] += amounts[i];
+            pool.totalElegible += amounts[i];
+            emit WhitelistBalanceChanged(accounts[i], poolId, pool.elegible[accounts[i]], pool.claimed[accounts[i]]);
         }
     }
 
     function _setWhitelistElegible(WhitelistStorage.PoolId poolId, address account, uint amount) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
-        whitelistSL.pools[poolId].totalElegible += amount - whitelistSL.pools[poolId].elegible[account];
-        whitelistSL.pools[poolId].elegible[account] += amount;
-        emit WhitelistBalanceChanged(account, poolId, whitelistSL.pools[poolId].elegible[account], whitelistSL.pools[poolId].claimed[account]);
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
+
+        pool.totalElegible += amount - pool.elegible[account];
+        pool.elegible[account] += amount;
+        emit WhitelistBalanceChanged(account, poolId, pool.elegible[account], pool.claimed[account]);
     }
 
     function _setWhitelistElegibleBatch(WhitelistStorage.PoolId poolId, address[] calldata accounts, uint[] calldata amounts) internal {
         if (accounts.length != amounts.length) revert Whitelist_InputDataMismatch();
 
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
 
         for (uint i = 0; i < accounts.length; i++) {
-            whitelistSL.pools[poolId].totalElegible += amounts[i] - whitelistSL.pools[poolId].elegible[accounts[i]];
-            whitelistSL.pools[poolId].elegible[accounts[i]] = amounts[i];
-            emit WhitelistBalanceChanged(accounts[i], poolId, whitelistSL.pools[poolId].elegible[accounts[i]], whitelistSL.pools[poolId].claimed[accounts[i]]);
+            pool.totalElegible += amounts[i] - pool.elegible[accounts[i]];
+            pool.elegible[accounts[i]] = amounts[i];
+            emit WhitelistBalanceChanged(accounts[i], poolId, pool.elegible[accounts[i]], pool.claimed[accounts[i]]);
         }
     }
 
@@ -91,10 +97,11 @@ contract WhitelistInternal is RolesInternal {
 
     function _setWhitelistClaimActive(WhitelistStorage.PoolId poolId, bool active) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
 
-        if (active == whitelistSL.pools[poolId].claimActive) 
+        if (active == pool.claimActive) 
             revert Whitelist_ClaimStateAlreadyUpdated();
         
-        whitelistSL.pools[poolId].claimActive = active;
+        pool.claimActive = active;
     }
 }
