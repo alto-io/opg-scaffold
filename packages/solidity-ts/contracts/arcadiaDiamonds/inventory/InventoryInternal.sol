@@ -97,10 +97,6 @@ contract InventoryInternal is
         return InventoryStorage.layout().numSlots;
     }
 
-    function _transferRequired(InventoryStorage.Slot storage slot) internal view returns (bool required) {
-        required = !slot.isBase && !slot.permanent;
-    }
-
     function _equip(
         uint arcadianId,
         InventoryStorage.Item[] calldata items,
