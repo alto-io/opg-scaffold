@@ -11,7 +11,7 @@ contract WhitelistInternal is RolesInternal {
     error Whitelist_ClaimStateAlreadyUpdated();
     error Whitelist_ClaimInactive();
 
-    event WhitelistBalanceChanged(address account, WhitelistStorage.PoolId poolId, uint totalElegibleAmount, uint totalClaimedAmount);
+    event WhitelistBalanceChanged(address indexed account, WhitelistStorage.PoolId poolId, uint totalElegibleAmount, uint totalClaimedAmount);
 
     function _totalClaimedWhitelist(WhitelistStorage.PoolId poolId) internal view returns (uint) {
         return WhitelistStorage.layout().pools[poolId].totalClaimed;
