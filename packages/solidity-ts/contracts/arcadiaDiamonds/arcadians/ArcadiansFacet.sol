@@ -54,15 +54,15 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
                 revert Arcadians_MaximumMintedArcadiansPerUserReached();
 
         } else if (arcadiansSL.isPublicMintOpen) {
+            if (msg.value != arcadiansSL.mintPrice)
+                revert Arcadians_InvalidPayAmount();
+
             if (tokenId > MAX_SUPPLY)
                 revert Arcadians_MaximumArcadiansSupplyReached();
 
             uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(GuaranteedPool, msg.sender);
             if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
                 revert Arcadians_MaximumMintedArcadiansPerUserReached();
-            
-            if (msg.value != arcadiansSL.mintPrice)
-                revert Arcadians_InvalidPayAmount();
         } else {
             revert Arcadians_NotElegibleToMint();
         }
