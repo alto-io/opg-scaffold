@@ -31,7 +31,7 @@ async function main() {
 
     const isPublicMintOpen = await await arcadiansSC.publicMintOpen();
     if (!isPublicMintOpen) {
-        let tx = await arcadiansSC.openPublicMint();
+        let tx = await arcadiansSC.setPublicMintOpen(true);
         tx.wait()
     }
 

@@ -108,7 +108,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         let nonBasicItems = items.filter((item: ItemTest)=>!item.isBasic)
         let itemsToEquip = convertItemsSC(basicItems)
 
-        await arcadiansContracts.arcadiansFacet.openPublicMint();
+        await arcadiansContracts.arcadiansFacet.setPublicMintOpen(true);
 
         // mint balance
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
@@ -209,7 +209,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             to.be.revertedWithCustomError(itemsContracts.itemsFacet, "Roles_MissingManagerRole");
 
         // mint arcadian
-        await arcadiansContracts.arcadiansFacet.openPublicMint();
+        await arcadiansContracts.arcadiansFacet.setPublicMintOpen(true);
 
         const itemAmount = 2;
         const basicItems = items.filter((item: ItemTest)=>item.isBasic)

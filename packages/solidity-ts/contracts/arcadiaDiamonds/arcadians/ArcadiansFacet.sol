@@ -101,21 +101,12 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
     /**
-     * @notice This function opens the public mint
+     * @notice This function sets the public mint as open/closed
      */
-    function openPublicMint() external onlyManager {
+    function setPublicMintOpen(bool isOpen) external onlyManager {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        arcadiansSL.isPublicMintOpen = true;
+        arcadiansSL.isPublicMintOpen = isOpen;
     }
-
-    /**
-     * @notice This function closes the public mint
-     */
-    function closePublicMint() external onlyManager {
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        arcadiansSL.isPublicMintOpen = false;
-    }
-
     /**
      * @notice Returns true if the public mint is open, false otherwise
      */
@@ -182,33 +173,5 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
 
     function nextArcadianId() internal view returns (uint arcadianId) {
         arcadianId = _totalSupply() + 1;
-    }
-
-    // required overrides
-    function _handleApproveMessageValue(
-        address operator,
-        uint tokenId,
-        uint value
-    ) internal virtual override {
-        if (value > 0) revert SolidStateERC721__PayableApproveNotSupported();
-        super._handleApproveMessageValue(operator, tokenId, value);
-    }
-
-    function _handleTransferMessageValue(
-        address from,
-        address to,
-        uint tokenId,
-        uint value
-    ) internal virtual override {
-        if (value > 0) revert SolidStateERC721__PayableTransferNotSupported();
-        super._handleTransferMessageValue(from, to, tokenId, value);
-    }
-
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint tokenId
-    ) internal virtual override {
-        super._beforeTokenTransfer(from, to, tokenId);
     }
 }

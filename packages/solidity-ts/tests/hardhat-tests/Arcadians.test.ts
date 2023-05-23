@@ -340,7 +340,7 @@ describe('mint restrictions', function () {
     it('Should be able to open and close public mint', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         
-        await arcadiansContracts.arcadiansFacet.closePublicMint();
+        await arcadiansContracts.arcadiansFacet.setPublicMintOpen(false);
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mintAndEquip([], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
     })
@@ -377,7 +377,7 @@ describe('mint max limit per user', function () {
     it('Should be able to mint before reaching max limit', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         
-        await arcadiansContracts.arcadiansFacet.openPublicMint()
+        await arcadiansContracts.arcadiansFacet.setPublicMintOpen(true)
         await arcadiansContracts.arcadiansFacet.setMaxMintPerUser(0)
         
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
