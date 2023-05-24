@@ -8,7 +8,7 @@ import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.It
 import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
 // Diamond init params
-export const merkleRoot = "0x81dc9bb909c953847a26cdab04b23eee53eb18b37ba7e547041d3d61077c03e8";
+export const merkleRoot = "0x4cc201573e110f41c0ab8a8a57a12e631393ab9e43b551868d1e9e95b37b5d0f";
 export const baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
 
 export const func = async() => {
