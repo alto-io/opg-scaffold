@@ -375,7 +375,7 @@ contract InventoryInternal is
 
         if (isBase) {
             inventorySL.baseSlotsIds.add(slotId);
-        } else if (inventorySL.baseSlotsIds.contains(slotId)) {
+        } else {
             inventorySL.baseSlotsIds.remove(slotId);
         }
     }
