@@ -154,7 +154,7 @@ contract InventoryInternal is
             revert Inventory_ItemDoesNotHaveSlotAssigned();
         
         if (!freeBaseModifier && inventorySL.slots[slotId].isBase) {
-            if (inventorySL.baseModifierCoupon[msg.sender][slotId] < 1)
+            if (inventorySL.baseModifierCoupon[msg.sender][slotId] == 0)
                 revert Inventory_CouponNeededToModifyBaseSlots();
 
             inventorySL.baseModifierCoupon[msg.sender][slotId]--;
@@ -293,13 +293,12 @@ contract InventoryInternal is
     ) internal view returns (bool) {
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
-        uint8 numSlots = inventorySL.numSlots;
 
         bytes memory encodedItems;
-        for (uint8 i = 0; i < numSlots; i++) {
-            uint8 slotId = i + 1;
-            if (!inventorySL.slots[slotId].isBase)
-                continue;
+        uint numBaseSlots = inventorySL.baseSlotsIds.length();
+
+        for (uint8 i = 0; i < numBaseSlots; i++) {
+            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
 
             InventoryStorage.Item memory item;
             for (uint j = 0; j < items.length; j++) {
@@ -327,12 +326,11 @@ contract InventoryInternal is
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         bytes memory encodedItems;
-        uint8 numSlots = inventorySL.numSlots;
+        uint numBaseSlots = inventorySL.baseSlotsIds.length();
 
-        for (uint8 i = 0; i < numSlots; i++) {
-            uint8 slotId = i + 1;
-            if (!inventorySL.slots[slotId].isBase)
-                continue;
+        for (uint8 i = 0; i < numBaseSlots; i++) {
+            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
+            
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
             encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.erc1155Contract, equippedItem.id);
         }
@@ -358,6 +356,8 @@ contract InventoryInternal is
         inventorySL.slots[newSlotId].isBase = isBase;
         inventorySL.slots[newSlotId].id = newSlotId;
 
+        _setSlotBase(newSlotId, isBase);
+
         if (allowedItems.length > 0) {
             _allowItemsInSlot(newSlotId, allowedItems);
         }
@@ -369,7 +369,15 @@ contract InventoryInternal is
         uint8 slotId,
         bool isBase
     ) internal onlyValidSlot(slotId) {
-        InventoryStorage.layout().slots[slotId].isBase = isBase;
+        InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
+
+        inventorySL.slots[slotId].isBase = isBase;
+
+        if (isBase) {
+            inventorySL.baseSlotsIds.add(slotId);
+        } else if (inventorySL.baseSlotsIds.contains(slotId)) {
+            inventorySL.baseSlotsIds.remove(slotId);
+        }
     }
 
     function _setSlotPermanent(
@@ -412,27 +420,22 @@ contract InventoryInternal is
     function _getBaseModifierCouponAll(address account) internal view returns (BaseModifierCoupon[] memory) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        uint8 numSlots = inventorySL.numSlots;
+        uint numBaseSlots = inventorySL.baseSlotsIds.length();
 
-        uint baseCounter;
-        for (uint8 i = 0; i < numSlots; i++) {
-            uint8 slotId = i + 1;
-            if (inventorySL.slots[slotId].isBase) {
-                baseCounter++;
-            }
-        }
-
-        BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](baseCounter);
+        BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](numBaseSlots);
         uint counter;
-        for (uint8 i = 0; i < numSlots; i++) {
-            uint8 slotId = i + 1;
-            if (!inventorySL.slots[slotId].isBase)
-                continue;
+        for (uint8 i = 0; i < numBaseSlots; i++) {
+            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
+
             coupons[counter].slotId = slotId;
             coupons[counter].amount = inventorySL.baseModifierCoupon[account][slotId];
             counter++;
         }
         return coupons;
+    }
+
+    function _getBaseSlotsIds() internal view returns (uint[] memory) {
+        return InventoryStorage.layout().baseSlotsIds.toArray();
     }
 
     function _setItemsTransferRequired(

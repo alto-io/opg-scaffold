@@ -125,6 +125,13 @@ contract InventoryFacet is
     }
 
     /**
+     * @notice Returns all the slots ids
+     */
+    function getBaseSlotsIds() external view returns (uint[] memory) {
+        return _getBaseSlotsIds();
+    }
+
+    /**
      * @notice Adds coupons to accounts that allow to modify the base traits
      * @param account The account to increase the number of coupons
      * @param slotsIds The slots ids to increase the number of coupons

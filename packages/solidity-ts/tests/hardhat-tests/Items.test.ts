@@ -100,7 +100,17 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         for (let i = 0; i < slots.length; i++) {
             const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
             const allowedItemsSC = convertItemsSC(allowedItems);
+            
             await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
+            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds()).map((v:BigNumber)=>v.toNumber());
+            
+            console.log("baseSlotsIds", baseSlotsIds)
+            console.log("slots[i]", slots[i])
+            if (slots[i].isBase) {
+                expect(baseSlotsIds).to.include(slots[i].id);
+            } else {
+                expect(baseSlotsIds).to.not.include(slots[i].id);
+            }
         }
 
         // mint arcadian
