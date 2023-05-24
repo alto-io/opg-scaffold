@@ -13,9 +13,6 @@ library InventoryStorage {
     bytes32 constant INVENTORY_STORAGE_POSITION =
         keccak256("inventory.storage.position");
 
-    using EnumerableSet for EnumerableSet.UintSet;
-    using EnumerableSet for EnumerableSet.Bytes32Set;
-
     // Holds the information needed to identify an ERC1155 item
     struct Item {
         address erc1155Contract;
@@ -44,9 +41,6 @@ library InventoryStorage {
         // item address => item id => equip items requires transfer
         mapping(address => mapping(uint => bool)) requiresTransfer;
 
-        // List of all the base slots ids
-        EnumerableSet.UintSet baseSlotsIds;
-
         // List of all the existent hashes
         EnumerableSet.Bytes32Set baseItemsHashes;
         // arcadian id => base items hash
@@ -54,6 +48,9 @@ library InventoryStorage {
 
         // account => slotId => number of coupons to modify the base traits
         mapping(address => mapping(uint => uint)) baseModifierCoupon;
+
+        // List of all the base slots ids
+        uint8[] baseSlotsIds;
     }
 
     function layout()

@@ -91,10 +91,44 @@ describe('Items Diamond Test', function () {
 })
 
 describe('Items Diamond Mint, equip and unequip items flow', function () {
+    it('should be able to switch the "base" property for the slots', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items } = await loadFixture(deployAndInitContractsFixture);
+
+        const bob = namedAccounts.bob;
+
+        for (let i = 0; i < slots.length; i++) {
+            const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
+            const allowedItemsSC = convertItemsSC(allowedItems);
+            
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
+
+            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds());
+            console.log("baseSlotsIds", baseSlotsIds)
+            if (slots[i].isBase) {
+                expect(baseSlotsIds).to.include(slots[i].id);
+            } else {
+                expect(baseSlotsIds).to.not.include(slots[i].id);
+            }
+        }
+
+        for (let i = 0; i < slots.length; i++) {
+            await arcadiansContracts.inventoryFacet.setSlotBase(slots[i].id, false);
+            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds())
+            expect(baseSlotsIds).to.not.include(slots[i].id);
+        }
+
+        for (let i = 0; i < slots.length; i++) {
+            await arcadiansContracts.inventoryFacet.setSlotBase(slots[i].id, true);
+            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds())
+            expect(baseSlotsIds).to.include(slots[i].id);
+        }
+    })
+
     it('should be able to equip and unequip items from an arcadian', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items } = await loadFixture(deployAndInitContractsFixture);
 
         const bob = namedAccounts.bob;
+        
 
         // create slot
         for (let i = 0; i < slots.length; i++) {
@@ -102,10 +136,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             const allowedItemsSC = convertItemsSC(allowedItems);
             
             await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
-            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds()).map((v:BigNumber)=>v.toNumber());
+
+            const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds());
             
-            console.log("baseSlotsIds", baseSlotsIds)
-            console.log("slots[i]", slots[i])
             if (slots[i].isBase) {
                 expect(baseSlotsIds).to.include(slots[i].id);
             } else {

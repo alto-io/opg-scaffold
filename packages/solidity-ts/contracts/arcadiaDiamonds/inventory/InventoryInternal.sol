@@ -14,7 +14,6 @@ contract InventoryInternal is
     ReentrancyGuard,
     RolesInternal
 {
-    using EnumerableSet for EnumerableSet.UintSet;
     using EnumerableSet for EnumerableSet.Bytes32Set;
     using AddressUtils for address;
 
@@ -295,10 +294,10 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         bytes memory encodedItems;
-        uint numBaseSlots = inventorySL.baseSlotsIds.length();
+        uint numBaseSlots = inventorySL.baseSlotsIds.length;
 
         for (uint8 i = 0; i < numBaseSlots; i++) {
-            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
+            uint8 slotId = inventorySL.baseSlotsIds[i];
 
             InventoryStorage.Item memory item;
             for (uint j = 0; j < items.length; j++) {
@@ -326,10 +325,10 @@ contract InventoryInternal is
     ) internal returns (bool isUnique) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         bytes memory encodedItems;
-        uint numBaseSlots = inventorySL.baseSlotsIds.length();
+        uint numBaseSlots = inventorySL.baseSlotsIds.length;
 
         for (uint8 i = 0; i < numBaseSlots; i++) {
-            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
+            uint8 slotId = inventorySL.baseSlotsIds[i];
             
             InventoryStorage.Item storage equippedItem = inventorySL.equippedItems[arcadianId][slotId];
             encodedItems = abi.encodePacked(encodedItems, slotId, equippedItem.erc1155Contract, equippedItem.id);
@@ -371,13 +370,30 @@ contract InventoryInternal is
     ) internal onlyValidSlot(slotId) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        inventorySL.slots[slotId].isBase = isBase;
+        uint8[] storage baseSlotsIds = inventorySL.baseSlotsIds;
 
         if (isBase) {
-            inventorySL.baseSlotsIds.add(slotId);
+            bool alreadyInBaseList;
+            for (uint i = 0; i < baseSlotsIds.length; i++) {
+                if (baseSlotsIds[i] == slotId) {
+                    alreadyInBaseList = true;
+                    break;
+                }
+            }
+            if (!alreadyInBaseList) {
+                baseSlotsIds.push(slotId);
+            }
         } else {
-            inventorySL.baseSlotsIds.remove(slotId);
+            for (uint i = 0; i < baseSlotsIds.length; i++) {
+                if (baseSlotsIds[i] == slotId) {
+                    baseSlotsIds[i] = baseSlotsIds[baseSlotsIds.length - 1];
+                    baseSlotsIds.pop();
+                    break;
+                }
+            }
         }
+
+        inventorySL.slots[slotId].isBase = isBase;
     }
 
     function _setSlotPermanent(
@@ -420,12 +436,12 @@ contract InventoryInternal is
     function _getBaseModifierCouponAll(address account) internal view returns (BaseModifierCoupon[] memory) {
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
-        uint numBaseSlots = inventorySL.baseSlotsIds.length();
+        uint numBaseSlots = inventorySL.baseSlotsIds.length;
 
         BaseModifierCoupon[] memory coupons = new BaseModifierCoupon[](numBaseSlots);
         uint counter;
         for (uint8 i = 0; i < numBaseSlots; i++) {
-            uint8 slotId = uint8(inventorySL.baseSlotsIds.at(i));
+            uint8 slotId = uint8(inventorySL.baseSlotsIds[i]);
 
             coupons[counter].slotId = slotId;
             coupons[counter].amount = inventorySL.baseModifierCoupon[account][slotId];
@@ -434,8 +450,8 @@ contract InventoryInternal is
         return coupons;
     }
 
-    function _getBaseSlotsIds() internal view returns (uint[] memory) {
-        return InventoryStorage.layout().baseSlotsIds.toArray();
+    function _getBaseSlotsIds() internal view returns (uint8[] memory) {
+        return InventoryStorage.layout().baseSlotsIds;
     }
 
     function _setItemsTransferRequired(

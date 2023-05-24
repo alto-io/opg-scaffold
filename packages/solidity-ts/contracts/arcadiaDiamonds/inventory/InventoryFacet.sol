@@ -125,9 +125,10 @@ contract InventoryFacet is
     }
 
     /**
-     * @notice Returns all the slots ids
+     * @notice Returns all the base slots ids
+     * @return List of base slots ids
      */
-    function getBaseSlotsIds() external view returns (uint[] memory) {
+    function getBaseSlotsIds() external view returns (uint8[] memory) {
         return _getBaseSlotsIds();
     }
 
