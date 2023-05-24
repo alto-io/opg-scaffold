@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity 0.8.19;
 
 import { AccessControl } from "@solidstate/contracts/access/access_control/AccessControl.sol";
