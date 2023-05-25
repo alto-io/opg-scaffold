@@ -42,7 +42,7 @@ contract InventoryInternal is
     event ItemsEquipped(
         address indexed by,
         uint indexed arcadianId,
-        uint[] slots
+        uint8[] slots
     );
 
     event ItemsUnequipped(
@@ -108,7 +108,7 @@ contract InventoryInternal is
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint8 numBaseSlotsModified;
-        uint[] memory slotsIds = new uint[](items.length);
+        uint8[] memory slotsIds = new uint8[](items.length);
         for (uint i = 0; i < items.length; i++) {
             uint8 slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
             if (inventorySL.slots[slotId].isBase) {
