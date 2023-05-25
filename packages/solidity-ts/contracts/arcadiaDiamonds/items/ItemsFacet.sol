@@ -64,6 +64,28 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
     }
 
     /**
+     * @notice Burn an amount of an item
+     * @param itemId The ID of the item to burn
+     * @param amount The item amount to burn
+     */
+    function burn(uint itemId, uint amount)
+        public
+    {
+        _burn(msg.sender, itemId, amount);
+    }
+
+    /**
+     * @notice Burn amounts of items
+     * @param itemIds The item ID burn
+     * @param amounts The item amounts to be minted
+     */
+    function burnBatch(uint256[] memory itemIds, uint256[] memory amounts)
+        public
+    {
+        _burnBatch(msg.sender, itemIds, amounts);
+    }
+
+    /**
      * @notice Mints a new item. Only minter role account can mint
      * @param to The address to mint the item to
      * @param itemId The ID of the item to mint

@@ -39,6 +39,35 @@ describe('Items Diamond Test', function () {
         expect(inventoryAddress).to.be.equal(namedAddresses.deployer);
     })
 
+    it('should be able to burn owned items', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, items } = await loadFixture(deployAndInitContractsFixture);
+        
+        let itemsIds = items.map((item)=>item.id);
+        itemsIds = itemsIds.slice(0,100);
+        const mintAmount = 1;
+        const mintAmounts = itemsIds.map(()=>mintAmount);
+        const accounts = itemsIds.map(()=>namedAddresses.deployer)
+
+        await itemsContracts.itemsFacet.mintBatch(namedAddresses.deployer, itemsIds, mintAmounts);
+        let balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, itemsIds)).map((a:BigNumber)=>a.toNumber());
+        expect(balanceBatch).to.be.eql(mintAmounts);
+
+        // revert if the user does not own the item
+        await expect(itemsContracts.itemsFacet.connect(namedAccounts.bob).burn(1, 1)).
+            to.be.revertedWithCustomError(itemsContracts.itemsFacet, "ERC1155Base__BurnExceedsBalance");
+
+        // burn items
+        const itemIdBurn = itemsIds[0];
+        await itemsContracts.itemsFacet.burn(itemIdBurn, 1);
+        let balanceItem = (await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, itemIdBurn)).toNumber();
+        expect(balanceItem).to.be.eql(0);
+        
+        balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, itemsIds)).map((a:BigNumber)=>a.toNumber());
+        await itemsContracts.itemsFacet.burnBatch(itemsIds, balanceBatch);
+        balanceBatch = (await itemsContracts.itemsFacet.balanceOfBatch(accounts, itemsIds)).map((a:BigNumber)=>a.toNumber());
+        expect(balanceBatch).to.be.eql(itemsIds.map(()=>0));
+    })
+
     it('should be able to migrate to ipfs', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
         const tokenId = 1;
