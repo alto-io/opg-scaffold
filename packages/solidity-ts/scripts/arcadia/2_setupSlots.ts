@@ -45,7 +45,6 @@ async function main() {
             }
         } else {
             // setup missing allowed item ids
-            
             const allowedItemsIdsMissing = slot.allowedItems
                 .filter((itemId: number)=> !slotSC.allowedItems.some((itemSC: ItemSC)=>itemSC.id == itemId))
 
@@ -92,6 +91,10 @@ async function main() {
             }
         }
     }
+    let baseSlotsIds = await inventorySC.getBaseSlotsIds();
+    console.log("baseSlotsIds", baseSlotsIds)
+
+    console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
     // slotsSC = await getAllSlots(inventorySC, itemsSC);
     // console.log("allSlots after: ", slotsSC.map((slot)=>{
     //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
@@ -125,9 +128,11 @@ async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contrac
     for (let i = 0; i < slotsAll.length; i++) {
         const slotId = slotsAll[i].id;
         let slotSC = await inventorySC.slot(slotId);
+        console.log("slotSC: ", slotSC);
+        
         
         let slot: SlotSC = {
-            id: slotSC.id.toNumber(),
+            id: slotSC.id,
             isBase: slotSC.isBase,
             permanent: slotSC.permanent,
             allowedItems: []
