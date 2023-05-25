@@ -134,7 +134,7 @@ contract InventoryInternal is
                         counter++;
                     }
                 }
-                emit BaseModifierCouponConsumed(msg.sender, baseSlotsModified);
+                emit BaseModifierCouponConsumed(msg.sender, arcadianId, baseSlotsModified);
             }
         }
 
