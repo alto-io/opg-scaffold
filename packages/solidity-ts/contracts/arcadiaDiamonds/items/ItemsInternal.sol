@@ -18,7 +18,7 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
     error Items_MintingNonBasicItem();
     error Items_MaximumItemMintsExceeded();
 
-    event ItemClaimedMerkle(address indexed to, uint indexed itemId, uint amount);
+    event ItemsClaimedMerkle(address indexed to, uint[] itemsIds, uint[] amounts);
 
     using ArrayUtils for uint[];
 
@@ -35,18 +35,35 @@ contract ItemsInternal is MerkleInternal, WhitelistInternal, ERC1155BaseInternal
         ERC1155BaseInternal._mint(to, itemId, amount, "");
 
         itemsSL.amountClaimed[to][itemId] += amount;
-        emit ItemClaimedMerkle(to, itemId, amount);
+        
+        uint[] memory itemsIds = new uint[](1);
+        itemsIds[0] = itemId;
+        uint[] memory amounts = new uint[](1);
+        amounts[0] = amount;
+        emit ItemsClaimedMerkle(to, itemsIds, amounts);
     }
 
-    function _claimMerkleBatch(address to, uint[] calldata itemIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
+    function _claimMerkleBatch(address to, uint[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) 
         internal
     {
-        if (itemIds.length != amounts.length) 
+        if (itemsIds.length != amounts.length) 
             revert Items_InputsLengthMistatch();
-        
-        for (uint i = 0; i < itemIds.length; i++) {
-            _claimMerkle(to, itemIds[i], amounts[i], proofs[i]);
+
+        ItemsStorage.Layout storage itemsSL = ItemsStorage.layout();
+
+        for (uint i = 0; i < itemsIds.length; i++) {
+
+            if (itemsIds[i] < 1) revert Items_InvalidItemId();
+
+            bytes memory leaf = abi.encode(to, itemsIds[i], amounts[i]);
+            _consumeLeaf(proofs[i], leaf);
+
+            ERC1155BaseInternal._mint(to, itemsIds[i], amounts[i], "");
+
+            itemsSL.amountClaimed[to][itemsIds[i]] += amounts[i];
         }
+
+        emit ItemsClaimedMerkle(to, itemsIds, amounts);
     }
     
     function _claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) internal {
