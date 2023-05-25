@@ -3,10 +3,10 @@ pragma solidity 0.8.19;
 
 import { WhitelistStorage } from "./WhitelistStorage.sol";
 import { RolesInternal } from "./../roles/RolesInternal.sol";
-
 contract WhitelistInternal is RolesInternal {
 
     error Whitelist_ExceedsElegibleAmount();
+    error Whitelist_ExceedsPoolSupply();
     error Whitelist_InputDataMismatch();
     error Whitelist_ClaimStateAlreadyUpdated();
     error Whitelist_ClaimInactive();
@@ -26,7 +26,16 @@ contract WhitelistInternal is RolesInternal {
     }
 
     function _elegibleWhitelist(WhitelistStorage.PoolId poolId, address account) internal view returns (uint) {
-        return WhitelistStorage.layout().pools[poolId].elegible[account];
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
+
+        uint elegibleAmount = pool.elegible[account];
+
+        if (pool.totalClaimed + elegibleAmount > pool.maxSupply){
+            return pool.maxSupply - pool.totalClaimed;
+        }else {
+            return elegibleAmount;
+        }
     }
 
     function _consumeWhitelist(WhitelistStorage.PoolId poolId, address account, uint amount) internal {
@@ -38,6 +47,9 @@ contract WhitelistInternal is RolesInternal {
 
         if (pool.elegible[account] < amount) 
             revert Whitelist_ExceedsElegibleAmount();
+
+        if (pool.totalClaimed + 1 > pool.maxSupply)
+            revert Whitelist_ExceedsPoolSupply();
 
         pool.elegible[account] -= amount;
         pool.claimed[account] += amount;
@@ -98,10 +110,18 @@ contract WhitelistInternal is RolesInternal {
     function _setWhitelistClaimActive(WhitelistStorage.PoolId poolId, bool active) internal {
         WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
         WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
-
-        if (active == pool.claimActive) 
-            revert Whitelist_ClaimStateAlreadyUpdated();
         
         pool.claimActive = active;
+    }
+
+    function _maxSupplyWhitelist(WhitelistStorage.PoolId poolId) view internal returns (uint) {
+        return WhitelistStorage.layout().pools[poolId].maxSupply;
+    }
+
+    function _setMaxSupplyWhitelist(WhitelistStorage.PoolId poolId, uint supply) internal {
+        WhitelistStorage.Layout storage whitelistSL = WhitelistStorage.layout();
+        WhitelistStorage.Pool storage pool = whitelistSL.pools[poolId];
+
+        pool.maxSupply = supply;
     }
 }

@@ -10,6 +10,10 @@ library ArcadiansStorage {
         uint maxMintPerUser;
         uint mintPrice;
         bool isPublicMintOpen;
+        // account => amount minted with public mint
+        mapping(address => uint) userPublicMints;
+        uint publicMintMaxSupply;
+        uint arcadiansMaxSupply;
     }
 
     function layout()

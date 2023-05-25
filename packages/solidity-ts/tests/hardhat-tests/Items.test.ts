@@ -59,9 +59,9 @@ describe('Items Diamond Test', function () {
     })
 
     it('should be able to claim items if whitelisted', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, maxSupplies } = await loadFixture(deployAndInitContractsFixture);
 
-        const elegibleAmount = 10;
+        const elegibleAmount = 5;
         const tokenId = 1;
 
         let balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
@@ -74,10 +74,10 @@ describe('Items Diamond Test', function () {
             to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
         await itemsContracts.whitelistFacet.increaseElegibleGuaranteedPool(namedAddresses.deployer, elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(elegibleAmount);
+        expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(0);
         expect(await itemsContracts.whitelistFacet.claimedGuaranteedPool(namedAddresses.deployer)).to.be.equal(0);
         expect(await itemsContracts.whitelistFacet.elegibleGuaranteedPool(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(0);
-        expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(elegibleAmount);
 
         await itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount]);
         
@@ -103,7 +103,7 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
 
             const baseSlotsIds = (await arcadiansContracts.inventoryFacet.getBaseSlotsIds());
-            console.log("baseSlotsIds", baseSlotsIds)
+
             if (slots[i].isBase) {
                 expect(baseSlotsIds).to.include(slots[i].id);
             } else {

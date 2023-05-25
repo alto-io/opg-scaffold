@@ -36,7 +36,26 @@ export const func = async() => {
     console.log('Arcadians Diamond Cut: ', cut)
 
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [baseArcadianURI, maxMintPerUser, mintPrice])
+    const maxSupplies = {
+        arcadiansMaxSupply: 6666,
+        maxMintPassSupply: 1000,
+        maxGuaranteedWLSupply: 3000,
+        maxRestrictedWLSupply: 2000,
+        publicMintMaxSupply: 666
+    }
+    const mintPassContractAddress = "0x9bfE56f968a3466D8ef35D7A011E373a7475FEF5";
+    let functionCall = diamondInit.interface.encodeFunctionData('init', 
+        [
+            baseArcadianURI, 
+            maxMintPerUser, 
+            mintPrice,
+            mintPassContractAddress,
+            maxSupplies.arcadiansMaxSupply,
+            maxSupplies.maxMintPassSupply,
+            maxSupplies.maxGuaranteedWLSupply,
+            maxSupplies.maxRestrictedWLSupply,
+            maxSupplies.publicMintMaxSupply,
+        ])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

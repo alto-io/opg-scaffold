@@ -32,6 +32,15 @@ export default async function deployAndInitContractsFixture() {
         fs.rmdirSync(deploymentLocalhostPath, { recursive: true })
     }
 
+    const { getNamedAccounts, deployments } = hre;
+    const { deploy } = deployments;
+    const { deployer } = await getNamedAccounts();
+    
+    // Deploy test erc721
+    const mockERC721Name = "MockERC721";
+    const mockERC721Deployment = await deploy(mockERC721Name, { from: deployer, log: true });
+    console.log(`${mockERC721Name} deployed: `, mockERC721Deployment.address);
+
     await deployArcadiansDiamond();
     await deployItemsDiamond();
     await initArcadiansDiamond();
@@ -52,7 +61,9 @@ export default async function deployAndInitContractsFixture() {
         rolesFacet: await hre.ethers.getContractAt(arcadiansFacetNames.rolesFacet, arcadiansDiamond.address),
         whitelistFacet: await hre.ethers.getContractAt(arcadiansFacetNames.whitelistFacet, arcadiansDiamond.address),
         inventoryFacet: await hre.ethers.getContractAt(arcadiansFacetNames.inventoryFacet, arcadiansDiamond.address),
+        mintPassFacet: await hre.ethers.getContractAt(arcadiansFacetNames.mintPassFacet, arcadiansDiamond.address),
     };
+    const mockERC721 = await hre.ethers.getContract("MockERC721");
 
     const itemsDiamond = await hre.ethers.getContract(itemsDiamondName);
     const itemsContracts = {
@@ -70,7 +81,25 @@ export default async function deployAndInitContractsFixture() {
         maxMintPerUser: 2,
         mintPrice: 10
     }
-    let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', [arcadiansParams.baseTokenUri, arcadiansParams.maxMintPerUser, arcadiansParams.mintPrice])
+    const maxSupplies = {
+        arcadiansMaxSupply: 12, 
+        maxMintPassSupply: 1,
+        maxGuaranteedWLSupply: 5,
+        maxRestrictedWLSupply: 5,
+        publicMintMaxSupply: 1
+    }
+    let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', 
+        [
+            arcadiansParams.baseTokenUri, 
+            arcadiansParams.maxMintPerUser, 
+            arcadiansParams.mintPrice,
+            mockERC721.address,
+            maxSupplies.arcadiansMaxSupply,
+            maxSupplies.maxMintPassSupply,
+            maxSupplies.maxGuaranteedWLSupply,
+            maxSupplies.maxRestrictedWLSupply,
+            maxSupplies.publicMintMaxSupply,
+        ])
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
     await tx.wait()
 
@@ -83,8 +112,14 @@ export default async function deployAndInitContractsFixture() {
         baseTokenUri: baseItemURI,
         merkleGenerator: new MerkleGenerator(itemsMerklePaths)
     }
+    
     // init items diamond
-    let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', [itemsParams.merkleGenerator.merkleRoot, itemsParams.baseTokenUri, arcadiansContracts.inventoryFacet.address]);
+    let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', 
+        [
+            itemsParams.merkleGenerator.merkleRoot, 
+            itemsParams.baseTokenUri, 
+            arcadiansContracts.inventoryFacet.address
+        ]);
     tx = await itemsContracts.diamond.diamondCut([], itemsContracts.init.address, initItemsFunctionCall);
     await tx.wait();
 
@@ -117,9 +152,7 @@ export default async function deployAndInitContractsFixture() {
         return !item.isBasic && !itemSlot.isBase && !itemSlot.permanent;
     })
     
-    console.log("input: ", convertItemsSC(items), itemsTransferRequired);
-    
     await arcadiansContracts.inventoryFacet.setItemsTransferRequired(convertItemsSC(items), itemsTransferRequired);
 
-    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items };
+    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, mockERC721, maxSupplies };
 }

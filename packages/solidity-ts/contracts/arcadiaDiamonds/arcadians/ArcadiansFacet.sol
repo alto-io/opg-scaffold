@@ -14,7 +14,6 @@ import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 import { InventoryStorage } from "../inventory/InventoryStorage.sol";
 import { WhitelistStorage } from "../whitelist/WhitelistStorage.sol";
-
 /**
  * @title ArcadiansFacet
  * @notice This contract is an ERC721 responsible for minting and claiming Arcadian tokens.
@@ -37,32 +36,31 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
     function _mint() internal returns (uint tokenId) {
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+
         tokenId = nextArcadianId();
 
-        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        if (_isWhitelistClaimActive(GuaranteedPool) && _elegibleWhitelist(GuaranteedPool, msg.sender) > 0) {
+        if (tokenId > arcadiansSL.arcadiansMaxSupply)
+            revert Arcadians_MaximumArcadiansSupplyReached();
+        
+
+        uint nonGuaranteedMintedAmount = _claimedWhitelist(RestrictedPool, msg.sender) + _claimedMintPass(msg.sender) + arcadiansSL.userPublicMints[msg.sender];
+        bool nonGuaranteedMintAllowed = nonGuaranteedMintedAmount < arcadiansSL.maxMintPerUser;
+
+        if (nonGuaranteedMintAllowed && _isMintPassClaimActive() && _elegibleMintPass(msg.sender) > 0) {
+            // Magic Eden mint flow
+            _consumeMintPass(msg.sender);
+        } else if (_isWhitelistClaimActive(GuaranteedPool) && _elegibleWhitelist(GuaranteedPool, msg.sender) > 0) {
             // OG mint flow
             _consumeWhitelist(GuaranteedPool, msg.sender, 1);
-        } else if (_isWhitelistClaimActive(RestrictedPool) && _elegibleWhitelist(RestrictedPool, msg.sender) > 0) { 
+        } else if (nonGuaranteedMintAllowed && _isWhitelistClaimActive(RestrictedPool) && _elegibleWhitelist(RestrictedPool, msg.sender) > 0) { 
             // Whitelist mint flow
             _consumeWhitelist(RestrictedPool, msg.sender, 1);
-            if (tokenId > MAX_SUPPLY)
-                revert Arcadians_MaximumArcadiansSupplyReached();
 
-            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(GuaranteedPool, msg.sender);
-            if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
-                revert Arcadians_MaximumMintedArcadiansPerUserReached();
-
-        } else if (arcadiansSL.isPublicMintOpen) {
+        } else if (nonGuaranteedMintAllowed && arcadiansSL.isPublicMintOpen) {
             if (msg.value != arcadiansSL.mintPrice)
                 revert Arcadians_InvalidPayAmount();
-
-            if (tokenId > MAX_SUPPLY)
-                revert Arcadians_MaximumArcadiansSupplyReached();
-
-            uint nonGuaranteedMintedAmount = _balanceOf(msg.sender) - _claimedWhitelist(GuaranteedPool, msg.sender);
-            if (nonGuaranteedMintedAmount >= arcadiansSL.maxMintPerUser) 
-                revert Arcadians_MaximumMintedArcadiansPerUserReached();
+            arcadiansSL.userPublicMints[msg.sender]++;
         } else {
             revert Arcadians_NotElegibleToMint();
         }
@@ -76,7 +74,9 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @return balance amount of arcadians that can be minted
      */
     function availableMints(address account) external view returns (uint balance) {
-        return  ArcadiansStorage.layout().maxMintPerUser - (_balanceOf(account) - _claimedWhitelist(GuaranteedPool, account)) + _elegibleWhitelist(GuaranteedPool, account);
+        ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
+        uint nonGuaranteedMintedAmount = _claimedWhitelist(RestrictedPool, account) + _claimedMintPass(account) + arcadiansSL.userPublicMints[account];
+        return _elegibleWhitelist(GuaranteedPool, account) + (arcadiansSL.maxMintPerUser - nonGuaranteedMintedAmount);
     }
 
     /**
@@ -150,8 +150,20 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      * @dev This function returns the maximum supply of arcadians
      * @return The current maximum supply of arcadians
      */
-    function maxSupply() external pure returns (uint) {
-        return MAX_SUPPLY;
+    function maxSupply() external view returns (uint) {
+        return ArcadiansStorage.layout().arcadiansMaxSupply;
+    }
+
+    /**
+     * @notice This function sets the max arcadians supply and all the sub-pools supplies
+     * @param maxArcadiansSupply The max supply of arcadians that can be minted
+     * @param maxMintPassSupply The max supply of arcadians that can be minted though mint passes
+     * @param maxGuaranteedWLSupply The max supply of arcadians that can be minted though the whitelist guaranteed pool
+     * @param maxRestrictedWLSupply The max supply of arcadians that can be minted though the whitelist restricted pool
+     * @param maxPublicMintSupply The max supply of arcadians that can be minted though open mint
+     */
+    function setMaxSupplies(uint maxArcadiansSupply, uint maxMintPassSupply, uint maxGuaranteedWLSupply, uint maxRestrictedWLSupply, uint maxPublicMintSupply) external onlyManager {
+        _setMaxSupplies(maxArcadiansSupply, maxMintPassSupply, maxGuaranteedWLSupply, maxRestrictedWLSupply, maxPublicMintSupply);
     }
 
     /**

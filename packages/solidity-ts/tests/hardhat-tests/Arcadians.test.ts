@@ -29,6 +29,64 @@ describe('Arcadians Diamond BaseUri Test', function () {
 })
 
 describe('Arcadians Diamond whitelist', function () {
+    it('should be able to mint using the mint pass', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, mockERC721, maxSupplies} = await loadFixture(deployAndInitContractsFixture);
+        const bob = namedAccounts.bob;
+
+        // create slot
+        for (let i = 0; i < slots.length; i++) {
+            const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
+            const allowedItemsSC = convertItemsSC(allowedItems);
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
+        }
+
+        const basicItems = items.filter((item: ItemTest)=>item.isBasic)
+        let itemsToEquip = convertItemsSC(basicItems)
+
+
+        // add mint pass
+        await mockERC721.safeMint(bob.address);
+        const balanceOf = await mockERC721.balanceOf(bob.address);
+        expect(balanceOf).to.be.equal(1);
+        expect(await arcadiansContracts.mintPassFacet.totalClaimedMintPass()).to.be.equal(0);
+        expect(await arcadiansContracts.mintPassFacet.claimedMintPass(bob.address)).to.be.equal(0);
+        expect(await arcadiansContracts.mintPassFacet.elegibleMintPass(bob.address)).to.be.equal(1);
+        expect(await arcadiansContracts.mintPassFacet.isTokenClaimed(0)).to.be.equal(false);
+        
+        const maxMintPerUser = (await arcadiansContracts.arcadiansFacet.maxMintPerUser()).toNumber();
+        let availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser);
+
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
+            
+        await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(true);
+        
+        // mint & equip arcadian
+        await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
+        
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
+
+        expect(await arcadiansContracts.mintPassFacet.totalClaimedMintPass()).to.be.equal(1);
+        expect(await arcadiansContracts.mintPassFacet.claimedMintPass(bob.address)).to.be.equal(1);
+        expect(await arcadiansContracts.mintPassFacet.elegibleMintPass(bob.address)).to.be.equal(0);
+        expect(await arcadiansContracts.mintPassFacet.isTokenClaimed(0)).to.be.equal(true);
+
+        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
+        expect(availableMints).to.be.equal(maxMintPerUser - 1);
+
+        const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
+        const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
+        let equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
+        for (let i = 0; i < equippedItems.length; i++) {
+            expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
+            expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
+        }
+    })
+})
+
+describe('Arcadians Diamond whitelist', function () {
     it('should be able to mint from the guaranteed pool', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items} = await loadFixture(deployAndInitContractsFixture);
         const bob = namedAccounts.bob;
@@ -353,15 +411,26 @@ describe('mint restrictions', function () {
         expect(await arcadiansContracts.arcadiansFacet.mintPrice()).to.be.equal(newMintPrice);
     })
 
-    // To run this test, the value MAX_SUPPLY should be updated in the 
-    // contract to a smaller value (ie. 1)
-    // it('Should be able to mint only until the max supply is reached ', async () => {
-    //     const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams } = await loadFixture(deployAndInitContractsFixture);
-    //     const maxSupply = await arcadiansContracts.arcadiansFacet.maxSupply();
-    //     console.log("maxSupply: ", maxSupply);
-    //     await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice});
-    //     await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mint({value: arcadiansParams.mintPrice})).to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumArcadiansSupplyReached")
-    // })
+    it('Should be able to mint only until the max supply is reached ', async () => {
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, items, slots } = await loadFixture(deployAndInitContractsFixture);
+        await arcadiansContracts.arcadiansFacet.setMaxSupplies(1, 0, 0, 0, 1);
+        await arcadiansContracts.arcadiansFacet.setPublicMintOpen(true);
+        const maxSupply = await arcadiansContracts.arcadiansFacet.maxSupply();
+        expect(maxSupply).to.be.equal(1);
+
+        // create slot
+        for (let i = 0; i < slots.length; i++) {
+            const allowedItems = items.filter((item: ItemTest) => slots[i].itemsIdsAllowed.includes((item.id)))
+            const allowedItemsSC = convertItemsSC(allowedItems);
+            await arcadiansContracts.inventoryFacet.createSlot(slots[i].permanent, slots[i].isBase, allowedItemsSC);
+        }
+
+        const basicItems = items.filter((item: ItemTest)=>item.isBasic)
+        let itemsToEquip = convertItemsSC(basicItems)
+        await arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice});
+        await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.alice).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumArcadiansSupplyReached")
+    })
 })
 
 describe('mint max limit per user', function () {
@@ -379,8 +448,8 @@ describe('mint max limit per user', function () {
         
         await arcadiansContracts.arcadiansFacet.setPublicMintOpen(true)
         await arcadiansContracts.arcadiansFacet.setMaxMintPerUser(0)
-        
+
         await expect(arcadiansContracts.arcadiansFacet.connect(namedAccounts.bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_MaximumMintedArcadiansPerUserReached");
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
     })
 })

@@ -7,7 +7,17 @@ import { IERC721 } from '@solidstate/contracts/interfaces/IERC721.sol';
 import { ERC165BaseInternal } from '@solidstate/contracts/introspection/ERC165/base/ERC165BaseInternal.sol';
 
 contract ArcadiansInit is RolesInternal, ArcadiansInternal, ERC165BaseInternal {
-    function init(string calldata baseUri, uint maxMintPerUser, uint mintPrice) external {
+    function init(
+        string calldata baseUri, 
+        uint maxMintPerUser, 
+        uint mintPrice, 
+        address mintPassAddress, 
+        uint arcadiansMaxSupply, 
+        uint maxMintPassSupply, 
+        uint maxGuaranteedWLSupply, 
+        uint maxRestrictedWLSupply, 
+        uint publicMintMaxSupply
+    ) external {
 
         _setSupportsInterface(type(IERC721).interfaceId, true);
 
@@ -18,5 +28,9 @@ contract ArcadiansInit is RolesInternal, ArcadiansInternal, ERC165BaseInternal {
         _setBaseURI(baseUri);
         _setMaxMintPerUser(maxMintPerUser);
         _setMintPrice(mintPrice);
+        _setMaxSupplies(arcadiansMaxSupply, maxMintPassSupply, maxGuaranteedWLSupply, maxRestrictedWLSupply, publicMintMaxSupply);
+
+        // Mint pass
+        _setMintPassContractAddress(mintPassAddress);
     }
 }

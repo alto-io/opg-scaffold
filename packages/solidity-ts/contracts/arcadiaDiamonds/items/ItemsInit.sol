@@ -7,6 +7,7 @@ import { ItemsInternal } from "./ItemsInternal.sol";
 import { InventoryInternal } from "../inventory/InventoryInternal.sol";
 import { ERC165BaseInternal } from '@solidstate/contracts/introspection/ERC165/base/ERC165BaseInternal.sol';
 import { IERC1155 } from '@solidstate/contracts/interfaces/IERC1155.sol';
+import { WhitelistStorage } from '../whitelist/WhitelistStorage.sol';
 
 contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal, ERC165BaseInternal {    
     function init(bytes32 merkleRoot, string calldata baseUri, address inventoryAddress) external {
@@ -19,5 +20,9 @@ contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal, ERC165Bas
 
         _setBaseURI(baseUri);
         _setInventoryAddress(inventoryAddress);
+
+
+        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Guaranteed, 1000000);
+        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Restricted, 1000000);
     }
 }
