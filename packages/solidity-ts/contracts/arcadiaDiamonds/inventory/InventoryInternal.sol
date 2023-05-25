@@ -372,10 +372,11 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         uint8[] storage baseSlotsIds = inventorySL.baseSlotsIds;
+        uint numBaseSlots = baseSlotsIds.length;
 
         if (isBase) {
             bool alreadyInBaseList;
-            for (uint i = 0; i < baseSlotsIds.length; i++) {
+            for (uint i = 0; i < numBaseSlots; i++) {
                 if (baseSlotsIds[i] == slotId) {
                     alreadyInBaseList = true;
                     break;
@@ -385,9 +386,9 @@ contract InventoryInternal is
                 baseSlotsIds.push(slotId);
             }
         } else {
-            for (uint i = 0; i < baseSlotsIds.length; i++) {
+            for (uint i = 0; i < numBaseSlots; i++) {
                 if (baseSlotsIds[i] == slotId) {
-                    baseSlotsIds[i] = baseSlotsIds[baseSlotsIds.length - 1];
+                    baseSlotsIds[i] = baseSlotsIds[numBaseSlots - 1];
                     baseSlotsIds.pop();
                     break;
                 }
