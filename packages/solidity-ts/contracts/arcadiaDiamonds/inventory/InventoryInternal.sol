@@ -67,6 +67,7 @@ contract InventoryInternal is
 
     event BaseModifierCouponConsumed(
         address indexed account,
+        uint indexed arcadianId,
         uint8[] slotsIds
     );
 
