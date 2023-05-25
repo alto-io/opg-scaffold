@@ -49,7 +49,7 @@ contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, Reentran
      * @param itemIds The IDs of the items to claim
      * @param amounts The amounts of the items to claim
      */
-    function claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) external {
+    function claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) external nonReentrant {
         _claimWhitelist(itemIds, amounts);
     }
 
