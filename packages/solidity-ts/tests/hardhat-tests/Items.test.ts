@@ -199,7 +199,10 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             expect(equippedItems[i].itemId).to.be.equal((itemsToEquip[i] as Item).id);
             expect(equippedItems[i].erc1155Contract).to.be.equal((itemsToEquip[i] as Item).erc1155Contract);
         }
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.true;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(13, itemsToEquip)).to.be.false;
+
         let arcadianUri = await arcadiansContracts.arcadiansFacet.tokenURI(arcadianId)
         let expectedUri = baseArcadianURI + arcadianId;
         expect(arcadianUri).to.be.equal(expectedUri);
@@ -207,7 +210,9 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
         
         await arcadiansContracts.inventoryFacet.connect(bob).unequip(arcadianId, nonBaseSlotsIds);
         
-        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(0, itemsToEquip)).to.be.false;
+        expect(await arcadiansContracts.inventoryFacet.isArcadianUnique(arcadianId, itemsToEquip)).to.be.true;
+
         equippedItems = await arcadiansContracts.inventoryFacet.equippedAll(arcadianId);
         for (let i = 0; i < equippedItems.length; i++) {
             const slot = slots.find((slot)=>slot.id == equippedItems[i].slotId);
@@ -226,7 +231,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
             return !itemSlot?.isBase && !itemSlot?.permanent
         });
         await arcadiansContracts.inventoryFacet.connect(bob).equip(arcadianId, convertItemsSC(itemsToReequip));
-
 
         // re-equip non-base slots with non basic items
         const reequipSlots = slots.filter((slot)=>!slot.permanent);

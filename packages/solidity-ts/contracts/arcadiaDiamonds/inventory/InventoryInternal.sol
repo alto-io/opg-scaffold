@@ -318,7 +318,7 @@ contract InventoryInternal is
             encodedItems = abi.encodePacked(encodedItems, slotId, item.erc1155Contract, item.id);
         }
 
-        return !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
+        return inventorySL.arcadianToBaseItemHash[arcadianId] == keccak256(encodedItems) || !inventorySL.baseItemsHashes.contains(keccak256(encodedItems));
     }
 
     function _hashBaseItemsUnchecked(
