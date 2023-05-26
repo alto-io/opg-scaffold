@@ -81,24 +81,15 @@ export default async function deployAndInitContractsFixture() {
         maxMintPerUser: 2,
         mintPrice: 10
     }
-    const maxSupplies = {
-        arcadiansMaxSupply: 12, 
-        maxMintPassSupply: 1,
-        maxGuaranteedWLSupply: 5,
-        maxRestrictedWLSupply: 5,
-        publicMintMaxSupply: 1
-    }
+    const maxArcadianSupply = 10;
+
     let initArcadiansFunctionCall = arcadiansContracts.init.interface.encodeFunctionData('init', 
         [
             arcadiansParams.baseTokenUri, 
             arcadiansParams.maxMintPerUser, 
             arcadiansParams.mintPrice,
             mockERC721.address,
-            maxSupplies.arcadiansMaxSupply,
-            maxSupplies.maxMintPassSupply,
-            maxSupplies.maxGuaranteedWLSupply,
-            maxSupplies.maxRestrictedWLSupply,
-            maxSupplies.publicMintMaxSupply,
+            maxArcadianSupply
         ])
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
     await tx.wait()
@@ -154,5 +145,5 @@ export default async function deployAndInitContractsFixture() {
     
     await arcadiansContracts.inventoryFacet.setItemsTransferRequired(convertItemsSC(items), itemsTransferRequired);
 
-    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, mockERC721, maxSupplies };
+    return { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, slots, items, mockERC721, maxArcadianSupply };
 }

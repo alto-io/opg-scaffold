@@ -88,7 +88,7 @@ describe('Items Diamond Test', function () {
     })
 
     it('should be able to claim items if whitelisted', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, maxSupplies } = await loadFixture(deployAndInitContractsFixture);
+        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, maxArcadianSupply } = await loadFixture(deployAndInitContractsFixture);
 
         const elegibleAmount = 5;
         const tokenId = 1;
