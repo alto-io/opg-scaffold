@@ -13,7 +13,6 @@ library WhitelistStorage {
         mapping(address => uint) elegible;
         uint totalClaimed;
         uint totalElegible;
-        uint maxSupply;
         bool claimActive;
     }
 

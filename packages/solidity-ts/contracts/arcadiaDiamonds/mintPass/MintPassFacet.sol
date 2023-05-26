@@ -20,20 +20,6 @@ contract MintPassFacet is MintPassInternal, RolesInternal {
     function totalClaimedMintPass() external view returns (uint) {
         return _totalClaimedMintPass();
     }
-    
-    /**
-     * @notice Sets the max supply for the mint pass
-     */
-    function setSupplyMintPass(uint supply) external onlyManager {
-        _setMaxSupplyMintPass(supply);
-    }
-    
-    /**
-     * @return The max supply for the mint pass
-     */
-    function supplyMintPass() external view returns (uint) {
-        return _maxSupplyMintPass();
-    }
 
     /**
      * @return The amount of mint passes redeemed by the account

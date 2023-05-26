@@ -20,9 +20,5 @@ contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal, ERC165Bas
 
         _setBaseURI(baseUri);
         _setInventoryAddress(inventoryAddress);
-
-
-        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Guaranteed, 1000000);
-        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Restricted, 1000000);
     }
 }

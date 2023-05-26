@@ -182,18 +182,4 @@ contract WhitelistFacet is WhitelistInternal {
     function isClaimActiveRestrictedPool() view external returns (bool active) {
         return _isWhitelistClaimActive(RestrictedPool);
     }
-    
-    /**
-     * @return supply Returns the max supply available for the restricted pool
-     */
-    function maxSupplyRestrictedPool() view external returns (uint supply) {
-        return _maxSupplyWhitelist(RestrictedPool);
-    }
-
-    /**
-     * @return supply Returns the max supply available for the guaranteed pool
-     */
-    function maxSupplyGuaranteedPool() view external returns (uint supply) {
-        return _maxSupplyWhitelist(GuaranteedPool);
-    }
 }

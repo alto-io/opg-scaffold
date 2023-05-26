@@ -12,11 +12,7 @@ contract ArcadiansInit is RolesInternal, ArcadiansInternal, ERC165BaseInternal {
         uint maxMintPerUser, 
         uint mintPrice, 
         address mintPassAddress, 
-        uint arcadiansMaxSupply, 
-        uint maxMintPassSupply, 
-        uint maxGuaranteedWLSupply, 
-        uint maxRestrictedWLSupply, 
-        uint publicMintMaxSupply
+        uint arcadiansMaxSupply
     ) external {
 
         _setSupportsInterface(type(IERC721).interfaceId, true);
@@ -28,7 +24,7 @@ contract ArcadiansInit is RolesInternal, ArcadiansInternal, ERC165BaseInternal {
         _setBaseURI(baseUri);
         _setMaxMintPerUser(maxMintPerUser);
         _setMintPrice(mintPrice);
-        _setMaxSupplies(arcadiansMaxSupply, maxMintPassSupply, maxGuaranteedWLSupply, maxRestrictedWLSupply, publicMintMaxSupply);
+        _setMaxSupply(arcadiansMaxSupply);
 
         // Mint pass
         _setMintPassContractAddress(mintPassAddress);

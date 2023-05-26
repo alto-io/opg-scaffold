@@ -6,18 +6,12 @@ import { IERC721A } from "./IERC721A.sol";
 
 contract MintPassInternal {
 
+    error MintPass_ClaimInactive();
+
     event MintPassConsumed(address indexed account, uint tokenId);
 
     function _totalClaimedMintPass() internal view returns (uint) {
         return MintPassStorage.layout().totalClaimed;
-    }
-
-    function _setMaxSupplyMintPass(uint supply) internal {
-        MintPassStorage.layout().maxSupply = supply;
-    }
-
-    function _maxSupplyMintPass() internal view returns (uint) {
-        return MintPassStorage.layout().maxSupply;
     }
 
     function _claimedMintPass(address account) internal view returns (uint) {
@@ -29,10 +23,6 @@ contract MintPassInternal {
 
         IERC721A passContract = IERC721A(mintPassSL.passContractAddress);
         uint balance = passContract.balanceOf(account);
-
-        if (mintPassSL.totalClaimed + 1 > mintPassSL.maxSupply) {
-            return 0;
-        }
 
         for (uint i = 0; i < balance; i++) {
             uint tokenId = passContract.tokenOfOwnerByIndex(account, i);
@@ -48,9 +38,8 @@ contract MintPassInternal {
         IERC721A passContract = IERC721A(mintPassSL.passContractAddress);
         uint balance = passContract.balanceOf(account);
 
-        if (mintPassSL.totalClaimed + 1 > mintPassSL.maxSupply) {
-            return false;
-        }
+        if (!MintPassStorage.layout().claimActive)
+            revert MintPass_ClaimInactive();
 
         for (uint i = 0; i < balance; i++) {
             uint tokenId = passContract.tokenOfOwnerByIndex(account, i);

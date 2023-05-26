@@ -15,7 +15,6 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, InventoryInterna
     error Arcadians_InvalidPayAmount();
     error Arcadians_MaximumArcadiansSupplyReached();
     error Arcadians_NotElegibleToMint();
-    error Arcadians_InvalidSupplies();
 
     event MaxMintPerUserChanged(address indexed by, uint oldMaxMintPerUser, uint newMaxMintPerUser);
     event MintPriceChanged(address indexed by, uint oldMintPrice, uint newMintPrice);
@@ -53,16 +52,9 @@ contract ArcadiansInternal is RolesInternal, WhitelistInternal, InventoryInterna
         return ArcadiansStorage.layout().maxMintPerUser;
     }
 
-    function _setMaxSupplies(uint arcadiansMaxSupply, uint maxMintPassSupply, uint maxGuaranteedWLSupply, uint maxRestrictedWLSupply, uint publicMintMaxSupply) internal {
+    function _setMaxSupply(uint arcadiansMaxSupply) internal {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-
-        if (maxMintPassSupply + maxGuaranteedWLSupply + maxRestrictedWLSupply + publicMintMaxSupply != arcadiansMaxSupply)
-            revert Arcadians_InvalidSupplies();
-
+        
         arcadiansSL.arcadiansMaxSupply = arcadiansMaxSupply;
-        arcadiansSL.publicMintMaxSupply = publicMintMaxSupply;
-        _setMaxSupplyMintPass(maxMintPassSupply);
-        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Guaranteed, maxGuaranteedWLSupply);
-        _setMaxSupplyWhitelist(WhitelistStorage.PoolId.Restricted, maxRestrictedWLSupply);
     }
 }

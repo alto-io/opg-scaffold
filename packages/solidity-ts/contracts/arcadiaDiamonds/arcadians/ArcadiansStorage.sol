@@ -12,7 +12,6 @@ library ArcadiansStorage {
         bool isPublicMintOpen;
         // account => amount minted with public mint
         mapping(address => uint) userPublicMints;
-        uint publicMintMaxSupply;
         uint arcadiansMaxSupply;
     }
 

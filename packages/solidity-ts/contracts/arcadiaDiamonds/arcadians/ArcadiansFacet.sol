@@ -42,25 +42,28 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
 
         if (tokenId > arcadiansSL.arcadiansMaxSupply)
             revert Arcadians_MaximumArcadiansSupplyReached();
-        
 
         uint nonGuaranteedMintedAmount = _claimedWhitelist(RestrictedPool, msg.sender) + _claimedMintPass(msg.sender) + arcadiansSL.userPublicMints[msg.sender];
-        bool nonGuaranteedMintAllowed = nonGuaranteedMintedAmount < arcadiansSL.maxMintPerUser;
 
-        if (nonGuaranteedMintAllowed && _isMintPassClaimActive() && _elegibleMintPass(msg.sender) > 0) {
-            // Magic Eden mint flow
-            _consumeMintPass(msg.sender);
-        } else if (_isWhitelistClaimActive(GuaranteedPool) && _elegibleWhitelist(GuaranteedPool, msg.sender) > 0) {
+        if (_isWhitelistClaimActive(GuaranteedPool) && _elegibleWhitelist(GuaranteedPool, msg.sender) > 0) {
             // OG mint flow
             _consumeWhitelist(GuaranteedPool, msg.sender, 1);
-        } else if (nonGuaranteedMintAllowed && _isWhitelistClaimActive(RestrictedPool) && _elegibleWhitelist(RestrictedPool, msg.sender) > 0) { 
-            // Whitelist mint flow
-            _consumeWhitelist(RestrictedPool, msg.sender, 1);
+        } else if (nonGuaranteedMintedAmount < arcadiansSL.maxMintPerUser) {
 
-        } else if (nonGuaranteedMintAllowed && arcadiansSL.isPublicMintOpen) {
-            if (msg.value != arcadiansSL.mintPrice)
-                revert Arcadians_InvalidPayAmount();
-            arcadiansSL.userPublicMints[msg.sender]++;
+            if (_isMintPassClaimActive() && _elegibleMintPass(msg.sender) > 0) {
+                // Magic Eden mint flow
+                _consumeMintPass(msg.sender);
+            } else if (_isWhitelistClaimActive(RestrictedPool) && _elegibleWhitelist(RestrictedPool, msg.sender) > 0) { 
+                // Whitelist mint flow
+                _consumeWhitelist(RestrictedPool, msg.sender, 1);
+
+            } else if (arcadiansSL.isPublicMintOpen) {
+                if (msg.value != arcadiansSL.mintPrice)
+                    revert Arcadians_InvalidPayAmount();
+                arcadiansSL.userPublicMints[msg.sender]++;
+            } else {
+                revert Arcadians_NotElegibleToMint();
+            }
         } else {
             revert Arcadians_NotElegibleToMint();
         }
@@ -155,15 +158,11 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
     }
 
     /**
-     * @notice This function sets the max arcadians supply and all the sub-pools supplies
+     * @notice Sets the max arcadians supply
      * @param maxArcadiansSupply The max supply of arcadians that can be minted
-     * @param maxMintPassSupply The max supply of arcadians that can be minted though mint passes
-     * @param maxGuaranteedWLSupply The max supply of arcadians that can be minted though the whitelist guaranteed pool
-     * @param maxRestrictedWLSupply The max supply of arcadians that can be minted though the whitelist restricted pool
-     * @param maxPublicMintSupply The max supply of arcadians that can be minted though open mint
      */
-    function setMaxSupplies(uint maxArcadiansSupply, uint maxMintPassSupply, uint maxGuaranteedWLSupply, uint maxRestrictedWLSupply, uint maxPublicMintSupply) external onlyManager {
-        _setMaxSupplies(maxArcadiansSupply, maxMintPassSupply, maxGuaranteedWLSupply, maxRestrictedWLSupply, maxPublicMintSupply);
+    function setMaxSupply(uint maxArcadiansSupply) external onlyManager {
+        _setMaxSupply(maxArcadiansSupply);
     }
 
     /**
