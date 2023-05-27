@@ -95,6 +95,8 @@ async function main() {
     console.log("baseSlotsIds", baseSlotsIds)
 
     console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
+
+    await checkAllowedSlotsIntegrity(inventorySC, itemsSC)
     // slotsSC = await getAllSlots(inventorySC, itemsSC);
     // console.log("allSlots after: ", slotsSC.map((slot)=>{
     //     (slot.allowedItems as any) = slot.allowedItems.map((item: ItemSC)=>item.id)
@@ -114,6 +116,16 @@ async function getItemsToDisallow(inventorySC: ethers.Contract, itemsSC: ethers.
         }
     }
     return itemsToDisallow;
+}
+
+async function checkAllowedSlotsIntegrity(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
+    for (let i = 0; i < itemsAll.length; i++) {
+        const itemSC: ItemSC = {erc1155Contract: itemsSC.address, id: itemsAll[i].id}
+        const allowedSlot = (await inventorySC.allowedSlot(itemSC)).toNumber();
+        if (allowedSlot != itemsAll[i].slotId) {
+            console.log("INCONSISTENT SLOT: item ", itemSC.id, " has slots id local ", itemsAll[i].slotId, " and SC ", allowedSlot);
+        }
+    }
 }
 
 async function getAllSlots(inventorySC: ethers.Contract, itemsSC: ethers.Contract) {
