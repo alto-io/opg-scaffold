@@ -8,7 +8,7 @@ import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.It
 import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
 // Diamond init params
-export const merkleRoot = "0x4cc201573e110f41c0ab8a8a57a12e631393ab9e43b551868d1e9e95b37b5d0f";
+// export const merkleRoot = "0x4cc201573e110f41c0ab8a8a57a12e631393ab9e43b551868d1e9e95b37b5d0f";
 export const baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
 
 export const func = async() => {
@@ -42,7 +42,7 @@ export const func = async() => {
 
     const inventoryAddress = arcadiansDiamond.address;
     // Intialize contract storage
-    let functionCall = diamondInit.interface.encodeFunctionData('init', [merkleRoot, baseItemURI, inventoryAddress])
+    let functionCall = diamondInit.interface.encodeFunctionData('init', [baseItemURI, inventoryAddress])
     let tx = await diamond.diamondCut(cut, diamondInit.address, functionCall)
     let receipt = await tx.wait()
     if (!receipt.status) {

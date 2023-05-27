@@ -70,9 +70,9 @@ export default async function deployAndInitContractsFixture() {
         diamond: itemsDiamond,
         init: await hre.ethers.getContract(itemsDiamondInitName),
         itemsFacet: await hre.ethers.getContractAt(itemsFacetNames.itemsFacet, itemsDiamond.address),
-        merkleFacet: await hre.ethers.getContractAt(itemsFacetNames.merkleFacet, itemsDiamond.address),
+        // merkleFacet: await hre.ethers.getContractAt(itemsFacetNames.merkleFacet, itemsDiamond.address),
         rolesFacet: await hre.ethers.getContractAt(itemsFacetNames.rolesFacet, itemsDiamond.address),
-        whitelistFacet: await hre.ethers.getContractAt(itemsFacetNames.whitelistFacet, itemsDiamond.address),
+        // whitelistFacet: await hre.ethers.getContractAt(itemsFacetNames.whitelistFacet, itemsDiamond.address),
     };
     
     // Init arcadians contract
@@ -94,20 +94,20 @@ export default async function deployAndInitContractsFixture() {
     let tx = await arcadiansContracts.diamond.diamondCut([], arcadiansContracts.init.address, initArcadiansFunctionCall)
     await tx.wait()
 
-    let itemsMerklePaths: MerklePaths = {
-        inputTokens: path.join(__dirname, "../../mocks/ownedItemsMock.json"),
-        outputMerkleTree: path.join(__dirname, "../../mocks/ownedItemsMerkleTree.json"),
-    }
+    // let itemsMerklePaths: MerklePaths = {
+    //     inputTokens: path.join(__dirname, "../../mocks/ownedItemsMock.json"),
+    //     outputMerkleTree: path.join(__dirname, "../../mocks/ownedItemsMerkleTree.json"),
+    // }
 
     const itemsParams = { 
         baseTokenUri: baseItemURI,
-        merkleGenerator: new MerkleGenerator(itemsMerklePaths)
+        // merkleGenerator: new MerkleGenerator(itemsMerklePaths)
     }
     
     // init items diamond
     let initItemsFunctionCall = itemsContracts.init.interface.encodeFunctionData('init', 
         [
-            itemsParams.merkleGenerator.merkleRoot, 
+            // itemsParams.merkleGenerator.merkleRoot, 
             itemsParams.baseTokenUri, 
             arcadiansContracts.inventoryFacet.address
         ]);

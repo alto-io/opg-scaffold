@@ -87,36 +87,36 @@ describe('Items Diamond Test', function () {
         expect(uri).to.be.equal(baseItemURI + tokenId);
     })
 
-    it('should be able to claim items if whitelisted', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, maxArcadianSupply } = await loadFixture(deployAndInitContractsFixture);
+    // it('should be able to claim items if whitelisted', async () => {
+    //     const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, maxArcadianSupply } = await loadFixture(deployAndInitContractsFixture);
 
-        const elegibleAmount = 5;
-        const tokenId = 1;
+    //     const elegibleAmount = 5;
+    //     const tokenId = 1;
 
-        let balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
-        expect(balance).to.be.equal(0);
+    //     let balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+    //     expect(balance).to.be.equal(0);
 
-        await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
-            to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ClaimInactive");
-        await itemsContracts.whitelistFacet.setClaimActiveGuaranteedPool(true);
-        await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
-            to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
+    //     await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
+    //         to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ClaimInactive");
+    //     await itemsContracts.whitelistFacet.setClaimActiveGuaranteedPool(true);
+    //     await expect(itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount])).
+    //         to.be.revertedWithCustomError(arcadiansContracts.whitelistFacet, "Whitelist_ExceedsElegibleAmount");
 
-        await itemsContracts.whitelistFacet.increaseElegibleGuaranteedPool(namedAddresses.deployer, elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(0);
-        expect(await itemsContracts.whitelistFacet.claimedGuaranteedPool(namedAddresses.deployer)).to.be.equal(0);
-        expect(await itemsContracts.whitelistFacet.elegibleGuaranteedPool(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+    //     await itemsContracts.whitelistFacet.increaseElegibleGuaranteedPool(namedAddresses.deployer, elegibleAmount);
+    //     expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(elegibleAmount);
+    //     expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(0);
+    //     expect(await itemsContracts.whitelistFacet.claimedGuaranteedPool(namedAddresses.deployer)).to.be.equal(0);
+    //     expect(await itemsContracts.whitelistFacet.elegibleGuaranteedPool(namedAddresses.deployer)).to.be.equal(elegibleAmount);
 
-        await itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount]);
+    //     await itemsContracts.itemsFacet.claimWhitelist([tokenId], [elegibleAmount]);
         
-        expect(await itemsContracts.whitelistFacet.claimedGuaranteedPool(namedAddresses.deployer)).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.elegibleGuaranteedPool(namedAddresses.deployer)).to.be.equal(0);
-        balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
-        expect(balance).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(elegibleAmount);
-        expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(0);
-    })
+    //     expect(await itemsContracts.whitelistFacet.claimedGuaranteedPool(namedAddresses.deployer)).to.be.equal(elegibleAmount);
+    //     expect(await itemsContracts.whitelistFacet.elegibleGuaranteedPool(namedAddresses.deployer)).to.be.equal(0);
+    //     balance = await itemsContracts.itemsFacet.balanceOf(namedAddresses.deployer, tokenId);
+    //     expect(balance).to.be.equal(elegibleAmount);
+    //     expect(await itemsContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(elegibleAmount);
+    //     expect(await itemsContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(0);
+    // })
 })
 
 describe('Items Diamond Mint, equip and unequip items flow', function () {

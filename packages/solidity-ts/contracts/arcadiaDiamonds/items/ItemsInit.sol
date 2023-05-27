@@ -10,11 +10,11 @@ import { IERC1155 } from '@solidstate/contracts/interfaces/IERC1155.sol';
 import { WhitelistStorage } from '../whitelist/WhitelistStorage.sol';
 
 contract ItemsInit is RolesInternal, ItemsInternal, InventoryInternal, ERC165BaseInternal {    
-    function init(bytes32 merkleRoot, string calldata baseUri, address inventoryAddress) external {
+    function init(string calldata baseUri, address inventoryAddress) external {
 
         _setSupportsInterface(type(IERC1155).interfaceId, true);
 
-        _updateMerkleRoot(merkleRoot);
+        // _updateMerkleRoot(merkleRoot);
 
         _initRoles();
 

@@ -87,12 +87,12 @@ describe('Arcadians roles', function () {
             to.be.revertedWithCustomError(arcadiansContracts.rolesFacet, "Roles_MissingManagerRole")
     })
 
-    it('should not be able to update merkle root without manager role', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
-        const newMerkleRoot = ethers.constants.HashZero;
-        await expect(itemsContracts.merkleFacet.connect(namedAccounts.alice).updateMerkleRoot(newMerkleRoot),).
-            to.be.revertedWithCustomError(itemsContracts.rolesFacet, "Roles_MissingManagerRole")
-    })
+    // it('should not be able to update merkle root without manager role', async () => {
+    //     const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
+    //     const newMerkleRoot = ethers.constants.HashZero;
+    //     await expect(itemsContracts.merkleFacet.connect(namedAccounts.alice).updateMerkleRoot(newMerkleRoot),).
+    //         to.be.revertedWithCustomError(itemsContracts.rolesFacet, "Roles_MissingManagerRole")
+    // })
     
     it('Should not be able to update max mint limit without manager role', async () => {
         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
@@ -116,19 +116,19 @@ describe('Arcadians roles', function () {
     })
 });
 
-describe('Items roles', function () {
+// describe('Items roles', function () {
 
-    it('account with manager role should be able to update merkle root', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
-        const newMerkleRoot = ethers.constants.HashZero;
-        await itemsContracts.merkleFacet.updateMerkleRoot(newMerkleRoot);
-        expect(await itemsContracts.merkleFacet.merkleRoot()).to.be.equal(newMerkleRoot);
-    })
+//     it('account with manager role should be able to update merkle root', async () => {
+//         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
+//         const newMerkleRoot = ethers.constants.HashZero;
+//         await itemsContracts.merkleFacet.updateMerkleRoot(newMerkleRoot);
+//         expect(await itemsContracts.merkleFacet.merkleRoot()).to.be.equal(newMerkleRoot);
+//     })
 
-    it('account without manager role shouldnt be able to update merkle root', async () => {
-        const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
-        const newMerkleRoot = ethers.constants.HashZero;
-        await expect(itemsContracts.merkleFacet.connect(namedAccounts.alice).updateMerkleRoot(newMerkleRoot)).
-            to.be.revertedWithCustomError(itemsContracts.rolesFacet, "Roles_MissingManagerRole");
-    })
-})
+//     it('account without manager role shouldnt be able to update merkle root', async () => {
+//         const { namedAccounts, namedAddresses, arcadiansContracts, itemsContracts, arcadiansParams, itemsParams, arcadianRoles, itemsRoles } = await loadFixture(deployAndInitPlusRolesFixture);
+//         const newMerkleRoot = ethers.constants.HashZero;
+//         await expect(itemsContracts.merkleFacet.connect(namedAccounts.alice).updateMerkleRoot(newMerkleRoot)).
+//             to.be.revertedWithCustomError(itemsContracts.rolesFacet, "Roles_MissingManagerRole");
+//     })
+// })

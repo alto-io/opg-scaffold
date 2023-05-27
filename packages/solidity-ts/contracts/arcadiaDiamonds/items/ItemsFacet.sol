@@ -11,6 +11,7 @@ import { ItemsInternal } from "./ItemsInternal.sol";
 import { ItemsStorage } from "./ItemsStorage.sol";
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 import { IERC1155 } from '@solidstate/contracts/interfaces/IERC1155.sol';
+import { RolesInternal } from "./../roles/RolesInternal.sol";
 
 /**
  * @title ItemsFacet
@@ -20,48 +21,48 @@ import { IERC1155 } from '@solidstate/contracts/interfaces/IERC1155.sol';
  * the items. It also uses the ReentrancyGuard and Multicall contracts for security
  * and gas efficiency.
  */
-contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal, Multicall {
+contract ItemsFacet is ERC1155Base, ERC1155Enumerable, ERC1155Metadata, ReentrancyGuard, ItemsInternal, Multicall, RolesInternal {
     
-    /**
-     * @notice Claims an item if present in the Merkle tree
-     * @param itemId The ID of the item to claim
-     * @param amount The amount of the item to claim
-     * @param proof The Merkle proof for the item
-     */
-    function claimMerkle(uint itemId, uint amount, bytes32[] calldata proof)
-        public nonReentrant
-    {
-        _claimMerkle(msg.sender, itemId, amount, proof);
-    }
+    // /**
+    //  * @notice Claims an item if present in the Merkle tree
+    //  * @param itemId The ID of the item to claim
+    //  * @param amount The amount of the item to claim
+    //  * @param proof The Merkle proof for the item
+    //  */
+    // function claimMerkle(uint itemId, uint amount, bytes32[] calldata proof)
+    //     public nonReentrant
+    // {
+    //     _claimMerkle(msg.sender, itemId, amount, proof);
+    // }
 
-    /**
-     * @notice Claims items if present in the Merkle tree
-     * @param itemsIds The IDs of the items to claim
-     * @param amounts The amounts of the items to claim
-     * @param proofs The Merkle proofs for the items
-     */
-    function claimMerkleBatch(uint[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
-        _claimMerkleBatch(msg.sender, itemsIds, amounts, proofs);
-    }
+    // /**
+    //  * @notice Claims items if present in the Merkle tree
+    //  * @param itemsIds The IDs of the items to claim
+    //  * @param amounts The amounts of the items to claim
+    //  * @param proofs The Merkle proofs for the items
+    //  */
+    // function claimMerkleBatch(uint[] calldata itemsIds, uint[] calldata amounts, bytes32[][] calldata proofs) external nonReentrant {
+    //     _claimMerkleBatch(msg.sender, itemsIds, amounts, proofs);
+    // }
 
-    /**
-     * @notice Claims items from a whitelist
-     * @param itemIds The IDs of the items to claim
-     * @param amounts The amounts of the items to claim
-     */
-    function claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) external nonReentrant {
-        _claimWhitelist(itemIds, amounts);
-    }
+    // /**
+    //  * @notice Claims items from a whitelist
+    //  * @param itemIds The IDs of the items to claim
+    //  * @param amounts The amounts of the items to claim
+    //  */
+    // function claimWhitelist(uint[] calldata itemIds, uint[] calldata amounts) external nonReentrant {
+    //     _claimWhitelist(itemIds, amounts);
+    // }
 
-    /**
-     * @notice Amount claimed by an address of a specific item
-     * @param account the account to query
-     * @param itemId the item id to query
-     * @return amount returns the claimed amount given an account and an item id
-     */
-    function claimedAmount(address account, uint itemId) external view returns (uint amount) {
-        return _claimedAmount(account, itemId);
-    }
+    // /**
+    //  * @notice Amount claimed by an address of a specific item
+    //  * @param account the account to query
+    //  * @param itemId the item id to query
+    //  * @return amount returns the claimed amount given an account and an item id
+    //  */
+    // function claimedAmount(address account, uint itemId) external view returns (uint amount) {
+    //     return _claimedAmount(account, itemId);
+    // }
 
     /**
      * @notice Burn an amount of an item

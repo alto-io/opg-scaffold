@@ -4,9 +4,9 @@ export const itemsDiamondName = 'ItemsDiamond';
 export const itemsDiamondInitName = 'ItemsInit';
 export const itemsFacetNames = {
     itemsFacet: 'ItemsFacet',
-    merkleFacet: 'MerkleFacet',
+    // merkleFacet: 'MerkleFacet',
     rolesFacet: 'RolesFacet',
-    whitelistFacet: 'WhitelistFacet'
+    // whitelistFacet: 'WhitelistFacet'
 }
 
 export const func = async() => {
