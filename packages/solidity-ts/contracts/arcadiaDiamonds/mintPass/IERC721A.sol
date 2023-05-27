@@ -88,8 +88,8 @@ interface IERC721A {
     function setTimestampExpirySeconds(uint64 expiry) external;
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
     function symbol() external view returns (string memory);
-    function tokenByIndex(uint256 index) external view returns (uint256);
-    function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256);
+    function tokensOfOwner(address owner) external view returns (uint256[] memory);
+    function tokensOfOwnerIn(address owner, uint256 indexStart, uint256 indexStop) external view returns (uint256[] memory);
     function tokenURI(uint256 tokenId) external view returns (string memory);
     function totalSupply() external view returns (uint256);
     function transferFrom(address from, address to, uint256 tokenId) external payable;

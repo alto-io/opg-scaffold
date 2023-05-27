@@ -22,11 +22,10 @@ contract MintPassInternal {
         MintPassStorage.Layout storage mintPassSL = MintPassStorage.layout();
 
         IERC721A passContract = IERC721A(mintPassSL.passContractAddress);
-        uint balance = passContract.balanceOf(account);
 
-        for (uint i = 0; i < balance; i++) {
-            uint tokenId = passContract.tokenOfOwnerByIndex(account, i);
-            if (!mintPassSL.isTokenClaimed[tokenId]) {
+        uint[] memory tokensOfOwner = passContract.tokensOfOwner(account);
+        for (uint i = 0; i < tokensOfOwner.length; i++) {
+            if (!mintPassSL.isTokenClaimed[tokensOfOwner[i]]) {
                 elegibleAmount++;
             }
         }
@@ -36,13 +35,14 @@ contract MintPassInternal {
         MintPassStorage.Layout storage mintPassSL = MintPassStorage.layout();
 
         IERC721A passContract = IERC721A(mintPassSL.passContractAddress);
-        uint balance = passContract.balanceOf(account);
 
         if (!MintPassStorage.layout().claimActive)
             revert MintPass_ClaimInactive();
 
-        for (uint i = 0; i < balance; i++) {
-            uint tokenId = passContract.tokenOfOwnerByIndex(account, i);
+        uint[] memory tokensOfOwner = passContract.tokensOfOwner(account);
+
+        for (uint i = 0; i < tokensOfOwner.length; i++) {
+            uint tokenId = tokensOfOwner[i];
             if (!mintPassSL.isTokenClaimed[tokenId]) {
                 mintPassSL.claimedAmount[account]++;
                 mintPassSL.totalClaimed++;

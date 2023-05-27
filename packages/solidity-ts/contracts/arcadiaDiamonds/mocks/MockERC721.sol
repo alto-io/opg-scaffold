@@ -18,6 +18,15 @@ contract MockERC721 is ERC721, ERC721Enumerable {
         _safeMint(to, tokenId);
     }
 
+    function tokensOfOwner(address account) public view returns (uint[] memory) {
+        uint balance = ERC721.balanceOf(account);
+        uint[] memory tokens = new uint[](balance);
+        for (uint i = 0; i < balance; i++) {
+            tokens[i] = tokenOfOwnerByIndex(account, i);
+        }
+        return tokens;
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
