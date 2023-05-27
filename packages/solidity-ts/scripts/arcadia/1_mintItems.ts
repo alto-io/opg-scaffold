@@ -18,7 +18,8 @@ async function main() {
 
     let nonBasicItems = itemsAll.filter((item, i)=>{
         const itemSlot = slotsAll.find((slot)=>slot.id==item.slotId)
-        return !item.isBasic && itemSlot && !itemSlot.isBase && !itemSlot.permanent
+        // return !item.isBasic && itemSlot && !itemSlot.isBase && !itemSlot.permanent && i%8 == 0
+        return !item.isBasic && itemSlot && !itemSlot.isBase
     })
 
     // Mint items
@@ -26,7 +27,8 @@ async function main() {
 
         let mintItemsTx: Item[] = nonBasicItems.slice(i, i + maxItemsPerTransaction)
         const itemsIds = mintItemsTx.map((item)=>item.id);
-        const itemsAmounts = mintItemsTx.map((item)=>1);
+        console.log("itemsIds", itemsIds)
+        const itemsAmounts = mintItemsTx.map((item)=>2);
         
         let tx = await itemsSC.mintBatch(recipientAddress, itemsIds, itemsAmounts);
         await tx.wait();
