@@ -16,7 +16,7 @@ async function main() {
     console.log("Items recipient address: ", recipientAddress);
     const maxItemsPerTransaction = 100;
 
-    const nonBasicItems = itemsAll.filter((item)=>{
+    let nonBasicItems = itemsAll.filter((item, i)=>{
         const itemSlot = slotsAll.find((slot)=>slot.id==item.slotId)
         return !item.isBasic && itemSlot && !itemSlot.isBase && !itemSlot.permanent
     })
