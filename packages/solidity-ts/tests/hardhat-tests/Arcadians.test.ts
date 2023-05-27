@@ -54,8 +54,11 @@ describe('Arcadians Diamond whitelist', function () {
         const maxMintPerUser = (await arcadiansContracts.arcadiansFacet.maxMintPerUser()).toNumber();
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
             .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
+
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         await arcadiansContracts.whitelistFacet.setClaimActiveGuaranteedPool(true);
         expect(await arcadiansContracts.whitelistFacet.isClaimActiveGuaranteedPool()).to.be.true;
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         // increase elegible amount
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
@@ -63,14 +66,14 @@ describe('Arcadians Diamond whitelist', function () {
 
         const claimAmount = 1;
         await arcadiansContracts.whitelistFacet.increaseElegibleGuaranteedPool(bob.address, claimAmount);
-        let availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser + claimAmount);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(claimAmount);
 
         // mint & equip arcadian
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
 
         expect(await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)).to.be.equal(1);
-        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(maxMintPerUser);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         await arcadiansContracts.whitelistFacet.setClaimActiveGuaranteedPool(false);
 
@@ -82,15 +85,14 @@ describe('Arcadians Diamond whitelist', function () {
         await mockERC721.safeMint(bob.address);
         let balancePass = await mockERC721.balanceOf(bob.address);
         expect(balancePass).to.be.equal(1);
-        
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
 
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip)).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
 
         // mint & equip arcadian
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(true);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip)
         
         expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(2);
@@ -101,9 +103,8 @@ describe('Arcadians Diamond whitelist', function () {
 
         await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(false);
 
-        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         expect(await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)).to.be.equal(2);
-        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
 
 
         // MINT PASS
@@ -114,13 +115,15 @@ describe('Arcadians Diamond whitelist', function () {
         balancePass = await mockERC721.balanceOf(bob.address);
         expect(balancePass).to.be.equal(2);
         
-        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip)).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
-
+        
         // mint & equip arcadian
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(true);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip)
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         
         expect(await arcadiansContracts.arcadiansFacet.totalMinted()).to.be.equal(3);
         expect(await arcadiansContracts.arcadiansFacet.totalSupply()).to.be.equal(3);
@@ -151,8 +154,15 @@ describe('Arcadians Diamond whitelist', function () {
         let itemsToEquip = convertItemsSC(basicItems)
 
 
+        await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(true);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
+            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
+
         // add mint pass
         await mockERC721.safeMint(bob.address);
+        
         const balanceOf = await mockERC721.balanceOf(bob.address);
         expect(balanceOf).to.be.equal(1);
         expect(await arcadiansContracts.mintPassFacet.totalClaimedMintPass()).to.be.equal(0);
@@ -161,13 +171,7 @@ describe('Arcadians Diamond whitelist', function () {
         expect(await arcadiansContracts.mintPassFacet.isTokenClaimed(0)).to.be.equal(false);
         
         const maxMintPerUser = (await arcadiansContracts.arcadiansFacet.maxMintPerUser()).toNumber();
-        let availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
-
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint");
-            
-        await arcadiansContracts.mintPassFacet.setClaimActiveMintPass(true);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
         
         // mint & equip arcadian
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
@@ -183,8 +187,7 @@ describe('Arcadians Diamond whitelist', function () {
         expect(await arcadiansContracts.mintPassFacet.elegibleMintPass(bob.address)).to.be.equal(0);
         expect(await arcadiansContracts.mintPassFacet.isTokenClaimed(0)).to.be.equal(true);
 
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser - 1);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
@@ -219,22 +222,21 @@ describe('Arcadians Diamond whitelist', function () {
 
         // mint balance
         const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
-        let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         // add to whitelist
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
             .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
         await arcadiansContracts.whitelistFacet.setClaimActiveGuaranteedPool(true);
         expect(await arcadiansContracts.whitelistFacet.isClaimActiveGuaranteedPool()).to.be.true;
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         // increase elegible amount
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
             .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
         const claimAmount = 1;
         await arcadiansContracts.whitelistFacet.increaseElegibleGuaranteedPool(bob.address, claimAmount);
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser.add(claimAmount));
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
         
         expect(await arcadiansContracts.whitelistFacet.elegibleGuaranteedPool(bob.address)).to.be.equal(claimAmount);
         expect(await arcadiansContracts.whitelistFacet.claimedGuaranteedPool(bob.address)).to.be.equal(0);
@@ -244,13 +246,11 @@ describe('Arcadians Diamond whitelist', function () {
         // mint & equip arcadian
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
 
-        expect(await arcadiansContracts.whitelistFacet.elegibleGuaranteedPool(bob.address)).to.be.equal(claimAmount-1);
-        expect(await arcadiansContracts.whitelistFacet.claimedGuaranteedPool(bob.address)).to.be.equal(claimAmount);
-        expect(await arcadiansContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(claimAmount-1);
-        expect(await arcadiansContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(claimAmount);
-
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.elegibleGuaranteedPool(bob.address)).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.claimedGuaranteedPool(bob.address)).to.be.equal(1);
+        expect(await arcadiansContracts.whitelistFacet.totalElegibleGuaranteedPool()).to.be.equal(0);
+        expect(await arcadiansContracts.whitelistFacet.totalClaimedGuaranteedPool()).to.be.equal(1);
 
         const balance = await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)
         const arcadianId = await arcadiansContracts.arcadiansFacet.tokenOfOwnerByIndex(bob.address, balance-1)
@@ -348,11 +348,7 @@ describe('Arcadians Diamond whitelist', function () {
             .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
         await arcadiansContracts.whitelistFacet.setClaimActiveRestrictedPool(true);
         expect(await arcadiansContracts.whitelistFacet.isClaimActiveRestrictedPool()).to.be.true;
-
-        // mint balance
-        const maxMintPerUser: BigNumber = await arcadiansContracts.arcadiansFacet.maxMintPerUser();
-        let availableMints: BigNumber = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         // increase elegible amount
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
@@ -364,15 +360,12 @@ describe('Arcadians Diamond whitelist', function () {
         expect(await arcadiansContracts.whitelistFacet.claimedRestrictedPool(bob.address)).to.be.equal(0);
         expect(await arcadiansContracts.whitelistFacet.totalElegibleRestrictedPool()).to.be.equal(claimAmount);
         expect(await arcadiansContracts.whitelistFacet.totalClaimedRestrictedPool()).to.be.equal(0);
-
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(1);
 
         // mint & equip arcadian
         await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
 
-        availableMints = await arcadiansContracts.arcadiansFacet.availableMints(bob.address);
-        expect(availableMints).to.be.equal(maxMintPerUser.sub(1));
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
 
         expect(await arcadiansContracts.whitelistFacet.elegibleRestrictedPool(bob.address)).to.be.equal(claimAmount-1);
         expect(await arcadiansContracts.whitelistFacet.claimedRestrictedPool(bob.address)).to.be.equal(claimAmount);

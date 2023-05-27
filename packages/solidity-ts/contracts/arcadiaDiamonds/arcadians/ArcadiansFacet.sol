@@ -14,6 +14,7 @@ import { EnumerableMap } from '@solidstate/contracts/data/EnumerableMap.sol';
 import { Multicall } from "@solidstate/contracts/utils/Multicall.sol";
 import { InventoryStorage } from "../inventory/InventoryStorage.sol";
 import { WhitelistStorage } from "../whitelist/WhitelistStorage.sol";
+
 /**
  * @title ArcadiansFacet
  * @notice This contract is an ERC721 responsible for minting and claiming Arcadian tokens.
@@ -80,7 +81,6 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
         
         uint mintPerUserMax = arcadiansSL.maxMintPerUser;
-        uint nonGuaranteedMintedAmount = _claimedWhitelist(RestrictedPool, account) + _claimedMintPass(account) + arcadiansSL.userPublicMints[account];
         uint nonGuaranteedAvailableMints;
         if (_isWhitelistClaimActive(RestrictedPool)) {
             nonGuaranteedAvailableMints += _elegibleWhitelist(RestrictedPool, account);
@@ -89,10 +89,10 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
             nonGuaranteedAvailableMints += _elegibleMintPass(account);
         }
         if (arcadiansSL.isPublicMintOpen) {
-            nonGuaranteedAvailableMints += mintPerUserMax;
+            nonGuaranteedAvailableMints += mintPerUserMax - arcadiansSL.userPublicMints[account];
         }
-        uint nonGuaranteedMintBalance = nonGuaranteedMintedAmount > mintPerUserMax ? 0 : mintPerUserMax - nonGuaranteedMintedAmount;
-        return _elegibleWhitelist(GuaranteedPool, account) + nonGuaranteedMintBalance;
+        nonGuaranteedAvailableMints = nonGuaranteedAvailableMints > mintPerUserMax ? mintPerUserMax : nonGuaranteedAvailableMints;
+        return _elegibleWhitelist(GuaranteedPool, account) + nonGuaranteedAvailableMints;
     }
 
     /**
