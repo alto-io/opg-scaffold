@@ -110,11 +110,18 @@ contract InventoryInternal is
         uint8 numBaseSlotsModified;
         uint8[] memory slotsIds = new uint8[](items.length);
         for (uint i = 0; i < items.length; i++) {
-            uint8 slotId = _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
+            uint8 slotId = inventorySL.itemSlot[items[i].erc1155Contract][items[i].id];
+            slotsIds[i] = slotId;
+
+            InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
+            if (existingItem.erc1155Contract == items[i].erc1155Contract && existingItem.id == items[i].id) {
+                continue;
+            }
+
+            _equipSingleSlot(arcadianId, items[i], freeBaseModifier);
             if (inventorySL.slots[slotId].isBase) {
                 numBaseSlotsModified++;
             }
-            slotsIds[i] = slotId;
         }
 
         if (!_baseAndPermanentSlotsEquipped(arcadianId)) 
@@ -123,7 +130,7 @@ contract InventoryInternal is
         if (numBaseSlotsModified > 0) {
             if (!_hashBaseItemsUnchecked(arcadianId))
                 revert Inventory_ArcadianNotUnique();
-            
+
             if (!freeBaseModifier) {
                 uint8[] memory baseSlotsModified = new uint8[](numBaseSlotsModified);
                 uint counter;
@@ -163,8 +170,6 @@ contract InventoryInternal is
         InventoryStorage.Item storage existingItem = inventorySL.equippedItems[arcadianId][slotId];
         if (inventorySL.slots[slotId].permanent && existingItem.erc1155Contract != address(0)) 
             revert Inventory_UnequippingPermanentSlot();
-        if (existingItem.erc1155Contract == item.erc1155Contract && existingItem.id == item.id)
-            revert Inventory_ItemAlreadyEquippedInSlot();
 
         if (inventorySL.equippedItems[arcadianId][slotId].erc1155Contract != address(0))
             _unequipUnchecked(arcadianId, slotId);
@@ -336,7 +341,8 @@ contract InventoryInternal is
         }
 
         bytes32 baseItemsHash = keccak256(encodedItems);
-        isUnique = !inventorySL.baseItemsHashes.contains(baseItemsHash);
+
+        isUnique = inventorySL.arcadianToBaseItemHash[arcadianId] == baseItemsHash || !inventorySL.baseItemsHashes.contains(baseItemsHash);
         inventorySL.baseItemsHashes.remove(inventorySL.arcadianToBaseItemHash[arcadianId]);
         inventorySL.baseItemsHashes.add(baseItemsHash);
         inventorySL.arcadianToBaseItemHash[arcadianId] = baseItemsHash;
