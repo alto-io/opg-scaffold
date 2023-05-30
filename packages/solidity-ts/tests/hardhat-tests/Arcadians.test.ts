@@ -135,6 +135,29 @@ describe('Arcadians Diamond whitelist', function () {
 
         expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
         expect(await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)).to.be.equal(3);
+
+
+        // MINT RESTRICTED
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+        await arcadiansContracts.whitelistFacet.setClaimActiveRestrictedPool(true);
+        expect(await arcadiansContracts.whitelistFacet.isClaimActiveRestrictedPool()).to.be.true;
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+
+        // increase elegible amount
+        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice}))
+            .to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_NotElegibleToMint")
+
+        await arcadiansContracts.whitelistFacet.increaseElegibleRestrictedPool(bob.address, 4);
+        expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+
+        // // mint & equip arcadian
+        // await arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(itemsToEquip, {value: arcadiansParams.mintPrice})
+
+        // expect(await arcadiansContracts.arcadiansFacet.balanceOf(bob.address)).to.be.equal(1);
+        // expect(await arcadiansContracts.arcadiansFacet.availableMints(bob.address)).to.be.equal(0);
+
+        // await arcadiansContracts.whitelistFacet.setClaimActiveRestrictedPool(false);
+
     })
 })
 
