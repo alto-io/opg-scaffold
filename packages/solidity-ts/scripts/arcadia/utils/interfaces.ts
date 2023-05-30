@@ -58,12 +58,12 @@ export interface ItemV1V2Converter {
 }
 export interface ClaimableItem {
     owner?: string,
-    nameV1: string,
-    nameV2: string,
+    nameV1?: string,
+    nameV2?: string,
     idV2: number,
-    amount: number,
-    slot: string,
-    slotId: number
+    amount?: number,
+    slot?: string,
+    slotId?: number
 }
 export interface ClaimableItemsObj {
     [owner: string]: ItemV1V2Converter[]
