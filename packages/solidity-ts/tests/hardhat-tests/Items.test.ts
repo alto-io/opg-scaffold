@@ -322,8 +322,6 @@ describe('Items Diamond Mint, equip and unequip items flow', function () {
 
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip(basicItemsSC, {value: 0})).
             to.be.revertedWithCustomError(arcadiansContracts.arcadiansFacet, "Arcadians_InvalidPayAmount")
-        await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([], {value: arcadiansParams.mintPrice})).
-            to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_ItemNotSpecified")
         await expect(arcadiansContracts.arcadiansFacet.connect(bob).mintAndEquip([basicItemsSC[0]], {value: arcadiansParams.mintPrice})).
             to.be.revertedWithCustomError(arcadiansContracts.inventoryFacet, "Inventory_NotAllBaseSlotsEquipped")
             

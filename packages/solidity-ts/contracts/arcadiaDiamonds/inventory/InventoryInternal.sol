@@ -24,8 +24,6 @@ contract InventoryInternal is
     error Inventory_InsufficientItemBalance();
     error Inventory_UnequippingEmptySlot();
     error Inventory_UnequippingBaseSlot();
-    error Inventory_SlotNotSpecified();
-    error Inventory_ItemNotSpecified();
     error Inventory_NotArcadianOwner();
     error Inventory_ArcadianNotUnique();
     error Inventory_NotAllBaseSlotsEquipped();
@@ -104,7 +102,7 @@ contract InventoryInternal is
     ) internal onlyArcadianOwner(arcadianId) {
 
         if (items.length == 0) 
-            revert Inventory_ItemNotSpecified();
+            return;
 
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
         uint8 numBaseSlotsModified;
@@ -235,7 +233,7 @@ contract InventoryInternal is
         InventoryStorage.Layout storage inventorySL = InventoryStorage.layout();
 
         if (slotsIds.length == 0) 
-            revert Inventory_SlotNotSpecified();
+            return;
 
         for (uint i = 0; i < slotsIds.length; i++) {
             if (inventorySL.slots[slotsIds[i]].permanent) 
