@@ -43,6 +43,12 @@ export const config: HardhatUserConfig = {
     }
   },
   networks: {
+    hardhat: {
+        // MAINEET FORK:
+        // forking: {
+        //     url: "https://mainnet.infura.io/v3/fc488ef8542b4fd08cb99fb07b957f64",
+        // }
+    },
     local: {
         url: 'http://localhost:8545',
       },
