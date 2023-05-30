@@ -10,7 +10,7 @@ import { Item, ItemSC, Slot, SlotSC, itemsPath, slotsPath } from "./utils/interf
 let slotsAll: Slot[] = JSON.parse(fs.readFileSync(slotsPath).toString());
 const itemsAll: Item[] = JSON.parse(fs.readFileSync(itemsPath).toString());
 
-const MAKE_TRANSACTION = false;
+const MAKE_TRANSACTION = true;
 console.log("MAKE_TRANSACTION: ", MAKE_TRANSACTION);
 
 async function main() {
