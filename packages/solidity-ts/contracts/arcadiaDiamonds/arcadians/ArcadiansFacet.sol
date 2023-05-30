@@ -91,8 +91,20 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (arcadiansSL.isPublicMintOpen) {
             nonGuaranteedAvailableMints += mintPerUserMax - arcadiansSL.userPublicMints[account];
         }
-        nonGuaranteedAvailableMints = nonGuaranteedAvailableMints > mintPerUserMax ? mintPerUserMax : nonGuaranteedAvailableMints;
-        return _elegibleWhitelist(GuaranteedPool, account) + nonGuaranteedAvailableMints;
+        uint nonGuaranteedMintedAmount = _claimedWhitelist(RestrictedPool, account) + _claimedMintPass(account) + arcadiansSL.userPublicMints[account];
+
+        if (nonGuaranteedMintedAmount >= mintPerUserMax) {
+            nonGuaranteedAvailableMints = 0;
+        } else  {
+            uint ceil = mintPerUserMax - nonGuaranteedMintedAmount;
+            nonGuaranteedAvailableMints = nonGuaranteedAvailableMints > ceil ? ceil : nonGuaranteedAvailableMints;
+        }
+
+        uint guaranteedAvailableMints;
+        if (_isWhitelistClaimActive(GuaranteedPool)) {
+            guaranteedAvailableMints += _elegibleWhitelist(GuaranteedPool, account);
+        }
+        return guaranteedAvailableMints + nonGuaranteedAvailableMints;
     }
 
     /**
