@@ -9,7 +9,7 @@ import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
 // Diamond init params
 // export const merkleRoot = "0x4cc201573e110f41c0ab8a8a57a12e631393ab9e43b551868d1e9e95b37b5d0f";
-export const baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
+export const baseItemURI = process.env.BASE_TOKEN_URI || "";
 
 export const func = async() => {
 

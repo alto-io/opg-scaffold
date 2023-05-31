@@ -6,7 +6,11 @@ import { arcadiansDiamondName, arcadiansDiamondInitName, arcadiansFacetNames } f
 import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/libraries/deployDiamond';
 
 // Diamond init params
-export const baseArcadianURI = "https://arcadians.dev.outplay.games/v2/arcadians/";
+const networkName = hre.network.name
+
+console.log("networkName", networkName)
+export const baseArcadianURI = networkName == "staging" ? "https://arcadians.staging.outplay.games/" : "https://arcadians.dev.outplay.games/"
+console.log("baseArcadianURI", baseArcadianURI)
 export const maxMintPerUser = 2;
 export const mintPrice = 0;
 
