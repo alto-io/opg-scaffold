@@ -8,8 +8,10 @@ import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.It
 import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
 // Diamond init params
-// export const merkleRoot = "0x4cc201573e110f41c0ab8a8a57a12e631393ab9e43b551868d1e9e95b37b5d0f";
-export const baseItemURI = process.env.BASE_TOKEN_URI || "";
+
+const networkName = hre.network.name
+export const baseItemURI = networkName == "staging" ? "https://arcadians.staging.outplay.games/" : "https://arcadians.dev.outplay.games/"
+console.log("baseItemURI", baseItemURI)
 
 export const func = async() => {
 

@@ -79,7 +79,13 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
      */
     function availableMints(address account) external view returns (uint balance) {
         ArcadiansStorage.Layout storage arcadiansSL = ArcadiansStorage.layout();
-        
+
+        uint totalSupply = totalSupply();
+        uint arcadiansMaxSupply = arcadiansSL.arcadiansMaxSupply;
+        if (totalSupply >= arcadiansMaxSupply) {
+            return 0;
+        }
+
         uint mintPerUserMax = arcadiansSL.maxMintPerUser;
         uint nonGuaranteedAvailableMints;
         if (_isWhitelistClaimActive(RestrictedPool)) {
@@ -104,7 +110,14 @@ contract ArcadiansFacet is SolidStateERC721, ArcadiansInternal, Multicall {
         if (_isWhitelistClaimActive(GuaranteedPool)) {
             guaranteedAvailableMints += _elegibleWhitelist(GuaranteedPool, account);
         }
-        return guaranteedAvailableMints + nonGuaranteedAvailableMints;
+
+        uint availableAmount = guaranteedAvailableMints + nonGuaranteedAvailableMints;
+
+        if (totalSupply + availableAmount > arcadiansMaxSupply) {
+            return arcadiansMaxSupply - totalSupply;
+        }
+
+        return availableAmount;
     }
 
     /**
