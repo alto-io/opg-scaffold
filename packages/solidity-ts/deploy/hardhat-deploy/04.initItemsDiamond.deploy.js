@@ -8,9 +8,20 @@ import { itemsDiamondInitName, itemsDiamondName, itemsFacetNames } from './02.It
 import { arcadiansDiamondName } from './01.ArcadiansDiamond.deploy';
 
 // Diamond init params
-
 const networkName = hre.network.name
-export const baseItemURI = networkName == "staging" ? "https://arcadians.staging.outplay.games/" : "https://arcadians.dev.outplay.games/"
+console.log("networkName", networkName)
+export let baseItemURI
+switch (networkName) {
+    case "production":
+        baseItemURI = "https://arcadians.prod.outplay.games/v2/items/";
+        break;
+    case "staging":
+        baseItemURI = "https://arcadians.staging.outplay.games/v2/items/";
+        break;
+    default:
+        baseItemURI = "https://arcadians.dev.outplay.games/v2/items/";
+        break;
+}
 console.log("baseItemURI", baseItemURI)
 
 export const func = async() => {

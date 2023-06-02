@@ -9,8 +9,20 @@ import { ensureUniqueFunctions, getFacetCut, getRemoveCut } from 'deploy/librari
 const networkName = hre.network.name
 
 console.log("networkName", networkName)
-export const baseArcadianURI = networkName == "staging" ? "https://arcadians.staging.outplay.games/" : "https://arcadians.dev.outplay.games/"
+export let baseArcadianURI
+switch (networkName) {
+    case "production":
+        baseArcadianURI = "https://arcadians.prod.outplay.games/v2/arcadians/";
+        break;
+    case "staging":
+        baseArcadianURI = "https://arcadians.staging.outplay.games/v2/arcadians/";
+        break;
+    default:
+        baseArcadianURI = "https://arcadians.dev.outplay.games/v2/arcadians/";
+        break;
+}
 console.log("baseArcadianURI", baseArcadianURI)
+
 export const maxMintPerUser = 2;
 export const mintPrice = 0;
 
