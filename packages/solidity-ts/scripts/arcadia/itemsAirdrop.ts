@@ -1,24 +1,26 @@
 import hre from "hardhat";
-import { BigNumber } from "ethers";
 import getDeployedContracts from "./utils/deployedContracts";
 import fs from "fs";
 import { ClaimableItem, claimableItemsPath } from "./utils/interfaces";
+
+// USE THIS OBJECT TO PUT THE ACCOUNTS TO AIRDROP ITEMS TO
+const walletsToAirdrop = [
+    "0xe6698e4C0882e9Fb0560DE2a83A753c147b9A2db",
+    "0x0C9f7F75E222BD7F88e7dBDA0231D6eD48cCa7DA"
+]
 
 async function main() {
 
     const claimableItems: ClaimableItem[] = JSON.parse(fs.readFileSync(claimableItemsPath).toString());
 
     const network = hre.network.name;
-    const { itemsSC } = await getDeployedContracts(network);
+    // const { itemsSC, whitelistArcadiansSC, mintPassFacetSC, arcadiansDiamondSC } = await getDeployedContracts(network);
+    const { itemsSC, arcadiansDiamondSC } = await getDeployedContracts(network);
 
-    const maxItemsPerTransaction = 100;
+    const signerAddress = await arcadiansDiamondSC.signer.getAddress();
+    console.log("signerAddress", signerAddress);
 
-    const recipientAddress = await itemsSC.signer.getAddress();
-    console.log("recipientAddress", recipientAddress)
-    
-    const initialBalance: BigNumber = (await itemsSC.signer.getBalance());
-    console.log("initialBalance", initialBalance)
-
+    // Creates the item (id, amount, owner) based on the OG item snapshot
     const claimableItemsObj = {};
     for (let i = 0; i < claimableItems.length; i++) {
         const claimableItem = claimableItems[i];
@@ -38,46 +40,22 @@ async function main() {
         }
         (claimableItemsObj as any)[claimableItem.owner as string] = itemsPerOwner;
     }
-    // console.log("claimableItemsObj: ", claimableItemsObj);
-    
-    const claimees: string[] = Object.keys(claimableItemsObj);
+
+    // Airdrop multiple random v2 items to the selected addresses
     const itemsPerOwner: ClaimableItem[][] = Object.values(claimableItemsObj);
+    for (let i = 0; i < walletsToAirdrop.length; i++) {
+        const claimer = walletsToAirdrop[i];
+        console.log("claimer: ", claimer)
+        const randomIndex = Math.floor(Math.random() * itemsPerOwner.length); 
+        const items = itemsPerOwner[randomIndex];
+        console.log("items to airdrop: ", items)
 
-    for (let i = 0; i < claimees.length; i++) {
+        const itemsIds = items.map((item)=>item.idV2);
+        const itemsAmounts = items.map((item)=>item.amount);
 
-        const claimer = claimees[i]; 
-        const items = itemsPerOwner[i]; 
-        console.log("- [", claimer, "]. iteration nr: ", i);
-
-        for (let j = 0; j < items.length; j += maxItemsPerTransaction) {
-            let itemsToMint: ClaimableItem[] = items.slice(j, j + maxItemsPerTransaction);
-            
-            let mintOwners = itemsToMint.map((item)=>item.owner);
-            let mintItemsIds = itemsToMint.map((item)=>item.idV2);
-            let mintAmounts = itemsToMint.map((item)=>item.amount as number);
-
-            const balances: number[] = (await itemsSC.balanceOfBatch(mintOwners, mintItemsIds)).map((v:BigNumber)=>v.toNumber())
-            const amountsLeft =  balances.map((balance, ind)=> mintAmounts[ind] - balance);
-
-            itemsToMint = itemsToMint.filter((item, ind)=> amountsLeft[ind] > 0);
-            
-            if (itemsToMint.length > 0) {
-                mintItemsIds = itemsToMint.map((item)=>item.idV2);
-                console.log("mintItemsIds", mintItemsIds)
-                mintAmounts = itemsToMint.map((item)=>item.amount as number);
-                console.log("mintAmounts", mintAmounts)
-                let tx = await itemsSC.mintBatch(claimer, mintItemsIds, mintAmounts);
-                await tx.wait();
-                itemsToMint = [];
-            } else {
-                console.log("Tokens already minted");
-            }
-        }
+        const tx = await itemsSC.mintBatch(claimer, itemsIds, itemsAmounts);
+        await tx.wait();
     }
-
-    const finalBalance: BigNumber = (await itemsSC.signer.getBalance());
-    console.log("finalBalance", finalBalance)
-    console.log("cost", initialBalance.sub(finalBalance))
 }
 
 main().catch((error) => {
