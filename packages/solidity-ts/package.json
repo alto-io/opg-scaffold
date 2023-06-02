@@ -15,6 +15,7 @@
     "script:set-transfer-required": "npx hardhat run ./scripts/arcadia/setTransferRequired.ts --network",
     "script:fetch-data": "npx hardhat run ./scripts/arcadia/fetchDataSC.ts --network",
     "script:items-airdrop": "npx hardhat run ./scripts/arcadia/itemsAirdrop.ts --network",
+    "script:items-airdrop-og": "npx hardhat run ./scripts/arcadia/itemsAirdropOG.ts --network",
     "deploy": "npx hardhat deploy --network",
     "chain:hardhat": "cross-env BUILDING=true hardhat node --network hardhat --no-deploy",
     "chain:foundry": "anvil",
