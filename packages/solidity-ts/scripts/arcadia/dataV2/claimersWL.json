@@ -18,5 +18,7 @@
     {"elegibleAddress": "0xcF78b6a79E8691d89AB10D9641D4CCA3AcfebC2B", "amount": 1},
     {"elegibleAddress": "0x0d3174A3c218b12d0C29e2E63C3493C93b700315", "amount": 1},
     {"elegibleAddress": "0x05a0d01a8c91bbb7f53d310a17e93fb5b7778c08", "amount": 1},
-    {"elegibleAddress": "0xbf7883B5bF5859777439ecD2285CB571BCBcc2B9", "amount": 1}
+    {"elegibleAddress": "0xbf7883B5bF5859777439ecD2285CB571BCBcc2B9", "amount": 1},
+    {"elegibleAddress": "0x9C7bfAd45698F47eF7d6cad30962BEA589ec1a9a", "amount": 1},
+    {"elegibleAddress": "0xC3725865a269AaEf5E62D600A423936fF36f6dE4", "amount": 1}
 ]
