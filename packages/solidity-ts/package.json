@@ -16,6 +16,7 @@
     "script:fetch-data": "npx hardhat run ./scripts/arcadia/fetchDataSC.ts --network",
     "script:items-airdrop": "npx hardhat run ./scripts/arcadia/itemsAirdrop.ts --network",
     "script:items-airdrop-og": "npx hardhat run ./scripts/arcadia/itemsAirdropOG.ts --network",
+    "script:test": "npx hardhat run ./scripts/arcadia/test.ts --network",
     "deploy": "npx hardhat deploy --network",
     "chain:hardhat": "cross-env BUILDING=true hardhat node --network hardhat --no-deploy",
     "chain:foundry": "anvil",
