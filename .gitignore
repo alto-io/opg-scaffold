@@ -15,7 +15,7 @@ dist
 
 # solidity
 packages/solidity-ts/cache
-packages/solidity-ts/generated
+!packages/solidity-ts/generated/hardhat**
 packages/common/src/generated
 cache
 artifacts
